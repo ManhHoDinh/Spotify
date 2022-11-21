@@ -1,0 +1,4 @@
+﻿1. Add new Images into folder Resource/Images
+2. Add  custom Image names into Images.xaml : <ImageSource x:Key="ExampleImage">Example.png</ImageSource> || ExampleImage: CustomName(__Image)
+		|| Example.png : Image file name
+3. Use Images : <Image Source="{StaticResource ExampleImage}"></Image>  || ExampleImage : CustomName
