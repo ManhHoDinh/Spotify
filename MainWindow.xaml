@@ -10,5 +10,6 @@
         <Grid Background="{StaticResource ExampleColor}">
             <Image Source="{StaticResource ExampleImage}"></Image>
         </Grid>
+        <TextBlock>Nhân lê</TextBlock>
     </Grid>
 </Window>
