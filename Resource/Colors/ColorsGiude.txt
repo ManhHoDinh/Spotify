@@ -1,0 +1,3 @@
+﻿1. Add  custom Color names into Color.xaml :  <SolidColorBrush x:Key="ExampleColor" Color="Yellow"></SolidColorBrush> 
+	|| ExampleColor: CustomName(__Color) || Yellow : Color
+2. Use Colors :  <Grid Background="{StaticResource ExampleColor}"></Grid>  || ExampleImage : CustomName
