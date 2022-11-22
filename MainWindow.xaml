@@ -9,6 +9,7 @@
     <Grid>
         <Grid Background="{StaticResource ExampleColor}">
             <Image Source="{StaticResource ExampleImage}"></Image>
+            <Label Content/>
         </Grid>
         <TextBlock Text="Manh"/>
     </Grid>
