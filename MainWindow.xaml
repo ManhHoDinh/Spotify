@@ -2,14 +2,20 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:controls ="clr-namespace:Spotify.Views.Components"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1700">
     <Grid>
-        <Grid Background="{StaticResource ExampleColor}">
-            <Image Source="{StaticResource ExampleImage}"></Image>
-            <Label Content/>
-        </Grid>
+        <Grid.RowDefinitions>   
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="112px"/>
+        </Grid.RowDefinitions>
+
+       
+        <controls:bottomComponent Grid.Row="1">
+           
+        </controls:bottomComponent>
     </Grid>
 </Window>

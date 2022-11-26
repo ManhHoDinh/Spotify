@@ -5,13 +5,32 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
 
                 <ResourceDictionary Source="Resource/Images/Images.xaml" />
                 <ResourceDictionary Source="Resource/Colors/Colors.xaml" />
                 <ResourceDictionary Source="Resource/Icons/Icons.xaml" />
+                <ResourceDictionary Source="Styles/ExampleTextBlockStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
         </ResourceDictionary>
+        <!--<Style x:Key="ControlBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="#000000"/>
+            <Setter Property="Width" Value="60"/>
+            <Setter Property="Height" Value="60"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="Transparent">
+                            <ContentPresenter Margin="20 0 20 0" Width="18" Height="18" Content="{TemplateBinding Content}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+       
     </Application.Resources>
 </Application>
