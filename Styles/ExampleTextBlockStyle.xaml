@@ -184,23 +184,44 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Focusable" Value="false"/>
         <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Background" Value="#8b8b8b"/>
+        <!--<Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>-->   
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
-                    <Border Height="3" Background="#8b8b8b" Width="{TemplateBinding Width}"/>
+                    <Border Height="3" Background="#8b8b8b" Width="{TemplateBinding Width}" CornerRadius="2.5"/>
+                    <!--<ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="RepeatButtonTransparent1" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Height" Value="5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
-                    <Border x:Name="BorderPlaying" Height="4" Background="#ffffff" Width="{TemplateBinding Width}"/>
+                    <Border x:Name="BorderPlaying" Height="4" Background="#ffffff" CornerRadius="2.5"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderPlaying" Property="Background" Value="#63CF6C"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
+               
             </Setter.Value>
         </Setter>
     </Style>
+    <!--<Style x:Key="TrackStyle" TargetType="Track">
+        <Setter Property="Cursor" Value="Help"/>
+    </Style>-->
     <!--<ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
             -->
     <!--<Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
@@ -232,7 +253,7 @@
                 </Grid.RowDefinitions>
                 <!--<TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
                     <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>-->
-                <Border x:Name="TrackBackground" CornerRadius="2.5" BorderBrush="#8b8b8b" BorderThickness="1" Background="#8b8b8b" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="center">
+                <Border x:Name="TrackBackground" CornerRadius="2.5" BorderBrush="#8b8b8b" Background="#8b8b8b" Height="4.0" Grid.Row="1" VerticalAlignment="center">
                     <Canvas Margin="-6,-1">
                         <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4.0" Visibility="Hidden"/>
                     </Canvas>
@@ -251,6 +272,7 @@
             </Grid>
         </Border>
     </ControlTemplate>
+    
     <Style x:Key="SliderStyle" TargetType="{x:Type Slider}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <!--<Setter Property="Background" Value="Transparent"/>-->

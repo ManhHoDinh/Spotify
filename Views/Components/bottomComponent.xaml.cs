@@ -43,6 +43,15 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty isFavorProperty =
             DependencyProperty.Register("isFavor", typeof(string), typeof(bottomComponent), new PropertyMetadata("true"));
+        public string isHover
+        {
+            get { return (string)GetValue(isHoverProperty); }
+            set { SetValue(isHoverProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isHoverProperty =
+            DependencyProperty.Register("isHover", typeof(string), typeof(bottomComponent), new PropertyMetadata("True"));
+        //button open the file mp3
         //button open the file mp3
 
 

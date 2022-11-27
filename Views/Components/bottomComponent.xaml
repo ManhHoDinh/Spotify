@@ -23,6 +23,7 @@
             <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
                 <TextBlock Foreground="#ffffff" FontSize = "18" Text="Bên trên tầng lầu"/>
                 <TextBlock Foreground="#b3b3b3" FontSize="16" Text="Tăng Duy Tân"/>
+               
             </StackPanel>
             <Button Tag="{Binding isFavor, ElementName=binh}" Click="Button_Click" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
                 <Button.Background>
