@@ -15,9 +15,43 @@
     <ControlTemplate x:Key="HeartStyle" TargetType="{x:Type ButtonBase}">
         <Border x:Name="border" Background="{TemplateBinding Background}"/>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="false"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
                 <Setter Property="Background" TargetName="border" Value="{StaticResource HeartHover}"/>
-            </Trigger>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--volume button-->
+    <ImageBrush x:Key="VolumeMaxHover" ImageSource="{StaticResource VolumeMaxHoverButton}"/>
+    <ImageBrush x:Key="VolumeMinHover" ImageSource="{StaticResource VolumeMinHoverButton}"/>
+    <ImageBrush x:Key="VolumeMediumHover" ImageSource="{StaticResource VolumeMediumHoverButton}"/>
+    <ControlTemplate x:Key="VolumeStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="Max"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource VolumeMaxHover}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="Medium"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource VolumeMediumHover}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="Min"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource VolumeMinHover}"/>
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--prevbtn-->

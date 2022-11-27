@@ -35,8 +35,28 @@ namespace Spotify.Views.Components
         public bool IsPlay;
         public bool IsFavor = false;
         public bool IsDrag = false;
-
+        public string isFavor
+        {
+            get { return (string)GetValue(isFavorProperty); }
+            set { SetValue(isFavorProperty, value); }
+        }
+        // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty isFavorProperty =
+            DependencyProperty.Register("isFavor", typeof(string), typeof(bottomComponent), new PropertyMetadata("true"));
         //button open the file mp3
+
+
+        public string VolumeStyle
+        {
+            get { return (string)GetValue(VolumeStyleProperty); }
+            set { SetValue(VolumeStyleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for VolumeStyle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VolumeStyleProperty =
+            DependencyProperty.Register("VolumeStyle", typeof(string), typeof(bottomComponent), new PropertyMetadata("Medium"));
+
+
         private void Btn_open(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -141,6 +161,7 @@ namespace Spotify.Views.Components
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = VolumnMedium;
                 VolumeButton.Background = brush;
+                VolumeStyle = "Medium";
             }
             if (volumeSlider.Value <=0.3)
             {
@@ -148,6 +169,7 @@ namespace Spotify.Views.Components
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = VolumnMin;
                 VolumeButton.Background = brush;
+                VolumeStyle = "Min";
 
             }
             if (volumeSlider.Value > 0.8)
@@ -155,6 +177,7 @@ namespace Spotify.Views.Components
                 ImageSource VolumnMax = (ImageSource)Application.Current.Resources["VolumeMaxButton"];
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = VolumnMax;
+                VolumeStyle = "Max";
                 VolumeButton.Background = brush;
             }
         }
@@ -213,6 +236,7 @@ namespace Spotify.Views.Components
                 ImgBrush.ImageSource = Heart;
                 HeartBtn.Background = ImgBrush;
                 IsFavor = false;
+                isFavor = "false";
             }
             else
             {
@@ -221,6 +245,7 @@ namespace Spotify.Views.Components
                 ImgBrush.ImageSource = HeartFill;
                 HeartBtn.Background = ImgBrush;
                 IsFavor = true;
+                isFavor = "true";
             }
            
 

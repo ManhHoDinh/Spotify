@@ -20,7 +20,7 @@
     <ImageSource x:Key="QueueHoverButton">Queue_Hover.png</ImageSource>
     <ImageSource x:Key="DevicesButton">Devices.png</ImageSource>
     <ImageSource x:Key="DevicesHoverButton">Devices_Hover.png</ImageSource>
-    <ImageSource x:Key="VolumeMaxButton">Volume_max.png</ImageSource>
+    <ImageSource x:Key="VolumeMaxButton">Volume_Max.png</ImageSource>
     <ImageSource x:Key="VolumeMaxHoverButton">Volume_Max_Hover.png</ImageSource>
     <ImageSource x:Key="VolumeMediumButton">Volume_Medium.png</ImageSource>
     <ImageSource x:Key="VolumeMediumHoverButton">Volume_Medium_Hover.png</ImageSource>

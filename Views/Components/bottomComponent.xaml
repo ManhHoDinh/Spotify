@@ -24,7 +24,7 @@
                 <TextBlock Foreground="#ffffff" FontSize = "18" Text="Bên trên tầng lầu"/>
                 <TextBlock Foreground="#b3b3b3" FontSize="16" Text="Tăng Duy Tân"/>
             </StackPanel>
-            <Button Click="Button_Click" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
+            <Button Tag="{Binding isFavor, ElementName=binh}" Click="Button_Click" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
                 <Button.Background>
                     <ImageBrush ImageSource="{StaticResource HeartButton}"/>
                 </Button.Background>
@@ -92,7 +92,7 @@
                         <ImageBrush ImageSource="{StaticResource DevicesButton}"/>
                     </Button.Background>
                 </Button>
-                <Button Margin="0 0 16 0" x:Name="VolumeButton" Click="MuteVolume_Click"  Style="{StaticResource ControlBtn}">
+                <Button Tag="{Binding VolumeStyle, ElementName=binh}" Template="{DynamicResource VolumeStyle}" Margin="0 0 16 0" x:Name="VolumeButton" Click="MuteVolume_Click"  Style="{StaticResource ControlBtn}">
                     <Button.Background>
                         <ImageBrush ImageSource="{StaticResource VolumeMaxButton}"/>
                     </Button.Background>

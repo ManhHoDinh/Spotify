@@ -28,7 +28,7 @@
     <None Remove="Resource\Images\Repeat_Hover.png" />
     <None Remove="Resource\Images\Shuffle.png" />
     <None Remove="Resource\Images\Shuffle_Hover.png" />
-    <None Remove="Resource\Images\Volume_max.png" />
+    <None Remove="Resource\Images\Volume_Max.png" />
     <None Remove="Resource\Images\Volume_Max_Hover.png" />
     <None Remove="Resource\Images\Volume_Medium.png" />
     <None Remove="Resource\Images\Volume_Medium_Hover.png" />
@@ -40,7 +40,6 @@
     <Resource Include="Resource\Images\Heart.png" />
     <Resource Include="Resource\Images\Heart_Fill.png" />
     <Resource Include="Resource\Images\Heart_Hover.png" />
-    <Resource Include="Resource\Images\Volume_Min_Hover.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,7 +47,6 @@
     <Resource Include="Resource\Images\Devices_Hover.png" />
     <Resource Include="Resource\Images\Queue.png" />
     <Resource Include="Resource\Images\Queue_Hover.png" />
-    <Resource Include="Resource\Images\Volume_max.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,10 +63,12 @@
     <Resource Include="Resource\Images\Repeat_Hover.png" />
     <Resource Include="Resource\Images\Shuffle.png" />
     <Resource Include="Resource\Images\Shuffle_Hover.png" />
+    <Resource Include="Resource\Images\Volume_Max.png" />
     <Resource Include="Resource\Images\Volume_Max_Hover.png" />
     <Resource Include="Resource\Images\Volume_Medium.png" />
     <Resource Include="Resource\Images\Volume_Medium_Hover.png" />
     <Resource Include="Resource\Images\Volume_Min.png" />
+    <Resource Include="Resource\Images\Volume_Min_Hover.png" />
   </ItemGroup>
 
 </Project>
