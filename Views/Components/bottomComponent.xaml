@@ -23,7 +23,7 @@
             <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
                 <TextBlock Foreground="#ffffff" FontSize = "18" Text="Bên trên tầng lầu"/>
                 <TextBlock Foreground="#b3b3b3" FontSize="16" Text="Tăng Duy Tân"/>
-               
+                <Button Click="Btn_open"  Content="open"></Button>
             </StackPanel>
             <Button Tag="{Binding isFavor, ElementName=binh}" Click="Button_Click" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
                 <Button.Background>
@@ -99,7 +99,7 @@
                     </Button.Background>
                 </Button>
             </StackPanel>
-            <Slider Minimum="0" Maximum="1" Value="0.5" ValueChanged="volumeSlider_ValueChanged" Grid.Column="1" VerticalAlignment="Center" x:Name="volumeSlider" Width="160" Style="{DynamicResource SliderStyle}" Margin="-40,10,0,0"/>
+            <Slider Minimum="0" Maximum="1" Value="0.5" ValueChanged="volumeSlider_ValueChanged" Grid.Column="1" VerticalAlignment="Center" x:Name="volumeSlider" Width="100" Style="{DynamicResource SliderStyle}" Margin="-40,10,0,0"/>
         </Grid>
     </Grid>
 </UserControl>

@@ -268,11 +268,16 @@
                     <Track.Thumb>
                         <Thumb x:Name="Thumb" Margin="-9 0 0 0" Style="{StaticResource SliderThumbStyle}" VerticalAlignment="Center"/>
                     </Track.Thumb>
+                    
                 </Track>
             </Grid>
         </Border>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding ElementName=PART_Trac, Path=IsMouseOver}" Value="true">
+                <Setter TargetName="Thumb" Property="Background" Value="red"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
-    
     <Style x:Key="SliderStyle" TargetType="{x:Type Slider}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <!--<Setter Property="Background" Value="Transparent"/>-->

@@ -221,6 +221,7 @@ namespace Spotify.Views.Components
             {
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = Pause;
+                mediaPlayer.Play();
                 PlayPauseBtn.Background = ImgBrush;
                 IsPlay = false;
             }
@@ -228,6 +229,7 @@ namespace Spotify.Views.Components
             {
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = Play;
+                mediaPlayer.Pause();
                 PlayPauseBtn.Background = ImgBrush;
                 IsPlay = true;
 
@@ -246,6 +248,7 @@ namespace Spotify.Views.Components
                 HeartBtn.Background = ImgBrush;
                 IsFavor = false;
                 isFavor = "false";
+
             }
             else
             {
