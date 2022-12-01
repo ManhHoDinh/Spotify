@@ -8,10 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resource\Icons\AddLibrary.png" />
+    <None Remove="Resource\Icons\Home.png" />
+    <None Remove="Resource\Icons\LikedSongs.png" />
+    <None Remove="Resource\Icons\Search.png" />
+    <None Remove="Resource\Icons\YourLibrary.png" />
     <None Remove="Resource\Images\Example.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\Icons\AddLibrary.png" />
+    <Resource Include="Resource\Icons\Home.png" />
+    <Resource Include="Resource\Icons\YourLibrary.png" />
+    <Resource Include="Resource\Icons\LikedSongs.png" />
+    <Resource Include="Resource\Icons\Search.png" />
     <Resource Include="Resource\Images\Example.png" />
   </ItemGroup>
 
