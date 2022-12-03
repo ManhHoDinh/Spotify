@@ -13,7 +13,45 @@
     <None Remove="Resource\Icons\LikedSongs.png" />
     <None Remove="Resource\Icons\Search.png" />
     <None Remove="Resource\Icons\YourLibrary.png" />
+    <None Remove="Resource\Images\Devices.png" />
+    <None Remove="Resource\Images\Devices_Hover.png" />
     <None Remove="Resource\Images\Example.png" />
+    <None Remove="Resource\Images\Heart.png" />
+    <None Remove="Resource\Images\Heart_Fill.png" />
+    <None Remove="Resource\Images\Heart_Hover.png" />
+    <None Remove="Resource\Images\Next.png" />
+    <None Remove="Resource\Images\Next_Hover.png" />
+    <None Remove="Resource\Images\Pause.png" />
+    <None Remove="Resource\Images\Pause_Hover.png" />
+    <None Remove="Resource\Images\Play.png" />
+    <None Remove="Resource\Images\Play_Hover.png" />
+    <None Remove="Resource\Images\Prev.png" />
+    <None Remove="Resource\Images\Prev_Hover.png" />
+    <None Remove="Resource\Images\Queue.png" />
+    <None Remove="Resource\Images\Queue_Hover.png" />
+    <None Remove="Resource\Images\Repeat.png" />
+    <None Remove="Resource\Images\Repeat_Hover.png" />
+    <None Remove="Resource\Images\Shuffle.png" />
+    <None Remove="Resource\Images\Shuffle_Hover.png" />
+    <None Remove="Resource\Images\Volume_Max.png" />
+    <None Remove="Resource\Images\Volume_Max_Hover.png" />
+    <None Remove="Resource\Images\Volume_Medium.png" />
+    <None Remove="Resource\Images\Volume_Medium_Hover.png" />
+    <None Remove="Resource\Images\Volume_Min.png" />
+    <None Remove="Resource\Images\Volume_Min_Hover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\Heart.png" />
+    <Resource Include="Resource\Images\Heart_Fill.png" />
+    <Resource Include="Resource\Images\Heart_Hover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Images\Devices.png" />
+    <Resource Include="Resource\Images\Devices_Hover.png" />
+    <Resource Include="Resource\Images\Queue.png" />
+    <Resource Include="Resource\Images\Queue_Hover.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +61,24 @@
     <Resource Include="Resource\Icons\LikedSongs.png" />
     <Resource Include="Resource\Icons\Search.png" />
     <Resource Include="Resource\Images\Example.png" />
+    <Resource Include="Resource\Images\Next.png" />
+    <Resource Include="Resource\Images\Next_Hover.png" />
+    <Resource Include="Resource\Images\Pause.png" />
+    <Resource Include="Resource\Images\Pause_Hover.png" />
+    <Resource Include="Resource\Images\Play.png" />
+    <Resource Include="Resource\Images\Play_Hover.png" />
+    <Resource Include="Resource\Images\Prev.png" />
+    <Resource Include="Resource\Images\Prev_Hover.png" />
+    <Resource Include="Resource\Images\Repeat.png" />
+    <Resource Include="Resource\Images\Repeat_Hover.png" />
+    <Resource Include="Resource\Images\Shuffle.png" />
+    <Resource Include="Resource\Images\Shuffle_Hover.png" />
+    <Resource Include="Resource\Images\Volume_Max.png" />
+    <Resource Include="Resource\Images\Volume_Max_Hover.png" />
+    <Resource Include="Resource\Images\Volume_Medium.png" />
+    <Resource Include="Resource\Images\Volume_Medium_Hover.png" />
+    <Resource Include="Resource\Images\Volume_Min.png" />
+    <Resource Include="Resource\Images\Volume_Min_Hover.png" />
   </ItemGroup>
 
 </Project>
