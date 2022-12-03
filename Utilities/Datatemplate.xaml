@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:view="clr-namespace:Spotify.Views.Pages"
+                    xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+                    >
+
+       <DataTemplate DataType="{x:Type vm:HomeVM}">
+        <view:Home />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CreatePlaylistVM}">
+        <view:CreatePlaylist />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:YourLibraryVM}">
+        <view:YourLibrary />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:LikedSongsVM}">
+        <view:LikedSongs />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:SearchVM}">
+        <view:Search />
+    </DataTemplate>
+
+
+</ResourceDictionary>

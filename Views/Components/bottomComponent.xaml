@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="Spotify.Views.Components.bottomComponent"
+             x:Name ="binh"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotify.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="110" d:DesignWidth="1700" Background="#000000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="310"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <Image  Margin="18 0 0 0" Grid.Column="0" Source="https://i.scdn.co/image/ab67616d0000b27323ec0bc09b61d08fcb64acea" Grid.RowSpan="2"/>
+            <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
+                <TextBlock Foreground="#ffffff" FontSize = "18" Text="Bên trên tầng lầu"/>
+                <TextBlock Foreground="#b3b3b3" FontSize="16" Text="Tăng Duy Tân"/>
+                <Button Click="Btn_open"  Content="open"></Button>
+            </StackPanel>
+            <Button Tag="{Binding isFavor, ElementName=binh}" Click="Button_Click" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
+                <Button.Background>
+                    <ImageBrush ImageSource="{StaticResource HeartButton}"/>
+                </Button.Background>
+            </Button>
+        </Grid>
+        <Grid Grid.Column="1" Width="760">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel  Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 10 0 0">
+                <Button Template="{DynamicResource ShuffleStyle}"  Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource ShuffleButton}"/>
+                    </Button.Background>
+                </Button>
+                <Button Template="{DynamicResource PrevStyle}" Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource PrevButton}"/>
+                    </Button.Background>
+                </Button>
+                <Button Template="{DynamicResource PausePlayStyle}" Click="PlayPause_Click" Width="44" Height="44"  Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource PauseButton}"/>
+                    </Button.Background>
+                </Button>
+
+                <Button Template="{DynamicResource NextStyle}" Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource NextButton}"/>
+                    </Button.Background>
+
+                </Button>
+                <Button Template="{DynamicResource RepeatStyle}" Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource RepeatButton}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="80"/>
+                </Grid.ColumnDefinitions>
+                <!--<Button Content="open" Click="Btn_open" Margin="-123,-25,123,25"/>-->
+                <Label Grid.Column="0"  Foreground="White" Name="playing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+                <Slider Grid.Column="1"  x:Name="slider" Thumb.DragStarted="slider_DragStarted" Thumb.DragCompleted="slider_DragCompleted" ValueChanged="slider_ValueChanged" Style="{DynamicResource SliderStyle}"/>
+                <Label  Grid.Column="2" Foreground="White" Content="..." Name="Duration" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="16 0 16 0" Template="{DynamicResource QueueStyle}" Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource QueueButton}"/>
+                    </Button.Background>
+                </Button>
+                <Button Margin="0 0 16 0" Template="{DynamicResource DeviceStyle}" Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource DevicesButton}"/>
+                    </Button.Background>
+                </Button>
+                <Button Tag="{Binding VolumeStyle, ElementName=binh}" Template="{DynamicResource VolumeStyle}" Margin="0 0 16 0" x:Name="VolumeButton" Click="MuteVolume_Click"  Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource VolumeMaxButton}"/>
+                    </Button.Background>
+                </Button>
+            </StackPanel>
+            <Slider Minimum="0" Maximum="1" Value="0.5" ValueChanged="volumeSlider_ValueChanged" Grid.Column="1" VerticalAlignment="Center" x:Name="volumeSlider" Width="100" Style="{DynamicResource SliderStyle}" Margin="-40,10,0,0"/>
+        </Grid>
+    </Grid>
+</UserControl>
