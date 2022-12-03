@@ -8,10 +8,10 @@
         xmlns:vm="clr-namespace:Spotify.ViewModels"
         mc:Ignorable="d"
         xmlns:Component ="clr-namespace:Spotify.Views.Components"
-        
         Title="MainWindow" Height="800" Width="1700">
     <Window.DataContext>
         <vm:NavigationVM/>
+        
     </Window.DataContext>
     <Grid>
         <!--Define Row-->
@@ -32,7 +32,7 @@
             <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0">
                 <StackPanel Background="#000">
                     <Button Command="{Binding HomeCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource HomeIcon}" NavigateText="Home"></Component:NavigateButton>
+                        <Component:NavigateButton IconSource="{StaticResource HomeIcon }" NavigateText="Home"></Component:NavigateButton>
                     </Button>
                     <Button Command="{Binding SearchCommand}">
                         <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Home"></Component:NavigateButton>
@@ -80,7 +80,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        </Button>
+                    </Button>
 
                     <Button Command="{Binding LikedSongsCommand}">
                         <Grid>
@@ -121,9 +121,8 @@
 
             </Grid>
         </Grid>
-
-       <Component:bottomComponent Grid.Row="1">
-        </Component:bottomComponent>
+        <controls:bottomComponent Grid.Row="1">   
+        </controls:bottomComponent>
 
     </Grid>
     
