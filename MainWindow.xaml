@@ -5,7 +5,9 @@
         xmlns:controls ="clr-namespace:Spotify.Views.Components"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify"
+        xmlns:vm="clr-namespace:Spotify.ViewModels"
         mc:Ignorable="d"
+
         Title="MainWindow" Height="800" Width="1700">
     <Grid>
         <Grid.RowDefinitions>   
@@ -14,8 +16,59 @@
         </Grid.RowDefinitions>
 
        
-        <controls:bottomComponent Grid.Row="1">
-           
+        
+
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:NavigationVM/>
+    </Window.DataContext>
+    <Grid>
+        <!--Define Row-->
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <!--Use first Row-->
+        <Grid Grid.Row="0" >
+
+            <!--Define Column-->
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition  Width="0.18*" />
+                <ColumnDefinition Width="0.72*" />
+            </Grid.ColumnDefinitions>
+            <!--LeftSideBar-->
+            <Grid x:Name="LeftSideBar" Background="Blue" Grid.Column="0">
+                <StackPanel>
+                    <Button Command="{Binding HomeCommand}">Home</Button>
+
+                    <Button Command="{Binding SearchCommand}">Search</Button>
+
+                    <Button Command="{Binding YourLibraryCommand}">Your Library</Button>
+
+                    <Button Command="{Binding CreatePlaylistCommand}">Create Playlist</Button>
+
+                    <Button Command="{Binding LikedSongsCommand}">Liked Songs</Button>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="LoadSideBar" Grid.Column="1">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition  Width="0.722*" />
+                    <ColumnDefinition Width="0.278*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <ContentControl x:Name="Pages"
+                                Content="{Binding CurrentView}" />
+                </Grid>
+                <Grid Background="Yellow" Grid.Column="1">
+                    <Button x:Name="CloseRightSideBarButton" Click="CloseRightSideBarButton_Click" Width="50" Height="30"></Button>
+                </Grid>
+            </Grid>
+        </Grid>
+       <controls:bottomComponent Grid.Row="1">   
         </controls:bottomComponent>
+
     </Grid>
+    
 </Window>

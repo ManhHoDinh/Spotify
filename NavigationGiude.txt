@@ -1,0 +1,8 @@
+﻿How to create navigation?
+1: create 5 pages with user control in Views/pages
+2: create 5 ViewModels as 5 pages
+3: create ViewModelBase in Utilities
+4: Create Navigation
+5: Create RelayCommand
+6: Create DataTemplate
+7: Add app.xaml

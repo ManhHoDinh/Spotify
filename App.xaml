@@ -9,7 +9,11 @@
                 <ResourceDictionary Source="Resource/Images/Images.xaml" />
                 <ResourceDictionary Source="Resource/Colors/Colors.xaml" />
                 <ResourceDictionary Source="Resource/Icons/Icons.xaml" />
+
                 <ResourceDictionary Source="Styles/ExampleTextBlockStyle.xaml"/>
+
+                <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         <!--<Style x:Key="ControlBtn" TargetType="Button">
