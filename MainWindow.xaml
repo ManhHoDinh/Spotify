@@ -35,74 +35,19 @@
                         <Component:NavigateButton IconSource="{StaticResource HomeIcon }" NavigateText="Home"></Component:NavigateButton>
                     </Button>
                     <Button Command="{Binding SearchCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Home"></Component:NavigateButton>
+                        <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Search"></Component:NavigateButton>
                     </Button>
 
                     <Button Command="{Binding YourLibraryCommand}">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource YourLibraryIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Your Library">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
+                        <Component:NavigateButton IconSource="{StaticResource YourLibraryIcon }" NavigateText="Your Library"></Component:NavigateButton>
                     </Button>
 
                     <Button Command="{Binding CreatePlaylistCommand}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource AddLibraryIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Create Playlist">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
+                       <Component:NavigateButton IconSource="{StaticResource AddLibraryIcon }" NavigateText="Create Playlist"></Component:NavigateButton>
                     </Button>
 
                     <Button Command="{Binding LikedSongsCommand}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource LikedSongsIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Liked Songs">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
-
+                       <Component:NavigateButton IconSource="{StaticResource LikedSongsIcon }" NavigateText="Liked Songs"></Component:NavigateButton>
                     </Button>
                 </StackPanel>
             </Grid>
