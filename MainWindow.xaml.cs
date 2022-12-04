@@ -27,7 +27,7 @@ namespace Spotify
         }
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadSideBar.ColumnDefinitions.RemoveAt(1);
+            //LoadSideBar.ColumnDefinitions.RemoveAt(1);
         }
     }
 }

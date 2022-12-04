@@ -17,6 +17,7 @@
         <TextBlock Grid.Column="1" Text="{Binding NavigateText}">
             <TextBlock.Style>
                 <Style>
+                    <Setter Property="TextBlock.FontFamily" Value="{StaticResource Circular}"></Setter>
                     <Setter Property="TextBlock.FontSize" Value="18"></Setter>
                     <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
                     <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
