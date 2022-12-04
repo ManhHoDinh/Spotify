@@ -20,8 +20,30 @@ namespace Spotify.Views.Components
     /// </summary>
     public partial class NavigateButton : UserControl
     {
-        public ImageSource IconSource { get; set; }
-        public string NavigateText { get; set; }
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register
+            ("IconSource", typeof(ImageSource), typeof(NavigateButton), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register
+            ("NavigateText", typeof(string), typeof(NavigateButton), new PropertyMetadata(string.Empty));
+        private ImageSource _iconSource;
+        private string _navigateText;
+        public ImageSource IconSource { 
+                get{
+                    return (ImageSource)GetValue(ImageProperty);
+                }
+                set
+                {
+                    _iconSource = value;
+                }
+            }
+        public string NavigateText {
+            get{
+                return (string)GetValue(TextProperty);
+               }
+            set
+            {
+                _navigateText = value;
+            }
+        }
         
         public NavigateButton()
         {
