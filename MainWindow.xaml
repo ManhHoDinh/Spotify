@@ -8,7 +8,9 @@
         xmlns:vm="clr-namespace:Spotify.ViewModels"
         mc:Ignorable="d"
         xmlns:Component ="clr-namespace:Spotify.Views.Components"
-        Title="MainWindow" Height="800" Width="1700">
+        Title="MainWindow" Height="700" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.DataContext>
         <vm:NavigationVM/>
         
@@ -16,6 +18,7 @@
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
+            
             <RowDefinition  Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
@@ -29,84 +32,28 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--LeftSideBar-->
-            <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0">
+            <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="300">
                 <StackPanel Background="#000">
-                    <Button Command="{Binding HomeCommand}">
+                    <Button Margin="30 60 0 20" Style="{StaticResource NavigateBtn}"  Command="{Binding HomeCommand}">
                         <Component:NavigateButton IconSource="{StaticResource HomeIcon }" NavigateText="Home"></Component:NavigateButton>
                     </Button>
-                    <Button Command="{Binding SearchCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Home"></Component:NavigateButton>
+                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}">
+                        <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Search"></Component:NavigateButton>
                     </Button>
 
-                    <Button Command="{Binding YourLibraryCommand}">
-                        <Grid >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource YourLibraryIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Your Library">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
+                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}">
+                        <Component:NavigateButton IconSource="{StaticResource YourLibraryIcon }" NavigateText="Your Library"></Component:NavigateButton>
+                    </Button>
+                    <Button  Margin="30 49 0 20" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}">
+                       <Component:NavigateButton IconSource="{StaticResource AddLibraryIcon }" NavigateText="Create Playlist"></Component:NavigateButton>
                     </Button>
 
-                    <Button Command="{Binding CreatePlaylistCommand}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource AddLibraryIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Create Playlist">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
-                    </Button>
-
-                    <Button Command="{Binding LikedSongsCommand}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="26"></ColumnDefinition>
-                                <ColumnDefinition Width="auto"></ColumnDefinition>
-
-                            </Grid.ColumnDefinitions>
-                            <Image Source="{StaticResource LikedSongsIcon}" Grid.Column="0"></Image>
-                            <TextBlock Grid.Column="1" Text="Liked Songs">
-                                <TextBlock.Style>
-                                    <Style>
-                                        <Setter Property="TextBlock.FontSize" Value="18"></Setter>
-                                        <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                                        <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
-                                        <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
-                                    </Style>
-                                </TextBlock.Style>
-                            </TextBlock>
-                        </Grid>
-
+                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}">
+                       <Component:NavigateButton IconSource="{StaticResource LikedSongsIcon }" NavigateText="Liked Songs"></Component:NavigateButton>
                     </Button>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="LoadSideBar" Grid.Column="1">
+           <!-- <Grid x:Name="LoadSideBar" Grid.Column="1">
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition  Width="0.722*" />
                     <ColumnDefinition Width="0.278*" />
@@ -114,11 +61,11 @@
                 <Grid Background="Yellow" Grid.Column="1">
                     <Button x:Name="CloseRightSideBarButton" Click="CloseRightSideBarButton_Click" Width="50" Height="30"></Button>
                 </Grid>
-                <Grid Grid.Column="0">
-                    <ContentControl x:Name="Pages"
+            </Grid>-->
+            <Grid Grid.Column="1">
+                
+                <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}" />
-                </Grid>
-
             </Grid>
         </Grid>
         <controls:bottomComponent Grid.Row="1">   
