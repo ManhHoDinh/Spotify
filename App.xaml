@@ -9,9 +9,9 @@
                 <ResourceDictionary Source="Resource/Images/Images.xaml" />
                 <ResourceDictionary Source="Resource/Colors/Colors.xaml" />
                 <ResourceDictionary Source="Resource/Icons/Icons.xaml" />
-
-                <ResourceDictionary Source="Styles/ExampleTextBlockStyle.xaml"/>
-
+                <ResourceDictionary Source="Resource/Fonts/Fonts.xaml" />
+                <ResourceDictionary Source="Styles/BottomStyles.xaml"/>
+                <ResourceDictionary Source="Styles/LeftSideBarStyles.xaml"/>
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
 
             </ResourceDictionary.MergedDictionaries>

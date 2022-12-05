@@ -7,6 +7,201 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Red">
-        <TextBlock FontSize="50" >Home</TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="yellow">
+            <TextBlock FontSize="50" HorizontalAlignment="Center">Header</TextBlock>
+        </Grid>
+        <ScrollViewer Grid.Row="1" Margin="41 30  24 0">
+            <StackPanel>
+                <TextBlock FontSize="39" Foreground="#fff" FontWeight="Medium" FontFamily="{StaticResource Circular}" LineHeight="49.33">Good Afternoon</TextBlock>
+                <Grid Margin="0 29 0 0" Height="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                </Grid>
+            <!--#region Text-->
+                <Grid Margin="0 29 0 0" Height="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                </Grid>
+                <Grid Margin="0 29 0 0" Height="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                </Grid>
+                <Grid Margin="0 29 0 0" Height="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                </Grid>
+                <Grid Margin="0 29 0 0" Height="180">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                        <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="2" Margin="0 0 15 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+
+                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+                    </Grid>
+
+                </Grid>
+
+                <!--#endregion-->
+            </StackPanel>
+        </ScrollViewer>
+       
     </Grid>
 </UserControl>
