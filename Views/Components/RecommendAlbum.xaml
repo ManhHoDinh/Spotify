@@ -5,15 +5,25 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
+<<<<<<<< HEAD:Views/Components/RecommendAlbum.xaml
              d:DesignHeight="450" d:DesignWidth="800">
+========
+             >
+   
+>>>>>>>> 0524d725e62a164d8c58c386225d67d1e7b61e83:Views/Components/NavigateButton.xaml
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="24"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
+<<<<<<<< HEAD:Views/Components/RecommendAlbum.xaml
         <Image Source="{Binding ImgSource}" Grid.Column="0"></Image>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Text}">
+========
+        <Image Source="{Binding IconSource}" Grid.Column="0"></Image>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding NavigateText}">
+>>>>>>>> 0524d725e62a164d8c58c386225d67d1e7b61e83:Views/Components/NavigateButton.xaml
             <TextBlock.Style>
                 <Style>
                     <Setter Property="TextBlock.FontFamily" Value="{StaticResource Circular}"></Setter>
