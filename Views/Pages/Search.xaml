@@ -5,8 +5,82 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Blue">
-        <TextBlock FontSize="50">Search</TextBlock>
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages">
+    <UserControl.DataContext>
+        <vm:SearchVM></vm:SearchVM>
+       
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
+            <ItemsPresenter/>
+        </ControlTemplate>
+    </UserControl.Resources>
+    
+    <Grid Background="#121212">
+        <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
+            
+        </Grid>
+        <ListView  x:Name="BeginingSearch"  Margin="0 60 0 0" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent">
+            <!--Text Index-->
+            <ListView.Resources>
+                <vm:OrdinalConverter x:Key="OrdinalConverter" />
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <Border Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                                    <Setter Property="Border.Background" Value="#5b5a5e"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="350"/>
+                                            <ColumnDefinition Width="300"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="80"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock  Grid.Column="0" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
+                                            <Image Width="40" Source="https://i1.sndcdn.com/artworks-LC3XCazRXEzo9wsY-okudbA-t500x500.jpg" Margin="0 0 20 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="{Binding Path=Name,Mode=OneWay}" Foreground="#ffffff" FontSize="20"/>
+                                                <TextBlock Text="{Binding Path=NameSinger,Mode=OneWay}" Foreground="#b3b3b3" FontSize="18"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding AlbumName}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                        <Grid  Grid.Column="3" HorizontalAlignment="Right">
+                                            <Button  Tag="{Binding isFavor, ElementName=BottomControl}" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
+                                                </Button.Background>
+                                            </Button>
+                                        </Grid>
+                                        <TextBlock Grid.Column="4" Text="{Binding DurationSong}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <TextBox x:Name="SearchBox"
+                  Width="300" Height="50" VerticalAlignment="Top" Margin="10"
+                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                 TextChanged="SearchBox_TextChanged"     
+                 />
+        
     </Grid>
 </UserControl>

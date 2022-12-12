@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.ViewModels.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,24 @@ namespace Spotify.Views.Pages
         public Search()
         {
             InitializeComponent();
+            PreparingSearch.Visibility= Visibility.Visible;
+            BeginingSearch.Visibility = Visibility.Hidden;
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(SearchBox.Text!=string.Empty)
+            {
+                PreparingSearch.Visibility = Visibility.Hidden;
+                BeginingSearch.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PreparingSearch.Visibility = Visibility.Visible;
+                BeginingSearch.Visibility = Visibility.Hidden;
+            }
+        }
+       
     }
 }
+
