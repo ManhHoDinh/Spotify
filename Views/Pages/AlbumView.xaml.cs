@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotify.Views.Pages
+namespace albumComponent.View
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for AlbumView.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class AlbumView : UserControl
     {
-        public Home()
+        public AlbumView()
         {
             InitializeComponent();
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.ViewModels.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,19 @@ using System.Windows.Shapes;
 namespace Spotify.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for Home.xaml
+    /// Interaction logic for LikedSongsView.xaml
     /// </summary>
-    public partial class Home : UserControl
+    public partial class LikedSongsView : UserControl
     {
-        public Home()
+        public LikedSongsView()
         {
             InitializeComponent();
+        }
+        private void Load_SongView(object sender, RoutedEventArgs e)
+        {
+            LikedSongsVM list = new LikedSongsVM();
+            list.LoadListSong();
+            ListSongItems.DataContext = list;
         }
     }
 }
