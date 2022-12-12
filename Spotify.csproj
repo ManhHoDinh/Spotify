@@ -9,8 +9,13 @@
 
   <ItemGroup>
     <None Remove="Resource\Icons\AddLibrary.png" />
+    <None Remove="Resource\Icons\Avatar.png" />
+    <None Remove="Resource\Icons\Back.png" />
+    <None Remove="Resource\Icons\Glass.png" />
+    <None Remove="Resource\Icons\HeaderSearch.png" />
     <None Remove="Resource\Icons\Home.png" />
     <None Remove="Resource\Icons\LikedSongs.png" />
+    <None Remove="Resource\Icons\NextPage.png" />
     <None Remove="Resource\Icons\Search.png" />
     <None Remove="Resource\Icons\YourLibrary.png" />
     <None Remove="Resource\Images\Devices.png" />
@@ -42,6 +47,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\Icons\Avatar.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Icons\Back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Icons\Glass.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Icons\HeaderSearch.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Icons\NextPage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resource\Images\Heart.png" />
     <Resource Include="Resource\Images\Heart_Fill.png" />
     <Resource Include="Resource\Images\Heart_Hover.png" />

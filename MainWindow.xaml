@@ -124,6 +124,11 @@
         <controls:bottomComponent Grid.Row="1">   
         </controls:bottomComponent>
 
+        <Component:Header HorizontalAlignment="Left" Margin="170,0,0,0" VerticalAlignment="Top" UserName="Pham Thanh Tuong" Width="{Binding Path=Width, ElementName=LoadSideBar}">
+            
+        </Component:Header>
+
+
     </Grid>
     
 </Window>
