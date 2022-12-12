@@ -48,6 +48,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resource\Images\Heart.png" />
+    <Resource Include="Resource\Images\Heart_Fill.png" />
+    <Resource Include="Resource\Images\Heart_Hover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resource\Images\Devices.png" />
     <Resource Include="Resource\Images\Devices_Hover.png" />
     <Resource Include="Resource\Images\Queue.png" />
