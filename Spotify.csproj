@@ -11,6 +11,7 @@
     <None Remove="Resource\Icons\AddLibrary.png" />
     <None Remove="Resource\Icons\Home.png" />
     <None Remove="Resource\Icons\LikedSongs.png" />
+    <None Remove="Resource\Icons\Play_GreemHover.png" />
     <None Remove="Resource\Icons\Search.png" />
     <None Remove="Resource\Icons\YourLibrary.png" />
     <None Remove="Resource\Images\Devices.png" />
@@ -42,12 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resource\Images\Heart.png" />
-    <Resource Include="Resource\Images\Heart_Fill.png" />
-    <Resource Include="Resource\Images\Heart_Hover.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Resource Include="Resource\Icons\Play_GreemHover.png" />
     <Resource Include="Resource\Images\Heart.png" />
     <Resource Include="Resource\Images\Heart_Fill.png" />
     <Resource Include="Resource\Images\Heart_Hover.png" />

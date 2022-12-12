@@ -29,5 +29,7 @@ namespace Spotify
         {
             //LoadSideBar.ColumnDefinitions.RemoveAt(1);
         }
+
+        
     }
 }

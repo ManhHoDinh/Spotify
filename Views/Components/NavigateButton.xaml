@@ -7,22 +7,21 @@
              mc:Ignorable="d" 
              >
    
-    <Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="26"></ColumnDefinition>
+            <ColumnDefinition Width="24"></ColumnDefinition>
             <ColumnDefinition Width="auto"></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
         <Image Source="{Binding IconSource}" Grid.Column="0"></Image>
-        <TextBlock Grid.Column="1" Text="{Binding NavigateText}">
+        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding NavigateText}">
             <TextBlock.Style>
                 <Style>
                     <Setter Property="TextBlock.FontFamily" Value="{StaticResource Circular}"></Setter>
-                    <Setter Property="TextBlock.FontSize" Value="18"></Setter>
+                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                     <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                    <Setter Property="TextBlock.LineHeight" Value="22.77"></Setter>
-                    <Setter Property="TextBlock.Foreground" Value="Gray"></Setter>
-                    <Setter Property="TextBlock.Margin" Value="20 4.5 0 4.5"></Setter>
+                    <Setter Property="TextBlock.Foreground" Value="#B3B3B3"></Setter>
+                    <Setter Property="TextBlock.Margin" Value="16 6.5 0 0"></Setter>
                     <Style.Triggers>
                         <Trigger Property="Button.IsMouseOver" Value="true">
                             <Setter Property="TextBlock.Foreground" Value="#fff"></Setter>

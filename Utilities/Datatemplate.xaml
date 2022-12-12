@@ -16,7 +16,7 @@
         <view:YourLibrary />
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:LikedSongsVM}">
-        <view:LikedSongs />
+        <view:LikedSongsView/>
     </DataTemplate>
 
     <DataTemplate DataType="{x:Type vm:SearchVM}">
