@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotify.Views.Pages
+namespace albumComponent.View
 {
     /// <summary>
-    /// Interaction logic for LikedSongs.xaml
+    /// Interaction logic for AlbumView.xaml
     /// </summary>
-    public partial class LikedSongs : UserControl
+    public partial class AlbumView : UserControl
     {
-        public LikedSongs()
+        public AlbumView()
         {
             InitializeComponent();
         }
