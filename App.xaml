@@ -15,11 +15,18 @@
                 <ResourceDictionary Source="Resource/Icons/Icons.xaml" />
                 <ResourceDictionary Source="Resource/Fonts/Fonts.xaml" />
                 <ResourceDictionary Source="Styles/LeftSideBarStyles.xaml"/>
-                <ResourceDictionary Source="Styles/BottomStyles.xaml"/>
+                
                 <ResourceDictionary Source="Styles/PlaylistStyles.xaml"/>
                 <ResourceDictionary Source="Styles/HomeStyles.xaml"/>
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
                 <ResourceDictionary Source="Styles/HomeStyles.xaml"/>
+                <ResourceDictionary Source="Styles/FavorButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ControlButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ScrollBarStyle.xaml"/>
+                <ResourceDictionary Source="Styles/TrackStyle.xaml"/>
+                <ResourceDictionary Source="Styles/VolumeButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ColumnStyle.xaml"/>
+                <ResourceDictionary Source="/ResourceXAML/ListSongVM.xaml"/>
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

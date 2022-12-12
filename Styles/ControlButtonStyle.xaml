@@ -1,0 +1,130 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--button style-->
+    <Style x:Key="ControlBtn" TargetType="Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="#000000"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0 0 30 0"/>
+    </Style>
+    <!--prevbtn-->
+    <ImageBrush x:Key="PrevHover" ImageSource="{StaticResource PrevHoverButton}"/>
+    <ImageBrush x:Key="Prev" ImageSource="{StaticResource PrevButton}"/>
+    <ControlTemplate x:Key="PrevStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource PrevHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Prev }"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--greenHover-->
+    <ImageBrush x:Key="PauseGreen" ImageSource="{StaticResource PauseGreemHoverButton}"/>
+    <ImageBrush x:Key="PlayGreen" ImageSource="{StaticResource PlayGreemHoverButton}"/>
+    <ControlTemplate x:Key="GreenPlayStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Width" TargetName="border" Value="90"/>
+                <Setter Property="Height" TargetName="border" Value="90"/>
+                <Setter Property="VerticalAlignment" TargetName="border" Value="Center"/>
+                <Setter Property="HorizontalAlignment" TargetName="border" Value="center"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--nextbtn-->
+    <ImageBrush x:Key="NextHover" ImageSource="{StaticResource NextHoverButton}"/>
+    <ImageBrush x:Key="Next" ImageSource="{StaticResource NextButton}"/>
+    <ControlTemplate x:Key="NextStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource NextHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Next }"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--Shufflebtn-->
+    <ImageBrush x:Key="ShuffleHover" ImageSource="{StaticResource ShuffleHoverButton}"/>
+    <ImageBrush x:Key="Shuffle" ImageSource="{StaticResource ShuffleButton}"/>
+    <ControlTemplate x:Key="ShuffleStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="false"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource ShuffleHover}"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--Repeatbtn-->
+    <ImageBrush x:Key="RepeatHover" ImageSource="{StaticResource RepeatHoverButton}"/>
+    <ImageBrush x:Key="Repeat" ImageSource="{StaticResource RepeatButton}"/>
+    <ImageBrush x:Key="RepeatS" ImageSource="{StaticResource RepeatSButton}"/>
+    <ImageBrush x:Key="RepeatOne" ImageSource="{StaticResource RepeatOneButton}"/>
+    <ControlTemplate x:Key="RepeatStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="None"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource RepeatHover}"/>
+            </MultiTrigger>
+            <!--<Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource RepeatHover}"/>
+            </Trigger>-->
+    
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--Pause/Playbtn-->
+    <ControlTemplate x:Key="PausePlayStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Width" TargetName="border" Value="50"/>
+                <Setter Property="Height" TargetName="border" Value="50"/>
+                <Setter Property="VerticalAlignment" TargetName="border" Value="Center"/>
+                <Setter Property="HorizontalAlignment" TargetName="border" Value="center"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--queueBtn-->
+    <ImageBrush x:Key="QueueHover" ImageSource="{StaticResource QueueHoverButton}"/>
+    <ImageBrush x:Key="Queue" ImageSource="{StaticResource QueueButton}"/>
+    <ControlTemplate x:Key="QueueStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource QueueHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Queue }"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ImageBrush x:Key="DeviceHover" ImageSource="{StaticResource DevicesHoverButton}"/>
+    <ImageBrush x:Key="Device" ImageSource="{StaticResource DevicesButton}"/>
+    <ControlTemplate x:Key="DeviceStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource DeviceHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{StaticResource Device }"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

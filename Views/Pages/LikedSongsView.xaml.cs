@@ -25,11 +25,5 @@ namespace Spotify.Views.Pages
         {
             InitializeComponent();
         }
-        private void Load_SongView(object sender, RoutedEventArgs e)
-        {
-            LikedSongsVM list = new LikedSongsVM();
-            list.LoadListSong();
-            ListSongItems.DataContext = list;
-        }
     }
 }
