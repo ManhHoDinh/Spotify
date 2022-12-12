@@ -7,4 +7,5 @@
     <ImageSource x:Key="YourLibraryIcon">./YourLibrary.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
+    <ImageSource x:Key="PlayFill">./Play_GreemHover.png</ImageSource>
 </ResourceDictionary>

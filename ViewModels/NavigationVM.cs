@@ -12,7 +12,7 @@ using Spotify.Utilities;
 
 namespace Spotify.ViewModels
 {
-    internal class NavigationVM:Utilities.ViewModelBase
+    internal class NavigationVM:Utilities.BaseViewModel
     {
         private object _currentView;
         public object CurrentView
