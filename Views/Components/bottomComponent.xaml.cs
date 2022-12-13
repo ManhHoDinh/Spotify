@@ -14,6 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using Spotify.ViewModels;
+using Spotify.Models;
+using Spotify.Views.Pages;
+using Spotify.ViewModels.Pages;
 
 namespace Spotify.Views.Components
 {
@@ -25,14 +29,18 @@ namespace Spotify.Views.Components
         public bottomComponent()
         {
             InitializeComponent();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
+        private bool mediaPlayerIsPlaying = false;
         string fileName = "";
         MediaPlayer mediaPlayer = new MediaPlayer();
         public bool IsMute = false;
         public double PrevVolume;
         public string PrevVolumeIcon = "";
         public double PrevVolumeSlider;
-        public bool IsPlay;
         public bool IsFavor = false;
         public bool IsDrag = false;
         public string isFavor
@@ -43,16 +51,27 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty isFavorProperty =
             DependencyProperty.Register("isFavor", typeof(string), typeof(bottomComponent), new PropertyMetadata("true"));
-        public string isHover
+
+        public bool IsShuffle
         {
-            get { return (string)GetValue(isHoverProperty); }
-            set { SetValue(isHoverProperty, value); }
+            get { return (bool)GetValue(IsShuffleProperty); }
+            set { SetValue(IsShuffleProperty, value); }
         }
         // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty isHoverProperty =
-            DependencyProperty.Register("isHover", typeof(string), typeof(bottomComponent), new PropertyMetadata("True"));
-        //button open the file mp3
-        //button open the file mp3
+        public static readonly DependencyProperty IsShuffleProperty =
+            DependencyProperty.Register("IsShuffle", typeof(bool), typeof(bottomComponent), new PropertyMetadata(false));
+
+
+        public string RepeatState
+        {
+            get { return (string)GetValue(RepeatStateProperty); }
+            set { SetValue(RepeatStateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RepeatState.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RepeatStateProperty =
+            DependencyProperty.Register("RepeatState", typeof(string), typeof(bottomComponent), new PropertyMetadata("None"));
+
 
 
         public string VolumeStyle
@@ -85,69 +104,58 @@ namespace Spotify.Views.Components
                 timer.Start();
             }
         }
+        private void Pause_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            //e.CanExecute = mediaPlayerIsPlaying;
+            e.CanExecute = (mePlayer != null) && (mePlayer.Source != null);
+
+        }
+        ImageSource Play = (ImageSource)Application.Current.Resources["PlayButton"];
+        ImageSource Pause = (ImageSource)Application.Current.Resources["PauseButton"];
+        private void Pause_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (mediaPlayerIsPlaying == false)
+            {
+                mePlayer.Play();
+                mediaPlayerIsPlaying = true;
+
+                ImageBrush ImgBrush = new ImageBrush();
+                ImgBrush.ImageSource = Pause;
+                PlayPauseBtn.Background = ImgBrush;
+
+
+
+            }
+            else
+            {
+                ImageBrush ImgBrush = new ImageBrush();
+                ImgBrush.ImageSource = Play;
+                PlayPauseBtn.Background = ImgBrush;
+                mePlayer.Pause();
+                mediaPlayerIsPlaying = false;
+
+            }
+            // mePlayer.Pause();
+        }
+
+
+
         // add second when the song is playing
         void timer_Tick(object sender, EventArgs e)
         {
-            if (mediaPlayer.Source != null && mediaPlayer.NaturalDuration.HasTimeSpan && (!IsDrag))
+            if (mePlayer.Source != null && mePlayer.NaturalDuration.HasTimeSpan && (!IsDrag))
             {
-                slider.Maximum = mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                slider.Value = mediaPlayer.Position.TotalSeconds;
-                playing.Content = mediaPlayer.Position.ToString(@"mm\:ss");
-                Duration.Content = mediaPlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
+                slider.Maximum = mePlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                slider.Value = mePlayer.Position.TotalSeconds;
+                playing.Content = mePlayer.Position.ToString(@"mm\:ss");
+                Duration.Content = mePlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
+
             }
         }
-        //button pause or play the song
-        //private void btnPlayPause_Click(object sender, RoutedEventArgs e)
-        //{
 
-        //    if (IsPlay)
-        //    {
-        //        mediaPlayer.Pause();
-        //        Icon = "Play";
-        //        IsPlay = false;
-        //    }
-        //    else
-        //    {
-        //        mediaPlayer.Play();
-        //        Icon = "Pause";
-        //        IsPlay = true;
-        //    }
-        //}
-        //set icon when play or pause
-        //public string Icon
-        //{
-        //    get { return (string)GetValue(IconProperty); }
-        //    set { SetValue(IconProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for IconProperty.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty IconProperty =
-        //    DependencyProperty.Register("Icon", typeof(string), typeof(bottomComponent), new PropertyMetadata("Pause"));
-        //set volume icon when adjust the volume
-        //public string VolumeIcon
-        //{
-        //    get { return (string)GetValue(VolumeIconProperty); }
-        //    set { SetValue(VolumeIconProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for VolumnIcon.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty VolumeIconProperty =
-        //    DependencyProperty.Register("VolumeIcon", typeof(string), typeof(bottomComponent), new PropertyMetadata("VolumeDown"));
-
-        //color when hover to button control 
-        //public string Color
-        //{
-        //    get { return (string)GetValue(ColorProperty); }
-        //    set { SetValue(ColorProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for ColorProperty.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty ColorProperty =
-        //    DependencyProperty.Register("Color", typeof(string), typeof(bottomComponent), new PropertyMetadata("#D9D9D9"));
-        //change label of position mediaplayer when the song is playing
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            playing.Content = String.Format("{0}", mediaPlayer.Position.ToString(@"mm\:ss"));
+            playing.Content = String.Format("{0}", mePlayer.Position.ToString(@"mm\:ss"));
         }
         // event when drag the thumb of slider
         private void slider_DragStarted(object sender, System.Windows.Controls.Primitives.DragStartedEventArgs e)
@@ -157,22 +165,22 @@ namespace Spotify.Views.Components
         // event when complete drag the thumg of slider
         private void slider_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
         {
-            mediaPlayer.Position = TimeSpan.FromSeconds(slider.Value);
+            mePlayer.Position = TimeSpan.FromSeconds(slider.Value);
             IsDrag = false;
         }
         //change the volume icon when value of volume slider change
         private void volumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            mediaPlayer.Volume = (double)volumeSlider.Value;  
+            mePlayer.Volume = (double)volumeSlider.Value;
             if (volumeSlider.Value < 0.8 && volumeSlider.Value > 0.3)
             {
-                ImageSource VolumnMedium =(ImageSource)Application.Current.Resources["VolumeMediumButton"];
+                ImageSource VolumnMedium = (ImageSource)Application.Current.Resources["VolumeMediumButton"];
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = VolumnMedium;
                 VolumeButton.Background = brush;
                 VolumeStyle = "Medium";
             }
-            if (volumeSlider.Value <=0.3)
+            if (volumeSlider.Value <= 0.3)
             {
                 ImageSource VolumnMin = (ImageSource)Application.Current.Resources["VolumeMinButton"];
                 ImageBrush brush = new ImageBrush();
@@ -199,47 +207,21 @@ namespace Spotify.Views.Components
                 PrevVolumeSlider = volumeSlider.Value;
                 volumeSlider.Value = 0;
                 PrevVolume = mediaPlayer.Volume;
-                mediaPlayer.Volume = 0;
+                mePlayer.Volume = 0;
                 IsMute = true;
             }
             else
             {
-                mediaPlayer.Volume = PrevVolume;
+                mePlayer.Volume = PrevVolume;
                 //VolumeIcon = PrevVolumeIcon;
                 volumeSlider.Value = PrevVolumeSlider;
                 IsMute = false;
             }
         }
-
-        private void PlayPause_Click(object sender, RoutedEventArgs e)
-        {
-            ImageSource Play = (ImageSource)Application.Current.Resources["PlayButton"];
-            ImageSource Pause = (ImageSource)Application.Current.Resources["PauseButton"];
-            var a = new ControlTemplate();
-            Button PlayPauseBtn = sender as Button;
-            if (IsPlay)
-            {
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Pause;
-                mediaPlayer.Play();
-                PlayPauseBtn.Background = ImgBrush;
-                IsPlay = false;
-            }
-            else
-            {
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Play;
-                mediaPlayer.Pause();
-                PlayPauseBtn.Background = ImgBrush;
-                IsPlay = true;
-
-            }
-            
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Button HeartBtn = sender as Button;
+
             if (IsFavor)
             {
                 ImageSource Heart = (ImageSource)Application.Current.Resources["HeartButton"];
@@ -258,9 +240,107 @@ namespace Spotify.Views.Components
                 HeartBtn.Background = ImgBrush;
                 IsFavor = true;
                 isFavor = "true";
+
             }
-           
+
 
         }
-    } 
+
+        private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            LikedSongsVM a = this.DataContext as LikedSongsVM;
+            if (a != null)
+            {
+
+                int index = a.SelectedItem.ID;
+                if (RepeatState == "RepeatOne")
+                {
+                    mePlayer.Position = TimeSpan.Zero;
+                    playing.Content = mePlayer.Position.ToString(@"mm\:ss");
+                }
+
+                else
+                {
+                    if (!IsShuffle)
+                    {
+                        {
+                            if (index < a.listSong.Count) a.SelectedItem = a.listSong[index];
+                            else
+                            {
+                                a.SelectedItem = a.listSong[0];
+                                if (RepeatState == "None")
+                                {
+                                    mePlayer.Pause();
+                                    ImageBrush img = new ImageBrush();
+                                    img.ImageSource = Play;
+                                    PlayPauseBtn.Background = img;
+                                }
+
+
+                            }
+                        }
+                    }
+                    else
+                    {
+
+                        Random rdm = new Random();
+                        int x = rdm.Next(0, a.listSong.Count);
+                        a.SelectedItem = a.listSong[index];
+                    }
+                }
+            }
+        }
+
+        private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (IsShuffle)
+            {
+                ImageSource Heart = (ImageSource)Application.Current.Resources["ShuffleButton"];
+                ImageBrush ImgBrush = new ImageBrush();
+                ImgBrush.ImageSource = Heart;
+                ShuffleBtn.Background = ImgBrush;
+                IsShuffle = false;
+
+            }
+            else
+            {
+                ImageSource HeartFill = (ImageSource)Application.Current.Resources["ShuffleSButton"];
+                ImageBrush ImgBrush = new ImageBrush();
+                ImgBrush.ImageSource = HeartFill;
+                ShuffleBtn.Background = ImgBrush;
+                IsShuffle = true;
+
+            }
+
+
+
+        }
+
+        private void Repeat_Click(object sender, RoutedEventArgs e)
+        {
+            ImageBrush img = new ImageBrush();
+            if (RepeatState == "None")
+            {
+
+                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatSButton"];
+                RepeatBtn.Background = img;
+                RepeatState = "Active";
+            }
+            else if (RepeatState == "Active")
+            {
+
+                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatOneButton"];
+                RepeatBtn.Background = img;
+                RepeatState = "RepeatOne";
+            }
+            else if (RepeatState == "RepeatOne")
+            {
+                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatButton"];
+                RepeatBtn.Background = img;
+                RepeatState = "None";
+            }
+
+        }
+    }
 }
