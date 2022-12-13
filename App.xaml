@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Resource/Fonts/Fonts.xaml" />
                 <ResourceDictionary Source="Styles/LeftSideBarStyles.xaml"/>
                 
+                <ResourceDictionary Source="Styles/BottomStyles.xaml"/>
                 <ResourceDictionary Source="Styles/PlaylistStyles.xaml"/>
                 <ResourceDictionary Source="Styles/HomeStyles.xaml"/>
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
