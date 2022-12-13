@@ -3,203 +3,268 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Red">
+             d:DesignHeight="8000" d:DesignWidth="800"
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             xmlns:Components="clr-namespace:Spotify.Views.Components"
+             >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+        <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
+            <ItemsPresenter/>
+        </ControlTemplate>
+        <ControlTemplate  x:Key="TopicAlbum" TargetType="ListView">
+            <StackPanel Margin="21 30 20 0">
+                <TextBlock Text="{TemplateBinding Tag}" FontSize="24" FontWeight="Bold" Foreground="#ffffff" TextWrapping="Wrap" Margin="21 0 0 10"/>
+                <ListView Template="{DynamicResource NonScrollableListView}" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                  ItemsSource="{TemplateBinding ItemsSource}" 
+                  Background="Transparent" BorderBrush="Transparent">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="AntiqueWhite"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border CornerRadius="8" BorderBrush="#000000" BorderThickness="1" Width="184" Height="264" Margin="0 0 20 0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#181818"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                                            <Setter Property="Border.Background" Value="#464646"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Grid>
+                                                <StackPanel Margin="16 10 16 0">
+                                                    <Border Width="150" Height="150" CornerRadius="8" Margin="0 0 0 20">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d0000b27323ec0bc09b61d08fcb64acea"/>
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding Name}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding Description}" FontSize="14" Foreground="#b3b3b3"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate  x:Key="RecomendAlbum" TargetType="ListView">
+            <StackPanel Margin="21 30 20 0">
+
+                <ListView Template="{DynamicResource NonScrollableListView}" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
+                  ItemsSource="{TemplateBinding ItemsSource}" 
+                  Background="Transparent" BorderBrush="Transparent">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="AntiqueWhite"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border CornerRadius="8" BorderBrush="#000000" BorderThickness="1" Width="184" Height="264" Margin="0 0 20 0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#181818"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                                            <Setter Property="Border.Background" Value="#464646"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Grid>
+                                                <StackPanel Margin="16 10 16 0">
+                                                    <Border Width="150" Height="150" CornerRadius="8" Margin="0 0 0 20">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="https://i.scdn.co/image/ab67616d0000b27323ec0bc09b61d08fcb64acea"/>
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding AlbumDescription}" FontSize="14" Foreground="#b3b3b3"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </ControlTemplate>
+        <ControlTemplate TargetType="Components:RecommendAlbum" x:Key="RecommendAblum">
+
+            <Button Template="{StaticResource HomeBtnBase}" Click="{Binding SelectedItem, Mode=OneWayToSource}">
+                <Grid HorizontalAlignment="Center" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="24"></ColumnDefinition>
+                        <ColumnDefinition Width="auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="{TemplateBinding ImgSource}" Grid.Column="0"></Image>
+                    <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{TemplateBinding Text}"/>
+                </Grid>
+
+            </Button>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <vm:HomeVM></vm:HomeVM>
+    </UserControl.DataContext>
+    
+
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="yellow">
-            <TextBlock FontSize="50" HorizontalAlignment="Center">Header</TextBlock>
+        <Grid Grid.Row="0" Background="{StaticResource HomeColor}">
+            <Components:Header UserName="Manh dz"></Components:Header>
         </Grid>
-        <ScrollViewer Grid.Row="1" Margin="41 30  24 0">
-            <StackPanel>
-                <TextBlock FontSize="39" Foreground="#fff" FontWeight="Medium" FontFamily="{StaticResource Circular}" LineHeight="49.33">Good Afternoon</TextBlock>
-                <Grid Margin="0 29 0 0" Height="180">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0 0 15 0">
+        <ScrollViewer Grid.Row="1">
+            <StackPanel  Background="{StaticResource HomeColor}">
+               
+                
+                <!--Content-->
+                <!--#region Content-->
+                <Grid >
+                    <Grid Visibility="{Binding IsAlbumItemVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition  Height="340"/>
+                            <RowDefinition  Height="140"/>
+                            <RowDefinition  Height="*"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+                        <Border Grid.Row="0">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                                    <GradientStop Color="#503A9F" Offset="0"/>
+                                    <GradientStop Color="#2A1E51" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="360"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <WrapPanel Grid.Column="0">
+                                    <Border Margin="32 80 0 0"  Width="232" Height="232">
+                                        <Border.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#3F13B8" Offset="0"/>
+                                                <GradientStop Color="#798C89" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </WrapPanel>
+                                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
+                                    <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff" />
+                                    <TextBlock Text="{Binding AlbumName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding AlbumDescription}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="1">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#20173f" Offset="0"/>
+                                    <GradientStop Color="#191526" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel Orientation="Vertical">
+                                <Button Margin="32 24 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="52">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="https://cdn-icons-png.flaticon.com/512/0/375.png"/>
+                                    </Button.Background>
+                                </Button>
+                                <Grid Margin="32 24 32 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="475"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="300"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="#"  Margin="16 0 0 0"/>
+                                    <TextBlock Grid.Column="1" Text="TITLE"/>
+                                    <TextBlock Grid.Column="2" Text="ALBUM"/>
+                                    <TextBlock Grid.Column="3" Text="DATE ADDED"/>
+                                    <TextBlock Grid.Column="4" Text="TIME" Margin="0 0 -12 0"/>
+                                </Grid>
+                               
+                            </StackPanel>
+                        </Border>
 
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
+
                     </Grid>
-                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
 
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
+                    <StackPanel Visibility="{Binding IsAlbumListVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="32 0 32 0">
+                        <Grid>
+                            <!--Header-->
 
-                    <Grid Grid.Column="2" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
+                            <TextBlock FontSize="39"  Foreground="#fff" FontWeight="Medium" FontFamily="{StaticResource Circular}" LineHeight="49.33">Good Afternoon</TextBlock>
+                            <Grid Height="180" Margin="0  68 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Margin="0 0 15 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Components:RecommendAlbum  Background="Blue" Margin="0 0 0 8" Grid.Row="0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    <Components:RecommendAlbum  Background="Blue" Grid.Row="1" Margin="0 8 0 0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                </Grid>
+                                <Grid Grid.Column="1" Margin="0 0 15 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Components:RecommendAlbum  Background="Blue" Margin="0 0 0 8" Grid.Row="0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    <Components:RecommendAlbum  Background="Blue" Grid.Row="1" Margin="0 8 0 0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                </Grid>
 
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
+                                <Grid Grid.Column="2" Margin="0 0 15 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Components:RecommendAlbum  Background="Blue" Margin="0 0 0 8" Grid.Row="0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    <Components:RecommendAlbum  Background="Blue" Grid.Row="1" Margin="0 8 0 0" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                </Grid>
 
+                            </Grid>
+                        </Grid>
+                        <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
+                        <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                        <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
+                        <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
+                    </StackPanel>
                 </Grid>
-            <!--#region Text-->
-                <Grid Margin="0 29 0 0" Height="180">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                    <Grid Grid.Column="2" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                </Grid>
-                <Grid Margin="0 29 0 0" Height="180">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                    <Grid Grid.Column="2" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                </Grid>
-                <Grid Margin="0 29 0 0" Height="180">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                    <Grid Grid.Column="2" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                </Grid>
-                <Grid Margin="0 29 0 0" Height="180">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                    <Grid Grid.Column="2" Margin="0 0 15 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="Blue" Margin="0 0 0 8"></Grid>
-
-                        <Grid Grid.Row="1" Background="Blue" Margin="0 8 0 0"></Grid>
-                    </Grid>
-
-                </Grid>
-
-                <!--#endregion-->
+                <!--#endregion Content-->
+              
             </StackPanel>
         </ScrollViewer>
        
