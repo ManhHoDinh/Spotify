@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using Spotify.ViewModels.Pages;
 
 
@@ -14,11 +15,28 @@ namespace Spotify.Views.Components
         {
             InitializeComponent();
         }
-
-        private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public bool IsFavor
         {
-            LikedSongsVM a = new LikedSongsVM();
-            a.LoadListSong();
+            get { return (bool)GetValue(IsFavorProperty); }
+            set { SetValue(IsFavorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsFavor.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsFavorProperty =
+            DependencyProperty.Register("IsFavor", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
+
+
+        private void Favor_Click(object sender, RoutedEventArgs e)
+        {
+            Button HeartBtn = sender as Button;
+            int index = int.Parse(HeartBtn.Tag.ToString());
+            LikedSongsVM list = this.DataContext as LikedSongsVM;
+            list.listSong.RemoveAt(index - 1);
+            for (int i = 0; i < list.listSong.Count; i++)
+            {
+                list.listSong[i].ID = i + 1;
+
+            }
         }
     }
 }

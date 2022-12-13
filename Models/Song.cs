@@ -8,156 +8,64 @@ using System.Threading.Tasks;
 
 namespace Spotify.Models
 {
-    public class Song:BaseViewModel
+    public class Song : BaseViewModel
     {
-        private string _id;
+        private int _id;
+        public int ID
+        {
+            get => _id; set { _id = value; OnPropertyChanged(); }
+        }
         private string _name;
-        private string _namesinger;
-        private string _albumName;
-        private string _type;
-        private string _decription;
-        private string _postTime;
-        private string _image;
-        private string _durationSong;
-
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _name; set { _name = value; OnPropertyChanged(); }
         }
+        private string _namesinger;
         public string NameSinger
         {
-            get
-            {
-                return _namesinger;
-            }
-            set
-            {
-                if (_namesinger != value)
-                {
-                    _namesinger = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+            get => _namesinger; set { _namesinger = value; OnPropertyChanged(); }
 
+        }
+        private string _albumName;
         public string AlbumName
         {
-            get
-            {
-                return _albumName;
-            }
-            set
-            {
-                if (_albumName != value)
-                {
-                    _albumName = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _albumName; set { _albumName = value; OnPropertyChanged(); }
         }
-
-
+        private string _type;
         public string Type
         {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                if (_type != value)
-                {
-                    _type = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _type; set { _type = value; OnPropertyChanged(); }
         }
-        public string Deciption
+        private string _decription;
+        public string Decription
         {
-            get
-            {
-                return _decription;
-            }
-            set
-            {
-                if (_decription != value)
-                {
-                    _decription = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _decription; set { _decription = value; OnPropertyChanged(); }
         }
+        private string _postTime;
         public string PostTime
         {
-            get
-            {
-                return _postTime;
-            }
-            set
-            {
-                if (_postTime != value)
-                {
-                    _postTime = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _postTime; set { _postTime = value; OnPropertyChanged(); }
         }
-        public string Image
+        private Uri _image;
+        public Uri Image
         {
-            get
-            {
-                return _image;
-            }
-            set
-            {
-                if (_image != value)
-                {
-                    _image = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _image; set { _image = value; OnPropertyChanged(); }
         }
-        public string ID
+        private string _durationSong;
+        public string DurationSong
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                if (_id != value)
-                {
-                    _id = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _durationSong; set { _durationSong = value; OnPropertyChanged(); }
         }
-       public string DurationSong
+        private Uri _LinkSong;
+        public Uri LinkSong
         {
-            get
-            {
-                return _durationSong;
-            }
-            set
-            {
-                if (_durationSong != value)
-                {
-                    _durationSong = value;
-                    OnPropertyChanged();
-                }
-            }
+            get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); }
         }
+
+
+
+
+
 
     }
 }
