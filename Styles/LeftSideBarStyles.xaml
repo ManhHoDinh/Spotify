@@ -49,10 +49,7 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="Red"/>
             </Trigger>
-            
         </Style.Triggers>
         
-       
     </Style>
-  
 </ResourceDictionary>
