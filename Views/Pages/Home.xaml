@@ -139,7 +139,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" Background="{StaticResource HomeColor}">
-            <TextBlock FontSize="50" HorizontalAlignment="Center">Header</TextBlock>
+            <Components:Header UserName="Manh dz"></Components:Header>
         </Grid>
         <ScrollViewer Grid.Row="1">
             <StackPanel  Background="{StaticResource HomeColor}">

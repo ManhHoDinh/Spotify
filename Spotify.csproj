@@ -9,8 +9,13 @@
 
   <ItemGroup>
     <None Remove="Resource\Icons\AddLibrary.png" />
+    <None Remove="Resource\Icons\Avatar.png" />
+    <None Remove="Resource\Icons\Back.png" />
+    <None Remove="Resource\Icons\Glass.png" />
+    <None Remove="Resource\Icons\HeaderSearch.png" />
     <None Remove="Resource\Icons\Home.png" />
     <None Remove="Resource\Icons\LikedSongs.png" />
+    <None Remove="Resource\Icons\NextPage.png" />
     <None Remove="Resource\Icons\Play_GreemHover.png" />
     <None Remove="Resource\Icons\Search.png" />
     <None Remove="Resource\Icons\YourLibrary.png" />
@@ -70,6 +75,34 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resource\Images\BenTrenTangLauImg.jfif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Images\CamNangImg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Images\DauMua.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BenTrenTangLau.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CamNang.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DauMua.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resource\Icons\Avatar.png" />
+    <Resource Include="Resource\Icons\Back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\Icons\Glass.png" />
+    <Resource Include="Resource\Icons\HeaderSearch.png" />
+    <Resource Include="Resource\Icons\NextPage.png" />
     <Resource Include="Resource\Icons\Play_GreemHover.png" />
     <Resource Include="Resource\Images\Heart.png" />
     <Resource Include="Resource\Images\Heart_Fill.png" />
