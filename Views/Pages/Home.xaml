@@ -38,7 +38,7 @@
                                                     <Setter Property="Background" Value="#181818"/>
                                                     <Style.Triggers>
                                                         <Trigger Property="Border.IsMouseOver" Value="True">
-                                                            <Setter Property="Border.Background" Value="#464646"/>
+                                                            <Setter Property="Border.Background" Value="#282828"/>
                                                         </Trigger>
                                                     </Style.Triggers>
                                                 </Style>
