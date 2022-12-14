@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,6 +49,10 @@ namespace Spotify.ViewModels.Pages
                     NameSinger = SelectedItem.NameSinger;
                     LinkSong = SelectedItem.LinkSong;
                     Image = SelectedItem.Image;
+                    SongBottom.Ins.SongName = Name;
+                    SongBottom.Ins.SingerName = NameSinger;
+                    SongBottom.Ins.LinkSong = LinkSong;
+
                 }
             }
         }

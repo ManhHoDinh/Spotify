@@ -18,12 +18,53 @@ using Spotify.ViewModels;
 using Spotify.Models;
 using Spotify.Views.Pages;
 using Spotify.ViewModels.Pages;
+using System.Security.Policy;
 
 namespace Spotify.Views.Components
 {
     /// <summary>
     /// Interaction logic for bottomComponent.xaml
     /// </summary>
+    public class SongBottom: DependencyObject
+    {
+        public string SongName
+        {
+            get { return (string)GetValue(SongNameProperty); }
+            set { SetValue(SongNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SongNameProperty =
+            DependencyProperty.Register("SongName", typeof(string), typeof(SongBottom), new PropertyMetadata(string.Empty));
+        public string SingerName
+        {
+            get { return (string)GetValue(SingerNameProperty); }
+            set { SetValue(SingerNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SingerNameProperty =
+            DependencyProperty.Register("SingerName", typeof(string), typeof(SongBottom), new PropertyMetadata(string.Empty));
+        public Uri LinkSong
+        {
+            get { return (Uri)GetValue(LinkSongProperty); }
+            set { SetValue(LinkSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LinkSongProperty =
+            DependencyProperty.Register("LinkSong", typeof(Uri), typeof(SongBottom), new PropertyMetadata(null));
+        public static SongBottom Ins { get; private set; }
+        static SongBottom()
+        {
+            Ins = new SongBottom();
+        }
+
+
+       
+
+
+    }
     public partial class bottomComponent : UserControl
     {
         public bottomComponent()
