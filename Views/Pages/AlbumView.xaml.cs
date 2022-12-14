@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotify
+namespace albumComponent.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AlbumView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AlbumView : UserControl
     {
-        public MainWindow()
+        public AlbumView()
         {
-            InitializeComponent();   
+            InitializeComponent();
         }
-        private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
-        {
-            //LoadSideBar.ColumnDefinitions.RemoveAt(1);
-        }
-
-        
     }
 }

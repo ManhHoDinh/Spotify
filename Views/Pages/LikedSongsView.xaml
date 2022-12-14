@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Spotify.Views.Pages.LikedSongsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotify.Views.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{StaticResource songviewVM}"
+             xmlns:component="clr-namespace:Spotify.Views.Components"
+             xmlns:SongItems="clr-namespace:Spotify.Views.Components">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="340"/>
+            <RowDefinition  Height="140"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                    <GradientStop Color="#503A9F" Offset="0"/>
+                    <GradientStop Color="#2A1E51" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="360"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Column="0">
+                    <Border Margin="32 80 0 0"  Width="232" Height="232">
+                        <Border.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="#3F13B8" Offset="0"/>
+                                <GradientStop Color="#798C89" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+                </WrapPanel>
+                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
+                    <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
+                    <TextBlock Text="Likes Songs" FontSize="96" Foreground="#ffffff" FontWeight="Bold" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#20173f" Offset="0"/>
+                    <GradientStop Color="#191526" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel Orientation="Vertical">
+                <!--<Button x:Name="PlayPauseGreen" Template="{DynamicResource GreenPlayStyle}" Margin="32 10 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource PlayGreemHoverButton}"/>
+                    </Button.Background>
+                </Button>-->
+                <Grid Margin="32 20 32 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="475"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="#" Style="{StaticResource columnTitle}" Margin="16 0 0 0"/>
+                    <TextBlock Grid.Column="1" Text="TITLE" Style="{StaticResource columnTitle}"/>
+                    <TextBlock Grid.Column="2" Text="ALBUM" Style="{StaticResource columnTitle}"/>
+                    <TextBlock Grid.Column="3" Text="DATE ADDED" Style="{StaticResource columnTitle}"/>
+                    <TextBlock Grid.Column="4" Text="TIME" Style="{StaticResource columnTitle}" Margin="0 0 -12 0"/>
+                </Grid>
+
+            </StackPanel>
+        </Border>
+        <SongItems:SongsView Grid.Row="2" x:Name="ListSongItems"/>
+    </Grid>
+</UserControl>

@@ -7,4 +7,10 @@
     <ImageSource x:Key="YourLibraryIcon">./YourLibrary.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
+    <ImageSource x:Key="PlayFill">./Play_GreemHover.png</ImageSource>
+    <ImageSource x:Key="BackButton">./Back.png</ImageSource>
+    <ImageSource x:Key="NextPageButton">./NextPage.png</ImageSource>
+    <ImageSource x:Key="Find">./Glass.png</ImageSource>
+    <ImageSource x:Key="SearchBoxForm">./HeaderSearch.png</ImageSource>
+    <ImageSource x:Key="Avatar">./Avatar.png</ImageSource>
 </ResourceDictionary>

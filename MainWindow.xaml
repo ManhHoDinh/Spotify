@@ -11,10 +11,11 @@
         Title="MainWindow" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
         >
+    
     <Window.DataContext>
         <vm:NavigationVM/>
-        
     </Window.DataContext>
+    
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
@@ -33,44 +34,22 @@
             </Grid.ColumnDefinitions>
             <!--LeftSideBar-->
             <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="300">
-                <StackPanel Background="#000">
-                    <Button Margin="30 60 0 20" Style="{StaticResource NavigateBtn}"  Command="{Binding HomeCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource HomeIcon }" NavigateText="Home"></Component:NavigateButton>
-                    </Button>
-                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource SearchIcon }" NavigateText="Search"></Component:NavigateButton>
-                    </Button>
-
-                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}">
-                        <Component:NavigateButton IconSource="{StaticResource YourLibraryIcon }" NavigateText="Your Library"></Component:NavigateButton>
-                    </Button>
-                    <Button  Margin="30 49 0 20" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}">
-                       <Component:NavigateButton IconSource="{StaticResource AddLibraryIcon }" NavigateText="Create Playlist"></Component:NavigateButton>
-                    </Button>
-
-                    <Button  Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}">
-                       <Component:NavigateButton IconSource="{StaticResource LikedSongsIcon }" NavigateText="Liked Songs"></Component:NavigateButton>
-                    </Button>
+                <StackPanel Background="#000" Margin="0 80 0 0">
+                    <Button Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}"></Button>
+                    <Button Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}"></Button>
+                    <Button Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}"></Button>
+                    <Button  Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}"></Button>
+                    <Button  Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}"></Button>
                 </StackPanel>
             </Grid>
-           <!-- <Grid x:Name="LoadSideBar" Grid.Column="1">
-                <Grid.ColumnDefinitions >
-                    <ColumnDefinition  Width="0.722*" />
-                    <ColumnDefinition Width="0.278*" />
-                </Grid.ColumnDefinitions>
-                <Grid Background="Yellow" Grid.Column="1">
-                    <Button x:Name="CloseRightSideBarButton" Click="CloseRightSideBarButton_Click" Width="50" Height="30"></Button>
-                </Grid>
-            </Grid>-->
             <Grid Grid.Column="1">
                 
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}" />
             </Grid>
         </Grid>
-        <controls:bottomComponent Grid.Row="1">   
+        <controls:bottomComponent Grid.Row="1">
         </controls:bottomComponent>
-
     </Grid>
     
 </Window>
