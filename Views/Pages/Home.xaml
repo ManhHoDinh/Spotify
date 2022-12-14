@@ -152,7 +152,7 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition  Height="340"/>
-                            <RowDefinition  Height="140"/>
+                            <RowDefinition  Height="60"/>
                             <RowDefinition  Height="*"/>
                         </Grid.RowDefinitions>
                         <Border Grid.Row="0">

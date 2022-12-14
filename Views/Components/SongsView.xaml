@@ -15,7 +15,12 @@
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="0 24 0 0">
-            <ListView x:Name="ListViewSong" Template="{StaticResource NonScrollableListView}" Width="1224" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderBrush="Transparent">
+            <ListView x:Name="ListViewSong" 
+                      Template="{StaticResource NonScrollableListView}" 
+                      Width="1224" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" 
+                      ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
+                      BorderBrush="Transparent">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Background" Value="AntiqueWhite"/>
