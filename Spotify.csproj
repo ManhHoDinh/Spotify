@@ -13,6 +13,7 @@
     <None Remove="Resource\Icons\Back.png" />
     <None Remove="Resource\Icons\Glass.png" />
     <None Remove="Resource\Icons\HeaderSearch.png" />
+    <None Remove="Resource\Icons\HeartFillWhite.png" />
     <None Remove="Resource\Icons\Home.png" />
     <None Remove="Resource\Icons\LikedSongs.png" />
     <None Remove="Resource\Icons\NextPage.png" />
@@ -28,6 +29,7 @@
     <None Remove="Resource\Images\Heart.png" />
     <None Remove="Resource\Images\Heart_Fill.png" />
     <None Remove="Resource\Images\Heart_Hover.png" />
+    <None Remove="Resource\Images\LikedSongs_S.png" />
     <None Remove="Resource\Images\Next.png" />
     <None Remove="Resource\Images\Next_Hover.png" />
     <None Remove="Resource\Images\Pause.png" />
@@ -102,6 +104,7 @@
     </Resource>
     <Resource Include="Resource\Icons\Glass.png" />
     <Resource Include="Resource\Icons\HeaderSearch.png" />
+    <Resource Include="Resource\Icons\HeartFillWhite.png" />
     <Resource Include="Resource\Icons\NextPage.png" />
     <Resource Include="Resource\Icons\Play_GreemHover.png" />
     <Resource Include="Resource\Images\Heart.png" />
@@ -112,6 +115,7 @@
   <ItemGroup>
     <Resource Include="Resource\Images\Devices.png" />
     <Resource Include="Resource\Images\Devices_Hover.png" />
+    <Resource Include="Resource\Images\LikedSongs_S.png" />
     <Resource Include="Resource\Images\Queue.png" />
     <Resource Include="Resource\Images\Queue_Hover.png" />
   </ItemGroup>

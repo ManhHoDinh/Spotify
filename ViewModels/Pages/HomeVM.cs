@@ -12,21 +12,23 @@ using System.Windows.Input;
 using Spotify.Utilities;
 using System.Windows.Media;
 using System.Windows.Documents;
+using Spotify.Views.Pages;
 
 namespace Spotify.ViewModels.Pages
 {
-    internal class HomeVM : BaseViewModel
+    public class HomeVM : BaseViewModel
     {
+        public ICommand LikeSongViewCommand { get; set; }
         private ObservableCollection<Album> _TopMix;
-        public ObservableCollection<Album> TopMix { get; set; }
+        public ObservableCollection<Album> TopMix { get => _TopMix; set { _TopMix = value;OnPropertyChanged(); } }
         private ObservableCollection<Album> _MadeForYou;
-        public ObservableCollection<Album> MadeForYou { get; set; }
+        public ObservableCollection<Album> MadeForYou { get => _MadeForYou; set { _MadeForYou = value; OnPropertyChanged(); } }
         private ObservableCollection<Album> _Recently;
-        public ObservableCollection<Album> Recently { get; set; }
+        public ObservableCollection<Album> Recently { get => _Recently; set { _Recently = value; OnPropertyChanged(); } }
         private ObservableCollection<Album> _JumBack;
-        public ObservableCollection<Album> JumBack { get; set; }
+        public ObservableCollection<Album> JumBack { get => _JumBack; set { _JumBack = value; OnPropertyChanged(); } }
         private ObservableCollection<Album> _RecommendPlaylists;
-        public ObservableCollection<Album> RecommendPlaylists { get; set; }
+        public ObservableCollection<Album> RecommendPlaylists { get => _RecommendPlaylists; set { _RecommendPlaylists = value; OnPropertyChanged(); } }
         public ICommand ClickCommand { get; set; }
         private Album _SelectedItem;
         public Album SelectedItem { get => _SelectedItem; 
@@ -36,7 +38,9 @@ namespace Spotify.ViewModels.Pages
                 { AlbumName = SelectedItem.Name; 
                   AlbumDescription = SelectedItem.Description; 
                   IsAlbumItemVisible = true; 
-                  IsAlbumListVisible = false; 
+                  IsAlbumListVisible = false;
+                  ViewPage.Ins.CurrentView = new AlbumView();
+                 
                 }
             }
         }
@@ -50,14 +54,22 @@ namespace Spotify.ViewModels.Pages
         public bool IsAlbumListVisible { get => _IsAlbumListVisible; set { _IsAlbumListVisible = value; OnPropertyChanged(); } }
         public HomeVM()
         {
+            LikeSongViewCommand = new RelayCommand<object>(
+                (p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    ViewPage.Ins.CurrentView = new LikedSongsVM();
+                });
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll"}); ;
+            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll"});
             RecommendPlaylists.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
             RecommendPlaylists.Add(new Album { Name = "Say nắng", Description = "Suni Hạ Linh" });
             RecommendPlaylists.Add(new Album { Name = "Có chắc yêu là đây", Description = "Sơn Tùng MTP" });
             RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
+            //RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
             TopMix = new ObservableCollection<Album>();
             TopMix.Add(new Album { Name = "chill", Description = "chillllll" });
             TopMix.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
@@ -70,9 +82,8 @@ namespace Spotify.ViewModels.Pages
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
+            MadeForYou.Add(new Album { Name = "chill", Description = "chlll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            JumBack = new ObservableCollection<Album>();
             ObservableCollection<Song> list = new ObservableCollection<Song>();
             list.Add(new Song { ID = 1, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
             list.Add(new Song { ID = 2, Name = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
@@ -86,14 +97,15 @@ namespace Spotify.ViewModels.Pages
             list.Add(new Song { ID = 10, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
             list.Add(new Song { ID = 11, Name = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
             list.Add(new Song { ID = 12, Name = "chúng ta không thuộc nhau", NameSinger = "Sơn Tùng", DurationSong = "3:231" });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs=list});
+            JumBack = new ObservableCollection<Album>();
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
             JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
             JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
             JumBack.Add(new Album { Name = "chill", Description = "chillllll}", songs = list });
             JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
+            JumBack.Add(new Album { Name = "chill", Description = "chll", songs = list });
             Recently = new ObservableCollection<Album>();
-            Recently.Add(new Album { Name = "chill", Description = "chillllll"  });
+            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });

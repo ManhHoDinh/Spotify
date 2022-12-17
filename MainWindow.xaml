@@ -19,7 +19,7 @@
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
-            
+           
             <RowDefinition  Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--LeftSideBar-->
-            <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="300">
+            <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="241">
                 <StackPanel Background="#000" Margin="0 80 0 0">
                     <Button Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}"></Button>
                     <Button Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}"></Button>
@@ -45,7 +45,8 @@
             <Grid Grid.Column="1">
                 
                 <ContentControl x:Name="Pages"
-                                Content="{Binding CurrentView}" />
+                                
+                                Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}" />
             </Grid>
         </Grid>
         <controls:bottomComponent Grid.Row="1">
