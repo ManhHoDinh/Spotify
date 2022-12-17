@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spotify.ViewModels.Pages;
-using System.Transactions;
 using System.Windows.Input;
 using Spotify.Views.Pages;
 using System.Windows.Controls;
