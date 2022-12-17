@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute(".gitattributes")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute(".gitignore")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/images/bentrentanglauimg.jfif")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/songs/bentrentanglau.mp3")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resource/songs/camnang.mp3")]

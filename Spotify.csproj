@@ -267,6 +267,8 @@
     <Resource Include="Resource\Icons\Play_GreemHover.png" />
     <Resource Include="Resource\Icons\Search.png" />
     <Resource Include="Resource\Icons\YourLibrary.png" />
+    <Content Include=".gitattributes" />
+    <Content Include=".gitignore" />
     <Content Include="Resource\Images\BenTrenTangLauImg.jfif" />
     <Resource Include="Resource\Images\CamNangImg.jpg" />
     <Resource Include="Resource\Images\DauMua.jpg" />
