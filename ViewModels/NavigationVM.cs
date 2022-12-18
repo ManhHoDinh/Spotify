@@ -9,6 +9,11 @@ using System.Windows.Input;
 using Spotify.Views.Pages;
 using System.Windows.Controls;
 using Spotify.Utilities;
+using System.Windows.Media;
+using System.Windows;
+using System.Drawing;
+
+
 namespace Spotify.ViewModels
 {
     internal class NavigationVM:Utilities.BaseViewModel
@@ -25,16 +30,67 @@ namespace Spotify.ViewModels
         public ICommand SearchCommand { get; set; }
         public ICommand YourLibraryCommand { get; set; }
         public ICommand AlbumCommand { get; set; }
+        public void ChangeViewStyle(string value, object obj)
+        {
+            StackPanel stack = obj as StackPanel;
+            foreach(object p in stack.Children)
+            {
+                Button btn = p as Button;
+                ControlTemplate ct = btn.Template;
+                Image img = (Image)ct.FindName("image", btn);
+                TextBlock tb = (TextBlock)ct.FindName("name", btn);
 
+                if (btn.Name == value)
+                {
+
+                    tb.Foreground = Brushes.White;
+                    if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
+                    {
+                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
+                    }
+                }
+                else
+                {
+                    tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179,179,179));
+                    if (btn.Name != "CreatePlaylist" && btn.Name != "LikeSongs")
+                    {
+                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "Icon"];
+                        
+                    }
+                  
+                }
+            }
+        }
         private void Home(object obj)
         {
-            ViewPage.Ins.IsBackHome = true;
             ViewPage.Ins.CurrentView = new HomeVM();
+
+            ChangeViewStyle("Home", obj);
+
         }
-        private void CreatePlaylist(object obj) => ViewPage.Ins.CurrentView = new CreatePlaylist();
-        private void LikedSongs(object obj) => ViewPage.Ins.CurrentView = new LikedSongsView();
-        private void Search(object obj) => ViewPage.Ins.CurrentView = new Search();
-        private void YourLibrary(object obj) => ViewPage.Ins.CurrentView = new YourLibrary();
+        private void CreatePlaylist(object obj)
+        {
+            ViewPage.Ins.CurrentView = new CreatePlaylist();
+            ChangeViewStyle("CreatePlaylist", obj);
+        }
+        private void LikedSongs(object obj)
+        {
+            ViewPage.Ins.CurrentView = new LikedSongsView();
+            ChangeViewStyle("LikeSongs", obj);
+
+        }
+        private void Search(object obj)
+        {
+            ViewPage.Ins.CurrentView = new Search();
+            ChangeViewStyle("Search", obj);
+
+        }
+        private void YourLibrary(object obj)
+        {
+            ViewPage.Ins.CurrentView = new YourLibrary();
+            ChangeViewStyle("YourLibrary", obj);
+
+        }
         private void Album(object obj) => ViewPage.Ins.CurrentView = new AlbumView();
         public NavigationVM()
         {

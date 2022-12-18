@@ -14,12 +14,15 @@
     <None Remove="Resource\Icons\Glass.png" />
     <None Remove="Resource\Icons\HeaderSearch.png" />
     <None Remove="Resource\Icons\HeartFillWhite.png" />
-    <None Remove="Resource\Icons\Home.png" />
+    <None Remove="Resource\Icons\Home_Fill_S.png" />
+    <None Remove="Resource\Icons\Home_S.png" />
+    <None Remove="Resource\Icons\Library_Fill_S.png" />
+    <None Remove="Resource\Icons\Library_S.png" />
     <None Remove="Resource\Icons\LikedSongs.png" />
     <None Remove="Resource\Icons\NextPage.png" />
     <None Remove="Resource\Icons\Play_GreemHover.png" />
     <None Remove="Resource\Icons\Search.png" />
-    <None Remove="Resource\Icons\YourLibrary.png" />
+    <None Remove="Resource\Icons\Search_Fill_S.png" />
     <None Remove="Resource\Images\BenTrenTangLauImg.jfif" />
     <None Remove="Resource\Images\CamNangImg.jpg" />
     <None Remove="Resource\Images\DauMua.jpg" />
@@ -105,8 +108,13 @@
     <Resource Include="Resource\Icons\Glass.png" />
     <Resource Include="Resource\Icons\HeaderSearch.png" />
     <Resource Include="Resource\Icons\HeartFillWhite.png" />
+    <Resource Include="Resource\Icons\Home_Fill_S.png" />
+    <Resource Include="Resource\Icons\Home_S.png" />
+    <Resource Include="Resource\Icons\Library_Fill_S.png" />
+    <Resource Include="Resource\Icons\Library_S.png" />
     <Resource Include="Resource\Icons\NextPage.png" />
     <Resource Include="Resource\Icons\Play_GreemHover.png" />
+    <Resource Include="Resource\Icons\Search_Fill_S.png" />
     <Resource Include="Resource\Images\Heart.png" />
     <Resource Include="Resource\Images\Heart_Fill.png" />
     <Resource Include="Resource\Images\Heart_Hover.png" />
@@ -122,8 +130,6 @@
 
   <ItemGroup>
     <Resource Include="Resource\Icons\AddLibrary.png" />
-    <Resource Include="Resource\Icons\Home.png" />
-    <Resource Include="Resource\Icons\YourLibrary.png" />
     <Resource Include="Resource\Icons\LikedSongs.png" />
     <Resource Include="Resource\Icons\Search.png" />
     <Resource Include="Resource\Images\Example.png" />

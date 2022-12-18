@@ -15,7 +15,7 @@
     <Window.DataContext>
         <vm:NavigationVM/>
     </Window.DataContext>
-    
+   
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
@@ -34,12 +34,40 @@
             </Grid.ColumnDefinitions>
             <!--LeftSideBar-->
             <Grid x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="241">
+                <!--<ListBox Background="#000" Margin="0 80 0 0">
+
+                    <ListBoxItem Content="Home"  Style="{StaticResource NavigateBtn}">
+                        --><!--<ListBoxItem.Content>
+                            <Button Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"></Button>
+                        </ListBoxItem.Content>--><!--
+                    </ListBoxItem>
+                    --><!--<ListBoxItem>
+                        <ListBoxItem.Content>
+                            <Button Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"></Button>
+                        </ListBoxItem.Content>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBoxItem.Content>
+                            <Button Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}"></Button>
+                        </ListBoxItem.Content>
+                    </ListBoxItem>
+                    <ListBoxItem Margin="0 49 0 20">
+                        <ListBoxItem.Content>
+                            <Button  Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}"></Button>
+                        </ListBoxItem.Content>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <ListBoxItem.Content>
+                            <Button  Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}"></Button>
+                        </ListBoxItem.Content>
+                    </ListBoxItem>--><!--
+                </ListBox>-->
                 <StackPanel Background="#000" Margin="0 80 0 0">
-                    <Button Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}"></Button>
-                    <Button Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}"></Button>
-                    <Button Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}"></Button>
-                    <Button  Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}"></Button>
-                    <Button  Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}"></Button>
+                    <Button Name="Home" Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                    <Button Name="Search" Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                    <Button Name="YourLibrary" Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                    <Button Name="CreatePlaylist" Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                    <Button Name="LikeSongs" Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1">

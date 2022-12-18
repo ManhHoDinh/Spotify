@@ -2,9 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
                     >
-    <ImageSource x:Key="HomeIcon">./home.png</ImageSource>
+    <ImageSource x:Key="HomeIcon">./Home_S.png</ImageSource>
+    <ImageSource x:Key="HomeFillIcon">./Home_Fill_S.png</ImageSource>
     <ImageSource x:Key="SearchIcon">./Search.png</ImageSource>
-    <ImageSource x:Key="YourLibraryIcon">./YourLibrary.png</ImageSource>
+    <ImageSource x:Key="SearchFillIcon">./Search_Fill_S.png</ImageSource>
+    <ImageSource x:Key="YourLibraryIcon">./Library_S.png</ImageSource>
+    <ImageSource x:Key="YourLibraryFillIcon">./Library_Fill_S.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
     <ImageSource x:Key="PlayFill">./Play_GreemHover.png</ImageSource>
