@@ -5,7 +5,7 @@
     x:Key="HomeColor" 
     EndPoint="0,1" 
     StartPoint="0,0">
-        <GradientStop Color="#3333A3" Offset="0"/>
+        <GradientStop Color="#121212" Offset="0"/>
         <GradientStop Color="#121212" Offset="1"/>
     </LinearGradientBrush>
 </ResourceDictionary>

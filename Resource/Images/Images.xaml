@@ -26,5 +26,5 @@
     <ImageSource x:Key="VolumeMediumHoverButton">Volume_Medium_Hover.png</ImageSource>
     <ImageSource x:Key="VolumeMinButton">Volume_min.png</ImageSource>
     <ImageSource x:Key="VolumeMinHoverButton">Volume_Min_Hover.png</ImageSource>
-    <ImageSource x:Key="spotifyLoginLogo">spotifyLogo.png</ImageSource>
+    <ImageSource x:Key="LikeSongBtn">LikedSongs_S.png</ImageSource>
 </ResourceDictionary>

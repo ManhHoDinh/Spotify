@@ -3,6 +3,7 @@
                     xmlns:views="clr-namespace:Spotify.ViewModels.Pages"
                     xmlns:pages="clr-namespace:Spotify.ViewModels.Pages">
     <views:LikedSongsVM x:Key="songviewVM"></views:LikedSongsVM>
+    <views:HomeVM x:Key="homeVM"></views:HomeVM>
     <pages:LikedSongsVM x:Key="likesongVM"></pages:LikedSongsVM>
     <pages:CreatePlaylistVM x:Key="createplaylistVM"></pages:CreatePlaylistVM>
 </ResourceDictionary>
