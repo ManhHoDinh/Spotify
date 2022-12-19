@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,6 +41,34 @@ namespace Spotify.ViewModels.Pages
     {
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;
+       
+        private Song _SelectedSongItem;
+        public Song SelectedSongItem
+        {
+            get => _SelectedSongItem;
+            set
+            {
+                _SelectedSongItem = value;
+                OnPropertyChanged();
+                if (SelectedSongItem != null)
+                {
+                    SongBottom.Ins.SongName = SelectedSongItem.Name;
+                    SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
+                    SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
+                }
+            }
+        }
+        public SearchVM()
+        {
+            ObservableCollection<Song> songs = new ObservableCollection<Song>();
+            songs.Add(Songs.CamNang) ;
+            songs.Add(Songs.BenTrenTangLau);
+            songs.Add(Songs.DauMua);
+
+            SongItemsCollection = new CollectionViewSource { Source = songs };
+            SongItemsCollection.Filter += MenuItems_Filter;
+
+        }
         public static string RemoveSign4VietnameseString(string str)
         {
             for (int i = 1; i < VietnameseSigns.Length; i++)
@@ -82,22 +111,6 @@ namespace Spotify.ViewModels.Pages
 
             "ÝỲỴỶỸ"
         };
-        public SearchVM()
-        {
-            ObservableCollection<Song>Songs= new ObservableCollection<Song>
-            {
-                new Song{Name="Có Chàng trai viết lên cây", NameSinger="Phan Mạnh Quỳnh", AlbumName="Ablum A",DurationSong="3:33"},
-                new Song{Name="Mong Manh Tinh Ve", NameSinger="Mỹ Tâm", AlbumName="Ablum C",DurationSong="3:33"},
-                new Song{Name="Mang Tiền Về cho Mẹ", NameSinger="Đen Vâu, Nguyên Thảo", AlbumName="Ablum B",DurationSong="3:33"},
-                new Song{Name="B", NameSinger="Đen Vâu, Nguyên Thảo", AlbumName="Ablum D",DurationSong="3:33" },
-                new Song{Name="A", NameSinger="Đen Vâu, Nguyên Thảo", AlbumName="Ablum P",DurationSong="3:33" }
-            };
-
-            SongItemsCollection = new CollectionViewSource { Source = Songs };
-            SongItemsCollection.Filter += MenuItems_Filter;
-
-        }
-
         private string filterText;
         public string FilterText
         {

@@ -5,6 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1600" Background="#181818">
@@ -13,77 +15,85 @@
             <ItemsPresenter/>
         </ControlTemplate>
     </UserControl.Resources>
-    <ScrollViewer>
-        <Grid Margin="0 24 0 0">
-            <ListView x:Name="ListViewSong" Template="{StaticResource NonScrollableListView}" Width="1224" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" BorderBrush="Transparent">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="AntiqueWhite"/>
-                        <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <!--<ControlTemplate.Triggers>
+    <Grid Margin="0 24 0 0">
+        <ListView x:Name="ListViewSong" 
+                      Template="{StaticResource NonScrollableListView}" 
+                      Width="1224" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" 
+                      ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
+                      BorderBrush="Transparent">
+            <ListView.Resources>
+                <vm:OrdinalConverter x:Key="OrdinalConverter" />
+            </ListView.Resources>
+
+            <ListView.ItemContainerStyle>
+                
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Background" Value="AntiqueWhite"/>
+                    <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                <!--<ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">
                                             <Setter Property="Background" Value="#5b5a5e"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>-->
-                                    <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                                        <Setter Property="Border.Background" Value="#2a2a2a"/>
+                                <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="Border.IsMouseOver" Value="True">
+                                                    <Setter Property="Border.Background" Value="#2a2a2a"/>
 
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <Grid >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="475"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="300"/>
-                                                <ColumnDefinition Width="80"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock  Grid.Column="0" x:Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
-                                                <Image Width="40" Source="{Binding ImageSong }" Margin="0 0 20 0"/>
-                                                <StackPanel Orientation="Vertical">
-                                                    <TextBlock Name="NameSong" Text="{Binding Name}" Foreground="#ffffff" FontSize="16"/>
-                                                    <TextBlock Name="NameSinger" Text="{Binding NameSinger}" Foreground="#b3b3b3" FontSize="14"/>
-                                                </StackPanel>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="250"/>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="200"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock  Grid.Column="0" x:Name="Id" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
+                                            <Image Width="40" Source="{Binding ImageSong }" Margin="0 0 20 0"/>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Name="NameSong" Text="{Binding Name}" Foreground="#ffffff" FontSize="16"/>
+                                                <TextBlock Name="NameSinger" Text="{Binding NameSinger}" Foreground="#b3b3b3" FontSize="14"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="Play it sale" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="Play it sale" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
 
-                                            <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click" Margin="30 0 0 0" Template="{DynamicResource HeartStyle}" Width="16" Height="16">
-                                                <Button.Background>
-                                                    <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
-                                                </Button.Background>
-                                            </Button>
+                                        <Button Grid.Column="3" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}"  Click="Favor_Click" Margin="30 0 0 0" Template="{DynamicResource HeartStyle}" Width="16" Height="16">
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
+                                            </Button.Background>
+                                        </Button>
 
-                                            <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Grid>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
+                                        <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                                <ControlTemplate.Triggers>
 
-                                        <Trigger Property="IsSelected" Value="true">
-                                            <Setter TargetName="_border" Property="Background" Value="#5a5a5a"/>
-                                            <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
-                                            <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
-                                            <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
+                                    <Trigger Property="IsSelected" Value="true">
+                                        <Setter TargetName="_border" Property="Background" Value="#5a5a5a"/>
+                                        <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
+                                        <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
+                                        <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
 
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
-        </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

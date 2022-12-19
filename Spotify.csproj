@@ -56,9 +56,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Playlist.cs" />
     <Compile Include="Models\Song.cs" />
+    <Compile Include="PlaceHolderControl.cs" />
     <Compile Include="Utilities\BaseViewModel.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="ViewModels\Albums.cs" />
     <Compile Include="ViewModels\NavigationVM.cs" />
     <Compile Include="ViewModels\Pages\AlbumViewModel.cs" />
     <Compile Include="ViewModels\Pages\CreatePlaylistVM.cs" />
@@ -66,8 +69,15 @@
     <Compile Include="ViewModels\Pages\LikedSongsVM.cs" />
     <Compile Include="ViewModels\Pages\SearchVM.cs" />
     <Compile Include="ViewModels\Pages\YourLibraryVM.cs" />
+    <Compile Include="ViewModels\Songs.cs" />
     <Compile Include="Views\Components\bottomComponent.xaml.cs">
       <DependentUpon>bottomComponent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\CreatePlaylistForm.xaml.cs">
+      <DependentUpon>CreatePlaylistForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\DeleteForm.xaml.cs">
+      <DependentUpon>DeleteForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Components\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
@@ -87,14 +97,23 @@
     <Compile Include="Views\Pages\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\ForgotPasswordForm.xaml.cs">
+      <DependentUpon>ForgotPasswordForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\LikedSongsView.xaml.cs">
       <DependentUpon>LikedSongsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\PlayListForm.xaml.cs">
+      <DependentUpon>PlayListForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SignInForm.xaml.cs">
+      <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\YourLibrary.xaml.cs">
       <DependentUpon>YourLibrary.xaml</DependentUpon>
@@ -135,6 +154,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Styles\BottomStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Styles\ColumnStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,6 +177,10 @@
     <Page Include="Styles\LeftSideBarStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\LoginFormStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\PlaylistStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -175,11 +202,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Utilities\Datatemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Components\bottomComponent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Components\CreatePlaylistForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Components\DeleteForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -207,6 +246,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\ForgotPasswordForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -215,9 +258,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\PlayListForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Pages\Search.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\SignInForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\YourLibrary.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -246,7 +297,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="Resource\Fonts\circular-std-medium-500.ttf" />
+    <Resource Include="Resource\Fonts\CircularStdLightItalic.otf" />
+    <Resource Include="Resource\Fonts\CircularStdLight.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBlack.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBlackItalic.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBold.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBoldItalic.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBook.otf" />
+    <Resource Include="Resource\Fonts\CircularStdBookItalic.otf" />
+    <Resource Include="Resource\Fonts\CircularStdMedium.otf" />
+    <Resource Include="Resource\Fonts\CircularStdMediumItalic.otf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -269,6 +329,11 @@
     <Resource Include="Resource\Icons\YourLibrary.png" />
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
+    <Resource Include="Resource\Album\ThoaMaiGacChanLen.jpg" />
+    <Resource Include="Resource\Icons\Close.png" />
+    <Resource Include="Resource\Icons\Edit.png" />
+    <Resource Include="Resource\Icons\Option.png" />
+    <Resource Include="Resource\Icons\SongIcon.png" />
     <Content Include="Resource\Images\BenTrenTangLauImg.jfif" />
     <Resource Include="Resource\Images\CamNangImg.jpg" />
     <Resource Include="Resource\Images\DauMua.jpg" />
@@ -299,6 +364,49 @@
     <Resource Include="Resource\Images\Volume_Medium_Hover.png" />
     <Resource Include="Resource\Images\Volume_Min.png" />
     <Resource Include="Resource\Images\Volume_Min_Hover.png" />
+    <Resource Include="Resource\Images\untitled.png" />
+    <Resource Include="Resource\Images\spotifyLogo.png" />
+    <Content Include="Resource\Songs\01 bao tiền một mớ bình yên.mp3" />
+    <Content Include="Resource\Songs\01 Buồn Thì Cứ Khóc Đi.mp3" />
+    <Content Include="Resource\Songs\01 Bất Bình Thường.mp3" />
+    <Content Include="Resource\Songs\01 Chuyện Nhà Bé Thôi, Con Đừng Về.mp3" />
+    <Content Include="Resource\Songs\01 Chuyện Rằng.mp3" />
+    <Content Include="Resource\Songs\01 Có Một Người Sẽ Đến.mp3" />
+    <Content Include="Resource\Songs\01 Có Người.mp3" />
+    <Content Include="Resource\Songs\01 Có Điều Gì, Sao Không Nói Cùng Anh_ %28Acoustic Version%29.mp3" />
+    <Content Include="Resource\Songs\01 Cảm Nắng.mp3" />
+    <Content Include="Resource\Songs\01 Cảm Ơn Và Xin Lỗi.mp3" />
+    <Content Include="Resource\Songs\01 Dù Cho Mai Về Sau - Acoustic Version.mp3" />
+    <Content Include="Resource\Songs\01 Gác Lại Âu Lo %28feat. Miu Lê%29.mp3" />
+    <Content Include="Resource\Songs\01 Hẹn Ước Từ Hư Vô - Live.mp3" />
+    <Content Include="Resource\Songs\01 Mùa thu cho em.mp3" />
+    <Content Include="Resource\Songs\01 Ngày Xưa Em Đến.mp3" />
+    <Content Include="Resource\Songs\01 Nàng Thơ.mp3" />
+    <Content Include="Resource\Songs\01 Nếu Mai Gặp Lại %28feat. Vũ Đặng Quốc Việt%29.mp3" />
+    <Content Include="Resource\Songs\01 Phút Ban Đầu.mp3" />
+    <Content Include="Resource\Songs\01 Phố Không Em.mp3" />
+    <Content Include="Resource\Songs\01 Suýt Nữa Thì.mp3" />
+    <Content Include="Resource\Songs\01 Trời Sáng Rồi %28Theme Song From _Trời Sáng Rồi, Ta Ngủ Đi Thôi_%29.mp3" />
+    <Content Include="Resource\Songs\01 Từ đó.mp3" />
+    <Content Include="Resource\Songs\01 vào hạ.mp3" />
+    <Content Include="Resource\Songs\01 Vẫn Nhớ.mp3" />
+    <Content Include="Resource\Songs\01 Xin Lỗi.mp3" />
+    <Content Include="Resource\Songs\01 Yêu Không Hối Tiếc - Remake.mp3" />
+    <Content Include="Resource\Songs\01 Đi Qua Mùa Hạ.mp3" />
+    <Content Include="Resource\Songs\01 Đúng Cũng Thành Sai.mp3" />
+    <Content Include="Resource\Songs\01 Ước Một Ngày %287 Deep Cuts Session%29.mp3" />
+    <Content Include="Resource\Songs\01.AnhTrangTinhAi\01 Ánh Trăng Tình Ái.m4a" />
+    <Content Include="Resource\Songs\02 Chờ Anh Nhé %28feat. Hoang Rob%29.mp3" />
+    <Content Include="Resource\Songs\02 tình em là đại dương.mp3" />
+    <Content Include="Resource\Songs\03 Với Anh.mp3" />
+    <Content Include="Resource\Songs\03 xuân hạ thu đông rồi lại xuân.mp3" />
+    <Content Include="Resource\Songs\04 nàng thơ... trời giấu trời mang đi.mp3" />
+    <Content Include="Resource\Songs\05 khi cô đơn em nhớ đến ai.mp3" />
+    <Content Include="Resource\Songs\05 Đôi Lời.mp3" />
+    <Content Include="Resource\Songs\07 Bước Qua Mùa Cô Đơn.mp3" />
+    <Content Include="Resource\Songs\07 Yếu Đuối.mp3" />
+    <Resource Include="Resource\Songs\AnhTrangTinhAi\AnhTrangTinhAi.jpg" />
+    <Content Include="Resource\Songs\AnhTrangTinhAi\AnhTrangTinhAi.mp3" />
     <Content Include="Resource\Songs\BenTrenTangLau.mp3" />
     <Content Include="Resource\Songs\CamNang.mp3" />
     <Content Include="Resource\Songs\DauMua.mp3" />

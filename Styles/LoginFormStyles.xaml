@@ -1,0 +1,171 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:local="clr-namespace:Spotify">
+    <Style x:Key="LoginTextStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="#000000"></Setter>
+        <Setter Property="FontSize" Value="14"></Setter>
+        <Setter Property="FontFamily" Value="{StaticResource CircularStdBold}"></Setter>
+        <Setter Property="FontWeight" Value="DemiBold"></Setter>
+    </Style>
+    <Style x:Key="TextBtn" TargetType="Button" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock x:Name="text" Text="{TemplateBinding Content}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" FontSize="16" FontWeight="SemiBold"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="true">
+                            <Setter Property="TextBlock.TextDecorations" Value="Underline" TargetName="text"></Setter>
+                            
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+                
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="RadiusBtn" TargetType="Button" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Center" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" VerticalAlignment="Center" CornerRadius="25" >
+                        <TextBlock x:Name="text"  Text="{TemplateBinding Content}" Padding="32 14" Background="Transparent" FontSize="14" FontWeight="SemiBold"  HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="true">
+                            <Setter Property="Button.BorderBrush" Value="#000" TargetName="border"></Setter>
+                            <Setter Property="Button.BorderThickness" Value="3" TargetName="border"></Setter>
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation To="HotPink" 
+                                    Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" 
+                                    FillBehavior="Stop"           
+                                    Duration="0:0:2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="White" />
+        <Setter Property="BorderBrush" Value="#FF262E34"/>
+        <Setter Property="Foreground" Value="#FF262E34"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                        <Border CornerRadius="2" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" Width="15" Height="15" Name="borderCheckbox">
+                            <!--                                   your color here -->
+                            <Path Stretch="Uniform" Width="15" Height="10" Fill="#ffffff" Name="eliCheck" Data="F1 M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z " Visibility="Collapsed"/>
+                        </Border>
+                        <TextBlock Margin="5,0,0,0" FontSize="14"  VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}" Text="{TemplateBinding Content}" FontWeight="SemiBold"></TextBlock>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="eliCheck" Property="Visibility" Value="Visible"></Setter>
+                            <Setter TargetName="borderCheckbox" Property="Background" Value="#169b45"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type PasswordBox}"
+        TargetType="{x:Type PasswordBox}">
+        <Setter Property="local:PasswordBoxMonitor.IsMonitoring"
+              Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border Name="border"
+                            
+                    VerticalAlignment="Center"
+                    Background="{TemplateBinding Background}"
+                    BorderThickness="1"
+                    BorderBrush="#000000"
+                    CornerRadius="8"
+                    >
+                        <Grid>
+                            <ScrollViewer x:Name="PART_ContentHost"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <TextBlock Text="Please enter your password" 
+                           Margin="10 2 0 0"
+                           LineHeight="14"
+                           Foreground="#000000" 
+                           Visibility="Collapsed"
+                           Opacity="0.5"
+                           FontSize="18"
+                           VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                           Name="txtPrompt" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="Border.BorderBrush" Value="#000000"/>
+                            <Setter TargetName="border" Property="Border.BorderThickness" Value="3"/>
+                            <Setter Property="Visibility" TargetName="txtPrompt" Value="Hidden"/>
+                        </Trigger>
+
+                        <Trigger Property="local:PasswordBoxMonitor.PasswordLength" Value="0">
+                            <Setter Property="Visibility" TargetName="txtPrompt" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="EmailPlaceHolder" TargetType="{x:Type local:PlaceHolderTextbox}" >
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="CaretBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:PlaceHolderTextbox}">
+                    <ControlTemplate.Resources>
+                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
+                    </ControlTemplate.Resources>
+
+                    <Border x:Name="border"  
+                    BorderThickness="1"
+                    BorderBrush="#000000"
+                    VerticalAlignment="Center"
+                                        
+                    CornerRadius="8" Background="{TemplateBinding Background}" >
+                        <Grid >
+                            <ScrollViewer x:Name="PART_ContentHost"
+                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <TextBlock Text="Please enter your password" 
+                           Margin="10 2 0 0"
+                           LineHeight="18"
+                           Foreground="#000000" 
+                           Opacity="0.5"
+                           FontSize="18"
+                           Visibility="{TemplateBinding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"
+                           VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                           Name="txtPrompt" />
+                        </Grid>
+
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="Border.BorderBrush" Value="#000000"/>
+                            <Setter TargetName="border" Property="Border.BorderThickness" Value="3"/>
+
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

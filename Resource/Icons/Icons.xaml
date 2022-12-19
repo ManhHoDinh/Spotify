@@ -13,4 +13,8 @@
     <ImageSource x:Key="Find">./Glass.png</ImageSource>
     <ImageSource x:Key="SearchBoxForm">./HeaderSearch.png</ImageSource>
     <ImageSource x:Key="Avatar">./Avatar.png</ImageSource>
+    <ImageSource x:Key="EditBtn">./HeaderSearch.png</ImageSource>
+    <ImageSource x:Key="SongIcon">./SongIcon.png</ImageSource>
+    <ImageSource x:Key="CloseBtn">./Close.png</ImageSource>
+    <ImageSource x:Key="OptionBtn">./Option.png</ImageSource>
 </ResourceDictionary>

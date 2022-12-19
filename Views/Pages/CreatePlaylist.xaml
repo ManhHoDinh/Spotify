@@ -4,9 +4,167 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Pages"
+             xmlns:component="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Yellow">
-        <TextBlock FontSize="50" >Create Playlist</TextBlock>
-    </Grid>
+             DataContext="{StaticResource createplaylistVM}"
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             xmlns:spotify="clr-namespace:Spotify"
+             d:DesignHeight="800" d:DesignWidth="800"
+             >
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
+            <ItemsPresenter/>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <ScrollViewer  Background="#121212">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="340"/>
+                <RowDefinition  Height="140"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                        <GradientStop Color="#545454" Offset="0"/>
+                        <GradientStop Color="#2b2b2b" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Template="{StaticResource SongLoadStyle}"
+                       
+                        Grid.Column="0"
+                        Width="232"
+                        Height="232" 
+                        Cursor="Hand"
+                        HorizontalAlignment="Left"
+                            Margin="32 0 0 0">
+                        <Image Width="60" Height="60" Source="{StaticResource SongIcon}"/>
+                        <!--<Button.Background>
+                            <ImageBrush ImageSource="{Binding PathImage}"/>
+                        </Button.Background>-->
+                    </Button>
+                    <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
+                        <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                        </TextBlock>
+                        <TextBlock Cursor="Hand" Text="{Binding DescriptionPlaylist}" Foreground="#b3b3b3" FontSize="16"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="#1e1e1e" Offset="0"/>
+                        <GradientStop Color="#1e1e1e" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <StackPanel>
+                    <Button
+                        Command="{Binding OptionCommand}"
+                        Width="32"
+                        Height="32" 
+                        Margin="32 0 0 0"
+                        HorizontalAlignment="Left">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource OptionBtn}"/>
+                        </Button.Background>
+                    </Button>
+                    <StackPanel  Visibility="{Binding IsVisibleOption,Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" Width="176" Background="#282828">
+                        <Button Command="{Binding LoadCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Edit details"/>
+                        <Button Command="{Binding OpenFormDeleteCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16"  Foreground="#ffffff" Content="Delete"/>
+                    </StackPanel>
+                </StackPanel>
+
+            </Border>
+            <StackPanel Grid.Row="2"  Margin="40 24 0 0" >
+                <TextBlock Margin="0 24 0 24" Text="Let's find something for your playlist" FontWeight="Medium"  FontSize="24" Foreground="#ffffff" FontFamily="{StaticResource CircularStdBlack}" />
+
+                <Border Background="#282828" Width="365" Height="40" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <StackPanel   Orientation="Horizontal" >
+                        <Image  Source="{StaticResource SearchIcon}"  Margin="10 8 5 8"></Image>
+                        <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#ffffff"
+                        Placeholder="Add name of your playlist" 
+                        Width="304"
+                        Height="40"
+                        Style="{StaticResource PlaceHolder}"
+                        
+                        Padding="0 8 8 0"
+                        VerticalAlignment="Center"
+                        Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                        />
+                    </StackPanel>
+                </Border>
+                <Grid Margin="0 24">
+                    <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
+                    </Grid>
+                    <ListView  x:Name="BeginingSearch" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent"  SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedSongIndex,Mode=OneWayToSource}" >
+                        <!--Text Index-->
+                        <ListView.Resources>
+                            <vm:OrdinalConverter x:Key="OrdinalConverter" />
+                        </ListView.Resources>
+                        <ListView.ItemContainerStyle >
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="AntiqueWhite"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                                                <Setter Property="Border.Background" Value="#5b5a5e"/>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="350"/>
+                                                        <ColumnDefinition Width="200"/>
+                                                        <ColumnDefinition Width="100"/>
+                                                    </Grid.ColumnDefinitions>                       
+                                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
+                                                        <Image Width="40" Source="{Binding ImageSong}" Margin="0 0 20 0"/>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <TextBlock Text="{Binding Path=Name,Mode=OneWay}" Foreground="#ffffff" FontSize="20"/>
+                                                            <TextBlock Text="{Binding Path=NameSinger,Mode=OneWay}" Foreground="#b3b3b3" FontSize="18"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                                    <Grid  Grid.Column="3" HorizontalAlignment="Right">
+                                                        <Button  Tag="{Binding isFavor, ElementName=BottomControl}" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                    </Grid>
+                                                   
+                                                </Grid>
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                 
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,14 @@ namespace Spotify.Views.Pages
     /// </summary>
     public partial class CreatePlaylist : UserControl
     {
-        public CreatePlaylist()
+     public CreatePlaylist()
         {
             InitializeComponent();
+            CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            Binding binding = new Binding("SelectedPlaylist");
+            binding.Source = playlist;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
         }
     }
 }

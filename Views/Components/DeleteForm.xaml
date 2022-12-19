@@ -1,0 +1,50 @@
+﻿<Window x:Class="Spotify.Views.Components.DeleteForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spotify.Views.Components"
+        mc:Ignorable="d"
+        DataContext="{StaticResource createplaylistVM}"
+        ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen"
+        Background="Transparent" AllowsTransparency="True"
+        Title="DeleteForm" Height="182" Width="420">
+    <Border Background="#ffffff" CornerRadius=" 12">
+        <StackPanel Width="356" Height="118" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock 
+                Height="38"
+                Foreground="#000000"
+                FontSize="24"
+                FontWeight="DemiBold"
+                Text="Are you sure to delete?"/>
+            <StackPanel Margin="0 32 0 0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button
+                    Template="{StaticResource ButtonDeleteForm}"
+                    Width="112"
+                    Height="48"
+                    BorderBrush="Transparent"
+                    Background="#ffffff"
+                     Foreground="#000000"
+                    FontWeight="DemiBold"
+                    FontSize="16"
+                    Command="{Binding CancelCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type Window}}}"
+                    Content="Cancel" />
+                <Button 
+                    Width="112"
+                    Height="48"
+                    BorderThickness="1"
+                    BorderBrush="#0c67d3"
+                    Margin="24 0 0 0"
+                    Background="#1ed760"
+                    Foreground="#000000"
+                    FontWeight="DemiBold"
+                    FontSize="16"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type Window}}}"
+                    Template="{StaticResource ButtonDeleteForm}"
+                    Content="Delete"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

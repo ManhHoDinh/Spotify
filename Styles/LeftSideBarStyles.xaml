@@ -21,7 +21,7 @@
                         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{TemplateBinding Content}">
                             <TextBlock.Style>
                                 <Style>
-                                    <Setter Property="TextBlock.FontFamily" Value="{StaticResource Circular}"></Setter>
+                                    <Setter Property="TextBlock.FontFamily" Value="{StaticResource CircularStdBlack}"></Setter>
                                     <Setter Property="TextBlock.FontSize" Value="14"></Setter>
                                     <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
                                     <Setter Property="TextBlock.Foreground" Value="#B3B3B3"></Setter>

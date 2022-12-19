@@ -4,4 +4,77 @@
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="#b3b3b3"/>
     </Style>
+    <ControlTemplate x:Key="SaveBtnStyle" TargetType="Button">
+        <Border x:Name="border" CornerRadius="24" Background="#ffffff" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ContentPresenter 
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Content="{TemplateBinding Content}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter TargetName="border" Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="SongLoadStyle" TargetType="Button">
+        <Border CornerRadius="8" Background="#3e3e3e" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ContentPresenter x:Name="content" HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="content" Property="Content">
+                    <Setter.Value>
+                        <StackPanel>
+                            <Image Width="48" Height="48" Source="{StaticResource EditBtn}"/>
+                            <TextBlock Foreground="#ffffff" FontSize="16" Text="Choose Photo"/>
+                        </StackPanel>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="OptionStyle" TargetType="Button">
+        <Border Name="border" CornerRadius="4" Background="#282828" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+            <ContentPresenter Margin="10 0 0 0" VerticalAlignment="Center" Content="{TemplateBinding Content}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="#3e3e3e"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <!--delete Button-->
+    <ControlTemplate x:Key="ButtonDeleteForm" TargetType="Button">
+        <Border Name="border"
+                CornerRadius="24"
+                Cursor="Hand"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}">
+            <ContentPresenter 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding Content}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="RenderTransformOrigin" Value="0.5, 0.5"/>
+                <Setter TargetName="border" Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1.05" ScaleY="1.05"/>
+                    </Setter.Value>
+                    
+                </Setter>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
 </ResourceDictionary>

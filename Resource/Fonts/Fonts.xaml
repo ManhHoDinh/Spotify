@@ -1,4 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <FontFamily x:Key="Circular">./circular-std-medium-500.ttf</FontFamily>
+    <FontFamily x:Key="CircularStdBlack">./CircularStdBlack.otf</FontFamily>
+    <FontFamily x:Key="CircularStdBlackItalic">./CircularStdBlackItalic.otf</FontFamily>
+    <FontFamily x:Key="CircularStdBold">./CircularStdBold.otf</FontFamily>
+    <FontFamily x:Key="CircularStdBoldItalic">./CircularStdBoldItalic.otf</FontFamily>
+    <FontFamily x:Key="CircularStdBook">./CircularStdBook.otf</FontFamily>
+    <FontFamily x:Key="CircularStdBookItalic">./CircularStdBookItalic.otf</FontFamily>
+    <FontFamily x:Key="CircularStdLight">./CircularStdLight.otf</FontFamily>
+    <FontFamily x:Key="CircularStdLightItalic">./CircularStdLightItalic.otf</FontFamily>
+    <FontFamily x:Key="CircularStdMedium">./CircularStdMedium.otf</FontFamily>
+    <FontFamily x:Key="CircularStdMediumItalic">./CircularStdMediumItalic.otf</FontFamily>
 </ResourceDictionary>

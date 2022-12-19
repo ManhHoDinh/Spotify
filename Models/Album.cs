@@ -17,7 +17,7 @@ namespace Spotify.Models
         private string _description;
         private string _postTime;
         private string _image;
-        public ObservableCollection<Song> songs = new ObservableCollection<Song>();
+        public ObservableCollection<Song> SongsOfAlbum = new ObservableCollection<Song>();
         public Album myProperty   // CS0053  
         {
             get

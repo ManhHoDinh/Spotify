@@ -1,4 +1,4 @@
-﻿<Window x:Class="Spotify.MainWindow"
+<Window x:Class="Spotify.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,15 +11,19 @@
         Title="MainWindow" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
         >
-
+    
     <Window.DataContext>
         <vm:NavigationVM/>
     </Window.DataContext>
-
+    <Window.Resources>
+         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListBox">
+            <ItemsPresenter/>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
-
+            
             <RowDefinition  Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
@@ -40,10 +44,44 @@
                     <Button Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}"></Button>
                     <Button  Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}"></Button>
                     <Button  Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}"></Button>
+                    <ScrollViewer>
+                        <ListBox 
+                        Template="{StaticResource NonScrollableListView}"
+                        Width="241" 
+                        BorderBrush="Transparent" 
+                        FontSize="14" 
+                        Background="#000000"
+                        Foreground="#b3b3b3" 
+                        SelectedItem="{Binding Source={x:Static Component:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay}"
+                        ItemsSource="{Binding Source={x:Static Component:ListPlaylist.Ins},Path=List}">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                <Border Height="32">
+                                                    <ContentPresenter Content="{Binding NamePlaylist}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    </ScrollViewer>
                 </StackPanel>
             </Grid>
+            
             <Grid Grid.Column="1">
-
+                
                 <ContentControl x:Name="Pages"
                                 Content="{Binding CurrentView}" />
             </Grid>
@@ -51,5 +89,5 @@
         <controls:bottomComponent Grid.Row="1">
         </controls:bottomComponent>
     </Grid>
-
+    
 </Window>

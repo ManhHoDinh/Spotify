@@ -41,7 +41,7 @@ namespace Spotify.Views.Components
             get { return (string)GetValue(SingerNameProperty); }
             set { SetValue(SingerNameProperty, value); }
         }
-
+        
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SingerNameProperty =
             DependencyProperty.Register("SingerName", typeof(string), typeof(SongBottom), new PropertyMetadata(string.Empty));
@@ -59,11 +59,6 @@ namespace Spotify.Views.Components
         {
             Ins = new SongBottom();
         }
-
-
-       
-
-
     }
     public partial class bottomComponent : UserControl
     {
@@ -305,10 +300,10 @@ namespace Spotify.Views.Components
                     if (!IsShuffle)
                     {
                         {
-                            if (index < a.listSong.Count) a.SelectedItem = a.listSong[index];
+                            if (index < LikedSongsVM.listSong.Count) a.SelectedItem = LikedSongsVM.listSong[index];
                             else
                             {
-                                a.SelectedItem = a.listSong[0];
+                                a.SelectedItem = LikedSongsVM.listSong[0];
                                 if (RepeatState == "None")
                                 {
                                     mePlayer.Pause();
@@ -325,8 +320,8 @@ namespace Spotify.Views.Components
                     {
 
                         Random rdm = new Random();
-                        int x = rdm.Next(0, a.listSong.Count);
-                        a.SelectedItem = a.listSong[index];
+                        int x = rdm.Next(0, LikedSongsVM.listSong.Count);
+                        a.SelectedItem = LikedSongsVM.listSong[index];
                     }
                 }
             }

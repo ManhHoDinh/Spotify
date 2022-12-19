@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.ViewModels.Pages;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -25,6 +26,9 @@ namespace Spotify.Views.Pages
         {
             InitializeComponent();
         }
-
+        private void Favor_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }
