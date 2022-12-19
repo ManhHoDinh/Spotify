@@ -44,12 +44,19 @@ namespace Spotify.Views.Components
         {
 
         }
-
         private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            //if (SearchBox.Text != string.Empty)
+            //{
+            //    PreparingSearch.Visibility = Visibility.Hidden;
+            //    BeginingSearch.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    PreparingSearch.Visibility = Visibility.Visible;
+            //    BeginingSearch.Visibility = Visibility.Hidden;
+            //}
         }
-
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
 

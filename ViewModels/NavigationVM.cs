@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Spotify.ViewModels.Pages;
-using System.Transactions;
 using System.Windows.Input;
 using Spotify.Views.Pages;
 using System.Windows.Controls;
@@ -13,6 +12,9 @@ using System.Windows.Media;
 using System.Windows;
 using System.Drawing;
 
+using System.Collections.ObjectModel;
+using Spotify.Views.Components;
+using Spotify.Models;
 
 namespace Spotify.ViewModels
 {
@@ -92,6 +94,18 @@ namespace Spotify.ViewModels
 
         }
         private void Album(object obj) => ViewPage.Ins.CurrentView = new AlbumView();
+       private void Home(object obj) => CurrentView = new HomeVM();
+       private void LikedSongs(object obj) => CurrentView = new LikedSongsVM();
+        private void Search(object obj) => CurrentView = new SearchVM();
+        private void YourLibrary(object obj) => CurrentView = new YourLibraryVM();
+        private void CreatePlaylist(object obj)
+        {
+            int count = ListPlaylist.Ins.CountPlaylist;
+            CurrentView = new CreatePlaylistVM();
+            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "" });
+            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+            ListPlaylist.Ins.CountPlaylist++;
+        }
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);

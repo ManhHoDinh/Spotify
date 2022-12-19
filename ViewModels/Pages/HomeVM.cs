@@ -13,10 +13,13 @@ using Spotify.Utilities;
 using System.Windows.Media;
 using System.Windows.Documents;
 using Spotify.Views.Pages;
+using Spotify.Views.Components;
+using System.Windows.Data;
 
 namespace Spotify.ViewModels.Pages
 {
-    public class HomeVM : BaseViewModel
+
+    internal class HomeVM : BaseViewModel
     {
         public ICommand LikeSongViewCommand { get; set; }
         private ObservableCollection<Album> _TopMix;
@@ -36,7 +39,8 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged(); 
                 if (SelectedItem != null) 
                 { AlbumName = SelectedItem.Name; 
-                  AlbumDescription = SelectedItem.Description; 
+                  AlbumDescription = SelectedItem.Description;
+                  SongsOfAlbum = SelectedItem.SongsOfAlbum;
                   IsAlbumItemVisible = true; 
                   IsAlbumListVisible = false;
                   ViewPage.Ins.CurrentView = new AlbumView();
@@ -44,8 +48,28 @@ namespace Spotify.ViewModels.Pages
                 }
             }
         }
+        private Song _SelectedSongItem;
+        public Song SelectedSongItem
+        {
+            get => _SelectedSongItem;
+            set
+            {
+                _SelectedSongItem = value;
+                OnPropertyChanged();
+                if (SelectedSongItem != null)
+                {
+                    SongBottom.Ins.SongName = SelectedSongItem.Name;
+                    SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
+                    SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
+                }
+            }
+        }
+
         private string _AlbumName;
         public string AlbumName { get => _AlbumName; set { _AlbumName = value; OnPropertyChanged(); } }
+        private ObservableCollection<Song> _songsOfAlbum = new ObservableCollection<Song>();
+        public ObservableCollection<Song> SongsOfAlbum { get => _songsOfAlbum; set { _songsOfAlbum = value; OnPropertyChanged(); } }
+
         private string _AlbumDescription;
         public string AlbumDescription { get => _AlbumDescription; set { _AlbumDescription = value; OnPropertyChanged(); } }
         private bool _IsAlbumItemVisible;
@@ -85,25 +109,16 @@ namespace Spotify.ViewModels.Pages
             MadeForYou.Add(new Album { Name = "chill", Description = "chlll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
             ObservableCollection<Song> list = new ObservableCollection<Song>();
-            list.Add(new Song { ID = 1, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            list.Add(new Song { ID = 2, Name = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            list.Add(new Song { ID = 3, Name = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            list.Add(new Song { ID = 4, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            list.Add(new Song { ID = 5, Name = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            list.Add(new Song { ID = 6, Name = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            list.Add(new Song { ID = 7, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            list.Add(new Song { ID = 8, Name = "chúng ta không về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:25" });
-            list.Add(new Song { ID = 9 ,Name = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            list.Add(new Song { ID = 10, Name = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            list.Add(new Song { ID = 11, Name = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            list.Add(new Song { ID = 12, Name = "chúng ta không thuộc nhau", NameSinger = "Sơn Tùng", DurationSong = "3:231" });
-            JumBack = new ObservableCollection<Album>();
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll}", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", songs = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chll", songs = list });
+            list.Add(Songs.CamNang);
+            list.Add(Songs.BenTrenTangLau);
+            list.Add(Songs.DauMua);
+           
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list});
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll}", SongsOfAlbum = list });
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
             Recently = new ObservableCollection<Album>();
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });

@@ -15,11 +15,11 @@ namespace Spotify.ViewModels.Pages
 {
     public class LikedSongsVM : BaseViewModel
     {
-        private ObservableCollection<Song> _listSong;
-        public ObservableCollection<Song> listSong
+        private static ObservableCollection<Song> _listSong;
+        public static ObservableCollection<Song> listSong
         {
             get => _listSong;
-            set { _listSong = value; OnPropertyChanged(); }
+            set { _listSong = value; }
         }
         private string _Name;
         public string Name
@@ -48,11 +48,11 @@ namespace Spotify.ViewModels.Pages
                     Name = SelectedItem.Name;
                     NameSinger = SelectedItem.NameSinger;
                     LinkSong = SelectedItem.LinkSong;
-                    Image = SelectedItem.Image;
+                    Image = SelectedItem.ImageSong;
                     SongBottom.Ins.SongName = Name;
                     SongBottom.Ins.SingerName = NameSinger;
                     SongBottom.Ins.LinkSong = LinkSong;
-
+                   
                 }
             }
         }
@@ -70,10 +70,11 @@ namespace Spotify.ViewModels.Pages
         {
 
             listSong = new ObservableCollection<Song>();
-            listSong.Add(new Song { ID = 1, Name = "Cảm nắng", NameSinger = "Suni Hạ Linh ft Rtee", DurationSong = "3:48", LinkSong = new Uri("pack://siteoforigin:,,,/Resource/Songs/CamNang.mp3"), Image = new Uri("pack://siteoforigin:,,,/Resource/Images/CamNangImg.jpg", UriKind.RelativeOrAbsolute) });
-            listSong.Add(new Song { ID = 2, Name = "Bên trên tầng lầu", NameSinger = "Tăng Duy Tân", DurationSong = "3:22", LinkSong = new Uri("pack://siteoforigin:,,,/Resource/Songs/BenTrenTangLau.mp3"), Image = new Uri("pack://siteoforigin:,,,/Resource/Images/BenTrenTangLauImg.jfif", UriKind.RelativeOrAbsolute) });
-            listSong.Add(new Song { ID = 3, Name = "Dấu mưa", NameSinger = "Trung Quân Idol", DurationSong = "4:20", LinkSong = new Uri("pack://siteoforigin:,,,/Resource/Songs/DauMua.mp3"), Image = new Uri("pack://siteoforigin:,,,/Resource/Images/DauMua.jpg", UriKind.RelativeOrAbsolute) });
-            //listSong.Add(new SongItemModel { Id = "3", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
+            listSong.Add(Songs.CamNang);
+            listSong.Add(Songs.BenTrenTangLau);
+            listSong.Add(Songs.DauMua);
+
+            //listSong.Add(new SongItemModel { Id = "3", NameSong = "chúng ta không thuộc nhau", NameSinger = "Sơn Tùng", DurationSong = "3:231" });
             //listSong.Add(new SongItemModel { Id = "4", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
             //listSong.Add(new SongItemModel { Id = "5", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
             //listSong.Add(new SongItemModel { Id = "6", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
@@ -83,6 +84,7 @@ namespace Spotify.ViewModels.Pages
             //listSong.Add(new SongItemModel { Id = "10", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
             //listSong.Add(new SongItemModel { Id = "11", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
             //listSong.Add(new SongItemModel { Id = "12", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
+            
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

@@ -6,11 +6,9 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages">
-    <UserControl.DataContext>
-        <vm:SearchVM></vm:SearchVM>
-       
-    </UserControl.DataContext>
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             xmlns:components="clr-namespace:Spotify.Views.Components">
+    
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
@@ -19,14 +17,13 @@
     
     <Grid Background="#121212">
         <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
-            
         </Grid>
-        <ListView  x:Name="BeginingSearch"  Margin="0 60 0 0" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent">
+        <ListView  x:Name="BeginingSearch"  Margin="0 90 0 0" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent"  SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedSongIndex,Mode=OneWayToSource}" >
             <!--Text Index-->
             <ListView.Resources>
                 <vm:OrdinalConverter x:Key="OrdinalConverter" />
             </ListView.Resources>
-            <ListView.ItemContainerStyle>
+            <ListView.ItemContainerStyle >
                 <Style TargetType="ListViewItem">
                     <Setter Property="Background" Value="AntiqueWhite"/>
                     <Setter Property="Template">
@@ -47,9 +44,9 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="50"/>
                                             <ColumnDefinition Width="350"/>
-                                            <ColumnDefinition Width="300"/>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="200"/>
                                             <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock  Grid.Column="0" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
@@ -70,6 +67,7 @@
                                         <TextBlock Grid.Column="4" Text="{Binding DurationSong}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
                                     </Grid>
                                 </Border>
+                               
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
@@ -77,10 +75,7 @@
             </ListView.ItemContainerStyle>
         </ListView>
         <TextBox x:Name="SearchBox"
-                  Width="300" Height="50" VerticalAlignment="Top" Margin="10"
-                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-                 TextChanged="SearchBox_TextChanged"     
-                 />
-        
+                 Style="{StaticResource SearchHeader}"
+                 VerticalAlignment="Top"  Tag="Monke D Luffy"/>
     </Grid>
 </UserControl>

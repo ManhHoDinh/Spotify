@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="Spotify.Views.Pages.SignInForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotify.Views.Pages"
+             xmlns:spotify="clr-namespace:Spotify"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="800">
+    <StackPanel Background="#ffffff" HorizontalAlignment="Center" >
+        <Image Source="{StaticResource spotifyLoginLogo}" Width="182" Height="56" Margin="0 30 0 20"/>
+        <Line X1="1000" Stroke="Gray"></Line>
+        <StackPanel HorizontalAlignment="Center" Width="450">
+            <TextBlock Margin="0 20 0 0" HorizontalAlignment="Center" 
+                       Text="To continue, log in to Spotify."
+                       Style="{StaticResource LoginTextStyle}" FontWeight="Bold"
+                       />
+            <TextBlock Text="Email address or username" Style="{StaticResource LoginTextStyle}" Margin="0 30 0 8 "></TextBlock>
+            <spotify:PlaceHolderTextbox
+                        x:Name="Email"
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Email address or username" 
+                        Width="450"
+                        Height="40"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                        Padding="8 6 8 10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" />
+            <TextBlock Text="Password"
+                       Style="{StaticResource LoginTextStyle}"
+                        Margin="0 20 0 8"                
+                       ></TextBlock>
+            <PasswordBox  Padding="8 11 8 11" Width="450" Height="42" VerticalAlignment="Center" HorizontalAlignment="Left" CaretBrush="#FFFF"></PasswordBox>
+            <Button Margin="0 15" Content="Forgot your password?" Style="{StaticResource TextBtn}"></Button>
+            <Grid Margin="0 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="124"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Content="Remember me" VerticalContentAlignment="Center" Margin="0,-9,0,9"/>
+                <Button Grid.Column="2" Content="Login In" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" Style="{StaticResource RadiusBtn}" Background="#1ED760"/>
+            </Grid>
+            <Line X1="1000" Stroke="Gray" Margin="0 25"/>
+            <TextBlock Style="{StaticResource LoginTextStyle}" Text="Don't have an account?" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+            <Button Style="{StaticResource RadiusBtn}" Content="SIGN UP FOR SPOTIFY" Width="450" Background="Transparent" BorderBrush="#878787" Foreground="#6A6A6A" Margin="0 20" BorderThickness="1"></Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

@@ -4,9 +4,7 @@
              xmlns:local="clr-namespace:Spotify"
              StartupUri="MainWindow.xaml"
              xmlns:ViewModel="clr-namespace:Spotify.ViewModels.Pages"
-             
              >
-    
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,6 +15,7 @@
                 <ResourceDictionary Source="Styles/LeftSideBarStyles.xaml"/>
                 <ResourceDictionary Source="Styles/PlaylistStyles.xaml"/>
                 <ResourceDictionary Source="Styles/HomeStyles.xaml"/>
+                <ResourceDictionary Source="Styles/SearchStyles.xaml"/>
                 <ResourceDictionary Source="Utilities/DataTemplate.xaml" />
                 <ResourceDictionary Source="Styles/HomeStyles.xaml"/>
                 <ResourceDictionary Source="Styles/FavorButtonStyle.xaml"/>
@@ -26,8 +25,10 @@
                 <ResourceDictionary Source="Styles/VolumeButtonStyle.xaml"/>
                 <ResourceDictionary Source="Styles/ColumnStyle.xaml"/>
                 <ResourceDictionary Source="/ResourceXAML/ListSongVM.xaml"/>
-
+                <ResourceDictionary Source="Themes/Generic.xaml"/>
+                <ResourceDictionary Source="Styles/LoginFormStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+           
         </ResourceDictionary>
         
         <!--<Style x:Key="ControlBtn" TargetType="Button">
