@@ -24,5 +24,25 @@
             </Trigger>
         </ControlTemplate.Triggers> 
     </ControlTemplate>
+    <ControlTemplate x:Key="HeaderBtn" TargetType="Button">
+        <Border Name="border"
+                CornerRadius="8"
+                Cursor="Hand"
+                Background="{TemplateBinding Background}"
+                BorderBrush="Transparent" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}">
+            <ContentPresenter 
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="{TemplateBinding Content}"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="0.5"/>
 
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
 </ResourceDictionary>

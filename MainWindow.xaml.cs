@@ -49,8 +49,6 @@ namespace Spotify
         {
             Ins = new ViewPage();
         }
-
-
     }
     public partial class MainWindow : Window
     {
@@ -63,10 +61,6 @@ namespace Spotify
             //LoadSideBar.ColumnDefinitions.RemoveAt(1);
         }
 
-
-       
-
-
-
+        
     }
 }

@@ -24,16 +24,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <!--greenPlay-->
-    <ControlTemplate x:Key="GreenStyle" TargetType="{x:Type ButtonBase}">
-        <Border x:Name="border" Background="{TemplateBinding Background}"/>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Width" TargetName="border" Value="84"/>
-                <Setter Property="Height" TargetName="border" Value="84"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
     <!--greenHover-->
     <ImageBrush x:Key="PauseGreen" ImageSource="{StaticResource PauseGreemHoverButton}"/>
     <ImageBrush x:Key="PlayGreen" ImageSource="{StaticResource PlayGreemHoverButton}"/>

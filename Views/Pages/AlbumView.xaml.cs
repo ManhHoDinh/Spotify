@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Spotify.Views.Pages
+namespace albumComponent.View
 {
     /// <summary>
     /// Interaction logic for AlbumView.xaml

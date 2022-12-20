@@ -12,7 +12,6 @@ using System.Windows.Input;
 using Spotify.Utilities;
 using System.Windows.Media;
 using System.Windows.Documents;
-using Spotify.Views.Pages;
 using Spotify.Views.Components;
 using System.Windows.Data;
 
@@ -21,17 +20,16 @@ namespace Spotify.ViewModels.Pages
 
     internal class HomeVM : BaseViewModel
     {
-        public ICommand LikeSongViewCommand { get; set; }
         private ObservableCollection<Album> _TopMix;
-        public ObservableCollection<Album> TopMix { get => _TopMix; set { _TopMix = value;OnPropertyChanged(); } }
+        public ObservableCollection<Album> TopMix { get; set; }
         private ObservableCollection<Album> _MadeForYou;
-        public ObservableCollection<Album> MadeForYou { get => _MadeForYou; set { _MadeForYou = value; OnPropertyChanged(); } }
+        public ObservableCollection<Album> MadeForYou { get; set; }
         private ObservableCollection<Album> _Recently;
-        public ObservableCollection<Album> Recently { get => _Recently; set { _Recently = value; OnPropertyChanged(); } }
+        public ObservableCollection<Album> Recently { get; set; }
         private ObservableCollection<Album> _JumBack;
-        public ObservableCollection<Album> JumBack { get => _JumBack; set { _JumBack = value; OnPropertyChanged(); } }
+        public ObservableCollection<Album> JumBack { get; set; }
         private ObservableCollection<Album> _RecommendPlaylists;
-        public ObservableCollection<Album> RecommendPlaylists { get => _RecommendPlaylists; set { _RecommendPlaylists = value; OnPropertyChanged(); } }
+        public ObservableCollection<Album> RecommendPlaylists { get; set; }
         public ICommand ClickCommand { get; set; }
         private Album _SelectedItem;
         public Album SelectedItem { get => _SelectedItem; 
@@ -42,9 +40,7 @@ namespace Spotify.ViewModels.Pages
                   AlbumDescription = SelectedItem.Description;
                   SongsOfAlbum = SelectedItem.SongsOfAlbum;
                   IsAlbumItemVisible = true; 
-                  IsAlbumListVisible = false;
-                  ViewPage.Ins.CurrentView = new AlbumView();
-                 
+                  IsAlbumListVisible = false; 
                 }
             }
         }
@@ -78,22 +74,14 @@ namespace Spotify.ViewModels.Pages
         public bool IsAlbumListVisible { get => _IsAlbumListVisible; set { _IsAlbumListVisible = value; OnPropertyChanged(); } }
         public HomeVM()
         {
-            LikeSongViewCommand = new RelayCommand<object>(
-                (p) =>
-                {
-                    return true;
-                }, (p) =>
-                {
-                    ViewPage.Ins.CurrentView = new LikedSongsVM();
-                });
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll"});
+            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll"}); ;
             RecommendPlaylists.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
             RecommendPlaylists.Add(new Album { Name = "Say nắng", Description = "Suni Hạ Linh" });
             RecommendPlaylists.Add(new Album { Name = "Có chắc yêu là đây", Description = "Sơn Tùng MTP" });
             RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
-            //RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
+            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
             TopMix = new ObservableCollection<Album>();
             TopMix.Add(new Album { Name = "chill", Description = "chillllll" });
             TopMix.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
@@ -106,8 +94,9 @@ namespace Spotify.ViewModels.Pages
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chlll" });
             MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
+            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
+            JumBack = new ObservableCollection<Album>();
             ObservableCollection<Song> list = new ObservableCollection<Song>();
             list.Add(Songs.CamNang);
             list.Add(Songs.BenTrenTangLau);
@@ -120,7 +109,7 @@ namespace Spotify.ViewModels.Pages
             JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
             JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
             Recently = new ObservableCollection<Album>();
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
+            Recently.Add(new Album { Name = "chill", Description = "chillllll"  });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });
             Recently.Add(new Album { Name = "chill", Description = "chillllll" });

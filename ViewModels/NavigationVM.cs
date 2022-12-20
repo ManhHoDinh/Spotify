@@ -8,13 +8,12 @@ using System.Windows.Input;
 using Spotify.Views.Pages;
 using System.Windows.Controls;
 using Spotify.Utilities;
-using System.Windows.Media;
-using System.Windows;
-using System.Drawing;
-
 using System.Collections.ObjectModel;
 using Spotify.Views.Components;
 using Spotify.Models;
+using albumComponent.View;
+using System.Windows.Media;
+using System.Windows;
 
 namespace Spotify.ViewModels
 {
@@ -35,7 +34,7 @@ namespace Spotify.ViewModels
         public void ChangeViewStyle(string value, object obj)
         {
             StackPanel stack = obj as StackPanel;
-            foreach(object p in stack.Children)
+            foreach (object p in stack.Children)
             {
                 Button btn = p as Button;
                 ControlTemplate ct = btn.Template;
@@ -48,18 +47,18 @@ namespace Spotify.ViewModels
                     tb.Foreground = Brushes.White;
                     if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
                     {
-                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
+                        img.Source = (ImageSource) Application.Current.Resources[btn.Name + "FillIcon"];
                     }
                 }
                 else
                 {
-                    tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179,179,179));
+                    tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179, 179, 179));
                     if (btn.Name != "CreatePlaylist" && btn.Name != "LikeSongs")
                     {
                         img.Source = (ImageSource)Application.Current.Resources[btn.Name + "Icon"];
-                        
+
                     }
-                  
+
                 }
             }
         }
@@ -94,18 +93,6 @@ namespace Spotify.ViewModels
 
         }
         private void Album(object obj) => ViewPage.Ins.CurrentView = new AlbumView();
-       private void Home(object obj) => CurrentView = new HomeVM();
-       private void LikedSongs(object obj) => CurrentView = new LikedSongsVM();
-        private void Search(object obj) => CurrentView = new SearchVM();
-        private void YourLibrary(object obj) => CurrentView = new YourLibraryVM();
-        private void CreatePlaylist(object obj)
-        {
-            int count = ListPlaylist.Ins.CountPlaylist;
-            CurrentView = new CreatePlaylistVM();
-            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "" });
-            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-            ListPlaylist.Ins.CountPlaylist++;
-        }
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);

@@ -12,8 +12,10 @@ using System.Windows.Input;
 using Spotify.Utilities;
 namespace Spotify.ViewModels.Pages
 {
-    public class AlbumViewModel:BaseViewModel
+    internal class AlbumViewModel : BaseViewModel
     {
+       
+        public ICommand ClickCommand { get; set; }
         private Album _SelectedItem;
         public Album SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); if (SelectedItem != null) { AlbumName = SelectedItem.Name; AlbumDescription = SelectedItem.Description; IsAlbumItemVisible = true; IsAlbumListVisible = false; } } }
         private string _AlbumName;
@@ -27,6 +29,15 @@ namespace Spotify.ViewModels.Pages
         public AlbumViewModel()
         {
             IsAlbumListVisible = true;
+           
+            ClickCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                MessageBox.Show("success");
+            }
+            );
         }
     }
 }
