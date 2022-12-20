@@ -115,6 +115,9 @@
     <Compile Include="Views\Pages\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\SongView.xaml.cs">
+      <DependentUpon>SongView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\YourLibrary.xaml.cs">
       <DependentUpon>YourLibrary.xaml</DependentUpon>
     </Compile>
@@ -270,6 +273,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\SongView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\YourLibrary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -337,9 +344,18 @@
     <Resource Include="Resource\Icons\Library_Fill_S.png" />
     <Resource Include="Resource\Icons\Home_Fill_S.png" />
     <Resource Include="Resource\Icons\Search_Fill_S.png" />
-    <Content Include="Resource\Images\BenTrenTangLauImg.jfif" />
-    <Resource Include="Resource\Images\CamNangImg.jpg" />
-    <Resource Include="Resource\Images\DauMua.jpg" />
+    <Resource Include="Resource\Icons\Pause_Greem Hover.png" />
+    <Resource Include="Resource\Icons\Play_XS.png" />
+    <Resource Include="Resource\Icons\Pause_XS.png" />
+    <Content Include="Resource\Images\BenTrenTangLauImg.jfif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Images\CamNangImg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Images\DauMua.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resource\Images\Devices.png" />
     <Resource Include="Resource\Images\Devices_Hover.png" />
     <Resource Include="Resource\Images\Example.png" />
@@ -410,9 +426,15 @@
     <Content Include="Resource\Songs\07 Yếu Đuối.mp3" />
     <Resource Include="Resource\Songs\AnhTrangTinhAi\AnhTrangTinhAi.jpg" />
     <Content Include="Resource\Songs\AnhTrangTinhAi\AnhTrangTinhAi.mp3" />
-    <Content Include="Resource\Songs\BenTrenTangLau.mp3" />
-    <Content Include="Resource\Songs\CamNang.mp3" />
-    <Content Include="Resource\Songs\DauMua.mp3" />
+    <Content Include="Resource\Songs\BenTrenTangLau.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CamNang.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DauMua.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Styles\StylesGiude.txt" />
     <Resource Include="ViewModels\Components\ComponentsViewModelGiude.txt" />
     <Resource Include="ViewModels\Pages\PagesViewModelGiude.txt" />
