@@ -14,6 +14,7 @@
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
         </ControlTemplate>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="0 24 0 0">
@@ -37,21 +38,7 @@
                                         </Trigger>
                                     </ControlTemplate.Triggers>-->
                                     <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                                        <Setter Property="Border.Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
+                                  
                                         <Grid >
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="50"/>
@@ -60,7 +47,23 @@
                                                 <ColumnDefinition Width="300"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock  Grid.Column="0" x:Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+  
+                                                <TextBlock Grid.Column="0" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <ContentPresenter>
+                                                            <ContentPresenter.Content>
+                                                                
+                                                                    <Image Source="{StaticResource Playxs}"/>
+                                                                
+                                                            </ContentPresenter.Content>
+                                                        </ContentPresenter>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                               
+                                            </Button>
+
                                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
                                                 <Image Width="40" Source="{Binding Image}" Margin="0 0 20 0"/>
                                                 <StackPanel Orientation="Vertical">
@@ -77,6 +80,7 @@
                                                                                     <Setter Property="TextDecorations" Value="Underline"/>
                                                                                     <Setter Property="Cursor" Value="Hand"/>
                                                                                     <Setter Property="FontWeight" Value="Bold"/>
+                                                                                    
                                                                                 </Trigger>
 
                                                                             </Style.Triggers>
@@ -100,6 +104,22 @@
 
                                             <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Grid>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                                        <Setter Property="Border.Background">
+                                                            <Setter.Value>
+                                                                <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                       
+
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
                                     </Border>
                                     <ControlTemplate.Triggers>
 
@@ -112,6 +132,10 @@
                                             <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="true">
+                                            <Setter TargetName="Id" Property="Visibility" Value="Hidden"/>
+                                            <Setter TargetName="PlayPauseBtn" Property="Visibility" Value="Visible"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

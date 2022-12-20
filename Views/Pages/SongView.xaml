@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="Spotify.Views.Pages.SongView"
+             Name="viewsong"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,7 +11,7 @@
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                <GradientStop Color="{Binding color, ElementName=hehe}" Offset="0"/>
+                <GradientStop Color="{Binding color, ElementName=viewsong}" Offset="0"/>
                 <GradientStop Color="#121212" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
