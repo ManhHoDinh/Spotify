@@ -48,11 +48,11 @@ namespace Spotify.ViewModels.Pages
                     Name = SelectedItem.Name;
                     NameSinger = SelectedItem.NameSinger;
                     LinkSong = SelectedItem.LinkSong;
-                    Image = SelectedItem.ImageSong;
+                    Image = SelectedItem.Image;
                     SongBottom.Ins.SongName = Name;
                     SongBottom.Ins.SingerName = NameSinger;
                     SongBottom.Ins.LinkSong = LinkSong;
-                   
+                    SongBottom.Ins.ImageSong = Image;
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace Spotify.ViewModels.Pages
             //listSong.Add(new SongItemModel { Id = "10", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
             //listSong.Add(new SongItemModel { Id = "11", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
             //listSong.Add(new SongItemModel { Id = "12", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            
+
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

@@ -20,4 +20,5 @@
     <ImageSource x:Key="SongIcon">./SongIcon.png</ImageSource>
     <ImageSource x:Key="CloseBtn">./Close.png</ImageSource>
     <ImageSource x:Key="OptionBtn">./Option.png</ImageSource>
+    <ImageSource x:Key="PauseFill">./Pause_Greem Hover.png</ImageSource>
 </ResourceDictionary>

@@ -47,7 +47,7 @@ namespace Spotify.Models
             get => _postTime; set { _postTime = value; OnPropertyChanged(); }
         }
         private Uri _image;
-        public Uri ImageSong
+        public Uri Image
         {
             get => _image; set { _image = value; OnPropertyChanged(); }
         }

@@ -50,6 +50,29 @@ namespace Spotify.Views.Components
             get { return (Uri)GetValue(LinkSongProperty); }
             set { SetValue(LinkSongProperty, value); }
         }
+        public Uri ImageSong
+        {
+            get { return (Uri)GetValue(ImageSongProperty); }
+            set { SetValue(ImageSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImageSongProperty =
+            DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongBottom), new PropertyMetadata(null));
+        public bool IsPlay
+        {
+            get { return (bool)GetValue(IsPlayProperty); }
+            set
+            {
+                SetValue(IsPlayProperty, value);
+
+
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsPlayProperty =
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongBottom), new PropertyMetadata(true));
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LinkSongProperty =
@@ -62,14 +85,57 @@ namespace Spotify.Views.Components
     }
     public partial class bottomComponent : UserControl
     {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == IsPlayProperty)
+            {
+                if (IsPlay == true)
+                {
+                    mePlayer.Play();
+                    mediaPlayerIsPlaying = true;
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = Pause;
+                    PlayPauseBtn.Background = ImgBrush;
+                }
+                else
+                {
+                    mePlayer.Pause();
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = Play;
+                    PlayPauseBtn.Background = ImgBrush;
+                    mediaPlayerIsPlaying = false;
+                }
+                // what is the code that would go here?
+            }
+        }
         public bottomComponent()
         {
             InitializeComponent();
+            Binding binding = new Binding("IsPlay");
+            binding.Source = SongBottom.Ins;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(BottomControl, IsPlayProperty, binding);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
         }
+        public bool IsPlay
+        {
+            get { return (bool)GetValue(IsPlayProperty); }
+            set
+            {
+
+                SetValue(IsPlayProperty, value);
+
+
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsPlayProperty =
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(bottomComponent), new PropertyMetadata(true));
         private bool mediaPlayerIsPlaying = false;
         string fileName = "";
         MediaPlayer mediaPlayer = new MediaPlayer();
@@ -154,16 +220,14 @@ namespace Spotify.Views.Components
             {
                 mePlayer.Play();
                 mediaPlayerIsPlaying = true;
-
+                IsPlay = true;
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = Pause;
                 PlayPauseBtn.Background = ImgBrush;
-
-
-
             }
             else
             {
+                IsPlay = false;
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = Play;
                 PlayPauseBtn.Background = ImgBrush;

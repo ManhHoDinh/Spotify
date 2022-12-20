@@ -2,8 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using Spotify.ViewModels.Pages;
-
-
+using Spotify.Views.Pages;
 
 namespace Spotify.Views.Components
 {
@@ -32,6 +31,14 @@ namespace Spotify.Views.Components
 
             LikedSongsVM.listSong.RemoveAt(index-1);
 
+        }
+
+        private void NameSong_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            ListViewItem curItem = ((ListViewItem)ListViewSong.ContainerFromElement((Button)sender));
+            curItem.IsSelected = true;
+            ViewPage.Ins.CurrentView = new SongView();
         }
     }
 }
