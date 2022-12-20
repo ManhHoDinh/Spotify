@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
-            <Image  Margin="18 0 0 0" Grid.Column="0" Source="{Binding ImageSong}" Grid.RowSpan="2"/>
+            <Image  Margin="18 0 0 0" Grid.Column="0" Source="{Binding Source={x:Static local:SongBottom.Ins},Path=ImageSong}" Grid.RowSpan="2"/>
             <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
                 <TextBlock Foreground="#ffffff" FontSize = "18" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SongName}"/>
                 <TextBlock Foreground="#B3B3B3" FontSize="16" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SingerName}"/>
