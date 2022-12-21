@@ -83,7 +83,7 @@
             
             <Grid Grid.Column="1">
                 
-                <ContentControl x:Name="Pages" Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}"/>
+                <ContentControl BorderBrush="Transparent" x:Name="Pages" Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}"/>
             </Grid>
         </Grid>
         <controls:bottomComponent Grid.Row="1">

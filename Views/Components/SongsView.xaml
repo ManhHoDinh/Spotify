@@ -6,48 +6,65 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
-             
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="1600" Background="#181818">
+             d:DesignHeight="450" d:DesignWidth="959" Background="#181818">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
         </ControlTemplate>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
-    <ScrollViewer>
-        <Grid Margin="0 24 0 0">
+    <StackPanel Margin="32 0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="33.4*"/>
+                <ColumnDefinition Width="22.2*"/>
+                <ColumnDefinition Width="17.78*"/>
+                <ColumnDefinition Width="21.62*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" FontSize="16" Foreground="#ffffff" Text="#" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Column="1" FontSize="16" Foreground="#ffffff" Text="TITLE" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Column="2" FontSize="16" Foreground="#ffffff" Text="ALBUM" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Column="3" FontSize="16" Foreground="#ffffff" Text="DATE ADDED" HorizontalAlignment="Left"/>
+            <TextBlock Grid.Column="4" FontSize="16" Foreground="#ffffff" Text="TIME"  HorizontalAlignment="Left"/>
+        </Grid>
+        <Grid>
             <ListView x:Name="ListViewSong" 
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
-                      Width="1224" 
                       SelectionChanged="ListViewSong_SelectionChanged"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" 
                       ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
+                      HorizontalContentAlignment="Stretch"
+                       HorizontalAlignment="Stretch"
                       BorderBrush="Transparent">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="Background" Value="AntiqueWhite"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                         <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
-                                    <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
-                                  
-                                        <Grid >
+                                    <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72" HorizontalAlignment="Stretch">
+
+                                        <Grid HorizontalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="475"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="300"/>
-                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="5*"/>
+                                                <ColumnDefinition Width="33.4*"/>
+                                                <ColumnDefinition Width="22.2*"/>
+                                                <ColumnDefinition Width="17.78*"/>
+                                                <ColumnDefinition Width="21.62*"/>
                                             </Grid.ColumnDefinitions>
                                             <Grid Name="wrapper">
                                                 <Image Grid.Column="0"
                                                    Width="16"
                                                    Height="16" 
                                                    Name="img"
+                                                      
+                                                 HorizontalAlignment="Left"
                                                    Visibility="Hidden"
                                                    Source="{StaticResource Bar1  }">
                                                     <Image.Triggers>
@@ -65,9 +82,9 @@
                                                         </EventTrigger>
                                                     </Image.Triggers>
                                                 </Image>
-                                                <TextBlock Grid.Column="0" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                <TextBlock Grid.Column="0" HorizontalAlignment="Left" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center"/>
                                             </Grid>
-                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" Click="PlayPauseSongBtn_Click">
+                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" HorizontalAlignment="Left" Click="PlayPauseSongBtn_Click">
                                                 <Button.Template>
                                                     <ControlTemplate>
                                                         <Border Background="{TemplateBinding Background}"/>
@@ -76,7 +93,7 @@
                                                 <Button.Background>
                                                     <ImageBrush ImageSource="{StaticResource Playxs}"/>
                                                 </Button.Background>
-                                               
+
                                             </Button>
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
@@ -95,7 +112,7 @@
                                                                                     <Setter Property="TextDecorations" Value="Underline"/>
                                                                                     <Setter Property="Cursor" Value="Hand"/>
                                                                                     <Setter Property="FontWeight" Value="Bold"/>
-                                                                                    
+
                                                                                 </Trigger>
 
                                                                             </Style.Triggers>
@@ -109,9 +126,9 @@
                                                     <TextBlock Name="NameSinger" Text="{Binding NameSinger}" Foreground="#b3b3b3" FontSize="14"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="Play it sale" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding AlbumName}" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
 
-                                            <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click" Margin="30 0 0 0" Template="{DynamicResource HeartStyle}" Width="16" Height="16">
+                                            <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click"  Template="{DynamicResource HeartStyle}" Width="16" Height="16">
                                                 <Button.Background>
                                                     <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
                                                 </Button.Background>
@@ -129,7 +146,7 @@
                                                                 <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
                                                             </Setter.Value>
                                                         </Setter>
-                                                       
+
 
                                                     </Trigger>
                                                 </Style.Triggers>
@@ -147,7 +164,7 @@
                                             <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
-                                          
+
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter TargetName="Id" Property="Visibility" Value="Hidden"/>
@@ -161,11 +178,10 @@
                         </Setter>
 
                     </Style>
-                    
-                </ListView.ItemContainerStyle>
-             
-            </ListView>
 
+                </ListView.ItemContainerStyle>
+
+            </ListView>
         </Grid>
-    </ScrollViewer>
+    </StackPanel>
 </UserControl>
