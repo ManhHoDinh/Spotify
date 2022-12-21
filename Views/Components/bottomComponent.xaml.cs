@@ -56,6 +56,8 @@ namespace Spotify.Views.Components
             set { SetValue(ImageSongProperty, value); }
         }
 
+       
+
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSongProperty =
             DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongBottom), new PropertyMetadata(null));

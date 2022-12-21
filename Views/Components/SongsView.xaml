@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="0 24 0 0">
-            <ListView Name="ListViewSong" 
+            <ListView Name="ListViewSong"   
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
                       Width="1224" 
