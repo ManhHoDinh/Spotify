@@ -56,8 +56,6 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.LinkSong = LinkSong;
                     SongBottom.Ins.ImageSong = Image;
                     SongBottom.Ins.IsPlay = true;
-                    
-                  
                 }
             }
         }
@@ -68,9 +66,7 @@ namespace Spotify.ViewModels.Pages
         public Uri LinkSong { get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); } }
         private Uri _Image;
         public Uri Image { get => _Image; set { _Image = value; OnPropertyChanged(); } }
-        private bool _IsPlay = false;
-        public bool IsPlay { get => _IsPlay; set { _IsPlay = value; OnPropertyChanged(); } }
-
+        
         public LikedSongsVM()
         {
             
