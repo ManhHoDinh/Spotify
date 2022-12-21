@@ -1,5 +1,5 @@
 ﻿<UserControl x:Class="Spotify.Views.Components.SongsView"
-            x:Name="songview"
+             x:Name="songview"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -18,25 +18,22 @@
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="0 24 0 0">
-            <ListView x:Name="ListViewSong" 
+            <ListView Name="ListViewSong" 
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
                       Width="1224" 
+                      SelectionChanged="ListViewSong_SelectionChanged"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" 
                       ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
                       BorderBrush="Transparent">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="Background" Value="AntiqueWhite"/>
+                        
                         <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
-                                    <!--<ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#5b5a5e"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>-->
+       
                                     <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
                                   
                                         <Grid >
@@ -47,20 +44,39 @@
                                                 <ColumnDefinition Width="300"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
-  
+                                            <Grid Name="wrapper">
+                                                <Image Grid.Column="0"
+                                                   Width="16"
+                                                   Height="16" 
+                                                   Name="img"
+                                                   Visibility="Hidden"
+                                                   Source="{StaticResource Bar1  }">
+                                                    <Image.Triggers>
+                                                        <EventTrigger RoutedEvent="Loaded">
+                                                            <BeginStoryboard>
+                                                                <Storyboard RepeatBehavior="Forever">
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Source"
+                                                                 Duration="0:0:0.4">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{StaticResource Bar2}"/>
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{StaticResource Bar3}"/>
+                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{StaticResource Bar4}"/>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </Image.Triggers>
+                                                </Image>
                                                 <TextBlock Grid.Column="0" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16">
+                                            </Grid>
+                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" Click="PlayPauseSongBtn_Click">
                                                 <Button.Template>
                                                     <ControlTemplate>
-                                                        <ContentPresenter>
-                                                            <ContentPresenter.Content>
-                                                                
-                                                                    <Image Source="{StaticResource Playxs}"/>
-                                                                
-                                                            </ContentPresenter.Content>
-                                                        </ContentPresenter>
+                                                        <Border Background="{TemplateBinding Background}"/>
                                                     </ControlTemplate>
                                                 </Button.Template>
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="{StaticResource Playxs}"/>
+                                                </Button.Background>
                                                
                                             </Button>
 
@@ -132,10 +148,13 @@
                                             <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
                                             <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
+                                          
                                         </Trigger>
                                         <Trigger Property="IsMouseOver" Value="true">
                                             <Setter TargetName="Id" Property="Visibility" Value="Hidden"/>
+                                            <Setter TargetName="img" Property="Visibility" Value="Hidden"/>
                                             <Setter TargetName="PlayPauseBtn" Property="Visibility" Value="Visible"/>
+                                            <Setter TargetName="wrapper"  Property="Visibility" Value="Hidden"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -143,7 +162,9 @@
                         </Setter>
 
                     </Style>
+                    
                 </ListView.ItemContainerStyle>
+             
             </ListView>
 
         </Grid>
