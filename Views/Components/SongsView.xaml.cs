@@ -132,6 +132,7 @@ namespace Spotify.Views.Components
             }
             else
             {
+                template.IsSelected = true;
                 SongBottom.Ins.IsPlay = true;
                 img.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
             }

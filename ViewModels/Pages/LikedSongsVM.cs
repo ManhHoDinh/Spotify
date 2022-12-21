@@ -23,8 +23,8 @@ namespace Spotify.ViewModels.Pages
             get => _listSong;
             set { _listSong = value; }
         }
-        private string _Name;
-        public string Name
+        private string _Name = "Like Songs";
+        public string Name 
         {
             get => _Name;
             set { _Name = value; OnPropertyChanged(); }
