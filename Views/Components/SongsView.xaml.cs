@@ -1,5 +1,10 @@
-﻿using System.Windows;
+﻿using System.CodeDom;
+using System.Security.Cryptography;
+using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
@@ -11,23 +16,73 @@ namespace Spotify.Views.Components
     /// </summary>
     public partial class SongsView : UserControl
     {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == IsPlayProperty)
+            {
+                if (ListViewSong.SelectedItem != null)
+                {
+                    LikedSongsVM vm = this.DataContext as LikedSongsVM;
+                    ImageBrush img = new ImageBrush();
+                    var template = ListViewSong.ItemContainerGenerator.ContainerFromIndex(ListViewSong.SelectedIndex) as ListViewItem;
+                    Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                    Image image = template.Template.FindName("img", template) as Image;
+                    TextBlock tb = template.Template.FindName("Id", template) as TextBlock ;
+                    if (IsPlay == true)
+                    {
+                        image.Visibility = Visibility.Visible;
+                        tb.Visibility = Visibility.Hidden;
+                        img.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
+                    }
+                    else
+                    {
+                        image.Visibility = Visibility.Hidden;
+                        tb.Visibility = Visibility.Visible;
+                        img.ImageSource = (ImageSource)Application.Current.Resources["Playxs"];          
+                    }
+                    btn.Background = img;
+                }
+            }
+        }
         public SongsView()
         {
             InitializeComponent();
+         
+            Binding binding = new Binding("IsPlay");
+            binding.Source = SongBottom.Ins;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(songview, IsPlayProperty, binding);
+            //if(LikedSongsView.SelectedItem != null)
+            //{
+            //    Binding bd = new Binding("IsPlay");
+            //    binding.Source = vm.SelectedItem;
+            //    binding.Mode = BindingMode.TwoWay;
+            //    BindingOperations.SetBinding(songview, IsPlayProperty, binding);
+            //}
+          
+
         }
 
 
+
+        public bool IsPlay
+        {
+            get { return (bool)GetValue(IsPlayProperty); }
+            set { SetValue(IsPlayProperty, value); }
+        }
+        public static readonly DependencyProperty IsPlayProperty =
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
+        
         public bool IsVisibleOption
         {
             get { return (bool)GetValue(IsVisibleOptionProperty); }
             set { SetValue(IsVisibleOptionProperty, value); }
         }
-
         // Using a DependencyProperty as the backing store for IsVisibleOption.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsVisibleOptionProperty =
             DependencyProperty.Register("IsVisibleOption", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
-
-
+       
         public bool IsFavor
         {
             get { return (bool)GetValue(IsFavorProperty); }
@@ -52,6 +107,64 @@ namespace Spotify.Views.Components
             ListViewItem curItem = ((ListViewItem)ListViewSong.ContainerFromElement((Button)sender));
             curItem.IsSelected = true;
             ViewPage.Ins.CurrentView = new SongView();
+        }
+         ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
+         ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
+        private void PlayPauseSongBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ImageBrush img = new ImageBrush();
+            Button btn = sender as Button;
+            ListViewItem template = btn.TemplatedParent as ListViewItem;
+            
+            if (SongBottom.Ins.IsPlay == true)
+            {
+                if(template.IsSelected == false)
+                {
+                    template.IsSelected = true;
+                    img.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
+
+                }
+                else
+                {
+                    img.ImageSource = (ImageSource)Application.Current.Resources["Playxs"];
+                    SongBottom.Ins.IsPlay = false;
+                }
+               
+            }
+            else
+            {
+                SongBottom.Ins.IsPlay = true;
+                img.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
+            }
+           (sender as Button).Background = img;
+        }
+
+        private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            for(int i = 0; i < ListViewSong.Items.Count; i++) 
+            {
+                var template = ListViewSong.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                ImageBrush img = new ImageBrush();
+                Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                Image image = template.Template.FindName("img", template) as Image;
+                TextBlock tb = template.Template.FindName("Id", template) as TextBlock;
+                if (i != ListViewSong.SelectedIndex)
+                {
+                    img.ImageSource = Play;
+                    btn.Background = img;
+                    image.Visibility = Visibility.Hidden;
+                    tb.Visibility = Visibility.Visible;
+                }
+
+                else
+                {
+                    img.ImageSource = Pause;
+                    btn.Background = img;
+                    image.Visibility = Visibility.Visible;
+                    tb.Visibility = Visibility.Hidden;
+                }
+
+            }
         }
     }
 }

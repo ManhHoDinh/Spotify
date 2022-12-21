@@ -72,7 +72,7 @@ namespace Spotify.Views.Components
 
         // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsPlayProperty =
-            DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongBottom), new PropertyMetadata(true));
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongBottom), new PropertyMetadata(false));
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LinkSongProperty =
@@ -135,7 +135,7 @@ namespace Spotify.Views.Components
 
         // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsPlayProperty =
-            DependencyProperty.Register("IsPlay", typeof(bool), typeof(bottomComponent), new PropertyMetadata(true));
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(bottomComponent), new PropertyMetadata(false));
         private bool mediaPlayerIsPlaying = false;
         string fileName = "";
         MediaPlayer mediaPlayer = new MediaPlayer();
@@ -218,7 +218,7 @@ namespace Spotify.Views.Components
         {
             if (mediaPlayerIsPlaying == false)
             {
-                mePlayer.Play();
+                //mePlayer.Play();
                 mediaPlayerIsPlaying = true;
                 IsPlay = true;
                 ImageBrush ImgBrush = new ImageBrush();
