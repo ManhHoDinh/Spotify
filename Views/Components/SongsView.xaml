@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Margin="0 24 0 0">
-            <ListView Name="ListViewSong"   
+            <ListView x:Name="ListViewSong" 
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
                       Width="1224" 
@@ -28,12 +28,11 @@
                       BorderBrush="Transparent">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        
+                        <Setter Property="Background" Value="AntiqueWhite"/>
                         <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
-       
                                     <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
                                   
                                         <Grid >

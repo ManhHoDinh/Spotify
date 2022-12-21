@@ -79,16 +79,6 @@ namespace Spotify.Views.Pages
                 SongBottom.Ins.IsPlay = true;
                
             }
-            //if (IsPlay == true)
-            //{
-            //    ImgBrush.ImageSource = Play;
-            //    IsPlay = false;
-            //}
-            //else
-            //{
-            //    ImgBrush.ImageSource = Pause;
-            //    IsPlay = true;
-            //}
             PlayPauseGreen.Background = ImgBrush;
         }
     }
