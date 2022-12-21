@@ -8,8 +8,6 @@
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:Components="clr-namespace:Spotify.Views.Components"
              DataContext="{StaticResource homeVM}"
-             xmlns:view="clr-namespace:Spotify.Views.Pages"
-             
              >
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
@@ -143,6 +141,8 @@
             </Button>
         </ControlTemplate>
     </UserControl.Resources>
+
+
 
 
     <Grid >
@@ -304,10 +304,9 @@
                     </StackPanel>
                 </Grid>
                 <!--#endregion Content-->
-
+               
             </StackPanel>
         </ScrollViewer>
 
     </Grid>
 </UserControl>
-
