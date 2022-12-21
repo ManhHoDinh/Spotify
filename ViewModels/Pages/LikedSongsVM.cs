@@ -56,8 +56,6 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.LinkSong = LinkSong;
                     SongBottom.Ins.ImageSong = Image;
                     SongBottom.Ins.IsPlay = true;
-                    
-                  
                 }
             }
         }

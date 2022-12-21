@@ -32,7 +32,6 @@
                         <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
                         <Setter Property="Template">
                             <Setter.Value>
-                                <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
                                     <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
                                   
                                         <Grid >
