@@ -1,10 +1,12 @@
 ﻿using Spotify.Utilities;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace Spotify.Models
 {
@@ -61,11 +63,11 @@ namespace Spotify.Models
         {
             get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); }
         }
-
-
-
-
-
+        private bool _isPlay = false;
+        public bool IsPlay
+        {
+            get => _isPlay; set { _isPlay = value; OnPropertyChanged(); }
+        }
 
     }
 }

@@ -38,7 +38,7 @@ namespace Spotify.Views.Pages
                 {
                     ImageBrush ImgBrush = new ImageBrush();
                     ImgBrush.ImageSource = Play;
-                    PlayPauseGreen.Background = ImgBrush;
+                    PlayPauseGreen.Background = ImgBrush;      
                 }
                 // what is the code that would go here?
             }
@@ -77,7 +77,18 @@ namespace Spotify.Views.Pages
             {
                 ImgBrush.ImageSource = Pause;
                 SongBottom.Ins.IsPlay = true;
+               
             }
+            //if (IsPlay == true)
+            //{
+            //    ImgBrush.ImageSource = Play;
+            //    IsPlay = false;
+            //}
+            //else
+            //{
+            //    ImgBrush.ImageSource = Pause;
+            //    IsPlay = true;
+            //}
             PlayPauseGreen.Background = ImgBrush;
         }
     }

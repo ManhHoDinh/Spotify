@@ -11,7 +11,6 @@ using Spotify.Utilities;
 using System.Collections.ObjectModel;
 using Spotify.Views.Components;
 using Spotify.Models;
-using albumComponent.View;
 using System.Windows.Media;
 using System.Windows;
 
@@ -71,8 +70,13 @@ namespace Spotify.ViewModels
         }
         private void CreatePlaylist(object obj)
         {
-            ViewPage.Ins.CurrentView = new CreatePlaylist();
+            int count = ListPlaylist.Ins.CountPlaylist;
+            ViewPage.Ins.CurrentView = new CreatePlaylistVM();
+            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "" });
+            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+            ListPlaylist.Ins.CountPlaylist++;
             ChangeViewStyle("CreatePlaylist", obj);
+
         }
         private void LikedSongs(object obj)
         {
