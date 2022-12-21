@@ -80,19 +80,19 @@ namespace Spotify.ViewModels
         }
         private void LikedSongs(object obj)
         {
-            ViewPage.Ins.CurrentView = new LikedSongsView();
+            ViewPage.Ins.CurrentView = new LikedSongsVM();
             ChangeViewStyle("LikeSongs", obj);
 
         }
         private void Search(object obj)
         {
-            ViewPage.Ins.CurrentView = new Search();
+            ViewPage.Ins.CurrentView = new SearchVM();
             ChangeViewStyle("Search", obj);
 
         }
         private void YourLibrary(object obj)
         {
-            ViewPage.Ins.CurrentView = new YourLibrary();
+            ViewPage.Ins.CurrentView = new YourLibraryVM();
             ChangeViewStyle("YourLibrary", obj);
 
         }
@@ -107,7 +107,7 @@ namespace Spotify.ViewModels
             AlbumCommand = new RelayCommand(Album);
 
             // Startup Page
-            ViewPage.Ins.CurrentView = new Home();
+            ViewPage.Ins.CurrentView = new HomeVM();
         }
     }
 }

@@ -81,7 +81,7 @@
                 <Border.Background>
                     <SolidColorBrush Color="#000000" Opacity="0.1"/>
                 </Border.Background>
-                <SongItems:SongsView x:Name="ListSongItems"/>
+                <SongItems:SongsView/>
             </Border>
         </Grid>
     </ScrollViewer>

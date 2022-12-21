@@ -56,6 +56,8 @@ namespace Spotify.Views.Components
             set { SetValue(ImageSongProperty, value); }
         }
 
+       
+
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSongProperty =
             DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongBottom), new PropertyMetadata(null));
@@ -97,6 +99,8 @@ namespace Spotify.Views.Components
                     ImageBrush ImgBrush = new ImageBrush();
                     ImgBrush.ImageSource = Pause;
                     PlayPauseBtn.Background = ImgBrush;
+                  
+                  
                 }
                 else
                 {
@@ -104,7 +108,8 @@ namespace Spotify.Views.Components
                     ImageBrush ImgBrush = new ImageBrush();
                     ImgBrush.ImageSource = Play;
                     PlayPauseBtn.Background = ImgBrush;
-                    mediaPlayerIsPlaying = false;
+                    mediaPlayerIsPlaying = false;   
+
                 }
                 // what is the code that would go here?
             }
@@ -221,17 +226,10 @@ namespace Spotify.Views.Components
                 //mePlayer.Play();
                 mediaPlayerIsPlaying = true;
                 IsPlay = true;
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Pause;
-                PlayPauseBtn.Background = ImgBrush;
             }
             else
             {
                 IsPlay = false;
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Play;
-                PlayPauseBtn.Background = ImgBrush;
-                mePlayer.Pause();
                 mediaPlayerIsPlaying = false;
 
             }
