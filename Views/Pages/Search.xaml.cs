@@ -24,10 +24,8 @@ namespace Spotify.Views.Pages
         public Search()
         {
             InitializeComponent();
-
             //PreparingSearch.Visibility = Visibility.Visible;
             //BeginingSearch.Visibility = Visibility.Hidden;
-        
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -43,8 +41,7 @@ namespace Spotify.Views.Pages
                 BeginingSearch.Visibility = Visibility.Hidden;
             }
         }
+
     }
-       
-    
 }
 

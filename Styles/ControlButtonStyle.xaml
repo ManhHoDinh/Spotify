@@ -23,10 +23,21 @@
                 <Setter Property="Background" TargetName="border" Value="{StaticResource Prev }"/>
             </Trigger>
         </ControlTemplate.Triggers>
+        
     </ControlTemplate>
+    <ControlTemplate x:Key="GreenStyle" TargetType="{x:Type ButtonBase}">
+        <Border x:Name="border" Background="{TemplateBinding Background}"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Width" TargetName="border" Value="84"/>
+                <Setter Property="Height" TargetName="border" Value="84"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+  
     <!--greenHover-->
-    <ImageBrush x:Key="PauseGreen" ImageSource="{StaticResource PauseGreemHoverButton}"/>
-    <ImageBrush x:Key="PlayGreen" ImageSource="{StaticResource PlayGreemHoverButton}"/>
+    <ImageBrush x:Key="PauseGreen" ImageSource="{StaticResource PauseFill}"/>
+    <ImageBrush x:Key="PlayGreen" ImageSource="{StaticResource PlayFill}"/>
     <ControlTemplate x:Key="GreenPlayStyle" TargetType="{x:Type ButtonBase}">
         <Border x:Name="border" Background="{TemplateBinding Background}"/>
         <ControlTemplate.Triggers>
@@ -68,10 +79,11 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <!--Repeatbtn-->
+    <!--Chỉnh file ảnh-->
     <ImageBrush x:Key="RepeatHover" ImageSource="{StaticResource RepeatHoverButton}"/>
     <ImageBrush x:Key="Repeat" ImageSource="{StaticResource RepeatButton}"/>
-    <ImageBrush x:Key="RepeatS" ImageSource="{StaticResource RepeatSButton}"/>
-    <ImageBrush x:Key="RepeatOne" ImageSource="{StaticResource RepeatOneButton}"/>
+    <ImageBrush x:Key="RepeatS" ImageSource="{StaticResource RepeatButton}"/>
+    <ImageBrush x:Key="RepeatOne" ImageSource="{StaticResource RepeatButton}"/>
     <ControlTemplate x:Key="RepeatStyle" TargetType="{x:Type ButtonBase}">
         <Border x:Name="border" Background="{TemplateBinding Background}"/>
         <ControlTemplate.Triggers>

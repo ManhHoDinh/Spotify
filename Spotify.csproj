@@ -338,7 +338,7 @@
     <Resource Include="Resource\Icons\Library_Fill_S.png" />
     <Resource Include="Resource\Icons\Home_Fill_S.png" />
     <Resource Include="Resource\Icons\Search_Fill_S.png" />
-    <Resource Include="Resource\Icons\Pause_Greem Hover.png" />
+    <Resource Include="Resource\Icons\Pause_GreemHover.png" />
     <Resource Include="Resource\Icons\Play_XS.png" />
     <Resource Include="Resource\Icons\Pause_XS.png" />
     <Resource Include="Resource\Icons\bar1.png" />
