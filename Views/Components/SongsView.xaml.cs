@@ -74,6 +74,7 @@ namespace Spotify.Views.Components
         }
         public static readonly DependencyProperty IsPlayProperty =
             DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
+        
         public bool IsVisibleOption
         {
             get { return (bool)GetValue(IsVisibleOptionProperty); }
@@ -82,6 +83,7 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for IsVisibleOption.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsVisibleOptionProperty =
             DependencyProperty.Register("IsVisibleOption", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
+       
         public bool IsFavor
         {
             get { return (bool)GetValue(IsFavorProperty); }
