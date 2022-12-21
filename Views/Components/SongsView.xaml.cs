@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using Spotify.Models;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 
@@ -141,29 +142,34 @@ namespace Spotify.Views.Components
 
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            for(int i = 0; i < ListViewSong.Items.Count; i++) 
+            for (int i = 0; i < ListViewSong.Items.Count; i++)
             {
                 var template = ListViewSong.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                 ImageBrush img = new ImageBrush();
-                Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
-                Image image = template.Template.FindName("img", template) as Image;
-                TextBlock tb = template.Template.FindName("Id", template) as TextBlock;
-                if (i != ListViewSong.SelectedIndex)
+                Button btn = new Button();
+                Image image = new Image();
+                TextBlock tb = new TextBlock();
+                if (template != null)
                 {
-                    img.ImageSource = Play;
-                    btn.Background = img;
-                    image.Visibility = Visibility.Hidden;
-                    tb.Visibility = Visibility.Visible;
+                    img = new ImageBrush();
+                    btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                    image = template.Template.FindName("img", template) as Image;
+                    tb = template.Template.FindName("Id", template) as TextBlock;
+                    if (i != ListViewSong.SelectedIndex)
+                    {
+                        img.ImageSource = Play;
+                        btn.Background = img;
+                        image.Visibility = Visibility.Hidden;
+                        tb.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        img.ImageSource = Pause;
+                        btn.Background = img;
+                        image.Visibility = Visibility.Visible;
+                        tb.Visibility = Visibility.Hidden;
+                    }
                 }
-
-                else
-                {
-                    img.ImageSource = Pause;
-                    btn.Background = img;
-                    image.Visibility = Visibility.Visible;
-                    tb.Visibility = Visibility.Hidden;
-                }
-
             }
         }
     }

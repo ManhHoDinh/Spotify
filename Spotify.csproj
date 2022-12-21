@@ -68,6 +68,7 @@
     <Compile Include="ViewModels\Pages\HomeVM.cs" />
     <Compile Include="ViewModels\Pages\LikedSongsVM.cs" />
     <Compile Include="ViewModels\Pages\SearchVM.cs" />
+    <Compile Include="ViewModels\Pages\SongViewVM.cs" />
     <Compile Include="ViewModels\Pages\YourLibraryVM.cs" />
     <Compile Include="ViewModels\Songs.cs" />
     <Compile Include="Views\Components\bottomComponent.xaml.cs">

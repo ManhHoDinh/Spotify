@@ -35,7 +35,7 @@
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
                       SelectionChanged="ListViewSong_SelectionChanged"
-                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex,Mode=OneWayToSource}" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
                       ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
                       HorizontalContentAlignment="Stretch"
                        HorizontalAlignment="Stretch"
