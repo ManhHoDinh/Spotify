@@ -73,9 +73,6 @@
     <Compile Include="Views\Components\bottomComponent.xaml.cs">
       <DependentUpon>bottomComponent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Components\CreatePlaylistForm.xaml.cs">
-      <DependentUpon>CreatePlaylistForm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Components\DeleteForm.xaml.cs">
       <DependentUpon>DeleteForm.xaml</DependentUpon>
     </Compile>
@@ -217,10 +214,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Components\CreatePlaylistForm.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Components\DeleteForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -242,8 +235,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\AlbumView.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\CreatePlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -347,6 +340,10 @@
     <Resource Include="Resource\Icons\Pause_Greem Hover.png" />
     <Resource Include="Resource\Icons\Play_XS.png" />
     <Resource Include="Resource\Icons\Pause_XS.png" />
+    <Resource Include="Resource\Icons\bar1.png" />
+    <Resource Include="Resource\Icons\bar2.png" />
+    <Resource Include="Resource\Icons\bar3.png" />
+    <Resource Include="Resource\Icons\bar4.png" />
     <Content Include="Resource\Images\BenTrenTangLauImg.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

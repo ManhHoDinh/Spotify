@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Documents;
 using Spotify.Views.Components;
 using System.Windows.Data;
+using Spotify.Views.Pages;
 
 namespace Spotify.ViewModels.Pages
 {
@@ -40,7 +41,9 @@ namespace Spotify.ViewModels.Pages
                   AlbumDescription = SelectedItem.Description;
                   SongsOfAlbum = SelectedItem.SongsOfAlbum;
                   IsAlbumItemVisible = true; 
-                  IsAlbumListVisible = false; 
+                  IsAlbumListVisible = false;
+                  ViewPage.Ins.CurrentView = new AlbumView();
+
                 }
             }
         }

@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              DataContext="{StaticResource songviewVM}"
-             xmlns:component="clr-namespace:Spotify.Views.Components"
+             
              xmlns:SongItems="clr-namespace:Spotify.Views.Components">
 
     <ScrollViewer>

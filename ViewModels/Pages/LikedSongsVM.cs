@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
 using Spotify.Views.Components;
+using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Spotify.ViewModels.Pages
@@ -53,6 +55,7 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.SingerName = NameSinger;
                     SongBottom.Ins.LinkSong = LinkSong;
                     SongBottom.Ins.ImageSong = Image;
+                    SongBottom.Ins.IsPlay = true;
                 }
             }
         }
@@ -63,12 +66,12 @@ namespace Spotify.ViewModels.Pages
         public Uri LinkSong { get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); } }
         private Uri _Image;
         public Uri Image { get => _Image; set { _Image = value; OnPropertyChanged(); } }
-        private bool _IsPlay;
+        private bool _IsPlay = false;
         public bool IsPlay { get => _IsPlay; set { _IsPlay = value; OnPropertyChanged(); } }
 
         public LikedSongsVM()
         {
-
+            
             listSong = new ObservableCollection<Song>();
             listSong.Add(Songs.CamNang);
             listSong.Add(Songs.BenTrenTangLau);
