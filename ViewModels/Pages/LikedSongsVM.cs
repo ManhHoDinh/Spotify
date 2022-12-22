@@ -17,11 +17,11 @@ namespace Spotify.ViewModels.Pages
 {
     public class LikedSongsVM : BaseViewModel
     {
-        private static ObservableCollection<Song> _listSong;
-        public static ObservableCollection<Song> listSong
+        private ObservableCollection<Song> _listSong;
+        public  ObservableCollection<Song> listSong
         {
             get => _listSong;
-            set { _listSong = value; }
+            set { _listSong = value; OnPropertyChanged(); }
         }
         private string _Name = "Like Songs";
         public string Name 

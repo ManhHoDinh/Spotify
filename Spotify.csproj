@@ -89,34 +89,34 @@
     <Compile Include="Views\Components\SongsView.xaml.cs">
       <DependentUpon>SongsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\AlbumView.xaml.cs">
+    <Compile Include="Views\Components\Pages\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\CreatePlaylist.xaml.cs">
+    <Compile Include="Views\Components\Pages\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\ForgotPasswordForm.xaml.cs">
+    <Compile Include="Views\Components\Pages\ForgotPasswordForm.xaml.cs">
       <DependentUpon>ForgotPasswordForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Home.xaml.cs">
+    <Compile Include="Views\Components\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\LikedSongsView.xaml.cs">
+    <Compile Include="Views\Components\Pages\LikedSongsView.xaml.cs">
       <DependentUpon>LikedSongsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\PlayListForm.xaml.cs">
+    <Compile Include="Views\Components\Pages\PlayListForm.xaml.cs">
       <DependentUpon>PlayListForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\Search.xaml.cs">
+    <Compile Include="Views\Components\Pages\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\SignInForm.xaml.cs">
+    <Compile Include="Views\Components\Pages\SignInForm.xaml.cs">
       <DependentUpon>SignInForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\SongView.xaml.cs">
+    <Compile Include="Views\Components\Pages\SongView.xaml.cs">
       <DependentUpon>SongView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\YourLibrary.xaml.cs">
+    <Compile Include="Views\Components\Pages\YourLibrary.xaml.cs">
       <DependentUpon>YourLibrary.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -235,43 +235,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\AlbumView.xaml">
+    <Page Include="Views\Components\Pages\AlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\CreatePlaylist.xaml">
+    <Page Include="Views\Components\Pages\CreatePlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\ForgotPasswordForm.xaml">
+    <Page Include="Views\Components\Pages\ForgotPasswordForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\Home.xaml">
+    <Page Include="Views\Components\Pages\Home.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\LikedSongsView.xaml">
+    <Page Include="Views\Components\Pages\LikedSongsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\PlayListForm.xaml">
+    <Page Include="Views\Components\Pages\PlayListForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\Search.xaml">
+    <Page Include="Views\Components\Pages\Search.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\SignInForm.xaml">
+    <Page Include="Views\Components\Pages\SignInForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\SongView.xaml">
+    <Page Include="Views\Components\Pages\SongView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\YourLibrary.xaml">
+    <Page Include="Views\Components\Pages\YourLibrary.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -326,11 +326,13 @@
     <Resource Include="Resource\Icons\NextPage.png" />
     <Resource Include="Resource\Icons\Play_GreemHover.png" />
     <Resource Include="Resource\Icons\Search.png" />
+    <Resource Include="..\..\Close_S.png">
+      <Link>Resource\Icons\Close_S.png</Link>
+    </Resource>
     <Content Include=".gitattributes" />
     <Content Include=".gitignore" />
     <Resource Include="Resource\Album\ThoaMaiGacChanLen.jpg" />
     <Resource Include="Resource\Icons\Close.png" />
-    <Resource Include="Resource\Icons\Edit.png" />
     <Resource Include="Resource\Icons\Option.png" />
     <Resource Include="Resource\Icons\SongIcon.png" />
     <Resource Include="Resource\Icons\Home_S.png" />
@@ -345,6 +347,8 @@
     <Resource Include="Resource\Icons\bar2.png" />
     <Resource Include="Resource\Icons\bar3.png" />
     <Resource Include="Resource\Icons\bar4.png" />
+    <Resource Include="Resource\Icons\Options_XS.png" />
+    <Resource Include="Resource\Images\backgroundSong.png" />
     <Content Include="Resource\Images\BenTrenTangLauImg.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -383,6 +387,7 @@
     <Resource Include="Resource\Images\Volume_Min_Hover.png" />
     <Resource Include="Resource\Images\untitled.png" />
     <Resource Include="Resource\Images\spotifyLogo.png" />
+    <Resource Include="Resource\Images\Edit.png" />
     <Content Include="Resource\Songs\01 bao tiền một mớ bình yên.mp3" />
     <Content Include="Resource\Songs\01 Buồn Thì Cứ Khóc Đi.mp3" />
     <Content Include="Resource\Songs\01 Bất Bình Thường.mp3" />
@@ -438,7 +443,7 @@
     <Resource Include="ViewModels\Pages\PagesViewModelGiude.txt" />
     <Resource Include="ViewModels\ViewModelGiude.txt" />
     <Resource Include="Views\Components\ComponentsViewGiude.txt" />
-    <Resource Include="Views\Pages\PagessViewGiude.txt" />
+    <Resource Include="Views\Components\Pages\PagessViewGiude.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -154,7 +154,7 @@
             <Components:Header UserName="Manh dz"></Components:Header>
         </Grid>
         <ScrollViewer Grid.Row="1">
-            <StackPanel  Background="{StaticResource HomeColor}">
+            <StackPanel  Background="#121212">
 
 
                 <!--Content-->
@@ -297,7 +297,7 @@
 
                             </Grid>
                         </Grid>
-                        <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                        <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding TopMix}" ></ListView>
                         <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
                         <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
                         <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>

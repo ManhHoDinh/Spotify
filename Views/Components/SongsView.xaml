@@ -16,157 +16,163 @@
         </ControlTemplate>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
-    <ScrollViewer>
-        <Grid Margin="0 24 0 0">
-            <ListView Name="ListViewSong"   
+    <UserControl.Template>
+        <ControlTemplate>
+            <ScrollViewer>
+                <Grid Margin="0 24 0 0">
+                    <ListView Name="PART_Header"   
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
                       Width="1224" 
-                    
                       SelectionChanged="ListViewSong_SelectionChanged"
-                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
-                      ItemsSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
+                      SelectedItem="{Binding SelectedSong,ElementName=songview,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                      ItemsSource="{Binding ItemSource,ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
                       BorderBrush="Transparent">
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        
-                        <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
-                                    <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
-                                  
-                                        <Grid >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="475"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="300"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Grid Name="wrapper">
-                                                <Image Grid.Column="0"
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+
+                                <!--<Setter Property="IsSelected" Value="{Binding IsCurrent}" />-->
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
+                                            <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
+
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="50"/>
+                                                        <ColumnDefinition Width="475"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="300"/>
+                                                        <ColumnDefinition Width="auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid Name="wrapper">
+                                                        <Image Grid.Column="0"
                                                    Width="16"
                                                    Height="16" 
                                                    Name="img"
                                                    Visibility="Hidden"
                                                    Source="{StaticResource Bar1  }">
-                                                    <Image.Triggers>
-                                                        <EventTrigger RoutedEvent="Loaded">
-                                                            <BeginStoryboard>
-                                                                <Storyboard RepeatBehavior="Forever">
-                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Source"
+                                                            <Image.Triggers>
+                                                                <EventTrigger RoutedEvent="Loaded">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard RepeatBehavior="Forever">
+                                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Source"
                                                                  Duration="0:0:0.4">
-                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{StaticResource Bar2}"/>
-                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{StaticResource Bar3}"/>
-                                                                        <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{StaticResource Bar4}"/>
-                                                                    </ObjectAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger>
-                                                    </Image.Triggers>
-                                                </Image>
-                                                <TextBlock Grid.Column="0" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                            </Grid>
-                                            <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" Click="PlayPauseSongBtn_Click">
-                                                <Button.Template>
-                                                    <ControlTemplate>
-                                                        <Border Background="{TemplateBinding Background}"/>
-                                                    </ControlTemplate>
-                                                </Button.Template>
-                                                <Button.Background>
-                                                    <ImageBrush ImageSource="{StaticResource Playxs}"/>
-                                                </Button.Background>
-                                               
-                                            </Button>
-
-                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
-                                                <Image Width="40" Source="{Binding Image}" Margin="0 0 20 0"/>
-                                                <StackPanel Orientation="Vertical">
-                                                    <Button Name="NameSong"  Click="NameSong_Click" Foreground="#ffffff">
+                                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.1" Value="{StaticResource Bar2}"/>
+                                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{StaticResource Bar3}"/>
+                                                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{StaticResource Bar4}"/>
+                                                                            </ObjectAnimationUsingKeyFrames>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                            </Image.Triggers>
+                                                        </Image>
+                                                        <TextBlock Grid.Column="0" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Grid>
+                                                    <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" Click="PlayPauseSongBtn_Click">
                                                         <Button.Template>
                                                             <ControlTemplate>
-                                                                <TextBlock  Text="{Binding Name}" Foreground="{TemplateBinding Foreground}">
-                                                                    <TextBlock.Style>
-                                                                        <Style TargetType="TextBlock">
-
-                                                                            <Setter Property="FontSize" Value="16"/>
-                                                                            <Style.Triggers>
-                                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                                    <Setter Property="TextDecorations" Value="Underline"/>
-                                                                                    <Setter Property="Cursor" Value="Hand"/>
-                                                                                    <Setter Property="FontWeight" Value="Bold"/>
-                                                                                    
-                                                                                </Trigger>
-
-                                                                            </Style.Triggers>
-                                                                        </Style>
-                                                                    </TextBlock.Style>
-                                                                </TextBlock>
-
+                                                                <Border Background="{TemplateBinding Background}"/>
                                                             </ControlTemplate>
                                                         </Button.Template>
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="{StaticResource Playxs}"/>
+                                                        </Button.Background>
+
                                                     </Button>
-                                                    <TextBlock Name="NameSinger" Text="{Binding NameSinger}" Foreground="#b3b3b3" FontSize="14"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <TextBlock Grid.Column="2" Text="Play it sale" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
 
-                                            <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click" Margin="30 0 0 0" Template="{DynamicResource HeartStyle}" Width="16" Height="16">
-                                                <Button.Background>
-                                                    <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
-                                                </Button.Background>
-                                            </Button>
+                                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
+                                                        <Image Width="40" Source="{Binding Image}" Margin="0 0 20 0"/>
+                                                        <StackPanel Orientation="Vertical">
+                                                            <Button Name="NameSong"  Click="NameSong_Click" Foreground="#ffffff">
+                                                                <Button.Template>
+                                                                    <ControlTemplate>
+                                                                        <TextBlock  Text="{Binding Name}" Foreground="{TemplateBinding Foreground}">
+                                                                            <TextBlock.Style>
+                                                                                <Style TargetType="TextBlock">
 
-                                            <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        </Grid>
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="Transparent"/>
-                                                <Style.Triggers>
-                                                    <Trigger Property="Border.IsMouseOver" Value="True">
-                                                        <Setter Property="Border.Background">
-                                                            <Setter.Value>
-                                                                <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
-                                                            </Setter.Value>
-                                                        </Setter>
-                                                       
+                                                                                    <Setter Property="FontSize" Value="16"/>
+                                                                                    <Style.Triggers>
+                                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                                            <Setter Property="TextDecorations" Value="Underline"/>
+                                                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                                                            <Setter Property="FontWeight" Value="Bold"/>
 
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
+                                                                                        </Trigger>
 
-                                        <Trigger Property="IsSelected" Value="true">
-                                            <Setter TargetName="_border" Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Color="#5a5a5a" Opacity="0.4"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
-                                            <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
-                                            <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
-                                          
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter TargetName="Id" Property="Visibility" Value="Hidden"/>
-                                            <Setter TargetName="img" Property="Visibility" Value="Hidden"/>
-                                            <Setter TargetName="PlayPauseBtn" Property="Visibility" Value="Visible"/>
-                                            <Setter TargetName="wrapper"  Property="Visibility" Value="Hidden"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
+                                                                                    </Style.Triggers>
+                                                                                </Style>
+                                                                            </TextBlock.Style>
+                                                                        </TextBlock>
 
-                    </Style>
-                    
-                </ListView.ItemContainerStyle>
-             
-            </ListView>
+                                                                    </ControlTemplate>
+                                                                </Button.Template>
+                                                            </Button>
+                                                            <TextBlock Name="NameSinger" Text="{Binding Name}" Foreground="#b3b3b3" FontSize="14"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="2" Text="Play it sale" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center"/>
 
-        </Grid>
-    </ScrollViewer>
+                                                    <Button Name="heartBtn" Visibility="Hidden" Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click" Margin="30 0 0 0" Template="{DynamicResource HeartStyle}" Width="16" Height="16">
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
+                                                        </Button.Background>
+                                                    </Button>
+
+                                                    <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Grid>
+                                                <Border.Style>
+                                                    <Style TargetType="Border">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                                                <Setter Property="Border.Background">
+                                                                    <Setter.Value>
+                                                                        <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
+                                                                    </Setter.Value>
+                                                                </Setter>
+
+
+
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Border.Style>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+
+                                                <Trigger Property="IsSelected" Value="true">
+                                                    <Setter TargetName="_border" Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Color="#5a5a5a" Opacity="0.4"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter TargetName="NameSong" Property="Foreground" Value="#65d36e"/>
+                                                    <Setter TargetName="Id" Property="Foreground" Value="#65d36e"/>
+                                                    <Setter TargetName="NameSinger" Property="Foreground" Value="#ffffff"/>
+
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter TargetName="Id" Property="Visibility" Value="Hidden"/>
+                                                    <Setter TargetName="img" Property="Visibility" Value="Hidden"/>
+                                                    <Setter TargetName="PlayPauseBtn" Property="Visibility" Value="Visible"/>
+                                                    <Setter TargetName="wrapper"  Property="Visibility" Value="Hidden"/>
+                                                    <Setter TargetName="heartBtn" Property="Visibility" Value="Visible"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                            </Style>
+
+                        </ListView.ItemContainerStyle>
+
+                    </ListView>
+
+                </Grid>
+            </ScrollViewer>
+        </ControlTemplate>
+    </UserControl.Template>
+   
 </UserControl>

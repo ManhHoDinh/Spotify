@@ -60,6 +60,7 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.SongName = SelectedSongItem.Name;
                     SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
                     SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
+                    SongBottom.Ins.ImageSong = SelectedSongItem.Image;
                 }
             }
         }
@@ -86,7 +87,10 @@ namespace Spotify.ViewModels.Pages
             RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
             RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
             TopMix = new ObservableCollection<Album>();
-            TopMix.Add(new Album { Name = "chill", Description = "chillllll" });
+            TopMix.Add(new Album { Name = "chill", Description = "chillllll",
+                SongsOfAlbum = new ObservableCollection<Song>() { 
+                    Songs.DauMua, Songs.CamNang, Songs.BenTrenTangLau
+                } });
             TopMix.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
             TopMix.Add(new Album { Name = "Say nắng", Description = "Suni Hạ Linh" });
             TopMix.Add(new Album { Name = "Có chắc yêu là đây", Description = "Sơn Tùng MTP" });

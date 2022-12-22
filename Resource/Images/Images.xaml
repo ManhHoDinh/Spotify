@@ -27,4 +27,6 @@
     <ImageSource x:Key="VolumeMinButton">Volume_min.png</ImageSource>
     <ImageSource x:Key="VolumeMinHoverButton">Volume_Min_Hover.png</ImageSource>
     <ImageSource x:Key="spotifyLoginLogo">spotifyLogo.png</ImageSource>
+    <ImageSource x:Key="SongBackground">backgroundSong.png</ImageSource>
+    <ImageSource x:Key="EditBtn">Edit.png</ImageSource>
 </ResourceDictionary>

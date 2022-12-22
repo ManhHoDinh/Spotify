@@ -76,7 +76,7 @@
                 <Border.Background>
                     <SolidColorBrush Color="#000000" Opacity="0.1"/>
                 </Border.Background>
-                <SongItems:SongsView/>
+                <SongItems:SongsView ItemSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedSong="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </Grid>
         <!--<Grid>

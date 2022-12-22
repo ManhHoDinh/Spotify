@@ -346,47 +346,47 @@ namespace Spotify.Views.Components
 
         private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-            LikedSongsVM a = this.DataContext as LikedSongsVM;
-            if (a != null)
-            {
+        //    LikedSongsVM a = this.DataContext as LikedSongsVM;
+        //    if (a != null)
+        //    {
 
-                int index = a.SelectedItem.ID;
-                if (RepeatState == "RepeatOne")
-                {
-                    mePlayer.Position = TimeSpan.Zero;
-                    playing.Content = mePlayer.Position.ToString(@"mm\:ss");
-                }
+        //        int index = a.SelectedItem.ID;
+        //        if (RepeatState == "RepeatOne")
+        //        {
+        //            mePlayer.Position = TimeSpan.Zero;
+        //            playing.Content = mePlayer.Position.ToString(@"mm\:ss");
+        //        }
 
-                else
-                {
-                    if (!IsShuffle)
-                    {
-                        {
-                            if (index < LikedSongsVM.listSong.Count) a.SelectedItem = LikedSongsVM.listSong[index];
-                            else
-                            {
-                                a.SelectedItem = LikedSongsVM.listSong[0];
-                                if (RepeatState == "None")
-                                {
-                                    mePlayer.Pause();
-                                    ImageBrush img = new ImageBrush();
-                                    img.ImageSource = Play;
-                                    PlayPauseBtn.Background = img;
-                                }
+        //        else
+        //        {
+        //            if (!IsShuffle)
+        //            {
+        //                {
+        //                    if (index < LikedSongsVM.listSong.Count) a.SelectedItem = LikedSongsVM.listSong[index];
+        //                    else
+        //                    {
+        //                        a.SelectedItem = LikedSongsVM.listSong[0];
+        //                        if (RepeatState == "None")
+        //                        {
+        //                            mePlayer.Pause();
+        //                            ImageBrush img = new ImageBrush();
+        //                            img.ImageSource = Play;
+        //                            PlayPauseBtn.Background = img;
+        //                        }
 
 
-                            }
-                        }
-                    }
-                    else
-                    {
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
 
-                        Random rdm = new Random();
-                        int x = rdm.Next(0, LikedSongsVM.listSong.Count);
-                        a.SelectedItem = LikedSongsVM.listSong[index];
-                    }
-                }
-            }
+        //                Random rdm = new Random();
+        //                int x = rdm.Next(0, LikedSongsVM.listSong.Count);
+        //                a.SelectedItem = LikedSongsVM.listSong[index];
+        //            }
+        //        }
+        //    }
         }
 
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
