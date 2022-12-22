@@ -167,20 +167,20 @@
                                             <Components:RecommendAlbum  Background="Transparent" Height="64" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
                                         </Button>
 
-                                    </Grid>
-
                                 </Grid>
-                            </Grid>
-                            <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
-                            <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
-                            <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
-                            <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
-                        </StackPanel>
-                    </Grid>
-                    <!--#endregion Content-->
 
-                </StackPanel>
-            </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                        <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
+                        <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
+                        <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                        <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                    </StackPanel>
+                </Grid>
+                <!--#endregion Content-->
+
+            </StackPanel>
+        </ScrollViewer>
 
         </Grid>
     </Grid>
