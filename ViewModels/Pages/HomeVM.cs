@@ -43,7 +43,6 @@ namespace Spotify.ViewModels.Pages
                   IsAlbumItemVisible = true; 
                   IsAlbumListVisible = false;
                   ViewPage.Ins.CurrentView = new AlbumView();
-
                 }
             }
         }

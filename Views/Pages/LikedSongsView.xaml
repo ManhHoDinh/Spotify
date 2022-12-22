@@ -7,8 +7,7 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="1900" d:DesignWidth="800"
-             DataContext="{StaticResource songviewVM}"
-             
+             DataContext="{StaticResource likedsongsVM}" 
              xmlns:SongItems="clr-namespace:Spotify.Views.Components">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
@@ -25,7 +24,7 @@
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition  Height="340"/>
-                <RowDefinition  Height="140"/>
+                <RowDefinition  Height="104"/>
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
@@ -52,13 +51,13 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Grid.Row="1">
+            <Border Grid.Row="1" Height="104">
                 <Border.Background>
                     <SolidColorBrush Color="#000000" Opacity="0.1"/>
                 </Border.Background>
-                <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#b3b3b3">
+                <Border Margin="0 0 32 0">
                     <StackPanel Orientation="Vertical">
-                        <Button x:Name="PlayPauseGreen" Template="{DynamicResource GreenPlayStyle}" Click="PlayPauseGreen_Click" Margin="32 10 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80">
+                        <Button x:Name="PlayPauseGreen" Template="{DynamicResource GreenPlayStyle}" Click="PlayPauseGreen_Click" Margin="16 12 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Padding="0" Height="80">
                             <Button.Background>
                                 <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                             </Button.Background>
@@ -66,8 +65,9 @@
                     </StackPanel>
                 </Border>
             </Border>
-      <SongItems:SongsView x:Name="ListSongItems" Grid.Row="2"/>
-           
+            <Grid  Grid.Row="2">
+                <SongItems:SongsView></SongItems:SongsView>
+            </Grid>
         </Grid>
     </ScrollViewer>
 </UserControl>
