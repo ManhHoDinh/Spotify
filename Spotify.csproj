@@ -313,6 +313,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\Album\DreAMEE\DreAMEE.jpg" />
     <Content Include="Resource\Spotify.sql" />
     <Resource Include="Resource\Songs\DauMua\DauMua.jpg" />
     <Resource Include="Resource\Album\HuongMuaHeEP.01\HuongMuaHeEP.01.jpg" />

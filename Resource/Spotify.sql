@@ -112,6 +112,19 @@ insert into Album values (N'Hương Mùa Hè EP.01', null , N'pack://siteoforigi
 insert into Album values (N'Trinh Acoustic', null , N'pack://siteoforigin:,,,/Resource/Album/TrinhAcoustic/TrinhAcoustic.jpg', N'blue')
 insert into Album values (N'Những Bài Hát Bất Hủ Thập Niên 8x 9x Của Anh Khanh (Vol.2)', null , N'pack://siteoforigin:,,,/Resource/Album/NhungBaiHatBatHuCuaAnhKhang(Vol2)/NhungBaiHatBatHuCuaAnhKhang(Vol2).jpg', N'dark blue')
 insert into Album values (N'Hương Mùa Hè EP.02', null , N'pack://siteoforigin:,,,/Resource/Album/HuongMuaHeEP.02/HuongMuaHeEP.02.jpg', N'light gray')
+insert into Album values (N'DreAMEE', null, N'pack://siteoforigin:,,,/Resource/Album/DreAMEE/DreAMEE.jpg', N'light pink')
+
+
+insert into AlbumAndSongRelation values (1,9)
+insert into AlbumAndSongRelation values (1, 17)
+insert into AlbumAndSongRelation values (1, 40)
+insert into AlbumAndSongRelation values (6, 25)
+insert into AlbumAndSongRelation values (6, 39)
+insert into AlbumAndSongRelation values (4, 27)
+insert into AlbumAndSongRelation values (3, 37)
+insert into AlbumAndSongRelation values (2, 22)
+insert into AlbumAndSongRelation values (2, 36)
+insert into AlbumAndSongRelation values (5, 31)
 
 
 
