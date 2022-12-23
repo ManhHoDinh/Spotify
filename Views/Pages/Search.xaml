@@ -21,14 +21,17 @@
         <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
 
         </Grid>
-        <ListView  x:Name="BeginingSearch"  Margin="0 60 0 0" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent">
+        <ListView  x:Name="BeginingSearch"  Margin="0 60 0 0" 
+                   Template="{StaticResource NonScrollableListView}"                    
+                   ItemsSource="{Binding SongSourceCollection}"
+                   Background="Transparent" BorderBrush="Transparent">
             <!--Text Index-->
             <ListView.Resources>
                 <vm:OrdinalConverter x:Key="OrdinalConverter" />
             </ListView.Resources>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="AntiqueWhite"/>
+                   
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
