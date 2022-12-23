@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="959" Background="#121212">
+             d:DesignHeight="450" d:DesignWidth="959" Background="#181818">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
