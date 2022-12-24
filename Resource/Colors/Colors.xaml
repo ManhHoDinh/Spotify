@@ -2,17 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="ExampleColor" Color="Yellow"></SolidColorBrush>
     <LinearGradientBrush 
-    x:Key="DefaultHomeColor" 
-    EndPoint="0,1" 
-    StartPoint="0,0">
-        <GradientStop Color="#98b8d8" Offset="0"/>
-        <GradientStop Color="#000" Offset="1"/>
-    </LinearGradientBrush>
-    <LinearGradientBrush 
     x:Key="HomeColor" 
     EndPoint="0,1" 
     StartPoint="0,0">
-        <GradientStop Color="#b06058" Offset="0"/>
-        <GradientStop Color="#000" Offset="1"/>
+        <GradientStop Color="#3333A3" Offset="0"/>
+        <GradientStop Color="#121212" Offset="1"/>
     </LinearGradientBrush>
 </ResourceDictionary>

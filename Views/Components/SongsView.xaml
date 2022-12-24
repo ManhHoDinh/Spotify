@@ -65,8 +65,8 @@
                                                    Width="16"
                                                    Height="16" 
                                                    Name="img"
-                                                   Margin="29 0 0 0"
-                                                   HorizontalAlignment="Left"
+                                                      
+                                                 HorizontalAlignment="Left"
                                                    Visibility="Hidden"
                                                    Source="{StaticResource Bar1  }">
                                                             <Image.Triggers>
