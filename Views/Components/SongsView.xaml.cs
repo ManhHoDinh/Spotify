@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 
@@ -95,6 +96,8 @@ namespace Spotify.Views.Components
             get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
         }
+        private CollectionViewSource SongItemsCollection;
+        public ICollectionView SongSourceCollection => SongItemsCollection.View;
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSourceProperty =
@@ -116,6 +119,8 @@ namespace Spotify.Views.Components
 
 
 
+        // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
+        
 
         public bool IsPlay
         {
