@@ -1,4 +1,4 @@
-﻿using System.CodeDom;
+using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Windows;
@@ -8,7 +8,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
-using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 
@@ -62,17 +61,11 @@ namespace Spotify.Views.Components
         public SongsView()
         {
             InitializeComponent();
-            Ins = new SongsView();
+         
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            songs.Add(Songs.CamNang);
-            songs.Add(Songs.BenTrenTangLau);
-            songs.Add(Songs.DauMua);
-            SongItemsCollection = new CollectionViewSource { Source = songs };
             BindingOperations.SetBinding(songview, IsPlayProperty, binding);
-           
             //if(LikedSongsView.SelectedItem != null)
             //{
             //    Binding bd = new Binding("IsPlay");
@@ -80,12 +73,9 @@ namespace Spotify.Views.Components
             //    binding.Mode = BindingMode.TwoWay;
             //    BindingOperations.SetBinding(songview, IsPlayProperty, binding);
             //}
-        }
-        private CollectionViewSource SongItemsCollection;
-        public ICollectionView SongSourceCollection => SongItemsCollection.View;
+          
 
-        public static SongsView Ins;
-        public ObservableCollection<Song> songs;
+        }
 
         // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
         
@@ -96,8 +86,6 @@ namespace Spotify.Views.Components
             get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
         }
-        private CollectionViewSource SongItemsCollection;
-        public ICollectionView SongSourceCollection => SongItemsCollection.View;
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSourceProperty =
@@ -119,8 +107,6 @@ namespace Spotify.Views.Components
 
 
 
-        // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
-        
 
         public bool IsPlay
         {
