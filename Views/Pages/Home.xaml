@@ -112,46 +112,37 @@
                             <Grid Margin="16 24 16 0">
                                 <!--Header-->
 
-                                <TextBlock FontSize="32" Foreground="#fff" FontFamily="{StaticResource CircularStdBlack}" FontWeight="Bold" LineHeight="49.33">Good afternoon</TextBlock>
-                                <Grid Height="250" Margin="0 48 0 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                                        <ColumnDefinition Width="*" ></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0" Margin="0 0 15 0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Button Command="{Binding LikeSongViewCommand}" Background="#000" Margin="0 8 0 0" Grid.Row="0" Height="64"  Grid.Column="0" Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum Background="Transparent" Height="64"  ImgSource="{StaticResource LikedSongsIcon}" Text="Like Songs"></Components:RecommendAlbum>
-                                            <!--<Button.Style>
-                                                <Style TargetType="{x:Type Button}">
-                                                    <Style.Triggers>
-                                                        <Trigger Property="IsMouseOver" Value="true">
-                                                            <Setter Property="Background" Value="{StaticResource HomeColor}"></Setter>
-                                                        </Trigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Button.Style>-->
-                                        </Button>
-                                        <Button Background="Transparent" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum  Background="Transparent" Height="64" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
-                                        </Button>
-                                    </Grid>
-                                    <Grid Grid.Column="1" Margin="0 0 15 0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <Button Background="Transparent" Margin="0 8 0 0" Grid.Row="0" Height="64" Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum  Background="Transparent" Height="64"   ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
-                                        </Button>
-                                        <Button Background="Transparent" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
-                                        </Button>
-                                    </Grid>
+                            <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33">Good Afternoon</TextBlock>
+                            <Grid Height="180" Margin="32 68 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Margin="0 0 15 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Button Command="{Binding NavigationVM.LikeSongViewCommand}" Background="#302842" Margin="0 8 0 0" Grid.Row="0" Height="64" Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum Background="Transparent" Height="64"  ImgSource="{StaticResource LikedSongsIcon}" Text="Like Songs"></Components:RecommendAlbum>
+                                    </Button>
+                                    <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64"  Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    </Button>
+                                </Grid>
+                                <Grid Grid.Column="1" Margin="0 0 15 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Button Background="#302842" Margin="0 8 0 0" Grid.Row="0" Height="64" Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    </Button>
+                                    <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    </Button>
+                                </Grid>
 
                                     <Grid Grid.Column="2" Margin="0 0 15 0">
                                         <Grid.RowDefinitions>
@@ -160,12 +151,13 @@
                                         </Grid.RowDefinitions>
 
 
-                                        <Button Background="#302842" Margin="0 8 0 0" Grid.Row="0" Height="64"  Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum  Background="Transparent" Height="64"   ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
-                                        </Button>
-                                        <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
-                                            <Components:RecommendAlbum  Background="Transparent" Height="64" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
-                                        </Button>
+                                    <Button Background="#302842" Margin="0 8 0 0" Grid.Row="0" Height="64" Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    </Button>
+                                    <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
+                                        <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
+                                    </Button>
+
                                     </Grid>
                                 </Grid>
                             </Grid>
@@ -180,6 +172,6 @@
                 </StackPanel>
             </ScrollViewer>
 
-        </Grid>
+           </Grid>
     </Grid>
 </UserControl>
