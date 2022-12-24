@@ -20,7 +20,7 @@
     <!--<ImageSource x:Key="CloseBtn">./Close_S.png</ImageSource>-->
     <ImageSource x:Key="OptionBtn">./Options_XS.png</ImageSource>
     <ImageSource x:Key="OptionHoverBtn">./Option.png</ImageSource>
-    <ImageSource x:Key="PauseFill">./Pause_Greem Hover.png</ImageSource>
+    <ImageSource x:Key="PauseFill">./Pause_GreemHover.png</ImageSource>
     <ImageSource x:Key="Playxs">./Play_XS.png</ImageSource>
     <ImageSource x:Key="Pausexs">./Pause_XS.png</ImageSource>
     <ImageSource x:Key="Bar1">./bar1.png</ImageSource>
