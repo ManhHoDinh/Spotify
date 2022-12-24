@@ -1,4 +1,4 @@
-﻿using System.CodeDom;
+using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Security.Cryptography;
@@ -9,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
-using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 
@@ -63,17 +62,11 @@ namespace Spotify.Views.Components
         public SongsView()
         {
             InitializeComponent();
-           
+         
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            songs.Add(Songs.CamNang);
-            songs.Add(Songs.BenTrenTangLau);
-            songs.Add(Songs.DauMua);
-           
             BindingOperations.SetBinding(songview, IsPlayProperty, binding);
-           
             //if(LikedSongsView.SelectedItem != null)
             //{
             //    Binding bd = new Binding("IsPlay");
@@ -81,8 +74,10 @@ namespace Spotify.Views.Components
             //    binding.Mode = BindingMode.TwoWay;
             //    BindingOperations.SetBinding(songview, IsPlayProperty, binding);
             //}
+          
+
         }
-       
+
         // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
         
 
@@ -92,7 +87,6 @@ namespace Spotify.Views.Components
             get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
         }
-
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSourceProperty =
@@ -114,8 +108,6 @@ namespace Spotify.Views.Components
 
 
 
-        // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
-        
 
         public bool IsPlay
         {

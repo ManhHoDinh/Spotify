@@ -30,7 +30,7 @@
         <Button x:Name="BackButton" 
                 Click="BackButton_Click" 
                 BorderThickness="0" 
-                Margin="16 20 0 0"
+                Margin="41 20 0 0"
                 Template="{StaticResource BaseHeaderButton}" 
                 Tag="{StaticResource BackButton}"/>
         <Button x:Name="NextButton" 
