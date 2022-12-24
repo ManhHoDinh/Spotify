@@ -71,11 +71,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" >
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                         <Button x:Name="BackButton" 
                                 Cursor="Hand"
                 BorderThickness="0" 
-                Margin="16 20 0 0"
+                Margin="41 20 0 0"
                 Template="{StaticResource BaseHeaderButton}" 
                 Tag="{StaticResource BackButton}"/>
                 <Button x:Name="NextButton" 
