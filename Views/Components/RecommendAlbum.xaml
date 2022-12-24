@@ -5,33 +5,41 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="24"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+             d:DesignHeight="64" d:DesignWidth="390">
+    <Border CornerRadius="8" Height="64" Width="390">
+        <Grid Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="64"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Source="{Binding ImgSource}" Grid.Column="0"></Image>
+            <TextBlock 
+            Margin="20 0 0 0"
+            FontSize="14"
+            FontWeight="Bold"
+            Foreground="#ffffff"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center" 
+            Text="{Binding Text}" />
+            <Image Source="{Binding IconSource}" Grid.Column="0"></Image>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding NavigateText}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="TextBlock.FontFamily" Value="{StaticResource CircularStdBlack}"></Setter>
+                        <Setter Property="TextBlock.FontSize" Value="14"></Setter>
+                        <Setter Property="TextBlock.FontWeight" Value="Bold"></Setter>
+                        <Setter Property="TextBlock.Foreground" Value="#ffffff"></Setter>
+                        <Setter Property="TextBlock.Margin" Value="16 6.5 0 0"></Setter>
+                        <Style.Triggers>
+                            <Trigger Property="Button.IsMouseOver" Value="true">
+                                <Setter Property="TextBlock.Foreground" Value="#fff"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
 
-        </Grid.ColumnDefinitions>
-        <Image Source="{Binding ImgSource}" Grid.Column="0"></Image>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding Text}"/>
-        <Image Source="{Binding IconSource}" Grid.Column="0"></Image>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Center" Text="{Binding NavigateText}">
-            <TextBlock.Style>
-                <Style>
-                    <Setter Property="TextBlock.FontFamily" Value="{StaticResource CircularStdBlack}"></Setter>
-                    <Setter Property="TextBlock.FontSize" Value="14"></Setter>
-                    <Setter Property="TextBlock.FontWeight" Value="Medium"></Setter>
-                    <Setter Property="TextBlock.Foreground" Value="#B3B3B3"></Setter>
-                    <Setter Property="TextBlock.Margin" Value="16 6.5 0 0"></Setter>
-                    <Style.Triggers>
-                        <Trigger Property="Button.IsMouseOver" Value="true">
-                            <Setter Property="TextBlock.Foreground" Value="#fff"></Setter>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-
-            </TextBlock.Style>
-        </TextBlock>
-    </Grid>
-
+                </TextBlock.Style>
+            </TextBlock>
+        </Grid>
+    </Border>
 </UserControl>
