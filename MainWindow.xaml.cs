@@ -61,6 +61,9 @@ namespace Spotify
             //LoadSideBar.ColumnDefinitions.RemoveAt(1);
         }
 
-        
+        private void bottomComponent_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -12,6 +12,10 @@ using System.Windows;
 using Spotify.Views.Pages;
 using System.Windows.Data;
 using System.ComponentModel;
+using Microsoft.Win32;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 
 namespace Spotify.ViewModels.Pages
 {
@@ -25,9 +29,9 @@ namespace Spotify.ViewModels.Pages
         public ICommand OpenFormDeleteCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        //public ICommand LoadImageCommand { get; set; }
+        public ICommand LoadImageCommand { get; set; }
 
-        private string _namePlaylist = "Playlist";
+        private string _namePlaylist = "My playlist #1";
         public string NamePlaylist { get => _namePlaylist; set { _namePlaylist = value; OnPropertyChanged(); } }
         private string _descriptionPlaylist = "";
         public string DescriptionPlaylist { get => _descriptionPlaylist; set { _descriptionPlaylist = value; OnPropertyChanged(); } }
@@ -125,23 +129,21 @@ namespace Spotify.ViewModels.Pages
 
       });
 
-            //LoadImageCommand = new RelayCommand<object>(
-            //  (p) =>
-            //  {
-            //      return true;
-            //  }, (p) =>
-            //  {
-            //      PlayListForm form = new PlayListForm();
-            //      OpenFileDialog filedialog = new OpenFileDialog();
-            //      if (filedialog.ShowDialog() == true)
-            //      {
-
-            //          PathImage = new BitmapImage(new Uri(@filedialog.FileName,UriKind.Relative));
-            //      }
-            //      {
-
-            //      }
-            //  });
+            LoadImageCommand = new RelayCommand<object>(
+              (p) =>
+              {
+                  return true;
+              }, (p) =>
+              {
+                  PlayListForm form = new PlayListForm();
+                  OpenFileDialog filedialog = new OpenFileDialog();
+                  if (filedialog.ShowDialog() == true)
+                  {
+                      ImageBrush img = new ImageBrush();
+                      img.ImageSource = new BitmapImage(new Uri(filedialog.FileName, UriKind.Absolute)); 
+                      (p as Button).Background = img;
+                  }
+              });
         }
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;

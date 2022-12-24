@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,33 @@ namespace Spotify.Views.Pages
         public PlayListForm()
         {
             InitializeComponent();
+        }
+
+
+        public bool IsVisible
+        {
+            get { return (bool)GetValue(IsVisibleProperty); }
+            set { SetValue(IsVisibleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsVisible.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsVisibleProperty =
+            DependencyProperty.Register("IsVisible", typeof(bool), typeof(PlayListForm), new PropertyMetadata(true));
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog a = new OpenFileDialog();
+            if (a.ShowDialog() == true)
+            {
+                img.Source = new BitmapImage(new Uri(a.FileName));
+
+                ContentPresenter x = (btn.Template.FindName("content", btn) as ContentPresenter);
+                //(x.Content.FindName("ImgInitial", x) as Image).Opacity = 0;
+                
+
+            }
+
         }
     }
 }
