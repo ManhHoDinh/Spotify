@@ -65,7 +65,7 @@
                                                    Width="16"
                                                    Height="16" 
                                                    Name="img"
-                                                      
+                                                  Margin="25 0 0 0"
                                                  HorizontalAlignment="Left"
                                                    Visibility="Hidden"
                                                    Source="{StaticResource Bar1  }">
@@ -84,9 +84,9 @@
                                                                 </EventTrigger>
                                                             </Image.Triggers>
                                                         </Image>
-                                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center"  Margin="32 0 0 0"/>
+                                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center"  Margin="29 0 0 0"/>
                                                     </Grid>
-                                                    <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" HorizontalAlignment="Left" Click="PlayPauseSongBtn_Click" Margin="29 0 0 0">
+                                                    <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" HorizontalAlignment="Left" Click="PlayPauseSongBtn_Click" Margin="25 0 0 0">
                                                         <Button.Template>
                                                             <ControlTemplate>
                                                                 <Border Background="{TemplateBinding Background}"/>
