@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1900" d:DesignWidth="800"
              DataContext="{StaticResource likedsongsVM}" 
-             xmlns:SongItems="clr-namespace:Spotify.Views.Components">
+             xmlns:components="clr-namespace:Spotify.Views.Components">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
@@ -66,7 +66,7 @@
                 </Border>
             </Border>
             <Grid  Grid.Row="2">
-                <SongItems:SongsView></SongItems:SongsView>
+                <components:SongsView ItemSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedSong="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>
     </ScrollViewer>

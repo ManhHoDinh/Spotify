@@ -71,17 +71,21 @@ namespace Spotify.ViewModels
         private void CreatePlaylist(object obj)
         {
             int count = ListPlaylist.Ins.CountPlaylist;
-            ViewPage.Ins.CurrentView = new CreatePlaylistVM();
             ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "" });
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+            ViewPage.Ins.CurrentView = new CreatePlaylistVM();
             ListPlaylist.Ins.CountPlaylist++;
             ChangeViewStyle("CreatePlaylist", obj);
 
         }
         private void LikedSongs(object obj)
         {
-            ViewPage.Ins.CurrentView = new LikedSongsVM();
-            ChangeViewStyle("LikeSongs", obj);
+            if (ViewPage.Ins.CurrentView.GetType().Name != "LikeSongView")
+            {
+                ViewPage.Ins.CurrentView = new LikedSongsVM();
+                ChangeViewStyle("LikeSongs", obj);
+
+            }
 
         }
         private void Search(object obj)

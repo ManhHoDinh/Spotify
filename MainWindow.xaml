@@ -52,6 +52,7 @@
                         Width="241" 
                         BorderBrush="Transparent" 
                         FontSize="14" 
+                        Margin="30 0 0 0"
                         Background="#000000"
                         Foreground="#b3b3b3" 
                         SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay}"
@@ -86,7 +87,7 @@
                 <ContentControl BorderBrush="Transparent" x:Name="Pages" Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}"/>
             </Grid>
         </Grid>
-        <controls:bottomComponent Grid.Row="1">
+        <controls:bottomComponent Grid.Row="1" Loaded="bottomComponent_Loaded">
         </controls:bottomComponent>
     </Grid>
     

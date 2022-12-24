@@ -330,7 +330,6 @@
     <Content Include=".gitignore" />
     <Resource Include="Resource\Album\ThoaMaiGacChanLen.jpg" />
     <Resource Include="Resource\Icons\Close.png" />
-    <Resource Include="Resource\Icons\Edit.png" />
     <Resource Include="Resource\Icons\Option.png" />
     <Resource Include="Resource\Icons\SongIcon.png" />
     <Resource Include="Resource\Icons\Home_S.png" />
@@ -345,6 +344,8 @@
     <Resource Include="Resource\Icons\bar2.png" />
     <Resource Include="Resource\Icons\bar3.png" />
     <Resource Include="Resource\Icons\bar4.png" />
+    <Resource Include="Resource\Icons\Options_XS.png" />
+    <Resource Include="Resource\Images\backgroundSong.png" />
     <Content Include="Resource\Images\BenTrenTangLauImg.jfif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -383,6 +384,7 @@
     <Resource Include="Resource\Images\Volume_Min_Hover.png" />
     <Resource Include="Resource\Images\untitled.png" />
     <Resource Include="Resource\Images\spotifyLogo.png" />
+    <Resource Include="Resource\Images\Edit.png" />
     <Content Include="Resource\Songs\01 bao tiền một mớ bình yên.mp3" />
     <Content Include="Resource\Songs\01 Buồn Thì Cứ Khóc Đi.mp3" />
     <Content Include="Resource\Songs\01 Bất Bình Thường.mp3" />
