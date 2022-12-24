@@ -37,11 +37,11 @@ namespace Spotify.ViewModels.Pages
             throw new System.InvalidOperationException();
         }
     }
-    public class SearchVM : BaseViewModel
+    internal class SearchVM:BaseViewModel
     {
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;
-
+       
         private Song _SelectedSongItem;
         public Song SelectedSongItem
         {
@@ -61,7 +61,7 @@ namespace Spotify.ViewModels.Pages
         public SearchVM()
         {
             ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            songs.Add(Songs.CamNang);
+            songs.Add(Songs.CamNang) ;
             songs.Add(Songs.BenTrenTangLau);
             songs.Add(Songs.DauMua);
 

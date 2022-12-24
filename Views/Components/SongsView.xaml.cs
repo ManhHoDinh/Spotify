@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -8,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 

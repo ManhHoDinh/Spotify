@@ -19,7 +19,7 @@
                 <TextBlock Text="{TemplateBinding Tag}" FontSize="24" FontWeight="Bold" Foreground="#ffffff" TextWrapping="Wrap" Margin="21 0 0 10"/>
                 <ListView Template="{DynamicResource NonScrollableListView}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" 
+                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
                   ItemsSource="{TemplateBinding ItemsSource}" 
                   Background="Transparent" BorderBrush="Transparent">
                     <ListView.ItemsPanel>
@@ -166,7 +166,9 @@
                                         <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
                                             <Components:RecommendAlbum  Background="Transparent" Height="64" ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
                                         </Button>
+
                                     </Grid>
+
                                 </Grid>
                             </Grid>
                             <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
