@@ -89,34 +89,6 @@ namespace Spotify.Views.Pages
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(AlbumsView, IsPlayProperty, binding);
         }
-        ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
-        ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
-        private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
-        {
-            ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.IsPlay == true)
-            {
-                ImgBrush.ImageSource = Play;
-                SongBottom.Ins.IsPlay = false;
-            }
-            else
-            {
-                ImgBrush.ImageSource = Pause;
-                SongBottom.Ins.IsPlay = true;
-
-            }
-            //if (IsPlay == true)
-            //{
-            //    ImgBrush.ImageSource = Play;
-            //    IsPlay = false;
-            //}
-            //else
-            //{
-            //    ImgBrush.ImageSource = Pause;
-            //    IsPlay = true;
-            //}
-            PlayPauseGreen.Background = ImgBrush;
-        }
-
+       
     }
 }

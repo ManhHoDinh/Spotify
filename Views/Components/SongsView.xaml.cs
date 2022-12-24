@@ -1,5 +1,6 @@
 ﻿using System.CodeDom;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -62,7 +63,7 @@ namespace Spotify.Views.Components
         public SongsView()
         {
             InitializeComponent();
-            Ins = new SongsView();
+           
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
@@ -70,7 +71,7 @@ namespace Spotify.Views.Components
             songs.Add(Songs.CamNang);
             songs.Add(Songs.BenTrenTangLau);
             songs.Add(Songs.DauMua);
-            SongItemsCollection = new CollectionViewSource { Source = songs };
+           
             BindingOperations.SetBinding(songview, IsPlayProperty, binding);
            
             //if(LikedSongsView.SelectedItem != null)
@@ -81,12 +82,7 @@ namespace Spotify.Views.Components
             //    BindingOperations.SetBinding(songview, IsPlayProperty, binding);
             //}
         }
-        private CollectionViewSource SongItemsCollection;
-        public ICollectionView SongSourceCollection => SongItemsCollection.View;
-
-        public static SongsView Ins;
-        public ObservableCollection<Song> songs;
-
+       
         // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
         
 
@@ -96,8 +92,7 @@ namespace Spotify.Views.Components
             get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
         }
-        private CollectionViewSource SongItemsCollection;
-        public ICollectionView SongSourceCollection => SongItemsCollection.View;
+
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSourceProperty =
