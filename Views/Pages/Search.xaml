@@ -14,66 +14,14 @@
             <ItemsPresenter/>
         </ControlTemplate>
     </UserControl.Resources>
-    
+    <UserControl.DataContext>
+        <vm:SearchVM></vm:SearchVM>
+
+    </UserControl.DataContext>
     <Grid Background="#121212">
         <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
         </Grid>
-        <ListView  x:Name="BeginingSearch"  Margin="0 90 0 0" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent"  SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedSongIndex,Mode=OneWayToSource}" >
-            <!--Text Index-->
-            <ListView.Resources>
-                <vm:OrdinalConverter x:Key="OrdinalConverter" />
-            </ListView.Resources>
-            <ListView.ItemContainerStyle >
-                <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="AntiqueWhite"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                <Border Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Style.Triggers>
-                                                <Trigger Property="Border.IsMouseOver" Value="True">
-                                                    <Setter Property="Border.Background" Value="#5b5a5e"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Border.Style>
-                                    <Grid >
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="350"/>
-                                            <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="80"/>
-                                            <ColumnDefinition Width="100"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock  Grid.Column="0" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}" Foreground="#ffffff" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
-                                            <Image Width="40" Source="https://i1.sndcdn.com/artworks-LC3XCazRXEzo9wsY-okudbA-t500x500.jpg" Margin="0 0 20 0"/>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="{Binding Path=Name,Mode=OneWay}" Foreground="#ffffff" FontSize="20"/>
-                                                <TextBlock Text="{Binding Path=NameSinger,Mode=OneWay}" Foreground="#b3b3b3" FontSize="18"/>
-                                            </StackPanel>
-                                        </StackPanel>
-                                        <TextBlock Grid.Column="2" Text="{Binding AlbumName}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
-                                        <Grid  Grid.Column="3" HorizontalAlignment="Right">
-                                            <Button  Tag="{Binding isFavor, ElementName=BottomControl}" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
-                                                <Button.Background>
-                                                    <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
-                                                </Button.Background>
-                                            </Button>
-                                        </Grid>
-                                        <TextBlock Grid.Column="4" Text="{Binding DurationSong}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                               
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListView.ItemContainerStyle>
-        </ListView>
+        <components:SongsView Margin="0 90 0 0" ItemSource="{Binding SongSourceCollection}" x:Name="BeginingSearch"></components:SongsView>
         <TextBox x:Name="SearchBox"
                  Style="{StaticResource SearchHeader}"
                  VerticalAlignment="Top"  Tag="Monke D Luffy"/>
