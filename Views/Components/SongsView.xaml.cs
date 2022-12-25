@@ -1,5 +1,6 @@
 using System.CodeDom;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -20,7 +21,7 @@ namespace Spotify.Views.Components
     
     public partial class SongsView : UserControl
     {
-        private ListView binh;
+        private ListView listview;
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
           
@@ -29,12 +30,12 @@ namespace Spotify.Views.Components
             {
                 if (GetTemplateChild("PART_Header") != null)
                 {
-                    binh = GetTemplateChild("PART_Header") as ListView;
-                    if (binh.SelectedItem != null)
+                    listview = GetTemplateChild("PART_Header") as ListView;
+                    if (listview.SelectedItem != null)
                     {
                         LikedSongsVM vm = this.DataContext as LikedSongsVM;
                         ImageBrush img = new ImageBrush();
-                        var template = binh.ItemContainerGenerator.ContainerFromIndex(binh.SelectedIndex) as ListViewItem;
+                        var template = listview.ItemContainerGenerator.ContainerFromIndex(listview.SelectedIndex) as ListViewItem;
                         Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
                         Image image = template.Template.FindName("img", template) as Image;
                         TextBlock tb = template.Template.FindName("Id", template) as TextBlock;
@@ -144,9 +145,9 @@ namespace Spotify.Views.Components
 
         private void NameSong_Click(object sender, RoutedEventArgs e)
         {
-            var binh = GetTemplateChild("PART_Header") as ListView;
+            var listview = GetTemplateChild("PART_Header") as ListView;
             Button btn = sender as Button;
-            ListViewItem curItem = ((ListViewItem)binh.ContainerFromElement((Button)sender));
+            ListViewItem curItem = ((ListViewItem)listview.ContainerFromElement((Button)sender));
             curItem.IsSelected = true;
             ViewPage.Ins.CurrentView = new SongView();
         }
@@ -184,10 +185,10 @@ namespace Spotify.Views.Components
 
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var binh = GetTemplateChild("PART_Header") as ListView;
-            for (int i = 0; i < binh.Items.Count; i++)
+            var listview = GetTemplateChild("PART_Header") as ListView;
+            for (int i = 0; i < listview.Items.Count; i++)
             {
-                var template = binh.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                 ImageBrush img = new ImageBrush();
                 Button btn = new Button();
                 Image image = new Image();
@@ -198,7 +199,7 @@ namespace Spotify.Views.Components
                     btn = template.Template.FindName("PlayPauseBtn", template) as Button;
                     image = template.Template.FindName("img", template) as Image;
                     tb = template.Template.FindName("Id", template) as TextBlock;
-                    if (i != binh.SelectedIndex)
+                    if (i != listview.SelectedIndex)
                     {
                         img.ImageSource = Play;
                         btn.Background = img;

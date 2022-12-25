@@ -17,7 +17,7 @@ using System.Management.Instrumentation;
 
 namespace Spotify.ViewModels
 {
-    internal class NavigationVM:Utilities.BaseViewModel
+    internal class NavigationVM : Utilities.BaseViewModel
     {
         private object _currentView;
         public object CurrentView
@@ -47,7 +47,7 @@ namespace Spotify.ViewModels
                     tb.Foreground = Brushes.White;
                     if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
                     {
-                        img.Source = (ImageSource) Application.Current.Resources[btn.Name + "FillIcon"];
+                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
                     }
                 }
                 else

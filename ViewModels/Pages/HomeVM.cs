@@ -37,8 +37,8 @@ namespace Spotify.ViewModels.Pages
             set { _SelectedItem = value; 
                 OnPropertyChanged(); 
                 if (SelectedItem != null) 
-                { AlbumName = SelectedItem.Name; 
-                  AlbumDescription = SelectedItem.Description;
+                { AlbumName = SelectedItem.AlbumName; 
+                  AlbumDescription = SelectedItem.Descriptions;
                   SongsOfAlbum = SelectedItem.SongsOfAlbum;
                   IsAlbumItemVisible = true; 
                   IsAlbumListVisible = false;
@@ -58,10 +58,10 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedSongItem != null)
                 {
-                    SongBottom.Ins.SongName = SelectedSongItem.Name;
-                    SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
-                    SongBottom.Ins.ImageSong = SelectedSongItem.Image;
+                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
                     SongBottom.Ins.IsPlay = true;
                 }
             }
@@ -82,48 +82,48 @@ namespace Spotify.ViewModels.Pages
         {
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll"}); ;
-            RecommendPlaylists.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
-            RecommendPlaylists.Add(new Album { Name = "Say nắng", Description = "Suni Hạ Linh" });
-            RecommendPlaylists.Add(new Album { Name = "Có chắc yêu là đây", Description = "Sơn Tùng MTP" });
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
-            RecommendPlaylists.Add(new Album { Name = "chill", Description = "chillllll" });
+            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
+            RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
+            RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
+            RecommendPlaylists.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
+            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             TopMix = new ObservableCollection<Album>();
-            TopMix.Add(new Album { Name = "chill", Description = "chillllll",
+            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",
                 SongsOfAlbum = new ObservableCollection<Song>() { 
                     Songs.DauMua, Songs.CamNang, Songs.BenTrenTangLau
                 } });
-            TopMix.Add(new Album { Name = "Bên trên tâng lầu", Description = "Tăng Duy Tân" });
-            TopMix.Add(new Album { Name = "Say nắng", Description = "Suni Hạ Linh" });
-            TopMix.Add(new Album { Name = "Có chắc yêu là đây", Description = "Sơn Tùng MTP" });
-            TopMix.Add(new Album { Name = "chill", Description = "chillllll" });
-            TopMix.Add(new Album { Name = "chill", Description = "chillllll" });
+            TopMix.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
+            TopMix.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
+            TopMix.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
+            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             MadeForYou = new ObservableCollection<Album>();
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
-            MadeForYou.Add(new Album { Name = "chill", Description = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             JumBack = new ObservableCollection<Album>();
-            ObservableCollection<Song> list = new ObservableCollection<Song>();
+            ObservableCollection<Song> list = Songs.AllSong;
             list.Add(Songs.CamNang);
             list.Add(Songs.BenTrenTangLau);
             list.Add(Songs.DauMua);
            
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list});
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll}", SongsOfAlbum = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { Name = "chill", Description = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list});
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll}", SongsOfAlbum = list });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
             Recently = new ObservableCollection<Album>();
-            Recently.Add(new Album { Name = "chill", Description = "chillllll"  });
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
-            Recently.Add(new Album { Name = "chill", Description = "chillllll" });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"  });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
 
             ClickCommand = new RelayCommand<object>((p) =>
             {

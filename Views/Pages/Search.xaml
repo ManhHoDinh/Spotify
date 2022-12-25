@@ -14,10 +14,7 @@
             <ItemsPresenter/>
         </ControlTemplate>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <vm:SearchVM></vm:SearchVM>
-
-    </UserControl.DataContext>
+   
     <Grid Background="#121212">
         <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
         </Grid>

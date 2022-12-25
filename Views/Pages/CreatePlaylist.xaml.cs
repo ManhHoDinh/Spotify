@@ -45,9 +45,8 @@ namespace Spotify.Views.Pages
                 SetValue(SelectedItemProperty, value);
                 if (SelectedItem != null)
                 {
-                    Ins.PlaylistName = SelectedItem.NamePlaylist;
-                    Ins.PlaylistDescription = SelectedItem.DescriptionPlaylist;
-                    Ins.ImagePlaylist = SelectedItem.ImagePlaylist;
+                    Ins.PlaylistName = SelectedItem.PlaylistName;
+                    Ins.PlaylistDescription = SelectedItem.Descriptions;
                 }
             }
         }

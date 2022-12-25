@@ -1,3 +1,5 @@
+﻿using Spotify.Models;
+using Spotify.ViewModels;
 ﻿using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -89,7 +91,8 @@ namespace Spotify
     {
         public MainWindow()
         {
-            InitializeComponent();   
+            InitializeComponent();
+            Songs.InitUri();
         }
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -100,5 +103,6 @@ namespace Spotify
         {
 
         }
+       
     }
 }
