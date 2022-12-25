@@ -44,7 +44,8 @@ namespace Spotify.ViewModels.Pages
                   IsAlbumListVisible = false;
                   ViewPage.Ins.CurrentView = new AlbumView();
 
-                }
+                  ViewPage.Ins.CurrentIndexView++;
+              }
             }
         }
         private Song _SelectedSongItem;
