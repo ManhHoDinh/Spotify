@@ -1,4 +1,4 @@
-﻿using System.CodeDom;
+using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
 using System.Windows;
@@ -76,7 +76,8 @@ namespace Spotify.Views.Components
 
         }
 
-
+        // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
+        
 
 
         public ObservableCollection<Song> ItemSource    

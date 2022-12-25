@@ -62,6 +62,7 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
                     SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
                     SongBottom.Ins.ImageSong = SelectedSongItem.Image;
+                    SongBottom.Ins.IsPlay = true;
                 }
             }
         }
