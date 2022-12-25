@@ -141,7 +141,7 @@
             </Button>
         </ControlTemplate>
     </UserControl.Resources>
-    <ScrollViewer ScrollBar.Scroll="ScrollViewer_Scroll" Background="#121212">
+    <ScrollViewer Background="#121212">
         <StackPanel  Background="#121212">
 
 
@@ -149,7 +149,6 @@
             <!--#region Content-->
             <Grid >
                 <StackPanel>
-
                     <Border Padding=" 0 64 0 0">
                         <Border.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
@@ -157,89 +156,7 @@
                                 <GradientStop Color="#121212" Offset="1"/>
                             </LinearGradientBrush>
                         </Border.Background>
-                        <Grid >
-                            <!--Header-->
-                        </Grid.RowDefinitions>
-                        <Border Grid.Row="0">
-                            <Border.Background>
-                                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                                    <GradientStop Color="#503A9F" Offset="0"/>
-                                    <GradientStop Color="#2A1E51" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="360"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <WrapPanel Grid.Column="0">
-                                    <Border Margin="32 80 0 0"  Width="232" Height="232">
-                                        <Border.Background>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="#3F13B8" Offset="0"/>
-                                                <GradientStop Color="#798C89" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Border.Background>
-                                    </Border>
-                                </WrapPanel>
-                                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
-                                    <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff" />
-                                    <TextBlock Text="{Binding AlbumName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
-                                    <TextBlock Text="{Binding AlbumDescription}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                        <Border Grid.Row="1">
-                            <Border.Background>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#20173f" Offset="0"/>
-                                    <GradientStop Color="#191526" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Border.Background>
-                            <StackPanel Orientation="Vertical">
-                                <Button Margin="32 24 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="52">
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="https://cdn-icons-png.flaticon.com/512/0/375.png"/>
-                                    </Button.Background>
-                                </Button>
-                                <Grid Margin="32 24 32 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="475"/>
-                                        <ColumnDefinition Width="*"/>
-                            </Grid>
-                        </Grid>
-                    </Border>
-
-                    <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding TopMix}" ></ListView>
-                    <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
-                    <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
-                    <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
-                </StackPanel>
-            </Grid>
-            <!--#endregion Content-->
-                               
-        </StackPanel>
-    </ScrollViewer>
-                    </Grid>-->
-
-                    <StackPanel 
-                        >
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Setter Property="Background">
-                                        <Setter.Value>
-                                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                                <GradientStop Color="#1E0E46" Offset="0"/>
-                                                <GradientStop Color="#121212" Offset="1"/>
-                                            </LinearGradientBrush>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </Grid.Style>
-                            <!--Header-->
-
+                        <StackPanel>
                             <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33">Good Afternoon</TextBlock>
                             <Grid Height="180" Margin="32 68 0 0">
                                 <Grid.ColumnDefinitions>
@@ -285,21 +202,84 @@
                                     <Button Background="#2c2933" Margin="0 8 0 0" Grid.Row="1" Height="64" Template="{StaticResource HeaderBtn}">
                                         <Components:RecommendAlbum  Background="Transparent" Height="64"  ImgSource="{StaticResource HeartButton}" Text="Nguyen Huu Tri"></Components:RecommendAlbum>
                                     </Button>
-
-                                    </Grid>
+                                </Grid>
 
                             </Grid>
+                        </StackPanel>
+                    </Border>
+                    <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding TopMix}" ></ListView>
+                    <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
+                    <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                    <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+    <!--Header-->
+    
+                     
+                            <!--<Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="360"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <WrapPanel Grid.Column="0">
+                                    <Border Margin="32 80 0 0"  Width="232" Height="232">
+                                        <Border.Background>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="#3F13B8" Offset="0"/>
+                                                <GradientStop Color="#798C89" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </WrapPanel>
+                                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
+                                    <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff" />
+                                    <TextBlock Text="{Binding AlbumName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding AlbumDescription}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Row="1">
+                            <Border.Background>
+                                <LinearGradientBrush>
+                                    <GradientStop Color="#20173f" Offset="0"/>
+                                    <GradientStop Color="#191526" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <StackPanel Orientation="Vertical">
+                                <Button Margin="32 24 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="52">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="https://cdn-icons-png.flaticon.com/512/0/375.png"/>
+                                    </Button.Background>
+                                </Button>
+                                <Grid Margin="32 24 32 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="475"/>
+                                        <ColumnDefinition Width="*"/>
+                            </Grid>
                         </Grid>
+                    </Border>-->
+
+                   
+            <!--</Grid>
+            --><!--#endregion Content--><!--
+                               
+        </StackPanel>
+    
+
+                            
                         <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding TopMix}" ></ListView>
                         <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
                         <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
                         <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
                     </StackPanel>
-                </Grid>
+                </Grid>-->
                 <!--#endregion Content-->
 
-            </StackPanel>
+            <!--</StackPanel>
         </ScrollViewer>
 
-    </Grid>
+    </Grid>-->
 </UserControl>

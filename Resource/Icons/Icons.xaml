@@ -7,6 +7,7 @@
     <ImageSource x:Key="SearchIcon">./Search.png</ImageSource>
     <ImageSource x:Key="SearchFillIcon">./Search_Fill_S.png</ImageSource>
     <ImageSource x:Key="YourLibraryIcon">./Library_S.png</ImageSource>
+    <ImageSource x:Key="CloseBtn">./Close_S.png</ImageSource>
     <ImageSource x:Key="YourLibraryFillIcon">./Library_Fill_S.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>

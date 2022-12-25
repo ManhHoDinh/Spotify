@@ -22,8 +22,6 @@ namespace Spotify
     /// </summary>
     public class ViewPage : DependencyObject
     {
-
-
         public object CurrentView
         {
             get { return (object)GetValue(CurrentViewProperty); }

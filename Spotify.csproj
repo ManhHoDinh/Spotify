@@ -327,6 +327,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Album\DreAMEE\DreAMEE.jpg" />
+    <Resource Include="Resource\Icons\Close_S.png" />
     <Content Include="Resource\Spotify.sql" />
     <Resource Include="Resource\Songs\DauMua\DauMua.jpg" />
     <Resource Include="Resource\Album\HuongMuaHeEP.01\HuongMuaHeEP.01.jpg" />
