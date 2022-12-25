@@ -12,7 +12,9 @@
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
     <ImageSource x:Key="PlayFill">./Play_GreemHover.png</ImageSource>
     <ImageSource x:Key="BackButton">./Back.png</ImageSource>
+    <ImageSource x:Key="BackDisable">./BackDisable.png</ImageSource>
     <ImageSource x:Key="NextPageButton">./NextPage.png</ImageSource>
+    <ImageSource x:Key="NextDisable">./NextDisable.png</ImageSource>
     <ImageSource x:Key="Find">./Glass.png</ImageSource>
     <ImageSource x:Key="SearchBoxForm">./HeaderSearch.png</ImageSource>
     <ImageSource x:Key="Avatar">./Avatar.png</ImageSource>

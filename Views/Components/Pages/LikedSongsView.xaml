@@ -11,7 +11,7 @@
              
              xmlns:SongItems="clr-namespace:Spotify.Views.Components">
 
-    <ScrollViewer>
+    <ScrollViewer Background="#121212">
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">

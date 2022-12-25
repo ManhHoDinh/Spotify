@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
-            <ScrollViewer>
+            <ScrollViewer Background="#121212">
                 <Grid Margin="0 24 0 0">
                     <ListView Name="PART_Header"   
                       SelectionMode="Single"

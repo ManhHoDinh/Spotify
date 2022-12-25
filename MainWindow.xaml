@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen"
         >
     <Window.Resources>
-        <ControlTemplate x:Key="NonScrollableListView" TargetType="ListBox">
+        <ControlTemplate x:Key="ScrollableListView" TargetType="ListBox">
             <ItemsPresenter/>
         </ControlTemplate>
     </Window.Resources>
@@ -23,68 +23,84 @@
     <Grid>
         <!--Define Row-->
         <Grid.RowDefinitions>
-            
             <RowDefinition  Height="*" />
             <RowDefinition Height="100" />
         </Grid.RowDefinitions>
 
-        <!--Use first Row-->
+            <!--Use first Row-->
         <Grid Grid.Row="0" >
 
             <!--Define Column-->
             <Grid.ColumnDefinitions >
-                <ColumnDefinition  Width="auto" />
+                <ColumnDefinition  Width="241" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <!--LeftSideBar-->
-            <StackPanel x:Name="LeftSideBar" Background="#000" Grid.Column="0" Width="241" Orientation="Vertical">
-                <StackPanel Background="#000" Margin="0 80 0 0">
-                    <Button Name="Home" Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-                    <Button Name="Search" Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-                    <Button Name="YourLibrary" Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-                    <Button Name="CreatePlaylist" Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-                    <Button Name="LikeSongs" Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-                   
+            <Grid  Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="auto"/>
+                    <RowDefinition  Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="LeftSideBar" Grid.Row="0" Background="#000" Orientation="Vertical">
+                    <StackPanel Background="#000" Margin="0 80 0 0">
+                        <Button Name="Home" Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                        <Button Name="Search" Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                        <Button Name="YourLibrary" Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                        <Button Name="CreatePlaylist" Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource AddLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+                        <Button Name="LikeSongs" Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
+
+                    </StackPanel>
+                
                 </StackPanel>
-                <ScrollViewer>
+                <Grid Grid.Row="1">
+                    <ScrollViewer Background="#000000">
                     <ListBox 
-                        Template="{StaticResource NonScrollableListView}"
-                        Width="241" 
+                       
                         BorderBrush="Transparent" 
                         FontSize="14" 
                         Margin="30 0 0 0"
-                        Background="#000000"
+                        Background="Transparent"
                         Foreground="#b3b3b3" 
                         SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay}"
                         ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay}">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                            <Border Height="32">
-                                                <ContentPresenter Content="{Binding NamePlaylist}"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Foreground" Value="#ffffff"/>
-                                                </Trigger>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Foreground" Value="#ffffff"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                                <Border Height="32">
+                                                    <ContentPresenter Content="{Binding NamePlaylist}"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Foreground" Value="#ffffff"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                        </ListBox>
+                    
                 </ScrollViewer>
-            </StackPanel>
+                </Grid>
+            </Grid>
+         
             
-            <Grid Grid.Column="1">
-                
+            <Grid Grid.Column="1" >
+                <!--<Grid.RowDefinitions>
+                    --><!--<RowDefinition Height="64"/>--><!--
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>-->
+               
                 <ContentControl x:Name="Pages" Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}"/>
+                <Component:Header Background="Transparent" Height="64" VerticalAlignment="Top"/>
+
+
             </Grid>
         </Grid>
         <controls:bottomComponent Grid.Row="1" Loaded="bottomComponent_Loaded">

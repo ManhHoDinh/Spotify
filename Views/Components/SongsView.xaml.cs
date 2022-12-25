@@ -61,7 +61,6 @@ namespace Spotify.Views.Components
         public SongsView()
         {
             InitializeComponent();
-         
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
