@@ -38,7 +38,7 @@ namespace Spotify.ViewModels.Pages
         private bool _isVisibleOption = false;
         public bool IsVisibleOption { get => _isVisibleOption; set { _isVisibleOption = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
-        public Playlist SelectedPlaylist { get => _SelectedPlaylist; set { _SelectedPlaylist = value; OnPropertyChanged(); if (SelectedPlaylist != null) { NamePlaylist = SelectedPlaylist.NamePlaylist; DescriptionPlaylist = SelectedPlaylist.DescriptionPlaylist; } } }
+        public Playlist SelectedPlaylist { get => _SelectedPlaylist; set { _SelectedPlaylist = value; OnPropertyChanged(); if (SelectedPlaylist != null) { NamePlaylist = SelectedPlaylist.PlaylistName; DescriptionPlaylist = SelectedPlaylist.Descriptions; } } }
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
         public CreatePlaylistVM()
@@ -81,8 +81,8 @@ namespace Spotify.ViewModels.Pages
                   NamePlaylist = SaveForm.NamePlaylist.Text;
                   DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
                   SaveForm.Close();
-                  SelectedPlaylist.NamePlaylist = NamePlaylist;
-                  SelectedPlaylist.DescriptionPlaylist = DescriptionPlaylist;
+                  SelectedPlaylist.PlaylistName = NamePlaylist;
+                  SelectedPlaylist.Descriptions = DescriptionPlaylist;
 
               });
             OptionCommand = new RelayCommand<object>(
@@ -158,9 +158,9 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedSongItem != null)
                 {
-                    SongBottom.Ins.SongName = SelectedSongItem.Name;
-                    SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
+                    SongBottom.Ins.SongName = SelectedSongItem.AlbumName;
+                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongBottom.Ins.LinkSong =new Uri(SelectedSongItem.SongLink);
                 }
             }
         }
@@ -228,7 +228,7 @@ namespace Spotify.ViewModels.Pages
             }
 
             Song _item = e.Item as Song;
-            if (RemoveSign4VietnameseString(_item.Name).ToUpper().Contains(RemoveSign4VietnameseString(FilterText).ToUpper()))
+            if (RemoveSign4VietnameseString(_item.SingerName).ToUpper().Contains(RemoveSign4VietnameseString(FilterText).ToUpper()))
             {
                 e.Accepted = true;
             }

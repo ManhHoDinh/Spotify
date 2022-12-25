@@ -17,7 +17,7 @@ namespace Spotify.ViewModels.Pages
        
         public ICommand ClickCommand { get; set; }
         private Album _SelectedItem;
-        public Album SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); if (SelectedItem != null) { AlbumName = SelectedItem.Name; AlbumDescription = SelectedItem.Description; IsAlbumItemVisible = true; IsAlbumListVisible = false; } } }
+        public Album SelectedItem { get => _SelectedItem; set { _SelectedItem = value; OnPropertyChanged(); if (SelectedItem != null) { AlbumName = SelectedItem.AlbumName; AlbumDescription = SelectedItem.Descriptions; IsAlbumItemVisible = true; IsAlbumListVisible = false; } } }
         private string _AlbumName;
         public string AlbumName { get => _AlbumName; set { _AlbumName = value; OnPropertyChanged(); } }
         private string _AlbumDescription;

@@ -52,9 +52,9 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedSongItem != null)
                 {
-                    SongBottom.Ins.SongName = SelectedSongItem.Name;
-                    SongBottom.Ins.SingerName = SelectedSongItem.NameSinger;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.LinkSong;
+                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongBottom.Ins.LinkSong = new Uri(SelectedSongItem.SongLink);
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace Spotify.ViewModels.Pages
             }
 
             Song _item = e.Item as Song;
-            if (RemoveSign4VietnameseString(_item.Name).ToUpper().Contains(RemoveSign4VietnameseString(FilterText).ToUpper()))
+            if (RemoveSign4VietnameseString(_item.SongName).ToUpper().Contains(RemoveSign4VietnameseString(FilterText).ToUpper()))
             {
                 e.Accepted = true;
             }

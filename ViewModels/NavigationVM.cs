@@ -16,7 +16,7 @@ using System.Windows;
 
 namespace Spotify.ViewModels
 {
-    internal class NavigationVM:Utilities.BaseViewModel
+    internal class NavigationVM : Utilities.BaseViewModel
     {
         private object _currentView;
         public object CurrentView
@@ -46,7 +46,7 @@ namespace Spotify.ViewModels
                     tb.Foreground = Brushes.White;
                     if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
                     {
-                        img.Source = (ImageSource) Application.Current.Resources[btn.Name + "FillIcon"];
+                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
                     }
                 }
                 else
@@ -71,7 +71,7 @@ namespace Spotify.ViewModels
         private void CreatePlaylist(object obj)
         {
             int count = ListPlaylist.Ins.CountPlaylist;
-            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "" });
+            ListPlaylist.Ins.List.Add(new Playlist { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "" });
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
             ViewPage.Ins.CurrentView = new CreatePlaylistVM();
             ListPlaylist.Ins.CountPlaylist++;

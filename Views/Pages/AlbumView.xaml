@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-              DataContext="{StaticResource homeVM}"
+             DataContext="{StaticResource homeVM}"
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer>
         <Grid>
@@ -60,10 +60,8 @@
                 </Border>
             </Border>
             <Grid  Grid.Row="2">
-                <components:SongsView
-            
-            SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-            ItemSource="{Binding SongsOfAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <components:SongsView SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    ItemSource="{Binding SongsOfAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>
     </ScrollViewer>

@@ -99,12 +99,12 @@
                                                     </Button>
 
                                                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left" Margin="16 0 0 0">
-                                                        <Image Width="40" Source="{Binding Image}" Margin="0 0 20 0"/>
+                                                        <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
                                                         <StackPanel Orientation="Vertical">
                                                             <Button Name="NameSong"  Click="NameSong_Click" Foreground="#ffffff">
                                                                 <Button.Template>
                                                                     <ControlTemplate>
-                                                                        <TextBlock  Text="{Binding Name}" Foreground="{TemplateBinding Foreground}">
+                                                                        <TextBlock  Text="{Binding SongName}" Foreground="{TemplateBinding Foreground}">
                                                                             <TextBlock.Style>
                                                                                 <Style TargetType="TextBlock">
 
@@ -125,7 +125,7 @@
                                                                     </ControlTemplate>
                                                                 </Button.Template>
                                                             </Button>
-                                                            <TextBlock Name="NameSinger" Text="{Binding NameSinger}" Foreground="#b3b3b3" FontSize="14"/>
+                                                            <TextBlock Name="NameSinger" Text="{Binding SingerName}" Foreground="#b3b3b3" FontSize="14"/>
                                                         </StackPanel>
                                                     </StackPanel>
                                                     <TextBlock Grid.Column="2" Text="{Binding AlbumName}" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center" HorizontalAlignment="Left"  />
@@ -136,7 +136,7 @@
                                                         </Button.Background>
                                                     </Button>
 
-                                                    <TextBlock Text="{Binding DurationSong}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                                                    <TextBlock Text="{Binding SongDuration}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
                                                 </Grid>
                                                 <Border.Style>
                                                     <Style TargetType="Border">
