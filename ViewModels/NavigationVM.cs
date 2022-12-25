@@ -13,6 +13,7 @@ using Spotify.Views.Components;
 using Spotify.Models;
 using System.Windows.Media;
 using System.Windows;
+using System.Management.Instrumentation;
 
 namespace Spotify.ViewModels
 {
@@ -61,46 +62,71 @@ namespace Spotify.ViewModels
                 }
             }
         }
+        void TranslatePage(object obj)
+        {
+            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
+            {
+                int currentId = ViewPage.Ins.CurrentIndexView;
+                int count = ViewPage.Ins.ListPage.Count;
+
+                if (currentId < count)
+                {
+                    for (int i = currentId + 1; i < count; i++)
+                    {
+                        ViewPage.Ins.ListPage.RemoveAt(1);
+                    }
+                }
+                ViewPage.Ins.CurrentView = obj;
+                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                ViewPage.Ins.CurrentIndexView++;
+                ViewPage.Ins.IsDisableBack = false;
+            }
+        }
         private void Home(object obj)
         {
-            ViewPage.Ins.CurrentView = new HomeVM();
-
+            
             ChangeViewStyle("Home", obj);
-
-        }
-        private void CreatePlaylist(object obj)
-        {
-            int count = ListPlaylist.Ins.CountPlaylist;
-            ListPlaylist.Ins.List.Add(new Playlist { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "" });
-            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-            ViewPage.Ins.CurrentView = new CreatePlaylistVM();
-            ListPlaylist.Ins.CountPlaylist++;
-            ChangeViewStyle("CreatePlaylist", obj);
-
-        }
-        private void LikedSongs(object obj)
-        {
-            if (ViewPage.Ins.CurrentView.GetType().Name != "LikeSongView")
-            {
-                ViewPage.Ins.CurrentView = new LikedSongsVM();
-                ChangeViewStyle("LikeSongs", obj);
-
-            }
+            TranslatePage(new HomeVM());
+          
 
         }
         private void Search(object obj)
         {
-            ViewPage.Ins.CurrentView = new SearchVM();
             ChangeViewStyle("Search", obj);
+            TranslatePage(new SearchVM());
+           
 
         }
         private void YourLibrary(object obj)
         {
-            ViewPage.Ins.CurrentView = new YourLibraryVM();
             ChangeViewStyle("YourLibrary", obj);
+            TranslatePage(new YourLibraryVM());
+        }
+        private void CreatePlaylist(object obj)
+        {
+            if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
+            {
+                ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+                ViewPage.Ins.CurrentIndexView++;
+
+
+            }
+            int count = ListPlaylist.Ins.CountPlaylist;
+            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "", ImagePlaylist = (ImageSource)Application.Current.Resources["SongBackground"] });
+            ViewPage.Ins.CurrentView = new CreatePlaylist();
+            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+            ListPlaylist.Ins.CountPlaylist++;
+            
+            ChangeViewStyle("CreatePlaylist", obj);
+        }
+        private void LikedSongs(object obj)
+        {
+            ChangeViewStyle("LikeSongs", obj);
+            TranslatePage(new LikedSongsVM());
 
         }
-        private void Album(object obj) => ViewPage.Ins.CurrentView = new AlbumView();
+       
+      
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);
@@ -108,10 +134,11 @@ namespace Spotify.ViewModels
             LikedSongsCommand = new RelayCommand(LikedSongs);
             SearchCommand = new RelayCommand(Search);
             YourLibraryCommand = new RelayCommand(YourLibrary);
-            AlbumCommand = new RelayCommand(Album);
+
 
             // Startup Page
             ViewPage.Ins.CurrentView = new HomeVM();
+            ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
         }
     }
 }
