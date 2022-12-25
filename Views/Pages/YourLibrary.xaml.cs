@@ -24,5 +24,7 @@ namespace Spotify.Views.Pages
         {
             InitializeComponent();
         }
+
+      
     }
 }

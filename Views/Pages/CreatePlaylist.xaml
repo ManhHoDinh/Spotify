@@ -36,7 +36,7 @@
                         <ColumnDefinition Width="360"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Template="{StaticResource SongLoadStyle}"
+                    <Button
                        
                         Grid.Column="0"
                         Width="232"
@@ -44,10 +44,10 @@
                         Cursor="Hand"
                         HorizontalAlignment="Left"
                             Margin="32 0 0 0">
-                        <Image Width="60" Height="60" Source="{StaticResource SongIcon}"/>
-                        <!--<Button.Background>
-                            <ImageBrush ImageSource="{Binding PathImage}"/>
-                        </Button.Background>-->
+        
+                        <Button.Background>
+                            <ImageBrush ImageSource="{Binding ImagePlaylist}"/>
+                        </Button.Background>
                     </Button>
                     <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
