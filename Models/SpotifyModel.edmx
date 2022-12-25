@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SpotifyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumName" Type="nvarchar(max)" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="AlbumImage" Type="nvarchar(max)" />
+          <Property Name="AlbumColor" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AlbumAndSongRelation">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlaylistName" Type="nvarchar(max)" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="PlaylistImage" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlaylistAndSongRelation">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="PlaylistID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SongName" Type="nvarchar(max)" />
+          <Property Name="SongLink" Type="nvarchar(max)" />
+          <Property Name="SingerName" Type="nvarchar(max)" />
+          <Property Name="SongImage" Type="nvarchar(max)" />
+          <Property Name="AlbumName" Type="nvarchar(max)" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
+          <Property Name="PostTime" Type="nvarchar(max)" />
+          <Property Name="SongDuration" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="UserImage" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__AlbumAndS__SongI__2C3393D0">
+          <End Role="Album" Type="Self.Album" Multiplicity="1" />
+          <End Role="AlbumAndSongRelation" Type="Self.AlbumAndSongRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlbumAndSongRelation">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__AlbumAndS__SongI__2D27B809">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="AlbumAndSongRelation" Type="Self.AlbumAndSongRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AlbumAndSongRelation">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Playlist__UserID__2A4B4B5E">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaylistA__Playl__300424B4">
+          <End Role="Playlist" Type="Self.Playlist" Multiplicity="1" />
+          <End Role="PlaylistAndSongRelation" Type="Self.PlaylistAndSongRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlist">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PlaylistAndSongRelation">
+              <PropertyRef Name="PlaylistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlaylistA__SongI__30F848ED">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="PlaylistAndSongRelation" Type="Self.PlaylistAndSongRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PlaylistAndSongRelation">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SpotifyModelStoreContainer">
+          <EntitySet Name="Album" EntityType="Self.Album" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlbumAndSongRelation" EntityType="Self.AlbumAndSongRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Playlist" EntityType="Self.Playlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlaylistAndSongRelation" EntityType="Self.PlaylistAndSongRelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AlbumAndS__SongI__2C3393D0" Association="Self.FK__AlbumAndS__SongI__2C3393D0">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="AlbumAndSongRelation" EntitySet="AlbumAndSongRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__AlbumAndS__SongI__2D27B809" Association="Self.FK__AlbumAndS__SongI__2D27B809">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="AlbumAndSongRelation" EntitySet="AlbumAndSongRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Playlist__UserID__2A4B4B5E" Association="Self.FK__Playlist__UserID__2A4B4B5E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Playlist" EntitySet="Playlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaylistA__Playl__300424B4" Association="Self.FK__PlaylistA__Playl__300424B4">
+            <End Role="Playlist" EntitySet="Playlist" />
+            <End Role="PlaylistAndSongRelation" EntitySet="PlaylistAndSongRelation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlaylistA__SongI__30F848ED" Association="Self.FK__PlaylistA__SongI__30F848ED">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="PlaylistAndSongRelation" EntitySet="PlaylistAndSongRelation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpotifyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="SpotifyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Albums" EntityType="SpotifyModel.Album" />
+          <EntitySet Name="Playlists" EntityType="SpotifyModel.Playlist" />
+          <EntitySet Name="Songs" EntityType="SpotifyModel.Song" />
+          <EntitySet Name="Users" EntityType="SpotifyModel.User" />
+          <AssociationSet Name="FK__Playlist__UserID__2A4B4B5E" Association="SpotifyModel.FK__Playlist__UserID__2A4B4B5E">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Playlist" EntitySet="Playlists" />
+          </AssociationSet>
+          <AssociationSet Name="AlbumAndSongRelation" Association="SpotifyModel.AlbumAndSongRelation">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="PlaylistAndSongRelation" Association="SpotifyModel.PlaylistAndSongRelation">
+            <End Role="Playlist" EntitySet="Playlists" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Songs" Relationship="SpotifyModel.AlbumAndSongRelation" FromRole="Album" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaylistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlaylistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="SpotifyModel.FK__Playlist__UserID__2A4B4B5E" FromRole="Playlist" ToRole="User" />
+          <NavigationProperty Name="Songs" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Playlist" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SongName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SongLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SingerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SongImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlbumName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostTime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SongDuration" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Albums" Relationship="SpotifyModel.AlbumAndSongRelation" FromRole="Song" ToRole="Album" />
+          <NavigationProperty Name="Playlists" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Song" ToRole="Playlist" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Playlists" Relationship="SpotifyModel.FK__Playlist__UserID__2A4B4B5E" FromRole="User" ToRole="Playlist" />
+        </EntityType>
+        <Association Name="FK__Playlist__UserID__2A4B4B5E">
+          <End Type="SpotifyModel.User" Role="User" Multiplicity="1" />
+          <End Type="SpotifyModel.Playlist" Role="Playlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Playlist">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AlbumAndSongRelation">
+          <End Type="SpotifyModel.Album" Role="Album" Multiplicity="*" />
+          <End Type="SpotifyModel.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        <Association Name="PlaylistAndSongRelation">
+          <End Type="SpotifyModel.Playlist" Role="Playlist" Multiplicity="*" />
+          <End Type="SpotifyModel.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SpotifyModelStoreContainer" CdmEntityContainer="SpotifyEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="SpotifyModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="AlbumColor" ColumnName="AlbumColor" />
+                <ScalarProperty Name="AlbumImage" ColumnName="AlbumImage" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="SpotifyModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="SpotifyModel.Song">
+              <MappingFragment StoreEntitySet="Song">
+                <ScalarProperty Name="SongDuration" ColumnName="SongDuration" />
+                <ScalarProperty Name="PostTime" ColumnName="PostTime" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
+                <ScalarProperty Name="SongImage" ColumnName="SongImage" />
+                <ScalarProperty Name="SingerName" ColumnName="SingerName" />
+                <ScalarProperty Name="SongLink" ColumnName="SongLink" />
+                <ScalarProperty Name="SongName" ColumnName="SongName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SpotifyModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AlbumAndSongRelation" TypeName="SpotifyModel.AlbumAndSongRelation" StoreEntitySet="AlbumAndSongRelation">
+            <EndProperty Name="Song">
+              <ScalarProperty Name="ID" ColumnName="SongID" />
+            </EndProperty>
+            <EndProperty Name="Album">
+              <ScalarProperty Name="ID" ColumnName="AlbumID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="PlaylistAndSongRelation" TypeName="SpotifyModel.PlaylistAndSongRelation" StoreEntitySet="PlaylistAndSongRelation">
+            <EndProperty Name="Song">
+              <ScalarProperty Name="ID" ColumnName="SongID" />
+            </EndProperty>
+            <EndProperty Name="Playlist">
+              <ScalarProperty Name="ID" ColumnName="PlaylistID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
