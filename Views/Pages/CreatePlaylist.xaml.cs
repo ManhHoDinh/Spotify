@@ -47,6 +47,7 @@ namespace Spotify.Views.Pages
                 {
                     Ins.PlaylistName = SelectedItem.NamePlaylist;
                     Ins.PlaylistDescription = SelectedItem.DescriptionPlaylist;
+                    Ins.ImagePlaylist = SelectedItem.ImagePlaylist;
                 }
             }
         }
@@ -58,6 +59,19 @@ namespace Spotify.Views.Pages
             get { return (string)GetValue(PlaylistDescriptionProperty); }
             set { SetValue(PlaylistDescriptionProperty, value); }
         }
+
+
+        public ImageSource ImagePlaylist
+        {
+            get { return (ImageSource)GetValue(ImagePlaylistProperty); }
+            set { SetValue(ImagePlaylistProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ImagePlaylist.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ImagePlaylistProperty =
+            DependencyProperty.Register("ImagePlaylist", typeof(ImageSource), typeof(ListPlaylist), new PropertyMetadata(null));
+
+
 
         // Using a DependencyProperty as the backing store for PlaylistDescription.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlaylistDescriptionProperty =

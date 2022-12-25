@@ -76,5 +76,26 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+<!--library-->
+    <ControlTemplate x:Key="LikeSongBtn" TargetType="Button">
+        <Border Name="border"
+                CornerRadius="16"
+                Cursor="Hand"
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}">
+            <ContentPresenter 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Margin="20 0 0 24"
+                Content="{TemplateBinding Content}"/>
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#3F13B8" Offset="0"/>
+                    <GradientStop Color="#798C89" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+    </ControlTemplate>
 </ResourceDictionary>

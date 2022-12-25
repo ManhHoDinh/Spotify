@@ -45,6 +45,8 @@ namespace Spotify.Views.Pages
                 img.Source = new BitmapImage(new Uri(a.FileName));
 
                 ContentPresenter x = (btn.Template.FindName("content", btn) as ContentPresenter);
+                Image imageInit = VisualTreeHelper.GetChild(x, 0) as Image;
+                imageInit.Opacity = 0;
                 //(x.Content.FindName("ImgInitial", x) as Image).Opacity = 0;
                 
 

@@ -37,8 +37,26 @@ namespace Spotify.ViewModels.Pages
         public string DescriptionPlaylist { get => _descriptionPlaylist; set { _descriptionPlaylist = value; OnPropertyChanged(); } }
         private bool _isVisibleOption = false;
         public bool IsVisibleOption { get => _isVisibleOption; set { _isVisibleOption = value; OnPropertyChanged(); } }
+
+        private ImageSource _imagePlaylist;
+        public ImageSource ImagePlaylist { get => _imagePlaylist; set { _imagePlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
-        public Playlist SelectedPlaylist { get => _SelectedPlaylist; set { _SelectedPlaylist = value; OnPropertyChanged(); if (SelectedPlaylist != null) { NamePlaylist = SelectedPlaylist.NamePlaylist; DescriptionPlaylist = SelectedPlaylist.DescriptionPlaylist; } } }
+        public Playlist SelectedPlaylist 
+        { 
+            get => _SelectedPlaylist; 
+            set 
+            { 
+                _SelectedPlaylist = value;
+                OnPropertyChanged();
+                if (SelectedPlaylist != null) 
+                { 
+                    NamePlaylist = SelectedPlaylist.NamePlaylist; 
+                    DescriptionPlaylist = SelectedPlaylist.DescriptionPlaylist;
+                    ImagePlaylist = SelectedPlaylist.ImagePlaylist;
+                    ViewPage.Ins.CurrentView = new CreatePlaylist();
+                } 
+            } 
+        }
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
         public CreatePlaylistVM()
@@ -79,10 +97,12 @@ namespace Spotify.ViewModels.Pages
               {
                   PlayListForm SaveForm = (PlayListForm)p;
                   NamePlaylist = SaveForm.NamePlaylist.Text;
+                  ImagePlaylist = SaveForm.img.Source;
                   DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
                   SaveForm.Close();
                   SelectedPlaylist.NamePlaylist = NamePlaylist;
                   SelectedPlaylist.DescriptionPlaylist = DescriptionPlaylist;
+                  SelectedPlaylist.ImagePlaylist = ImagePlaylist;
 
               });
             OptionCommand = new RelayCommand<object>(
@@ -128,23 +148,23 @@ namespace Spotify.ViewModels.Pages
           IsVisibleOption = false;
 
       });
-
-            LoadImageCommand = new RelayCommand<object>(
-              (p) =>
-              {
-                  return true;
-              }, (p) =>
-              {
-                  PlayListForm form = new PlayListForm();
-                  OpenFileDialog filedialog = new OpenFileDialog();
-                  if (filedialog.ShowDialog() == true)
-                  {
-                      ImageBrush img = new ImageBrush();
-                      img.ImageSource = new BitmapImage(new Uri(filedialog.FileName, UriKind.Absolute)); 
-                      (p as Button).Background = img;
-                  }
-              });
         }
+        //    LoadImageCommand = new RelayCommand<object>(
+        //      (p) =>
+        //      {
+        //          return true;
+        //      }, (p) =>
+        //      {
+        //          PlayListForm form = new PlayListForm();
+        //          OpenFileDialog filedialog = new OpenFileDialog();
+        //          if (filedialog.ShowDialog() == true)
+        //          {
+        //              ImageBrush img = new ImageBrush();
+        //              img.ImageSource = new BitmapImage(new Uri(filedialog.FileName, UriKind.Absolute)); 
+        //              (p as Button).Background = img;
+        //          }
+        //      });
+        //}
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;
 
