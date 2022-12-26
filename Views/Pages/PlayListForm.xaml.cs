@@ -48,7 +48,7 @@ namespace Spotify.Views.Pages
                 Image imageInit = VisualTreeHelper.GetChild(x, 0) as Image;
                 imageInit.Opacity = 0;
                 //(x.Content.FindName("ImgInitial", x) as Image).Opacity = 0;
-                
+
 
             }
 

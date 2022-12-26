@@ -59,7 +59,7 @@ namespace Spotify.Views.Components
             }
         }
         public Header()
-        {          
+        {
             InitializeComponent();
             Binding binding = new Binding("IsDisableBack");
             binding.Source = ViewPage.Ins;
@@ -73,15 +73,17 @@ namespace Spotify.Views.Components
         public bool IsDisableBack
         {
             get { return (bool)GetValue(IsDisableBackProperty); }
-            set { SetValue(IsDisableBackProperty, value);
+            set
+            {
+                SetValue(IsDisableBackProperty, value);
                 Border bd = BackButton.Template.FindName("border", BackButton) as Border;
                 if (IsDisableBack == true)
                 {
-                        BackButton.Cursor = Cursors.No;
-                        SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
-                        color.Opacity = 0.2;
-                        bd.Background = color;
-                        (bd.FindName("img") as Image).Source = (ImageSource)Application.Current.Resources["BackDisable"];
+                    BackButton.Cursor = Cursors.No;
+                    SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
+                    color.Opacity = 0.2;
+                    bd.Background = color;
+                    (bd.FindName("img") as Image).Source = (ImageSource)Application.Current.Resources["BackDisable"];
                 }
                 else
                 {
@@ -127,15 +129,15 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsDisableNext", typeof(bool), typeof(Header), new PropertyMetadata(true));
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             int count = ViewPage.Ins.CurrentIndexView;
             Button btn = sender as Button;
             Border bd = BackButton.Template.FindName("border", BackButton) as Border;
-           // MessageBox.Show(bd.ToString());
+            // MessageBox.Show(bd.ToString());
             if (count > 0)
             {
 
-                
+
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
                 ViewPage.Ins.CurrentIndexView--;
                 IsDisableNext = false;
@@ -162,7 +164,7 @@ namespace Spotify.Views.Components
         {
 
             int count = ViewPage.Ins.CurrentIndexView;
-            if (count <ViewPage.Ins.ListPage.Count - 1)
+            if (count < ViewPage.Ins.ListPage.Count - 1)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
 

@@ -12,6 +12,8 @@ create table Song
 	PostTime smalldatetime,
 	SongDuration smalldatetime,
 )
+alter table  Song alter column PostTime string
+alter table  Song alter column SongDuration string
 
 create table Album
 (

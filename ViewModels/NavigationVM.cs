@@ -84,17 +84,17 @@ namespace Spotify.ViewModels
         }
         private void Home(object obj)
         {
-            
+
             ChangeViewStyle("Home", obj);
             TranslatePage(new HomeVM());
-          
+
 
         }
         private void Search(object obj)
         {
             ChangeViewStyle("Search", obj);
             TranslatePage(new SearchVM());
-           
+
 
         }
         private void YourLibrary(object obj)
@@ -112,11 +112,11 @@ namespace Spotify.ViewModels
 
             }
             int count = ListPlaylist.Ins.CountPlaylist;
-            ListPlaylist.Ins.List.Add(new Playlist { NamePlaylist = "My playlist #" + count.ToString(), DescriptionPlaylist = "", ImagePlaylist = (ImageSource)Application.Current.Resources["SongBackground"] });
+            ListPlaylist.Ins.List.Add(new Playlist { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImageSource = (ImageSource)Application.Current.Resources["SongBackground"] });
             ViewPage.Ins.CurrentView = new CreatePlaylist();
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
             ListPlaylist.Ins.CountPlaylist++;
-            
+
             ChangeViewStyle("CreatePlaylist", obj);
         }
         private void LikedSongs(object obj)
@@ -125,8 +125,8 @@ namespace Spotify.ViewModels
             TranslatePage(new LikedSongsVM());
 
         }
-       
-      
+
+
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);

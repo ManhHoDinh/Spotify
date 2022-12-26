@@ -30,19 +30,19 @@ namespace Spotify.Views.Pages
         
         }
 
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (SearchBox.Text != string.Empty)
-            {
-                PreparingSearch.Visibility = Visibility.Hidden;
-                BeginingSearch.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                PreparingSearch.Visibility = Visibility.Visible;
-                BeginingSearch.Visibility = Visibility.Hidden;
-            }
-        }
+        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (SearchBox.Text != string.Empty)
+        //    {
+        //        PreparingSearch.Visibility = Visibility.Hidden;
+        //        BeginingSearch.Visibility = Visibility.Visible;
+        //    }
+        //    else
+        //    {
+        //        PreparingSearch.Visibility = Visibility.Visible;
+        //        BeginingSearch.Visibility = Visibility.Hidden;
+        //    }
+        //}
     }
        
     

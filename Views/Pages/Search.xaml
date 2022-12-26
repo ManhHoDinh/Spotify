@@ -19,8 +19,5 @@
         <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
         </Grid>
         <components:SongsView Margin="0 90 0 0" ItemSource="{Binding SongSourceCollection}" x:Name="BeginingSearch"></components:SongsView>
-        <TextBox x:Name="SearchBox"
-                 Style="{StaticResource SearchHeader}"
-                 VerticalAlignment="Top"  Tag="Monke D Luffy"/>
     </Grid>
 </UserControl>

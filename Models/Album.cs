@@ -31,6 +31,7 @@ namespace Spotify.Models
         public static void InitUri(ref Album album)
         {
             album.AlbumImageUri = new Uri(album.AlbumImage == null ? "" : album.AlbumImage, UriKind.RelativeOrAbsolute);
+            album.SongsOfAlbum = new ObservableCollection<Song>(album.Songs);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

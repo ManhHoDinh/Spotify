@@ -12,6 +12,8 @@ namespace Spotify.Models
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
 
     public partial class Playlist
     {
@@ -20,11 +22,10 @@ namespace Spotify.Models
         {
             this.Songs = new HashSet<Song>();
             SongsOfPlaylist = new ObservableCollection<Song>(Songs);
-            PlaylistImageUri = new Uri(PlaylistImage == null ? "" : PlaylistImage, UriKind.RelativeOrAbsolute);
         }
         public static void InitUri(ref Playlist playlist)
         {
-            playlist.PlaylistImageUri = new Uri(playlist.PlaylistImage == null ? "" : playlist.PlaylistImage, UriKind.RelativeOrAbsolute);
+            playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage==null?"":playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
         }
 
         public int ID { get; set; }
@@ -36,7 +37,7 @@ namespace Spotify.Models
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Song> Songs { get; set; }
-        public Uri PlaylistImageUri { get; set; }
+        public ImageSource PlaylistImageSource { get; set; }
         public ObservableCollection<Song> SongsOfPlaylist { get; set; }
     }
 }

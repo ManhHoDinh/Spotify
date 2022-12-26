@@ -47,6 +47,7 @@ namespace Spotify.Views.Pages
                 {
                     Ins.PlaylistName = SelectedItem.PlaylistName;
                     Ins.PlaylistDescription = SelectedItem.Descriptions;
+                    Ins.ImagePlaylist = SelectedItem.PlaylistImageSource;
                 }
             }
         }
@@ -105,7 +106,7 @@ namespace Spotify.Views.Pages
     }
     public partial class CreatePlaylist : UserControl
     {
-     public CreatePlaylist()
+        public CreatePlaylist()
         {
             InitializeComponent();
             CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;

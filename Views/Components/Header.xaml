@@ -21,10 +21,10 @@
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true"/>
             </ControlTemplate.Triggers>
-            
+
         </ControlTemplate>
 
-       
+
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
         <Button x:Name="BackButton" 

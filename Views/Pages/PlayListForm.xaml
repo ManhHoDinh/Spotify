@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Spotify.Views.Pages"
         mc:Ignorable="d"
         xmlns:spotify="clr-namespace:Spotify"
-        DataContext="{StaticResource createplaylistVM}"
+        DataContext="{StaticResource createPlaylistVM}"
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
@@ -58,7 +58,7 @@
                     <Button.Template>
                         <ControlTemplate>
                             <Border x:Name="border" Opacity="1">
-                  
+
                                 <ContentPresenter Name="content">
                                     <ContentPresenter.Content>
                                         <Image x:Name="imgInitial" Width="180" Height="180" Source="{StaticResource SongBackground}"/>
@@ -86,7 +86,7 @@
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
-             
+
                 </Button>
                 <!--<Button Template="{StaticResource SongLoadStyle}"
                         Grid.Column="0" 
@@ -97,7 +97,6 @@
                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
                         Margin="0 0 16 0">
                     <Image Width="48" Height="48" Source="{StaticResource SongIcon}"/>
-
                 </Button>-->
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <spotify:PlaceHolderTextbox
