@@ -31,6 +31,9 @@ namespace Spotify.ViewModels
         public ICommand SearchCommand { get; set; }
         public ICommand YourLibraryCommand { get; set; }
         public ICommand AlbumCommand { get; set; }
+        private bool _isSearchView { get; set; }
+        public bool IsSearchView { get { return _isSearchView; }
+            set { _isSearchView = value; OnPropertyChanged(); } }
         public void ChangeViewStyle(string value, object obj)
         {
             StackPanel stack = obj as StackPanel;
@@ -40,7 +43,6 @@ namespace Spotify.ViewModels
                 ControlTemplate ct = btn.Template;
                 Image img = (Image)ct.FindName("image", btn);
                 TextBlock tb = (TextBlock)ct.FindName("name", btn);
-
                 if (btn.Name == value)
                 {
 
@@ -84,7 +86,7 @@ namespace Spotify.ViewModels
         }
         private void Home(object obj)
         {
-
+           
             ChangeViewStyle("Home", obj);
             TranslatePage(new HomeVM());
 
@@ -92,10 +94,10 @@ namespace Spotify.ViewModels
         }
         private void Search(object obj)
         {
+            IsSearchView= true;
             ChangeViewStyle("Search", obj);
             TranslatePage(new SearchVM());
-
-
+            
         }
         private void YourLibrary(object obj)
         {
@@ -119,6 +121,7 @@ namespace Spotify.ViewModels
 
             ChangeViewStyle("CreatePlaylist", obj);
         }
+       
         private void LikedSongs(object obj)
         {
             ChangeViewStyle("LikeSongs", obj);

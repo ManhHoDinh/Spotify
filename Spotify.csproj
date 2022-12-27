@@ -125,6 +125,9 @@
     <Compile Include="Views\Components\SongsView.xaml.cs">
       <DependentUpon>SongsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\AfterSendForgotPasswordEmailView.xaml.cs">
+      <DependentUpon>AfterSendForgotPasswordEmailView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,9 @@
     </Compile>
     <Compile Include="Views\Pages\ForgotPasswordForm.xaml.cs">
       <DependentUpon>ForgotPasswordForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ForgotPasswordView.xaml.cs">
+      <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -146,8 +152,12 @@
     <Compile Include="Views\Pages\Search.xaml.cs">
       <DependentUpon>Search.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\SignInForm.xaml.cs">
-      <DependentUpon>SignInForm.xaml</DependentUpon>
+    <Compile Include="Views\Pages\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SignInViewModel.cs" />
+    <Compile Include="Views\Pages\SignUpView.xaml.cs">
+      <DependentUpon>SignUpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\SongView.xaml.cs">
       <DependentUpon>SongView.xaml</DependentUpon>
@@ -271,6 +281,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\AfterSendForgotPasswordEmailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\AlbumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,6 +294,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Pages\ForgotPasswordForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,7 +317,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\SignInForm.xaml">
+    <Page Include="Views\Pages\SignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SignUpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,181 @@
+﻿<UserControl x:Class="Spotify.Views.Pages.SignUpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotify.Views.Pages"
+             mc:Ignorable="d" 
+             xmlns:spotify="clr-namespace:Spotify"
+
+             d:DesignHeight="1000" d:DesignWidth="800" >
+    <StackPanel Background="#ffffff">
+        <Image Source="{StaticResource spotifyLoginLogo}" Width="182" Height="56" Margin="0 40 0 40"/>
+        <TextBlock Style="{StaticResource LoginTextStyle}" HorizontalAlignment="Center" FontSize="32" FontWeight="DemiBold" TextAlignment="Center" Margin="0 0 0 32">Sign up for free to start<LineBreak/> listening.</TextBlock>
+        <StackPanel HorizontalAlignment="Center" Width="450">
+            <Line X1="1000" Stroke="#7f7f7f" Margin="16 0 16 34"></Line>
+            <TextBlock Margin="0 0 0 18" HorizontalAlignment="Center" 
+                       Text="Sign up with your email address"
+                       Style="{StaticResource LoginTextStyle}"
+                       FontWeight="Bold"
+                       FontSize="18"
+                       />
+            <TextBlock Text="What's your email?" Style="{StaticResource LoginTextStyle}" Margin="0 0 0 8 "></TextBlock>
+            <StackPanel Margin="0 0 0 24">
+                <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Email address or username" 
+                        Width="450"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Margin="0 0 0 8"
+                />
+                <StackPanel  Orientation="Horizontal">
+                    <!--<Image Source="{StaticResource Error}" Width="18" Height="18" VerticalAlignment="Center"></Image >-->
+                    <TextBlock Padding="5 0 0 0" Foreground="#D31225" Style="{StaticResource LoginTextStyle}" FontWeight="Normal" VerticalAlignment="Center">You need to enter your email.</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Confirm your email" Style="{StaticResource LoginTextStyle}" Margin="0 0 0 8 "></TextBlock>
+            <StackPanel Margin="0 0 0 24">
+                <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Email address or username" 
+                        Width="450"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Margin="0 0 0 8"
+                />
+                <StackPanel  Orientation="Horizontal">
+                    <!--<Image Source="{StaticResource Error}" Width="18" Height="18" VerticalAlignment="Center"></Image >-->
+                    <TextBlock Padding="5 0 0 0" Foreground="#D31225" Style="{StaticResource LoginTextStyle}" FontWeight="Normal" VerticalAlignment="Center">You need to confirm your email.</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="Create a password?" Style="{StaticResource LoginTextStyle}" Margin="0 0 0 8 "></TextBlock>
+            <StackPanel Margin="0 0 0 24">
+                <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Email address or username" 
+                        Width="450"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Margin="0 0 0 8"
+                />
+                <StackPanel  Orientation="Horizontal">
+                    <!--<Image Source="{StaticResource Error}" Width="18" Height="18" VerticalAlignment="Center"></Image >-->
+                    <TextBlock Padding="5 0 0 0" Foreground="#D31225" Style="{StaticResource LoginTextStyle}" FontWeight="Normal" VerticalAlignment="Center">You need to enter a password.</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="What should we call you?" Style="{StaticResource LoginTextStyle}" Margin="0 0 0 8 "></TextBlock>
+            <StackPanel Margin="0 0 0 24">
+                <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Email address or username" 
+                        Width="450"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                        Margin="0 0 0 8"
+                />
+                <StackPanel  Orientation="Horizontal">
+                    <!--<Image Source="{StaticResource Error}" Width="18" Height="18" VerticalAlignment="Center"></Image >-->
+                    <TextBlock Padding="5 0 0 0" Foreground="#D31225" Style="{StaticResource LoginTextStyle}" FontWeight="Normal" VerticalAlignment="Center">Enter a name for your profile.</TextBlock>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Text="What's your date of birth?" Style="{StaticResource LoginTextStyle}" Margin="0 0 0 8 "></TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="225"/>
+                    <ColumnDefinition Width="113"/>
+                    <ColumnDefinition Width="112"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="Month" Style="{StaticResource LoginTextStyle}" Padding="0 0 0 8" FontWeight="Regular"/>
+                    <!--<spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="Month" 
+                        Width="202"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                        Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                 />-->
+                    <ComboBox x:Name="SelectTeamComboBox" Width="202" HorizontalAlignment="Left" SelectedIndex="0" Background="AliceBlue">
+                        <ComboBox.ItemsSource>
+                            <CompositeCollection>
+                                <ComboBoxItem Visibility="Collapsed">-- Select Team --</ComboBoxItem>
+                                <ComboBoxItem >Option 1</ComboBoxItem>
+                                <ComboBoxItem >Option 2</ComboBoxItem>
+                            </CompositeCollection>
+                        </ComboBox.ItemsSource>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="1" >
+                    <TextBlock Text="Day" Style="{StaticResource LoginTextStyle}" Padding="0 0 0 8" FontWeight="Regular"/>
+                    <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="DD" 
+                        Width="90"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                />
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Year" Style="{StaticResource LoginTextStyle}" Padding="0 0 0 8" FontWeight="Regular"/>
+                    <spotify:PlaceHolderTextbox
+                        Background="transparent"                        
+                        FontSize="18"
+                        Foreground="#000000"
+                        Placeholder="YYYY" 
+                        Width="112"
+                        Height="42"
+                        Style="{StaticResource EmailPlaceHolder}"
+                        BorderBrush="#000000"
+                        BorderThickness="1"
+                         Padding="8 6 8 0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" 
+                />
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>

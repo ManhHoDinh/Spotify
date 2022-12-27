@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Spotify.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for SignInForm.xaml
+    /// Interaction logic for AfterSendForgotEmailView.xaml
     /// </summary>
-    public partial class SignInForm : UserControl
+    public partial class AfterSendForgotPasswordEmailView : UserControl
     {
-        public SignInForm()
+        public AfterSendForgotPasswordEmailView()
         {
             InitializeComponent();
         }

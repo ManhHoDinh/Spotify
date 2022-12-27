@@ -30,7 +30,7 @@
                     Margin="320,0,0,0"
                     Command="{Binding CloseCommand}" 
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type Window}}}">
-                    <Button.Template>
+                    <!--<Button.Template>
                         <ControlTemplate>
                             <Border Name="border" Background="Transparent" CornerRadius="50">
                                 <ContentPresenter>
@@ -45,7 +45,7 @@
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
-                    </Button.Template>
+                    </Button.Template>-->
                 </Button>
             </StackPanel>
             <Grid Grid.Row="1" Margin="24 0 0 0" VerticalAlignment="Top">
@@ -55,7 +55,7 @@
                 </Grid.ColumnDefinitions>
                 <Image x:Name="img" Grid.Column="0" Width="180" Height="180"/>
                 <Button  Click="Button_Click" Name="btn" Width="180" Height="180">
-                    <Button.Template>
+                    <!--<Button.Template>
                         <ControlTemplate>
                             <Border x:Name="border" Opacity="1">
 
@@ -85,7 +85,7 @@
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
-                    </Button.Template>
+                    </Button.Template>-->
 
                 </Button>
                 <!--<Button Template="{StaticResource SongLoadStyle}"

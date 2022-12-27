@@ -23,20 +23,47 @@ namespace Spotify.Views.Components
     /// </summary>
     public partial class Header : UserControl
     {
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register
+        public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register
             ("UserName", typeof(string), typeof(Header), new PropertyMetadata(null));
         private string _UserName;
         public string UserName
         {
             get
             {
-                return (string)GetValue(TextProperty);
+                return (string)GetValue(UserNameProperty);
             }
             set
             {
                 _UserName = value;
             }
         }
+        public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register
+           ("Avatar", typeof(ImageSource), typeof(Header), new PropertyMetadata(null));
+        private ImageSource _avatar;
+        public ImageSource Avatar
+        {
+            get
+            {
+                return (ImageSource)GetValue(AvatarProperty);
+            }
+            set
+            {
+                _avatar = value;
+            }
+        }
+
+        private bool _isSearchView;
+        public bool IsSearchView
+        {
+            get { return (bool)GetValue(IsSearchViewProperty); }
+            set { _isSearchView = value; }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchViewProperty =
+            DependencyProperty.Register("IsSearchView", typeof(bool), typeof(Header), new PropertyMetadata(null));
+
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
 
@@ -48,6 +75,14 @@ namespace Spotify.Views.Components
                     IsDisableBack = true;
                 }
                 else IsDisableBack = false;
+            }
+            if(e.Property== IsSearchViewProperty)
+            {
+                if (IsSearchView == true)
+                {
+                    IsSearchView = true;
+                }
+                else IsSearchView = false;
             }
             if (e.Property == IsDisableNextProperty)
             {
@@ -61,6 +96,7 @@ namespace Spotify.Views.Components
         public Header()
         {
             InitializeComponent();
+            DataContext= this;
             Binding binding = new Binding("IsDisableBack");
             binding.Source = ViewPage.Ins;
             binding.Mode = BindingMode.TwoWay;
