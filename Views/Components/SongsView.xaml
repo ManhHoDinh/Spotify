@@ -17,24 +17,8 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
-            <StackPanel Background="#181818">
-                <Border BorderThickness="0 0 0 1" Margin="16 0 16 16" BorderBrush="#b3b3b3">
-                    <Grid  Margin="0 24 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition Width="33.4*"/>
-                            <ColumnDefinition Width="26.2*"/>
-                            <ColumnDefinition Width="17.78*"/>
-                            <ColumnDefinition Width="17.62*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" FontSize="16" Foreground="#b3b3b3" Text="#" HorizontalAlignment="Left"  Margin="16 0 0 0"/>
-                        <TextBlock Grid.Column="1" FontSize="16" Foreground="#b3b3b3" Text="TITLE" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="2" FontSize="16" Foreground="#b3b3b3" Text="ALBUM" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="3" FontSize="16" Foreground="#b3b3b3" Text="DATE ADDED" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="4" FontSize="16" Foreground="#b3b3b3" Text="TIME"  HorizontalAlignment="Left" Margin="0 0 0 15"/>
-                    </Grid>
-                </Border>
-                <Grid>
+            <ScrollViewer Background="#121212">
+                <Grid Margin="0 24 0 0">
                     <ListView Name="PART_Header"   
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 
@@ -188,7 +172,7 @@
 
                     </ListView>
                 </Grid>
-            </StackPanel>
+            </ScrollViewer>
         </ControlTemplate>
     </UserControl.Template>
 
