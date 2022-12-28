@@ -1,9 +1,12 @@
-﻿using Spotify.ViewModels;
+﻿using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,20 +26,47 @@ namespace Spotify.Views.Components
     /// </summary>
     public partial class Header : UserControl
     {
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register
+        public static readonly DependencyProperty UserNameProperty = DependencyProperty.Register
             ("UserName", typeof(string), typeof(Header), new PropertyMetadata(null));
         private string _UserName;
         public string UserName
         {
             get
             {
-                return (string)GetValue(TextProperty);
+                return (string)GetValue(UserNameProperty);
             }
             set
             {
                 _UserName = value;
             }
         }
+        public static readonly DependencyProperty AvatarProperty = DependencyProperty.Register
+           ("Avatar", typeof(ImageSource), typeof(Header), new PropertyMetadata(null));
+        private ImageSource _avatar;
+        public ImageSource Avatar
+        {
+            get
+            {
+                return (ImageSource)GetValue(AvatarProperty);
+            }
+            set
+            {
+                _avatar = value;
+            }
+        }
+
+        private bool _isSearchView;
+        public bool IsSearchView
+        {
+            get { return (bool)GetValue(IsSearchViewProperty); }
+            set { _isSearchView = value; }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchViewProperty =
+            DependencyProperty.Register("IsSearchView", typeof(bool), typeof(Header), new PropertyMetadata(null));
+
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
 
@@ -49,6 +79,14 @@ namespace Spotify.Views.Components
                 }
                 else IsDisableBack = false;
             }
+            if(e.Property== IsSearchViewProperty)
+            {
+                if (IsSearchView == true)
+                {
+                    IsSearchView = true;
+                }
+                else IsSearchView = false;
+            }
             if (e.Property == IsDisableNextProperty)
             {
                 if (IsDisableNext == true)
@@ -59,7 +97,7 @@ namespace Spotify.Views.Components
             }
         }
         public Header()
-        {          
+        {
             InitializeComponent();
             Binding binding = new Binding("IsDisableBack");
             binding.Source = ViewPage.Ins;
@@ -73,15 +111,17 @@ namespace Spotify.Views.Components
         public bool IsDisableBack
         {
             get { return (bool)GetValue(IsDisableBackProperty); }
-            set { SetValue(IsDisableBackProperty, value);
+            set
+            {
+                SetValue(IsDisableBackProperty, value);
                 Border bd = BackButton.Template.FindName("border", BackButton) as Border;
                 if (IsDisableBack == true)
                 {
-                        BackButton.Cursor = Cursors.No;
-                        SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
-                        color.Opacity = 0.2;
-                        bd.Background = color;
-                        (bd.FindName("img") as Image).Source = (ImageSource)Application.Current.Resources["BackDisable"];
+                    BackButton.Cursor = Cursors.No;
+                    SolidColorBrush color = (SolidColorBrush)new BrushConverter().ConvertFrom("#ffffff");
+                    color.Opacity = 0.2;
+                    bd.Background = color;
+                    (bd.FindName("img") as Image).Source = (ImageSource)Application.Current.Resources["BackDisable"];
                 }
                 else
                 {
@@ -127,15 +167,13 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsDisableNext", typeof(bool), typeof(Header), new PropertyMetadata(true));
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             int count = ViewPage.Ins.CurrentIndexView;
             Button btn = sender as Button;
             Border bd = BackButton.Template.FindName("border", BackButton) as Border;
-           // MessageBox.Show(bd.ToString());
+            // MessageBox.Show(bd.ToString());
             if (count > 0)
             {
-
-                
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
                 ViewPage.Ins.CurrentIndexView--;
                 IsDisableNext = false;
@@ -145,24 +183,11 @@ namespace Spotify.Views.Components
                 IsDisableBack = true;
             }
         }
-        private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //if (SearchBox.Text != string.Empty)
-            //{
-            //    PreparingSearch.Visibility = Visibility.Hidden;
-            //    BeginingSearch.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    PreparingSearch.Visibility = Visibility.Visible;
-            //    BeginingSearch.Visibility = Visibility.Hidden;
-            //}
-        }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
 
             int count = ViewPage.Ins.CurrentIndexView;
-            if (count <ViewPage.Ins.ListPage.Count - 1)
+            if (count < ViewPage.Ins.ListPage.Count - 1)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
 
@@ -174,6 +199,55 @@ namespace Spotify.Views.Components
                 IsDisableNext = true;
             }
         }
+        public static string RemoveSign4VietnameseString(string str)
+        {
+            for (int i = 1; i < VietnameseSigns.Length; i++)
+            {
+                for (int j = 0; j < VietnameseSigns[i].Length; j++)
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+            }
+            return str;
+        }
+        private static readonly string[] VietnameseSigns = new string[]
+        {
 
+            "aAeEoOuUiIdDyY",
+
+            "áàạảãâấầậẩẫăắằặẳẵ",
+
+            "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+            "éèẹẻẽêếềệểễ",
+
+            "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+            "óòọỏõôốồộổỗơớờợởỡ",
+
+            "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+            "úùụủũưứừựửữ",
+
+            "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+            "íìịỉĩ",
+
+            "ÍÌỊỈĨ",
+
+            "đ",
+
+            "Đ",
+
+            "ýỳỵỷỹ",
+
+            "ÝỲỴỶỸ"
+        };
+
+        private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchVM.Ins.IsSearch = true;
+            if (SearchTextbox.Text == "")
+                SearchVM.Ins.IsSearch = false;
+            SearchVM.Ins.filteredCollection = new ObservableCollection<Song>(from item in Songs.AllSong where RemoveSign4VietnameseString(item.SongName).ToUpper().Contains(RemoveSign4VietnameseString(SearchTextbox.Text).ToUpper()) select item);
+        }
     }
 }

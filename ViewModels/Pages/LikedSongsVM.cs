@@ -18,13 +18,13 @@ namespace Spotify.ViewModels.Pages
     public class LikedSongsVM : BaseViewModel
     {
         private ObservableCollection<Song> _listSong;
-        public  ObservableCollection<Song> listSong
+        public ObservableCollection<Song> listSong
         {
             get => _listSong;
             set { _listSong = value; OnPropertyChanged(); }
         }
         private string _Name = "Like Songs";
-        public string Name 
+        public string Name
         {
             get => _Name;
             set { _Name = value; OnPropertyChanged(); }
@@ -66,14 +66,14 @@ namespace Spotify.ViewModels.Pages
         public Uri LinkSong { get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); } }
         private Uri _Image;
         public Uri Image { get => _Image; set { _Image = value; OnPropertyChanged(); } }
-        
+
         public LikedSongsVM()
         {
-            
-            listSong = new ObservableCollection<Song>();
-            listSong.Add(Songs.CamNang);
-            listSong.Add(Songs.BenTrenTangLau);
-            listSong.Add(Songs.DauMua);
+            var ListLikeSong = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).FirstOrDefault();
+            listSong = ListLikeSong.SongsOfAlbum;
+            //listSong.Add(Songs.CamNang);
+            //listSong.Add(Songs.BenTrenTangLau);
+            //listSong.Add(Songs.DauMua);
 
             //listSong.Add(new SongItemModel { Id = "3", NameSong = "chúng ta không thuộc nhau", NameSinger = "Sơn Tùng", DurationSong = "3:231" });
             //listSong.Add(new SongItemModel { Id = "4", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });

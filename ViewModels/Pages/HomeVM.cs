@@ -37,9 +37,11 @@ namespace Spotify.ViewModels.Pages
             set { _SelectedItem = value; 
                 OnPropertyChanged(); 
                 if (SelectedItem != null) 
-                { AlbumName = SelectedItem.AlbumName; 
+                { 
+                  AlbumName = SelectedItem.AlbumName; 
                   AlbumDescription = SelectedItem.Descriptions;
                   SongsOfAlbum = SelectedItem.SongsOfAlbum;
+                  AlbumImage = SelectedItem.AlbumImageUri;
                   IsAlbumItemVisible = true; 
                   IsAlbumListVisible = false;
                   ViewPage.Ins.CurrentView = new AlbumView();
@@ -78,6 +80,9 @@ namespace Spotify.ViewModels.Pages
         public bool IsAlbumItemVisible { get => _IsAlbumItemVisible; set { _IsAlbumItemVisible = value; OnPropertyChanged(); } }
         private bool _IsAlbumListVisible;
         public bool IsAlbumListVisible { get => _IsAlbumListVisible; set { _IsAlbumListVisible = value; OnPropertyChanged(); } }
+
+        private Uri _AlbumImage;
+        public Uri AlbumImage { get => _AlbumImage; set { _AlbumImage = value; OnPropertyChanged(); } }
         public HomeVM()
         {
             IsAlbumListVisible = true;
@@ -99,24 +104,19 @@ namespace Spotify.ViewModels.Pages
             TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             MadeForYou = new ObservableCollection<Album>();
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",  });
             MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             MadeForYou.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });
             MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            JumBack = new ObservableCollection<Album>();
-            ObservableCollection<Song> list = Songs.AllSong;
-            list.Add(Songs.CamNang);
-            list.Add(Songs.BenTrenTangLau);
-            list.Add(Songs.DauMua);
-           
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list});
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll}", SongsOfAlbum = list });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", SongsOfAlbum = list });
+            JumBack = Albums.AllAlbums;
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",AlbumImageUri = new Uri("pack://siteoforigin:,,,/Resource/Images/CamNangImg.jpg", UriKind.RelativeOrAbsolute) });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll}",  });
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",});
+            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",  });
             Recently = new ObservableCollection<Album>();
             Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"  });
             Recently.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });

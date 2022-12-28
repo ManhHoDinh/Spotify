@@ -11,7 +11,7 @@ namespace Spotify.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Song
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +20,12 @@ namespace Spotify.Models
             this.Albums = new HashSet<Album>();
             this.Playlists = new HashSet<Playlist>();
         }
-        
+
         public static void InitUri(ref Song song)
         {
             song.SongLinkUri = new Uri(song.SongLink == null ? "" : song.SongLink, UriKind.RelativeOrAbsolute);
             song.SongImageUri = new Uri(song.SongImage == null ? "" : song.SongImage, UriKind.RelativeOrAbsolute);
         }
-
         public int ID { get; set; }
         public string SongName { get; set; }
         public string SongLink { get; set; }
@@ -36,7 +35,7 @@ namespace Spotify.Models
         public string Descriptions { get; set; }
         public string PostTime { get; set; }
         public string SongDuration { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Album> Albums { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

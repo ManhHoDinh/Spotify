@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
 using Spotify.Views.Components;
+using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -41,7 +43,15 @@ namespace Spotify.ViewModels.Pages
     {
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;
-       
+        private ObservableCollection<Song> _SongSource = new ObservableCollection<Song>();
+        public ObservableCollection<Song> SongSource { get => _SongSource; set { _SongSource = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<Song> _filteredCollection = new ObservableCollection<Song>();
+        public ObservableCollection<Song> filteredCollection { get => _filteredCollection; set { _filteredCollection = value; OnPropertyChanged(); } }
+
+        private bool _isSearch;
+        public bool IsSearch { get => _isSearch; set { _isSearch= value; OnPropertyChanged(); } }
+        public static SearchVM Ins=new SearchVM();
         private Song _SelectedSongItem;
         public Song SelectedSongItem
         {
@@ -54,21 +64,23 @@ namespace Spotify.ViewModels.Pages
                 {
                     SongBottom.Ins.SongName = SelectedSongItem.SongName;
                     SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                    SongBottom.Ins.LinkSong = new Uri(SelectedSongItem.SongLink);
+                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    SongBottom.Ins.IsPlay = true;
+                    ViewPage.Ins.CurrentView = new SongView();
+                    ViewPage.Ins.CurrentIndexView++;
                 }
             }
         }
         public SearchVM()
         {
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            songs.Add(Songs.CamNang) ;
-            songs.Add(Songs.BenTrenTangLau);
-            songs.Add(Songs.DauMua);
-
-            SongItemsCollection = new CollectionViewSource { Source = songs };
+            SongSource = Songs.AllSong;
+            SongItemsCollection = new CollectionViewSource { Source = SongSource };
             SongItemsCollection.Filter += MenuItems_Filter;
-
+            filteredCollection = SongSource;
+            IsSearch= false;
         }
+
         public static string RemoveSign4VietnameseString(string str)
         {
             for (int i = 1; i < VietnameseSigns.Length; i++)
@@ -117,7 +129,8 @@ namespace Spotify.ViewModels.Pages
             get => filterText;
             set
             {
-                filterText = value;
+                filteredCollection = new ObservableCollection<Song>(from item in SongSource where item.ID > 20 select item);
+                MessageBox.Show(filterText);
                 SongItemsCollection.View.Refresh();
                 OnPropertyChanged("FilterText");
             }
@@ -141,7 +154,19 @@ namespace Spotify.ViewModels.Pages
                 e.Accepted = false;
             }
         }
-
+        private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //if (SearchBox.Text != string.Empty)
+            //{
+            //    PreparingSearch.Visibility = Visibility.Hidden;
+            //    BeginingSearch.Visibility = Visibility.Visible;
+            //}
+            //else
+            //{
+            //    PreparingSearch.Visibility = Visibility.Visible;
+            //    BeginingSearch.Visibility = Visibility.Hidden;
+            //}
+        }
 
     }
 }

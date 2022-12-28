@@ -7,11 +7,10 @@
              xmlns:local="clr-namespace:Spotify.Views.Components"
               xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="620" d:DesignWidth="800"
-             
+           
              >
     <UserControl.DataContext>
-        <vm:SearchVM></vm:SearchVM>
+        <vm:SearchVM/>
     </UserControl.DataContext>
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="BaseHeaderButton">
@@ -21,12 +20,81 @@
             <ControlTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="true"/>
             </ControlTemplate.Triggers>
-            
         </ControlTemplate>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
 
-       
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.6*"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Button x:Name="BackButton" 
+               Cursor="No"
+                Click="BackButton_Click" 
+                BorderThickness="0" 
+                Margin="16 20 0 0"
+                Template="{StaticResource BaseHeaderButton}" 
+                Tag="{StaticResource BackDisable}"/>
+            <Button x:Name="NextButton" 
+               Cursor="No"
+                Click="NextButton_Click" 
+                BorderThickness="0"  
+                Template="{StaticResource BaseHeaderButton}" 
+                Tag="{StaticResource NextDisable}"
+                Margin="20 20 0 0"
+                />
+
+        </StackPanel>
+        <Grid x:Name="SearchBox" Grid.Column="1" HorizontalAlignment="Left" 
+                Visibility="{Binding IsSearchView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Rectangle x:Name="searchBoxForm" Width="370" Height="40" Margin="30,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{StaticResource SearchBoxForm}"></ImageBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <StackPanel Width="{Binding Path=Width, ElementName=searchBoxForm}"  
+                        Height="{Binding Path=Height, ElementName=searchBoxForm}" 
+                        Margin="{Binding Path=Margin, ElementName=searchBoxForm}" 
+                        Orientation="Horizontal" 
+                        HorizontalAlignment="{Binding Path=HorizontalAlignment, ElementName=searchBoxForm}" 
+                        VerticalAlignment="{Binding Path=VerticalAlignment, ElementName=searchBoxForm}"
+                       
+                        >
+                <Rectangle Height="20" Width="20" Margin="15,0,0,0">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{StaticResource Find}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Grid>
+                    <TextBox x:Name="SearchTextbox" Style="{StaticResource SearchBoxStyle}" 
+                         TextWrapping="Wrap" 
+                         UndoLimit="500"
+                         FontSize="18" 
+                         Width="300"
+                         CaretBrush="#000"
+                         TextChanged="SearchTextbox_TextChanged"
+                         Foreground="#000" />
+                    <TextBlock 
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource SearchTextStyle}" 
+                    Foreground="#FF757575" Margin=" 22,8,0,8" Text="What do you want listen to?"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+        <StackPanel  Margin="-50,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Grid.Column="2">
+            <Rectangle Height="34" Width="34" Margin="3, 3, 3, 3">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding Avatar}"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Label Width="122" Height="40" Content="{Binding UserName}" Margin="3,0,0,0" FontFamily="Bahnschrift Light Condensed" FontSize="18" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" ></Label>
+        </StackPanel>
+    </Grid>
+    <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch">
         <Button x:Name="BackButton" 
                Cursor="No"
                 Click="BackButton_Click" 
@@ -76,10 +144,10 @@
         <StackPanel Width="189" Height="40" Margin="30,20,0,0" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
             <Rectangle Height="34" Width="34" Margin="3, 3, 3, 3">
                 <Rectangle.Fill>
-                    <ImageBrush ImageSource="{StaticResource Avatar}"/>
+                    <ImageBrush ImageSource="{Binding Avatar}"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Label Width="122" Height="40" Content="{Binding Path=UserName}" Margin="3,0,0,0" FontFamily="Bahnschrift Light Condensed" FontSize="18" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" ></Label>
+            <Label Width="122" Height="40" Content="{Binding UserName}" Margin="3,0,0,0" FontFamily="Bahnschrift Light Condensed" FontSize="18" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" ></Label>
         </StackPanel>
-    </StackPanel>
+    </StackPanel>-->
 </UserControl>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              xmlns:component="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
-             DataContext="{StaticResource createplaylistVM}"
+             DataContext="{StaticResource createPlaylistVM}"
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:spotify="clr-namespace:Spotify"
              d:DesignHeight="800" d:DesignWidth="800"
@@ -44,7 +44,7 @@
                         Cursor="Hand"
                         HorizontalAlignment="Left"
                             Margin="32 0 0 0">
-        
+
                         <Button.Background>
                             <ImageBrush ImageSource="{Binding ImagePlaylist}"/>
                         </Button.Background>
@@ -52,9 +52,9 @@
                     <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
                         <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
-                                </TextBlock.InputBindings>
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
                         </TextBlock>
                         <TextBlock Cursor="Hand" Text="{Binding DescriptionPlaylist}" Foreground="#b3b3b3" FontSize="16"/>
                     </StackPanel>
@@ -68,7 +68,7 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <Border Margin="32 0 32 0" BorderBrush="#bababa" BorderThickness="0 0 0 1">
-          
+
                     <StackPanel>
                         <Button
                         Command="{Binding OptionCommand}"
@@ -155,7 +155,7 @@
                                                         <ColumnDefinition Width="350"/>
                                                         <ColumnDefinition Width="200"/>
                                                         <ColumnDefinition Width="100"/>
-                                                    </Grid.ColumnDefinitions>                       
+                                                    </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
                                                         <Image Width="40" Source="{Binding ImageSong}" Margin="0 0 20 0"/>
                                                         <StackPanel Orientation="Vertical">
@@ -171,7 +171,7 @@
                                                             </Button.Background>
                                                         </Button>
                                                     </Grid>
-                                                   
+
                                                 </Grid>
                                             </Border>
 
@@ -181,7 +181,7 @@
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
-                 
+
                 </Grid>
             </StackPanel>
         </Grid>

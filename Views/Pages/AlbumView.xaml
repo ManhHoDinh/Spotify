@@ -36,12 +36,13 @@
                                     <GradientStop Color="#798C89" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
+                            <!--<Image Source="{Binding AlbumImage}"/>-->
                         </Border>
                     </WrapPanel>
                     <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
                         <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
-                        <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="96" Foreground="#ffffff" FontWeight="Bold" />
-                        <TextBlock Text="{Binding NameSinger}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                        <TextBlock Text="{Binding AlbumName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                        <TextBlock Text="{Binding AlbumDescription}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -60,7 +61,7 @@
                 </Border>
             </Border>
             <Grid  Grid.Row="2">
-                <components:SongsView SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <components:SongsView FavorIcon="{StaticResource HeartButton}" SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     ItemSource="{Binding SongsOfAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>

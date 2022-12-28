@@ -98,9 +98,7 @@
                 </Grid.RowDefinitions>-->
                
                 <ContentControl x:Name="Pages" Content="{Binding Source={x:Static local:ViewPage.Ins}, Path=CurrentView}"/>
-                <Component:Header Background="Transparent" Height="64" VerticalAlignment="Top"/>
-
-
+                <Component:Header Avatar="{StaticResource Avatar}" IsSearchView="true" UserName="Monkey D luffy" Background="Transparent" Height="64" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
         <controls:bottomComponent Grid.Row="1" Loaded="bottomComponent_Loaded">

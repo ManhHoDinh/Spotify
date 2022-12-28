@@ -26,6 +26,9 @@
                       SelectedItem="{Binding SelectedSong,ElementName=songview,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding ItemSource,ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
                       BorderBrush="Transparent">
+                        <ListView.Resources>
+                            <vm:OrdinalConverter x:Key="OrdinalConverter" />
+                        </ListView.Resources>
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
 
@@ -36,7 +39,7 @@
                                         <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
                                             <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72" HorizontalAlignment="Stretch">
 
-                                                <Grid HorizontalAlignment="Stretch">
+                                                <Grid HorizontalAlignment="Stretch" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="5*"/>
                                                         <ColumnDefinition Width="33.4*"/>
@@ -68,7 +71,7 @@
                                                                 </EventTrigger>
                                                             </Image.Triggers>
                                                         </Image>
-                                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Name="Id" Text="{Binding ID}" Foreground="#ffffff" VerticalAlignment="Center"  Margin="29 0 0 0"/>
+                                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Name="Id"  Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}" Foreground="#ffffff" VerticalAlignment="Center"  Margin="29 0 0 0"/>
                                                     </Grid>
                                                     <Button Grid.Column="0" Visibility="Hidden" x:Name="PlayPauseBtn" Width="16" Height="16" HorizontalAlignment="Left" Click="PlayPauseSongBtn_Click" Margin="25 0 0 0">
                                                         <Button.Template>
@@ -116,7 +119,7 @@
 
                                                     <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click"  Template="{DynamicResource HeartStyle}" Width="16" Height="16">
                                                         <Button.Background>
-                                                            <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
+                                                            <ImageBrush ImageSource="{Binding FavorIcon, ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                                         </Button.Background>
                                                     </Button>
 
