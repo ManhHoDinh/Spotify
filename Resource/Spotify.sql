@@ -12,8 +12,8 @@ create table Song
 	PostTime smalldatetime,
 	SongDuration smalldatetime,
 )
-alter table  Song alter column PostTime string
-alter table  Song alter column SongDuration string
+alter table Song alter column PostTime nvarchar(max)
+alter table Song alter column SongDuration nvarchar(max)
 
 create table Album
 (
@@ -32,6 +32,9 @@ create table Users
 	UserImage nvarchar(max),
 )
 
+drop table PlaylistAndSongRelation
+drop table playlist
+--PlaylistType :  0 : Likedsong, 1 : Reccent Search, 2 : Playlist normal
 create table Playlist
 (
 	ID int identity(1,1) primary key,
@@ -39,29 +42,29 @@ create table Playlist
 	Descriptions nvarchar(max),
 	PlaylistImage nvarchar(max),
 	UserID int not null,
-
+	PlaylistType int,
 	foreign key (UserID) references Users(UserID),
 )
-
-create table AlbumAndSongRelation
-(
-	AlbumID int not null,
-	SongID int not null
-
-	foreign key (AlbumID) references Album(ID),
-	foreign key (SongID) references Song(ID)
-)
-
-alter table AlbumAndSongRelation add constraint PK_AASR primary key (AlbumID, SongID)
 
 create table PlaylistAndSongRelation
 (
 	PlaylistID int not null,
 	SongID int not null,
-
 	foreign key (PlaylistID) references Playlist(ID),
+	foreign key (SongID) references Song(ID),
+)
+
+
+
+create table AlbumAndSongRelation
+(
+	AlbumID int not null,
+	SongID int not null,
+	foreign key (AlbumID) references Album(ID),
 	foreign key (SongID) references Song(ID)
 )
+
+alter table AlbumAndSongRelation add constraint PK_AASR primary key (AlbumID, SongID)
 alter table PlaylistAndSongRelation add constraint PK_PASR primary key (PlaylistID, SongID)
 
 insert into Song values (N'Ánh Trăng Tình Ái', N'pack://siteoforigin:,,,/Resource/Songs/AnhTrangTinhAi/AnhTrangTinhAi.mp3', N'Dương Edward', N'pack://siteoforigin:,,,/Resource/Songs/AnhTrangTinhAi/AnhTrangTinhAi.jpg', Null, null, '2021', '04:04')
@@ -127,6 +130,9 @@ insert into AlbumAndSongRelation values (3, 37)
 insert into AlbumAndSongRelation values (2, 22)
 insert into AlbumAndSongRelation values (2, 36)
 insert into AlbumAndSongRelation values (5, 31)
+insert into Users values ('Admin','Admin',null)
+insert into Playlist values('Likesong','','',1, 0)
+insert into Playlist values('Recently Search','','',1,0)
 
 
 

@@ -21,19 +21,18 @@ namespace Spotify.Models
         public Playlist()
         {
             this.Songs = new HashSet<Song>();
-            SongsOfPlaylist = new ObservableCollection<Song>(Songs);
         }
         public static void InitUri(ref Playlist playlist)
         {
-            playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage==null?"":playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
+            playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage == null ? "" : playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
         }
-
         public int ID { get; set; }
         public string PlaylistName { get; set; }
         public string Descriptions { get; set; }
         public string PlaylistImage { get; set; }
         public int UserID { get; set; }
-    
+        public Nullable<int> PlaylistType { get; set; }
+
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Song> Songs { get; set; }

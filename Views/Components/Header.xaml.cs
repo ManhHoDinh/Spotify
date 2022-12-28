@@ -1,9 +1,12 @@
-﻿using Spotify.ViewModels;
+﻿using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -96,7 +99,6 @@ namespace Spotify.Views.Components
         public Header()
         {
             InitializeComponent();
-            DataContext= this;
             Binding binding = new Binding("IsDisableBack");
             binding.Source = ViewPage.Ins;
             binding.Mode = BindingMode.TwoWay;
@@ -172,8 +174,6 @@ namespace Spotify.Views.Components
             // MessageBox.Show(bd.ToString());
             if (count > 0)
             {
-
-
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
                 ViewPage.Ins.CurrentIndexView--;
                 IsDisableNext = false;
@@ -182,19 +182,6 @@ namespace Spotify.Views.Components
             {
                 IsDisableBack = true;
             }
-        }
-        private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //if (SearchBox.Text != string.Empty)
-            //{
-            //    PreparingSearch.Visibility = Visibility.Hidden;
-            //    BeginingSearch.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    PreparingSearch.Visibility = Visibility.Visible;
-            //    BeginingSearch.Visibility = Visibility.Hidden;
-            //}
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -212,6 +199,55 @@ namespace Spotify.Views.Components
                 IsDisableNext = true;
             }
         }
+        public static string RemoveSign4VietnameseString(string str)
+        {
+            for (int i = 1; i < VietnameseSigns.Length; i++)
+            {
+                for (int j = 0; j < VietnameseSigns[i].Length; j++)
+                    str = str.Replace(VietnameseSigns[i][j], VietnameseSigns[0][i - 1]);
+            }
+            return str;
+        }
+        private static readonly string[] VietnameseSigns = new string[]
+        {
 
+            "aAeEoOuUiIdDyY",
+
+            "áàạảãâấầậẩẫăắằặẳẵ",
+
+            "ÁÀẠẢÃÂẤẦẬẨẪĂẮẰẶẲẴ",
+
+            "éèẹẻẽêếềệểễ",
+
+            "ÉÈẸẺẼÊẾỀỆỂỄ",
+
+            "óòọỏõôốồộổỗơớờợởỡ",
+
+            "ÓÒỌỎÕÔỐỒỘỔỖƠỚỜỢỞỠ",
+
+            "úùụủũưứừựửữ",
+
+            "ÚÙỤỦŨƯỨỪỰỬỮ",
+
+            "íìịỉĩ",
+
+            "ÍÌỊỈĨ",
+
+            "đ",
+
+            "Đ",
+
+            "ýỳỵỷỹ",
+
+            "ÝỲỴỶỸ"
+        };
+
+        private void SearchTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchVM.Ins.IsSearch = true;
+            if (SearchTextbox.Text == "")
+                SearchVM.Ins.IsSearch = false;
+            SearchVM.Ins.filteredCollection = new ObservableCollection<Song>(from item in Songs.AllSong where RemoveSign4VietnameseString(item.SongName).ToUpper().Contains(RemoveSign4VietnameseString(SearchTextbox.Text).ToUpper()) select item);
+        }
     }
 }

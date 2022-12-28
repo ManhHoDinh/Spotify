@@ -1,6 +1,7 @@
 using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -18,13 +19,13 @@ namespace Spotify.Views.Components
     /// Interaction logic for SongsView.xaml
     /// </summary>
     [TemplatePart(Name = "PART_Header", Type = typeof(ListView))]
-    
+
     public partial class SongsView : UserControl
     {
         private ListView listview;
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-          
+
             base.OnPropertyChanged(e);
             if (e.Property == IsPlayProperty)
             {
@@ -55,8 +56,8 @@ namespace Spotify.Views.Components
                     }
 
                 }
-                
-              
+
+
             }
         }
         public SongsView()
@@ -73,15 +74,24 @@ namespace Spotify.Views.Components
             //    binding.Mode = BindingMode.TwoWay;
             //    BindingOperations.SetBinding(songview, IsPlayProperty, binding);
             //}
-          
+
 
         }
 
         // Using a DependencyProperty as the backing store for Songs.  This enables animation, styling, binding, etc...
-        
+
+        public ImageSource FavorIcon
+        {
+            get { return (ImageSource)GetValue(FavorIconProperty); }
+            set { SetValue(FavorIconProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FavorIcon.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FavorIconProperty =
+            DependencyProperty.Register("FavorIcon", typeof(ImageSource), typeof(SongsView), new PropertyMetadata(null));
 
 
-        public ObservableCollection<Song> ItemSource    
+        public ObservableCollection<Song> ItemSource
         {
             get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
             set { SetValue(ItemSourceProperty, value); }
@@ -115,7 +125,7 @@ namespace Spotify.Views.Components
         }
         public static readonly DependencyProperty IsPlayProperty =
             DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
-        
+
         public bool IsVisibleOption
         {
             get { return (bool)GetValue(IsVisibleOptionProperty); }
@@ -124,7 +134,7 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for IsVisibleOption.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsVisibleOptionProperty =
             DependencyProperty.Register("IsVisibleOption", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
-       
+
         public bool IsFavor
         {
             get { return (bool)GetValue(IsFavorProperty); }
@@ -136,11 +146,39 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsFavor", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
         private void Favor_Click(object sender, RoutedEventArgs e)
         {
-            Button HeartBtn = sender as Button;
-            int index = int.Parse(HeartBtn.Tag.ToString());
-
-            //LikedSongsVM.listSong.RemoveAt(index-1);
-
+            var listview = GetTemplateChild("PART_Header") as ListView;
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Grid gr = btn.Parent as Grid;
+            int id = int.Parse(gr.Tag.ToString());
+            ImageBrush img = new ImageBrush();
+            var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
+            var album = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).FirstOrDefault();
+            if (FavorIcon == (ImageSource)Application.Current.Resources["HeartFillButton"])
+            {
+                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
+                btn.Background = img;
+                album.SongsOfAlbum.Remove(song);
+                album.Songs.Remove(song);
+                for (int i = 0; i < listview.Items.Count; i++)
+                {
+                    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                    TextBlock tb = new TextBlock();
+                    if (template != null)
+                    {
+                        tb = template.Template.FindName("Id", template) as TextBlock;
+                        tb.Text = (i + 1).ToString();
+                    }
+                }
+            }
+            else
+            {
+                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                btn.Background = img;
+                album.Songs.Add(song);
+                album.SongsOfAlbum.Add(song);
+            }
+            DataProvider.Ins.DB.SaveChanges();
         }
 
         private void NameSong_Click(object sender, RoutedEventArgs e)
@@ -151,17 +189,17 @@ namespace Spotify.Views.Components
             curItem.IsSelected = true;
             ViewPage.Ins.CurrentView = new SongView();
         }
-         ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
-         ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
+        ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
+        ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
         private void PlayPauseSongBtn_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush img = new ImageBrush();
             Button btn = sender as Button;
             ListViewItem template = btn.TemplatedParent as ListViewItem;
-            
+
             if (SongBottom.Ins.IsPlay == true)
             {
-                if(template.IsSelected == false)
+                if (template.IsSelected == false)
                 {
                     template.IsSelected = true;
                     img.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
@@ -172,7 +210,7 @@ namespace Spotify.Views.Components
                     img.ImageSource = (ImageSource)Application.Current.Resources["Playxs"];
                     SongBottom.Ins.IsPlay = false;
                 }
-               
+
             }
             else
             {

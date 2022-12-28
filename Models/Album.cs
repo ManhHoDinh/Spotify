@@ -19,20 +19,17 @@ namespace Spotify.Models
         public Album()
         {
             this.Songs = new HashSet<Song>();
-            SongsOfAlbum = new ObservableCollection<Song>(Songs);
-            AlbumImageUri = new Uri(AlbumImage==null?"":AlbumImage, UriKind.RelativeOrAbsolute);
         }
-        
-        public int ID { get; set; }
-        public string AlbumName { get; set; }
-        public string Descriptions { get; set; }
-        public string AlbumImage { get; set; }
-        public string AlbumColor { get; set; }
         public static void InitUri(ref Album album)
         {
             album.AlbumImageUri = new Uri(album.AlbumImage == null ? "" : album.AlbumImage, UriKind.RelativeOrAbsolute);
             album.SongsOfAlbum = new ObservableCollection<Song>(album.Songs);
         }
+        public int ID { get; set; }
+        public string AlbumName { get; set; }
+        public string Descriptions { get; set; }
+        public string AlbumImage { get; set; }
+        public string AlbumColor { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Song> Songs { get; set; }

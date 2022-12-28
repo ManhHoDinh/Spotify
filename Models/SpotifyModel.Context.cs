@@ -28,6 +28,7 @@ namespace Spotify.Models
         public virtual DbSet<Album> Albums { get; set; }
         public virtual DbSet<Playlist> Playlists { get; set; }
         public virtual DbSet<Song> Songs { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

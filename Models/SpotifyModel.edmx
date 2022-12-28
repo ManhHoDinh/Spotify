@@ -32,6 +32,7 @@
           <Property Name="Descriptions" Type="nvarchar(max)" />
           <Property Name="PlaylistImage" Type="nvarchar(max)" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PlaylistType" Type="int" />
         </EntityType>
         <EntityType Name="PlaylistAndSongRelation">
           <Key>
@@ -54,6 +55,16 @@
           <Property Name="Descriptions" Type="nvarchar(max)" />
           <Property Name="PostTime" Type="nvarchar(max)" />
           <Property Name="SongDuration" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -88,7 +99,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Playlist__UserID__2A4B4B5E">
+        <Association Name="FK__Playlist__UserID__5CD6CB2B">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Playlist" Type="Self.Playlist" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,7 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlaylistA__Playl__300424B4">
+        <Association Name="FK__PlaylistA__Playl__5EBF139D">
           <End Role="Playlist" Type="Self.Playlist" Multiplicity="1" />
           <End Role="PlaylistAndSongRelation" Type="Self.PlaylistAndSongRelation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PlaylistA__SongI__30F848ED">
+        <Association Name="FK__PlaylistA__SongI__5FB337D6">
           <End Role="Song" Type="Self.Song" Multiplicity="1" />
           <End Role="PlaylistAndSongRelation" Type="Self.PlaylistAndSongRelation" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,6 +141,7 @@
           <EntitySet Name="Playlist" EntityType="Self.Playlist" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlaylistAndSongRelation" EntityType="Self.PlaylistAndSongRelation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Song" EntityType="Self.Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AlbumAndS__SongI__2C3393D0" Association="Self.FK__AlbumAndS__SongI__2C3393D0">
             <End Role="Album" EntitySet="Album" />
@@ -139,15 +151,15 @@
             <End Role="Song" EntitySet="Song" />
             <End Role="AlbumAndSongRelation" EntitySet="AlbumAndSongRelation" />
           </AssociationSet>
-          <AssociationSet Name="FK__Playlist__UserID__2A4B4B5E" Association="Self.FK__Playlist__UserID__2A4B4B5E">
+          <AssociationSet Name="FK__Playlist__UserID__5CD6CB2B" Association="Self.FK__Playlist__UserID__5CD6CB2B">
             <End Role="Users" EntitySet="Users" />
             <End Role="Playlist" EntitySet="Playlist" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlaylistA__Playl__300424B4" Association="Self.FK__PlaylistA__Playl__300424B4">
+          <AssociationSet Name="FK__PlaylistA__Playl__5EBF139D" Association="Self.FK__PlaylistA__Playl__5EBF139D">
             <End Role="Playlist" EntitySet="Playlist" />
             <End Role="PlaylistAndSongRelation" EntitySet="PlaylistAndSongRelation" />
           </AssociationSet>
-          <AssociationSet Name="FK__PlaylistA__SongI__30F848ED" Association="Self.FK__PlaylistA__SongI__30F848ED">
+          <AssociationSet Name="FK__PlaylistA__SongI__5FB337D6" Association="Self.FK__PlaylistA__SongI__5FB337D6">
             <End Role="Song" EntitySet="Song" />
             <End Role="PlaylistAndSongRelation" EntitySet="PlaylistAndSongRelation" />
           </AssociationSet>
@@ -160,8 +172,9 @@
           <EntitySet Name="Albums" EntityType="SpotifyModel.Album" />
           <EntitySet Name="Playlists" EntityType="SpotifyModel.Playlist" />
           <EntitySet Name="Songs" EntityType="SpotifyModel.Song" />
+          <EntitySet Name="sysdiagrams" EntityType="SpotifyModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SpotifyModel.User" />
-          <AssociationSet Name="FK__Playlist__UserID__2A4B4B5E" Association="SpotifyModel.FK__Playlist__UserID__2A4B4B5E">
+          <AssociationSet Name="FK__Playlist__UserID__5CD6CB2B" Association="SpotifyModel.FK__Playlist__UserID__5CD6CB2B">
             <End Role="User" EntitySet="Users" />
             <End Role="Playlist" EntitySet="Playlists" />
           </AssociationSet>
@@ -194,7 +207,8 @@
           <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PlaylistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="SpotifyModel.FK__Playlist__UserID__2A4B4B5E" FromRole="Playlist" ToRole="User" />
+          <Property Name="PlaylistType" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" FromRole="Playlist" ToRole="User" />
           <NavigationProperty Name="Songs" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Playlist" ToRole="Song" />
         </EntityType>
         <EntityType Name="Song">
@@ -213,6 +227,16 @@
           <NavigationProperty Name="Albums" Relationship="SpotifyModel.AlbumAndSongRelation" FromRole="Song" ToRole="Album" />
           <NavigationProperty Name="Playlists" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Song" ToRole="Playlist" />
         </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
@@ -221,9 +245,9 @@
           <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Playlists" Relationship="SpotifyModel.FK__Playlist__UserID__2A4B4B5E" FromRole="User" ToRole="Playlist" />
+          <NavigationProperty Name="Playlists" Relationship="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" FromRole="User" ToRole="Playlist" />
         </EntityType>
-        <Association Name="FK__Playlist__UserID__2A4B4B5E">
+        <Association Name="FK__Playlist__UserID__5CD6CB2B">
           <End Type="SpotifyModel.User" Role="User" Multiplicity="1" />
           <End Type="SpotifyModel.Playlist" Role="Playlist" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,6 +287,7 @@
           <EntitySetMapping Name="Playlists">
             <EntityTypeMapping TypeName="SpotifyModel.Playlist">
               <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="PlaylistType" ColumnName="PlaylistType" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
                 <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
@@ -283,6 +308,17 @@
                 <ScalarProperty Name="SongLink" ColumnName="SongLink" />
                 <ScalarProperty Name="SongName" ColumnName="SongName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SpotifyModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

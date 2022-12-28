@@ -21,6 +21,27 @@ namespace Spotify.Views.Pages
     /// </summary>
     public partial class Search : UserControl
     {
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            //if (e.Property == IsPlayProperty)
+            //{
+            //    if (IsPlay == true)
+            //    {
+            //        ImageBrush ImgBrush = new ImageBrush();
+            //        ImgBrush.ImageSource = Pause;
+            //        PlayPauseGreen.Background = ImgBrush;
+            //    }
+            //    else
+            //    {
+            //        ImageBrush ImgBrush = new ImageBrush();
+            //        ImgBrush.ImageSource = Play;
+            //        PlayPauseGreen.Background = ImgBrush;
+            //    }
+            //    // what is the code that would go here?
+            //}
+        }
         public Search()
         {
             InitializeComponent();

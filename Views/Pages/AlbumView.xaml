@@ -61,7 +61,7 @@
                 </Border>
             </Border>
             <Grid  Grid.Row="2">
-                <components:SongsView SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                <components:SongsView FavorIcon="{StaticResource HeartButton}" SelectedSong="{Binding SelectedSongItem, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     ItemSource="{Binding SongsOfAlbum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Grid>

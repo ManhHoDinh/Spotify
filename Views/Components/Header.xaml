@@ -9,7 +9,9 @@
              mc:Ignorable="d" 
            
              >
-   
+    <UserControl.DataContext>
+        <vm:SearchVM/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="BaseHeaderButton">
             <Border x:Name="border" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="32" Background="#000">
@@ -47,7 +49,7 @@
 
         </StackPanel>
         <Grid x:Name="SearchBox" Grid.Column="1" HorizontalAlignment="Left" 
-                Visibility="{Binding IsSearchView, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding IsSearchView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Rectangle x:Name="searchBoxForm" Width="370" Height="40" Margin="30,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{StaticResource SearchBoxForm}"></ImageBrush>
@@ -70,16 +72,16 @@
                 <Grid>
                     <TextBox x:Name="SearchTextbox" Style="{StaticResource SearchBoxStyle}" 
                          TextWrapping="Wrap" 
-                         UndoLimit="500" 
-                         TextChanged="SearchTextbox_TextChanged" 
+                         UndoLimit="500"
                          FontSize="18" 
                          Width="300"
-                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#FF757575" />
+                         CaretBrush="#000"
+                         TextChanged="SearchTextbox_TextChanged"
+                         Foreground="#000" />
                     <TextBlock 
                     HorizontalAlignment="Left"
                     Style="{StaticResource SearchTextStyle}" 
-                    Foreground="#FF757575" Text="What do you want listen to?"/>
+                    Foreground="#FF757575" Margin=" 22,8,0,8" Text="What do you want listen to?"/>
                 </Grid>
             </StackPanel>
         </Grid>
