@@ -105,20 +105,25 @@ namespace Spotify.ViewModels.Pages
 
                   DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
                   SaveForm.Close();
+                  Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
                   SelectedPlaylist.PlaylistName = NamePlaylist;
                   SelectedPlaylist.Descriptions = DescriptionPlaylist;
                   SelectedPlaylist.PlaylistImageSource = ImagePlaylist;
                   if (ListPlaylist.Ins.Image != "")
                   {
-                      SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+
                   }
-                  else SelectedPlaylist.PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png";
-                  Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
+                  else
+                  {
+                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png";
+       
+                  }
+
                   playlist.PlaylistName = NamePlaylist;
                   playlist.Descriptions = DescriptionPlaylist;
                   playlist.PlaylistImageSource = ImagePlaylist;
                   
-                  playlist.PlaylistImage = ListPlaylist.Ins.Image;
                   DataProvider.Ins.DB.Entry(playlist).State = System.Data.Entity.EntityState.Modified;
                   DataProvider.Ins.DB.SaveChanges();
                   SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
