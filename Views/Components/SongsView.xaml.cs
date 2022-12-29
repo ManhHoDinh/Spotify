@@ -173,10 +173,19 @@ namespace Spotify.Views.Components
             }
             else
             {
-                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                btn.Background = img;
-                album.Songs.Add(song);
-                album.SongsOfAlbum.Add(song);
+                var list = album.Songs;
+                int test = 0;
+                foreach(Song s in list)
+                {
+                    if (s.ID == song.ID) test++;
+                }
+                if(test == 0)
+                {
+                    img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                    btn.Background = img;
+                    album.Songs.Add(song);
+                    album.SongsOfAlbum.Add(song);
+                }
             }
             DataProvider.Ins.DB.SaveChanges();
         }

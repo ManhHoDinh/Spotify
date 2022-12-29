@@ -17,7 +17,7 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
-            <ScrollViewer Background="#121212">
+            <ScrollViewer Name="g" Background="#121212">
                 <Grid Margin="0 24 0 0">
                     <ListView Name="PART_Header"   
                       SelectionMode="Single"
@@ -38,7 +38,6 @@
                                     <Setter.Value>
                                         <ControlTemplate x:Name="t" TargetType="{x:Type ListViewItem}">
                                             <Border x:Name="_border" Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72" HorizontalAlignment="Stretch">
-
                                                 <Grid HorizontalAlignment="Stretch" Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="5*"/>
@@ -117,7 +116,7 @@
                                                     </StackPanel>
                                                     <TextBlock Grid.Column="2" Text="{Binding AlbumName}" FontSize="14" Foreground="#b3b3b3" VerticalAlignment="Center" HorizontalAlignment="Left"  />
 
-                                                    <Button Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click"  Template="{DynamicResource HeartStyle}" Width="16" Height="16">
+                                                    <Button Name="favorBtn" Visibility="Hidden" Grid.Column="3" Tag="{Binding ID}" Click="Favor_Click"  Template="{DynamicResource HeartStyle}" Width="16" Height="16">
                                                         <Button.Background>
                                                             <ImageBrush ImageSource="{Binding FavorIcon, ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                                         </Button.Background>
@@ -160,7 +159,13 @@
                                                     <Setter TargetName="img" Property="Visibility" Value="Hidden"/>
                                                     <Setter TargetName="PlayPauseBtn" Property="Visibility" Value="Visible"/>
                                                     <Setter TargetName="wrapper"  Property="Visibility" Value="Hidden"/>
+                                                    <Setter TargetName="favorBtn"  Property="Visibility" Value="Visible"/>
                                                 </Trigger>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        
+                                                    </MultiTrigger.Conditions>
+                                                </MultiTrigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
                                     </Setter.Value>

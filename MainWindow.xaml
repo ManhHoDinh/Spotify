@@ -69,6 +69,13 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                                 <Border Height="32">
+                                                    <Border.ContextMenu>
+                                                        <ContextMenu>
+                                                            <MenuItem Header="Edit details"/>
+                                                            <MenuItem Header="Delete"/>
+                                                        </ContextMenu>
+                                                        
+                                                    </Border.ContextMenu>
                                                     <ContentPresenter Content="{Binding NamePlaylist}"/>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
