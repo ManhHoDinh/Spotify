@@ -36,7 +36,52 @@
                         <ColumnDefinition Width="360"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Button
+                    <Grid Grid.Column="0" 
+                          Margin="32 0 0 0"
+                          Width="232"
+                          Height="232" 
+                          VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="img" Grid.Column="0"/>
+                        <Button
+                            Click="Button_Click" Name="btn">
+                            <Button.Template>
+                                <ControlTemplate>
+                                    <Border x:Name="border" Opacity="1" Width="232" Height="232">
+
+                                        <ContentPresenter Name="content">
+                                            <ContentPresenter.Content>
+                                                <Image x:Name="imgInitial" Source="{Binding ImagePlaylist}"/>
+                                            </ContentPresenter.Content>
+                                        </ContentPresenter>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Opacity" Value="1"/>
+                                            <Setter TargetName="border" Property="Cursor" Value="Hand"/>
+                                            <Setter TargetName="content" Property="ContentPresenter.Content">
+                                                <Setter.Value>
+                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                                                        <Image Width="48" Height="48" Source="{StaticResource EditBtn}"/>
+                                                        <TextBlock Foreground="#ffffff" FontSize="16" Text="Choose Photo"/>
+                                                    </StackPanel>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter TargetName="border" Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#ffffff" Opacity="0.6"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                    <!--<Button
                        
                         Grid.Column="0"
                         Width="232"
@@ -48,7 +93,7 @@
                         <Button.Background>
                             <ImageBrush ImageSource="{Binding ImagePlaylist}"/>
                         </Button.Background>
-                    </Button>
+                    </Button>-->
                     <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
                         <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
@@ -69,7 +114,7 @@
                 </Border.Background>
                 <Border Margin="32 0 32 0" BorderBrush="#bababa" BorderThickness="0 0 0 1">
 
-                    <StackPanel>
+                    <StackPanel  Orientation="Horizontal">
                         <Button
                         Command="{Binding OptionCommand}"
                         Width="32"
@@ -96,7 +141,13 @@
 
                             </Button.Template>
                         </Button>
-                        <StackPanel  Visibility="{Binding IsVisibleOption,Converter={StaticResource BooleanToVisibilityConverter}}" Orientation="Vertical" Width="176" Background="#282828">
+                        <StackPanel
+                            
+                            Height="80"
+                            Visibility="{Binding IsVisibleOption,Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Orientation="Vertical" 
+                            Width="176" 
+                            Background="#282828" Margin="0,51,0,0">
                             <Button Command="{Binding LoadCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Edit details"/>
                             <Button Command="{Binding OpenFormDeleteCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16"  Foreground="#ffffff" Content="Delete"/>
                         </StackPanel>

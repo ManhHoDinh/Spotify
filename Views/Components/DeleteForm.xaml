@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Spotify.Views.Components"
         mc:Ignorable="d"
-        DataContext="{StaticResource createplaylistVM}"
+        DataContext="{StaticResource createPlaylistVM}"
         ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen"
         Background="Transparent" AllowsTransparency="True"
         Title="DeleteForm" Height="182" Width="420">

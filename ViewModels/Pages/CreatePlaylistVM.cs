@@ -103,6 +103,12 @@ namespace Spotify.ViewModels.Pages
                   SelectedPlaylist.PlaylistName = NamePlaylist;
                   SelectedPlaylist.Descriptions = DescriptionPlaylist;
                   SelectedPlaylist.PlaylistImageSource = ImagePlaylist;
+                  SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+                  Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
+                  DataProvider.Ins.DB.Entry(playlist).State = System.Data.Entity.EntityState.Modified;
+                  DataProvider.Ins.DB.SaveChanges();
+                  SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+                  ListPlaylist.Ins.Image = "";
 
               });
             OptionCommand = new RelayCommand<object>(
@@ -131,6 +137,9 @@ namespace Spotify.ViewModels.Pages
            return true;
        }, (p) =>
        {
+           Playlist playlist = DataProvider.Ins.DB.Playlists.Where(ob => ob.ID == SelectedPlaylist.ID).FirstOrDefault();
+           DataProvider.Ins.DB.Playlists.Remove(playlist);
+           DataProvider.Ins.DB.SaveChanges();
            ListPlaylist.Ins.List.Remove(SelectedPlaylist);
            SelectedPlaylist = ListPlaylist.Ins.List[0];
            DeleteForm form = (DeleteForm)p;

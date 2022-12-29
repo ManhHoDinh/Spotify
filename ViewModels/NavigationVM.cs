@@ -31,6 +31,8 @@ namespace Spotify.ViewModels
         public ICommand SearchCommand { get; set; }
         public ICommand YourLibraryCommand { get; set; }
         public ICommand AlbumCommand { get; set; }
+        public ICommand OpenFormDeleteCommand { get; set; }
+        public ICommand LoadCommand { get; set; }
         private bool _isSearchView { get; set; }
         public bool IsSearchView { get { return _isSearchView; }
             set { _isSearchView = value; OnPropertyChanged(); } }
@@ -110,18 +112,22 @@ namespace Spotify.ViewModels
             {
                 ViewPage.Ins.ListPage.Add(new CreatePlaylist());
                 ViewPage.Ins.CurrentIndexView++;
-
-
             }
             int count = ListPlaylist.Ins.CountPlaylist;
-            ListPlaylist.Ins.List.Add(new Playlist { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImageSource = (ImageSource)Application.Current.Resources["SongBackground"] });
+            Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1 };
+            Playlist.InitUri(ref playlist);
+            
+            //MessageBox.Show(playlist.PlaylistName);
+            DataProvider.Ins.DB.Playlists.Add(playlist);
+            DataProvider.Ins.DB.SaveChanges();
+            ListPlaylist.Ins.List.Add(playlist);
             ViewPage.Ins.CurrentView = new CreatePlaylist();
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
             ListPlaylist.Ins.CountPlaylist++;
 
             ChangeViewStyle("CreatePlaylist", obj);
         }
-       
+
         private void LikedSongs(object obj)
         {
             ChangeViewStyle("LikeSongs", obj);
@@ -137,7 +143,24 @@ namespace Spotify.ViewModels
             LikedSongsCommand = new RelayCommand(LikedSongs);
             SearchCommand = new RelayCommand(Search);
             YourLibraryCommand = new RelayCommand(YourLibrary);
+            OpenFormDeleteCommand = new RelayCommand(
 
+       (p) =>
+       {
+           DeleteForm form = new DeleteForm();
+           Application.Current.MainWindow.Opacity = 0.3;
+           form.ShowDialog();
+           Application.Current.MainWindow.Opacity = 1;
+       });
+            LoadCommand = new RelayCommand(
+                 (p) =>
+                 {
+                     PlayListForm form = new PlayListForm();
+                     Application.Current.MainWindow.Opacity = 0.3;
+                     form.ShowDialog();
+                     Application.Current.MainWindow.Opacity = 1;
+                     //  IsVisibleOption = false;
+                 });
 
             // Startup Page
             ViewPage.Ins.CurrentView = new HomeVM();
