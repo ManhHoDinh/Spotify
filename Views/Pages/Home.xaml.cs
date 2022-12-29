@@ -1,4 +1,5 @@
-﻿using Spotify.ViewModels.Pages;
+﻿using Spotify.Models;
+using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -32,6 +33,13 @@ namespace Spotify.Views.Pages
             
         }
 
- 
+        private void PlaySong_Click(object sender, RoutedEventArgs e)
+        {
+            HomeVM vm = this.DataContext as HomeVM;
+            int IdAlbum = int.Parse((sender as Button).Tag.ToString());
+            var AlbumPlay = DataProvider.Ins.DB.Albums.Where(a => a.ID == IdAlbum).FirstOrDefault();
+            vm.SelectedSongItem = AlbumPlay.SongsOfAlbum[0];
+        }
+
     }
 }

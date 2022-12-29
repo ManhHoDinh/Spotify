@@ -57,9 +57,12 @@
                                                             Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                             Width="80" 
                                                             Height="80"
+                                                            Cursor="Hand"
+                                                            Tag="{Binding ID }"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center"                      
                                                             Margin="76 -180 0 0 "
+                                                            Click="PlaySong_Click"
                                                              >
                                                         <Button.Background>
                                                             <ImageBrush ImageSource="{StaticResource PlayFill}"/>
