@@ -99,6 +99,7 @@ namespace Spotify.ViewModels
             IsSearchView= true;
             ChangeViewStyle("Search", obj);
             TranslatePage(new SearchVM());
+            MessageBox.Show(ListPlaylist.Ins.List[0].PlaylistImage);
             
         }
         private void YourLibrary(object obj)
@@ -113,10 +114,10 @@ namespace Spotify.ViewModels
                 ViewPage.Ins.ListPage.Add(new CreatePlaylist());
                 ViewPage.Ins.CurrentIndexView++;
             }
+   
             int count = ListPlaylist.Ins.CountPlaylist;
             Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1 };
             Playlist.InitUri(ref playlist);
-            
             //MessageBox.Show(playlist.PlaylistName);
             DataProvider.Ins.DB.Playlists.Add(playlist);
             DataProvider.Ins.DB.SaveChanges();

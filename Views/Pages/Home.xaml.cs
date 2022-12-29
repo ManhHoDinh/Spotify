@@ -26,7 +26,7 @@ namespace Spotify.Views.Pages
     {
         public Home()
         {
-            InitializeComponent();
+          InitializeComponent();
         }
         private void Favor_Click(object sender, RoutedEventArgs e)
         {

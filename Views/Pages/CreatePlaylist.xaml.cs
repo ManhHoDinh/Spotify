@@ -92,7 +92,7 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for CountPlaylist.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CountPlaylistProperty =
-            DependencyProperty.Register("CountPlaylist", typeof(int), typeof(ListPlaylist), new PropertyMetadata(1));
+            DependencyProperty.Register("CountPlaylist", typeof(int), typeof(ListPlaylist), new PropertyMetadata(DataProvider.Ins.DB.Playlists.Count() + 1));
         public ObservableCollection<Playlist> List
         {
             get { return (ObservableCollection<Playlist>)GetValue(ListProperty); }

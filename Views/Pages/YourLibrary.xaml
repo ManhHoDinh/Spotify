@@ -33,8 +33,8 @@
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  Background="#121212"
                         Foreground="#b3b3b3" 
-                        SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay}"
-                        ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay}">
+                        SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel IsItemsHost="True" />

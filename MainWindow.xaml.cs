@@ -4,7 +4,7 @@ using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,7 +96,7 @@ namespace Spotify
             Songs.InitUri();
             Albums.InitUri();
             Playlists.InitUri();
-
+            ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.ToList());
         }
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {
