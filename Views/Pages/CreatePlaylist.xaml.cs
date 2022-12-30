@@ -106,7 +106,7 @@ namespace Spotify.Views.Pages
         static ListPlaylist()
         {
             Ins = new ListPlaylist();
-            Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.ToList());
+            Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
             Ins.SelectedItem = new Playlist();
 
         }

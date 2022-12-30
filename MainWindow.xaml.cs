@@ -96,7 +96,7 @@ namespace Spotify
             Songs.InitUri();
             Albums.InitUri();
             Playlists.InitUri();
-            ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.ToList());
+            ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=> p.PlaylistType==2).ToList());
         }
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {
