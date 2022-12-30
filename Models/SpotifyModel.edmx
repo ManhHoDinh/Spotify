@@ -170,17 +170,17 @@
       <Schema Namespace="SpotifyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="SpotifyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Albums" EntityType="SpotifyModel.Album" />
-          <EntitySet Name="Playlists" EntityType="SpotifyModel.Playlist" />
           <EntitySet Name="Songs" EntityType="SpotifyModel.Song" />
           <EntitySet Name="sysdiagrams" EntityType="SpotifyModel.sysdiagram" />
           <EntitySet Name="Users" EntityType="SpotifyModel.User" />
-          <AssociationSet Name="FK__Playlist__UserID__5CD6CB2B" Association="SpotifyModel.FK__Playlist__UserID__5CD6CB2B">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Playlist" EntitySet="Playlists" />
-          </AssociationSet>
           <AssociationSet Name="AlbumAndSongRelation" Association="SpotifyModel.AlbumAndSongRelation">
             <End Role="Album" EntitySet="Albums" />
             <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <EntitySet Name="Playlists" EntityType="SpotifyModel.Playlist" />
+          <AssociationSet Name="FK__Playlist__UserID__5CD6CB2B" Association="SpotifyModel.FK__Playlist__UserID__5CD6CB2B">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Playlist" EntitySet="Playlists" />
           </AssociationSet>
           <AssociationSet Name="PlaylistAndSongRelation" Association="SpotifyModel.PlaylistAndSongRelation">
             <End Role="Playlist" EntitySet="Playlists" />
@@ -197,19 +197,6 @@
           <Property Name="AlbumImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AlbumColor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Songs" Relationship="SpotifyModel.AlbumAndSongRelation" FromRole="Album" ToRole="Song" />
-        </EntityType>
-        <EntityType Name="Playlist">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PlaylistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="PlaylistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="PlaylistType" Type="Int32" />
-          <NavigationProperty Name="User" Relationship="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" FromRole="Playlist" ToRole="User" />
-          <NavigationProperty Name="Songs" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Playlist" ToRole="Song" />
         </EntityType>
         <EntityType Name="Song">
           <Key>
@@ -247,6 +234,23 @@
           <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Playlists" Relationship="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" FromRole="User" ToRole="Playlist" />
         </EntityType>
+        <Association Name="AlbumAndSongRelation">
+          <End Type="SpotifyModel.Album" Role="Album" Multiplicity="*" />
+          <End Type="SpotifyModel.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaylistName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlaylistImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PlaylistType" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" FromRole="Playlist" ToRole="User" />
+          <NavigationProperty Name="Songs" Relationship="SpotifyModel.PlaylistAndSongRelation" FromRole="Playlist" ToRole="Song" />
+        </EntityType>
         <Association Name="FK__Playlist__UserID__5CD6CB2B">
           <End Type="SpotifyModel.User" Role="User" Multiplicity="1" />
           <End Type="SpotifyModel.Playlist" Role="Playlist" Multiplicity="*" />
@@ -258,10 +262,6 @@
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="AlbumAndSongRelation">
-          <End Type="SpotifyModel.Album" Role="Album" Multiplicity="*" />
-          <End Type="SpotifyModel.Song" Role="Song" Multiplicity="*" />
         </Association>
         <Association Name="PlaylistAndSongRelation">
           <End Type="SpotifyModel.Playlist" Role="Playlist" Multiplicity="*" />
@@ -280,18 +280,6 @@
                 <ScalarProperty Name="AlbumImage" ColumnName="AlbumImage" />
                 <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
                 <ScalarProperty Name="AlbumName" ColumnName="AlbumName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Playlists">
-            <EntityTypeMapping TypeName="SpotifyModel.Playlist">
-              <MappingFragment StoreEntitySet="Playlist">
-                <ScalarProperty Name="PlaylistType" ColumnName="PlaylistType" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -340,6 +328,18 @@
               <ScalarProperty Name="ID" ColumnName="AlbumID" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="SpotifyModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="PlaylistType" ColumnName="PlaylistType" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlaylistImage" ColumnName="PlaylistImage" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <AssociationSetMapping Name="PlaylistAndSongRelation" TypeName="SpotifyModel.PlaylistAndSongRelation" StoreEntitySet="PlaylistAndSongRelation">
             <EndProperty Name="Song">
               <ScalarProperty Name="ID" ColumnName="SongID" />
