@@ -147,6 +147,7 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsFavor", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
         private void Favor_Click(object sender, RoutedEventArgs e)
         {
+            var BackGroundBtn = (sender as Button).Background as ImageBrush;
             var listview = GetTemplateChild("PART_Header") as ListView;
             Button btn = sender as Button;
             int index = int.Parse(btn.Tag.ToString());

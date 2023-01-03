@@ -97,12 +97,37 @@ namespace Spotify.ViewModels.Pages
               {
                   PlayListForm SaveForm = (PlayListForm)p;
                   NamePlaylist = SaveForm.NamePlaylist.Text;
-                  ImagePlaylist = SaveForm.img.Source;
+                  if (SaveForm.img.Source != null)
+                  {
+                      ImagePlaylist = SaveForm.img.Source;
+                  }
+                  else ImagePlaylist = (ImageSource)Application.Current.Resources["SongBackground"];
+
                   DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
                   SaveForm.Close();
+                  Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
                   SelectedPlaylist.PlaylistName = NamePlaylist;
                   SelectedPlaylist.Descriptions = DescriptionPlaylist;
                   SelectedPlaylist.PlaylistImageSource = ImagePlaylist;
+                  if (ListPlaylist.Ins.Image != "")
+                  {
+                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+
+                  }
+                  else
+                  {
+                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png";
+       
+                  }
+
+                  playlist.PlaylistName = NamePlaylist;
+                  playlist.Descriptions = DescriptionPlaylist;
+                  playlist.PlaylistImageSource = ImagePlaylist;
+                  
+                  DataProvider.Ins.DB.Entry(playlist).State = System.Data.Entity.EntityState.Modified;
+                  DataProvider.Ins.DB.SaveChanges();
+                  SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+                  ListPlaylist.Ins.Image = "";
 
               });
             OptionCommand = new RelayCommand<object>(
@@ -131,6 +156,9 @@ namespace Spotify.ViewModels.Pages
            return true;
        }, (p) =>
        {
+           Playlist playlist = DataProvider.Ins.DB.Playlists.Where(ob => ob.ID == SelectedPlaylist.ID).FirstOrDefault();
+           DataProvider.Ins.DB.Playlists.Remove(playlist);
+           DataProvider.Ins.DB.SaveChanges();
            ListPlaylist.Ins.List.Remove(SelectedPlaylist);
            SelectedPlaylist = ListPlaylist.Ins.List[0];
            DeleteForm form = (DeleteForm)p;

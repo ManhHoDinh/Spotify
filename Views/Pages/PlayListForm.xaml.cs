@@ -43,7 +43,7 @@ namespace Spotify.Views.Pages
             if (a.ShowDialog() == true)
             {
                 img.Source = new BitmapImage(new Uri(a.FileName));
-
+                ListPlaylist.Ins.Image = a.FileName;
                 ContentPresenter x = (btn.Template.FindName("content", btn) as ContentPresenter);
                 Image imageInit = VisualTreeHelper.GetChild(x, 0) as Image;
                 imageInit.Opacity = 0;

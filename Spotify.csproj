@@ -243,6 +243,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\MenuContext.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\PlaylistStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -408,6 +412,9 @@
     </Content>
     <Resource Include="Resource\NoteModifySql.txt" />
     <Resource Include="Resource\Icons\CloseBtn_S.png" />
+    <Content Include="Resource\Images\InitImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Spotify.sql" />
     <Content Include="Resource\Songs\DauMua\DauMua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -27,6 +27,7 @@
                 <ResourceDictionary Source="/ResourceXAML/ListSongVM.xaml"/>
                 <ResourceDictionary Source="Themes/Generic.xaml"/>
                 <ResourceDictionary Source="Styles/LoginFormStyles.xaml" />
+                <ResourceDictionary Source="Styles/MenuContext.xaml" />
             </ResourceDictionary.MergedDictionaries>
            
         </ResourceDictionary>

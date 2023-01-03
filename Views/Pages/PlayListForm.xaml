@@ -54,14 +54,14 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Image x:Name="img" Grid.Column="0" Width="180" Height="180"/>
-                <Button  Click="Button_Click" Name="btn" Width="180" Height="180">
-                    <!--<Button.Template>
+                <Button  Click="Button_Click" Name="btn" Width="180" Height="180" Margin="0 0 16 0">
+                    <Button.Template>
                         <ControlTemplate>
                             <Border x:Name="border" Opacity="1">
 
                                 <ContentPresenter Name="content">
                                     <ContentPresenter.Content>
-                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{StaticResource SongBackground}"/>
+                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{Binding ImagePlaylist}"/>
                                     </ContentPresenter.Content>
                                 </ContentPresenter>
                             </Border>
@@ -85,7 +85,7 @@
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
-                    </Button.Template>-->
+                    </Button.Template>
 
                 </Button>
                 <!--<Button Template="{StaticResource SongLoadStyle}"
@@ -101,6 +101,7 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <spotify:PlaceHolderTextbox
                         x:Name="NamePlaylist"
+                        Text="{Binding NamePlaylist}"
                         Background="#3e3e3e"
                         FontSize="14"
                         Foreground="#ffffff"
@@ -113,6 +114,7 @@
                     </spotify:PlaceHolderTextbox>
                     <spotify:PlaceHolderTextbox
                         x:Name="DescriptionPlaylist"
+                        Text="{Binding DescriptionPlaylist}"
                         Background="#3e3e3e"
                         FontSize="14"
                         Foreground="#ffffff"
