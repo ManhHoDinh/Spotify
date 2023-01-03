@@ -177,7 +177,7 @@
 
                     </ListView>
                 </Grid>
-            </ScrollViewer>
+          
         </ControlTemplate>
     </UserControl.Template>
 

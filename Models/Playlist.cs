@@ -26,7 +26,8 @@ namespace Spotify.Models
         }
         public static void InitUri(ref Playlist playlist)
         {
-            playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage == null ? "" : playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
+            playlist.SongsOfPlaylist = new ObservableCollection<Song>(playlist.Songs);
+            //playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage == null ? "" : playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
         }
         public int ID { get; set; }
         private string _playlistName;

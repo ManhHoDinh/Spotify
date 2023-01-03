@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
 
@@ -159,8 +160,8 @@ namespace Spotify.Views.Components
             {
                 img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
                 btn.Background = img;
-                album.SongsOfAlbum.Remove(song);
-                album.Songs.Remove(song);
+                playlist.SongsOfPlaylist.Remove(song);
+                playlist.Songs.Remove(song);
                 for (int i = 0; i < listview.Items.Count; i++)
                 {
                     var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;

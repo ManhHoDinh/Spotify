@@ -151,9 +151,6 @@
     <Compile Include="Views\Pages\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\ForgotPasswordForm.xaml.cs">
-      <DependentUpon>ForgotPasswordForm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
@@ -321,10 +318,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Pages\ForgotPasswordForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -425,6 +418,7 @@
       <LastGenOutput>SpotifyModel.cs</LastGenOutput>
     </Content>
     <Resource Include="Resource\NoteModifySql.txt" />
+    <Resource Include="Resource\Icons\CloseBtn_S.png" />
     <Content Include="Resource\Images\InitImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

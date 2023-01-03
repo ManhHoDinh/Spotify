@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spotify.ViewModels
 {
-    internal class Playlists
+    public class Playlists
     {
         public static ObservableCollection<Playlist> AllPlaylists = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.ToList());
         public static void InitUri()
@@ -19,5 +19,7 @@ namespace Spotify.ViewModels
                 Playlist.InitUri(ref playlist);
             }
         }
+        public static Playlist LikedSongsPlayplist = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == 1).FirstOrDefault();
+        public static Playlist RecentSearchPlaylist = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 1 && a.UserID == 1).FirstOrDefault();
     }
 }
