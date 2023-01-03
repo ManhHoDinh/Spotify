@@ -7,107 +7,139 @@
              xmlns:local="clr-namespace:Spotify.Views.Components" xmlns:models="clr-namespace:Spotify.Models" 
              mc:Ignorable="d"  
             
-             d:DesignHeight="110" d:DesignWidth="1700" Background="#181818">
+             d:DesignHeight="110" d:DesignWidth="1536" Background="#181818">
     <UserControl.CommandBindings>
         <CommandBinding Command="MediaCommands.Pause" CanExecute="Pause_CanExecute" Executed="Pause_Executed" />
     </UserControl.CommandBindings>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="360"/>
-        </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+    <Border Padding="16 0 16 0">
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
             </Grid.ColumnDefinitions>
-            <Image  Margin="18 0 0 0" Grid.Column="0" Source="{Binding Source={x:Static local:SongBottom.Ins},Path=ImageSong}" Grid.RowSpan="2"/>
-            <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
-                <TextBlock Foreground="#ffffff" FontSize = "18" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SongName}"/>
-                <TextBlock Foreground="#B3B3B3" FontSize="16" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SingerName}"/>
-                <MediaElement MediaEnded="mePlayer_MediaEnded" x:Name="mePlayer" Source="{Binding Source={x:Static local:SongBottom.Ins},Path=LinkSong}" LoadedBehavior="Manual" />
-                <!--<Button Command="ApplicationCommands.Open" Content="open" Foreground="red" />-->
-                <!--<Button Click="Btn_"  Content="open"></Button>-->
-            </StackPanel>
-            <Button Click="Button_Click" Tag="{Binding isFavor, ElementName=BottomControl}" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
-                <Button.Background>
-                    <ImageBrush ImageSource="{StaticResource HeartButton}"/>
-                </Button.Background>
-            </Button>
-        </Grid>
-        <Grid Grid.Column="1" Width="760">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <StackPanel  Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 10 0 0">
-                <Button Tag="{Binding IsShuffle, ElementName=BottomControl}" Click="ShuffleBtn_Click" x:Name="ShuffleBtn" Template="{DynamicResource ShuffleStyle}"  Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource ShuffleButton}"/>
-                    </Button.Background>
-                </Button>
-                <Button Template="{DynamicResource PrevStyle}" Command="{Binding PrevCommand}"  Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource PrevButton}"/>
-                    </Button.Background>
-                </Button>
-                <Button x:Name="PlayPauseBtn" Template="{DynamicResource PausePlayStyle}" Command="MediaCommands.Pause" Width="44" Height="44"  Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource PlayButton}"/>
-
-                    </Button.Background>
-                </Button>
-
-                <Button Template="{DynamicResource NextStyle}" Command="{Binding NextCommand}" Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource NextButton}"/>
-                    </Button.Background>
-
-                </Button>
-                <Button x:Name="RepeatBtn" Tag="{Binding RepeatState,ElementName=BottomControl}" Click="Repeat_Click"  Template="{DynamicResource RepeatStyle}" Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource RepeatButton}"/>
-                    </Button.Background>
-                </Button>
-            </StackPanel>
-            <Grid Grid.Row="1">
+            <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="80"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="60"/>
                 </Grid.ColumnDefinitions>
-                <!--<Button Content="open" Click="Btn_open" Margin="-123,-25,123,25"/>-->
-                <Label Grid.Column="0"  Foreground="White" Name="playing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
-                <Slider Grid.Column="1"  x:Name="slider" Thumb.DragStarted="slider_DragStarted" Thumb.DragCompleted="slider_DragCompleted" ValueChanged="slider_ValueChanged" Style="{DynamicResource SliderStyle}"/>
-                <Label  Grid.Column="2" Foreground="White" Content="..." Name="Duration" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+                <Image  Margin="18 0 0 0" Grid.Column="0" Source="{Binding Source={x:Static local:SongBottom.Ins},Path=ImageSong}" Grid.RowSpan="2"/>
+                <StackPanel Margin="18,32,0,0" Grid.Column ="1" Orientation="Vertical" VerticalAlignment="Top">
+                    <TextBlock Foreground="#ffffff" FontSize = "14" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SongName}"/>
+                    <TextBlock Foreground="#B3B3B3" FontSize="11" Text="{Binding Source={x:Static local:SongBottom.Ins},Path=SingerName}"/>
+                    <MediaElement MediaEnded="mePlayer_MediaEnded" x:Name="mePlayer" Source="{Binding Source={x:Static local:SongBottom.Ins},Path=LinkSong}" LoadedBehavior="Manual" />
+                    <!--<Button Command="ApplicationCommands.Open" Content="open" Foreground="red" />-->
+                    <!--<Button Click="Btn_"  Content="open"></Button>-->
+                </StackPanel>
+                <Button Click="Button_Click" Tag="{Binding isFavor, ElementName=BottomControl}" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="{StaticResource HeartButton}"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid Grid.Column="1" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="321*"/>
+                    <ColumnDefinition Width="347*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel 
+                    Grid.Row="0" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Orientation="Horizontal"  
+                    Height="60" 
+                    Margin="0 -40 0 0"
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2">
+                    <Button Tag="{Binding IsShuffle, ElementName=BottomControl}" Click="ShuffleBtn_Click" x:Name="ShuffleBtn" Template="{DynamicResource ShuffleStyle}"  Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource ShuffleButton}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button 
+                        Template="{DynamicResource PrevStyle}"
+                        Click="Prev_Click"
+                        Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource PrevButton}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="PlayPauseBtn" Template="{DynamicResource PausePlayStyle}" Command="MediaCommands.Pause" Width="44" Height="44"  Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource PlayButton}"/>
+
+                        </Button.Background>
+                    </Button>
+
+                    <Button 
+                        Click="Next_Click"
+                        Template="{DynamicResource NextStyle}"
+                        
+                        Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource NextButton}"/>
+                        </Button.Background>
+
+                    </Button>
+                    <Button x:Name="RepeatBtn" Tag="{Binding RepeatState,ElementName=BottomControl}" Click="Repeat_Click"  Template="{DynamicResource RepeatStyle}" Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource RepeatButton}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+                    <!--<Button Content="open" Click="Btn_open" Margin="-123,-25,123,25"/>-->
+                    <Label Grid.Column="0"  Foreground="White" Name="playing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+                    <Slider Grid.Column="1" Width="405" x:Name="slider" Thumb.DragStarted="slider_DragStarted" Thumb.DragCompleted="slider_DragCompleted" ValueChanged="slider_ValueChanged" Style="{DynamicResource SliderStyle}"/>
+                    <Label  Grid.Column="2" Foreground="White" Content="..." Name="Duration" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="2" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Margin="16 0 16 0" Template="{DynamicResource QueueStyle}" Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource QueueButton}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Margin="0 0 16 0" Template="{DynamicResource DeviceStyle}" Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource DevicesButton}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button Tag="{Binding VolumeStyle, ElementName=BottomControl}" Template="{DynamicResource VolumeStyle}" Margin="0 0 16 0" x:Name="VolumeButton" Click="MuteVolume_Click"  Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource VolumeMaxButton}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+                <Slider 
+                    Minimum="0"
+                    Maximum="1" 
+                    Value="0.5"
+                    ValueChanged="volumeSlider_ValueChanged"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    x:Name="volumeSlider" 
+                    Width="100"
+                    Margin="0 10 0 0"
+                    Style="{DynamicResource SliderStyle}"
+                    />
             </Grid>
         </Grid>
-        <Grid Grid.Column="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Margin="16 0 16 0" Template="{DynamicResource QueueStyle}" Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource QueueButton}"/>
-                    </Button.Background>
-                </Button>
-                <Button Margin="0 0 16 0" Template="{DynamicResource DeviceStyle}" Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource DevicesButton}"/>
-                    </Button.Background>
-                </Button>
-                <Button Tag="{Binding VolumeStyle, ElementName=BottomControl}" Template="{DynamicResource VolumeStyle}" Margin="0 0 16 0" x:Name="VolumeButton" Click="MuteVolume_Click"  Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource VolumeMaxButton}"/>
-                    </Button.Background>
-                </Button>
-            </StackPanel>
-            <Slider Minimum="0" Maximum="1" Value="0.5" ValueChanged="volumeSlider_ValueChanged" Grid.Column="1" VerticalAlignment="Center" x:Name="volumeSlider" Width="100" Style="{DynamicResource SliderStyle}" Margin="-40,10,0,0"/>
-        </Grid>
-    </Grid>
+    </Border>
 </UserControl>

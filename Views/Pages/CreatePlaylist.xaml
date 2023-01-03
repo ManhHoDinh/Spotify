@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              xmlns:component="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
+             x:Name="playlist"
              DataContext="{StaticResource createPlaylistVM}"
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:spotify="clr-namespace:Spotify"
@@ -22,12 +23,13 @@
             <Grid.RowDefinitions>
                 <RowDefinition  Height="340"/>
                 <RowDefinition  Height="140"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                        <GradientStop Color="#545454" Offset="0"/>
+                        <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
                         <GradientStop Color="#2b2b2b" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
@@ -81,19 +83,6 @@
                             </Button.Template>
                         </Button>
                     </Grid>
-                    <!--<Button
-                       
-                        Grid.Column="0"
-                        Width="232"
-                        Height="232" 
-                        Cursor="Hand"
-                        HorizontalAlignment="Left"
-                            Margin="32 0 0 0">
-
-                        <Button.Background>
-                            <ImageBrush ImageSource="{Binding ImagePlaylist}"/>
-                        </Button.Background>
-                    </Button>-->
                     <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
                         <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
@@ -155,7 +144,11 @@
 
                 </Border>
             </Border>
-            <StackPanel Grid.Row="2"  Margin="40 24 0 0" >
+            <component:SongsView
+                Grid.Row="2"
+                SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Grid.Row="3"  Margin="40 24 0 0" >
                 <TextBlock Margin="0 24 0 24" Text="Let's find something for your playlist" FontWeight="Medium"  FontSize="24" Foreground="#ffffff" FontFamily="{StaticResource CircularStdBlack}" />
 
                 <Border Background="#282828" Width="365" Height="40" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -179,7 +172,15 @@
                 <Grid Margin="0 24">
                     <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
                     </Grid>
-                    <ListView  x:Name="BeginingSearch" Template="{StaticResource NonScrollableListView}" Width="1224"  ItemsSource="{Binding SongSourceCollection}" Background="Transparent" BorderBrush="Transparent"  SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" SelectedIndex="{Binding SelectedSongIndex,Mode=OneWayToSource}" >
+                    <ListView  
+                        x:Name="BeginingSearch"
+                        Template="{StaticResource NonScrollableListView}"
+                        Width="1224" 
+                        ItemsSource="{Binding SongSourceCollection}"
+                        Background="Transparent"
+                        BorderBrush="Transparent" 
+                        SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" >
+
                         <!--Text Index-->
                         <ListView.Resources>
                             <vm:OrdinalConverter x:Key="OrdinalConverter" />
@@ -190,7 +191,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border Cursor="Hand" CornerRadius="8" BorderThickness="0"  Height="72">
+                                            <Border Cursor="Hand" CornerRadius="8" BorderThickness="0" Padding="8 0 0 0" Height="54">
                                                 <Border.Style>
                                                     <Style TargetType="Border">
                                                         <Setter Property="Background" Value="Transparent"/>
@@ -204,22 +205,28 @@
                                                 <Grid >
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="350"/>
-                                                        <ColumnDefinition Width="200"/>
-                                                        <ColumnDefinition Width="100"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="auto"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
-                                                        <Image Width="40" Source="{Binding ImageSong}" Margin="0 0 20 0"/>
+                                                        <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
                                                         <StackPanel Orientation="Vertical">
-                                                            <TextBlock Text="{Binding Path=Name,Mode=OneWay}" Foreground="#ffffff" FontSize="20"/>
-                                                            <TextBlock Text="{Binding Path=NameSinger,Mode=OneWay}" Foreground="#b3b3b3" FontSize="18"/>
+                                                            <TextBlock Text="{Binding SongName}" FontWeight="DemiBold" Foreground="#ffffff" FontSize="16"/>
+                                                            <TextBlock Text="{Binding SingerName}" FontWeight="DemiBold" Foreground="#b3b3b3" FontSize="14"/>
                                                         </StackPanel>
                                                     </StackPanel>
-                                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" FontSize="18" Foreground="#b3b3b3" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" FontSize="14" FontWeight="DemiBold" Margin="300 0 0 0" Foreground="#b3b3b3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                                     <Grid  Grid.Column="3" HorizontalAlignment="Right">
-                                                        <Button  Tag="{Binding isFavor, ElementName=BottomControl}" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
-                                                            <Button.Background>
-                                                                <ImageBrush ImageSource="{StaticResource HeartFillButton}"/>
-                                                            </Button.Background>
+                                                        <Button
+                                                            Tag="{Binding ID}"
+                                                            Click="Add_Click"
+                                                            Margin="0 0 16 0"
+                                                            FontSize="14"
+                                                            FontWeight="DemiBold"
+                                                            Foreground="#ffffff"
+                                                            Template="{StaticResource AddBtnStyle}" >
+                                                            
+                                                           Add
                                                         </Button>
                                                     </Grid>
 

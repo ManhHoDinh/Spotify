@@ -9,13 +9,15 @@
 
 namespace Spotify.Models
 {
+    using Spotify.Utilities;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Data.Entity.ModelConfiguration.Configuration;
     using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
-    public partial class Playlist
+    public partial class Playlist:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Playlist()
@@ -27,7 +29,8 @@ namespace Spotify.Models
             playlist.PlaylistImageSource = new BitmapImage(new Uri(playlist.PlaylistImage == null ? "" : playlist.PlaylistImage, UriKind.RelativeOrAbsolute));
         }
         public int ID { get; set; }
-        public string PlaylistName { get; set; }
+        private string _playlistName;
+        public string PlaylistName { get => _playlistName; set { _playlistName = value; OnPropertyChanged();  } }
         public string Descriptions { get; set; }
         public string PlaylistImage { get; set; }
         public int UserID { get; set; }

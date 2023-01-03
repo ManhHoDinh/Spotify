@@ -130,6 +130,9 @@
     <Compile Include="Views\Components\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Components\ListAlbumView.xaml.cs">
+      <DependentUpon>ListAlbumView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Components\NavigateButton.xaml.cs">
       <DependentUpon>NavigateButton.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
     <Page Include="Views\Components\Header.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Components\ListAlbumView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Components\NavigateButton.xaml">
       <Generator>MSBuild:Compile</Generator>

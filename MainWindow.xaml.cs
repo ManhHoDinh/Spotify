@@ -68,7 +68,19 @@ namespace Spotify
         public static readonly DependencyProperty ListPageProperty =
             DependencyProperty.Register("ListPage", typeof(List<object>), typeof(ViewPage), new PropertyMetadata(new List<object> { }));
 
+        public string ViewPageSelected
+        {
+            get { return (string)GetValue(ViewPageSelectedProperty); }
+            set
+            {
+                SetValue(ViewPageSelectedProperty, value);
 
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for ViewPageSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewPageSelectedProperty =
+            DependencyProperty.Register("ViewPageSelected", typeof(string), typeof(ViewPage), new PropertyMetadata(string.Empty));
 
         public int CurrentIndexView
         {
@@ -90,14 +102,71 @@ namespace Spotify
     }
     public partial class MainWindow : Window
     {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+
+            base.OnPropertyChanged(e);
+            if (e.Property == ViewPageSelectedProperty)
+            {
+                ViewPageSelected = ViewPageSelected;
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
+            Binding binding = new Binding("ViewPageSelected");
+            binding.Source = window;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.ViewPageSelectedProperty, binding);
             Songs.InitUri();
             Albums.InitUri();
             Playlists.InitUri();
             ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=> p.PlaylistType==2).ToList());
         }
+        public string ViewPageSelected
+        {
+            get { return (string)GetValue(ViewPageSelectedProperty); }
+            set
+            {
+                SetValue(ViewPageSelectedProperty, value);
+                StackPanel stack = LeftSideBar.Children[0] as StackPanel;
+
+                foreach (object p in stack.Children)
+                {
+                    Button btn = p as Button;
+                    ControlTemplate ct = btn.Template;
+                    Image img = (Image)ct.FindName("image", btn);
+                    TextBlock tb = (TextBlock)ct.FindName("name", btn);
+                    string NamePage = (ViewPageSelected == "CreatePlaylist") ? "CreatePlaylist" : ViewPageSelected.Substring(0, ViewPageSelected.Length - 2);
+
+                    if (btn.Name == NamePage)
+                    {
+                        
+                        tb.Foreground = Brushes.White;
+                        if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
+                        {
+
+                            img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
+                        }
+                    }
+                    else
+                    {
+                        tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179, 179, 179));
+                        if (ViewPageSelected != "CreatePlaylist" && ViewPageSelected != "LikedSongsVM")
+                        {
+                            img.Source = (ImageSource)Application.Current.Resources[btn.Name + "Icon"];
+
+                        }
+
+                    }
+                }
+
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for ViewPageSelected.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewPageSelectedProperty =
+            DependencyProperty.Register("ViewPageSelected", typeof(string), typeof(MainWindow), new PropertyMetadata(string.Empty));
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {
             //LoadSideBar.ColumnDefinitions.RemoveAt(1);

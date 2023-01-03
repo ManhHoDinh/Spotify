@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="Spotify.Views.Pages.Home"
+             x:Name="home"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,7 +18,9 @@
         <ControlTemplate  x:Key="TopicAlbum" TargetType="ListView">
             <StackPanel Margin="32 30 0 0">
                 <TextBlock Text="{TemplateBinding Tag}" FontSize="24" FontWeight="Bold" Foreground="#ffffff" TextWrapping="Wrap" Margin="21 0 0 10"/>
-                <ListView Template="{DynamicResource NonScrollableListView}" 
+                <ListView 
+                   Name="PART_Header"
+                    Template="{DynamicResource NonScrollableListView}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                   SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" 
                   ItemsSource="{TemplateBinding ItemsSource}" 
@@ -53,7 +56,26 @@
                                                     </Border>
                                                     <TextBlock Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
                                                     <TextBlock TextWrapping="wrap" Text="{Binding Descriptions}" FontSize="14" Foreground="#b3b3b3"/>
-                                                    <Button Template="{DynamicResource GreenStyle}" 
+                                                    <Button
+                                                        Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                                        x:Name="PlayPauseGreen" 
+                                                        Tag="{Binding ID }"
+                                                        
+                                                        Template="{DynamicResource GreenPlayStyle}"
+                                                        Click="PlayPauseGreen_Click" 
+                                                       
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"
+                                                        Width="80"
+                                                        Padding="0"
+                                                        Margin="76 -180 0 0 "
+                                                        Height="80">
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                                                        </Button.Background>
+                                                    </Button>
+
+                                                    <!--<Button Template="{DynamicResource GreenStyle}" 
                                                             Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                             Width="80" 
                                                             Height="80"
@@ -61,13 +83,13 @@
                                                             Tag="{Binding ID }"
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center"                      
-                                                            Margin="76 -180 0 0 "
+                                                            
                                                             Click="PlaySong_Click"
                                                              >
                                                         <Button.Background>
                                                             <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                                                         </Button.Background>
-                                                    </Button>
+                                                    </Button>-->
                                                 </StackPanel>
                                             </Grid>
                                         </Border>
@@ -216,8 +238,9 @@
 
                                 </Grid>
                             </Grid>
-                            <ListView Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
-                            <ListView   Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
+                            <Components:ListAlbumView Tag="binh day" ItemsSource="{Binding JumBack}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
+                            <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
+                            <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
                         </StackPanel>

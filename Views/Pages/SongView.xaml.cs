@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,27 @@ namespace Spotify.Views.Pages
     {
         public SongView()
         {
+
             InitializeComponent();
+           
             Random r = new Random();
             Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
             string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
             color = "#" + hex;
         }
+
+
+
+        public Song SelectedSong
+
+        {
+            get { return (Song)GetValue(SelectedSongProperty); }
+            set { SetValue(SelectedSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NameSong.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedSongProperty =
+            DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongView), new PropertyMetadata(null));
 
 
         public string color

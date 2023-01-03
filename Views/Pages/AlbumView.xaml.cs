@@ -1,4 +1,5 @@
 ﻿using Spotify.Models;
+using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,55 @@ namespace Spotify.Views.Pages
     /// </summary>
     public partial class AlbumView : UserControl
     {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == IsPlayProperty)
+            {
+                if (IsPlay == true)
+                {
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = Pause;
+                    PlayPauseGreen.Background = ImgBrush;
+                }
+                else
+                {
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = Play;
+                    PlayPauseGreen.Background = ImgBrush;
+                }
+                // what is the code that would go here?
+            }
+        }
+        public bool IsPlay
+        {
+            get { return (bool)GetValue(IsPlayProperty); }
+            set { SetValue(IsPlayProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsPlayProperty =
+            DependencyProperty.Register("IsPlay", typeof(bool), typeof(AlbumView), new PropertyMetadata(false));
         public AlbumView()
         {
             InitializeComponent();
+            HomeVM vm = this.DataContext as HomeVM;
            
-            
+            Binding binding = new Binding("SelectedSongItem");
+            binding.Source = vm;
+            binding.Mode = BindingMode.OneWayToSource;
+            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            if (ListAlbumView.IsClick == true)
+            {
+                SongBottom.Ins.ListSong = Album.ItemSource;
+                SongBottom.Ins.SelectedSong = Album.ItemSource[0];
+                ListAlbumView.IsClick = false;
+            }
+            Binding bd = new Binding("IsPlay");
+            bd.Source = SongBottom.Ins;
+            bd.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(Albumview, IsPlayProperty, bd);
+
         }
         ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];

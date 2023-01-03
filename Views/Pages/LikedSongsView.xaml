@@ -24,7 +24,7 @@
             </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition  Height="340"/>
-                <RowDefinition  Height="104"/>
+                <RowDefinition  Height="140"/>
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
@@ -51,22 +51,45 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Height="104">
+            <Border Grid.Row="1">
                 <Border.Background>
                     <SolidColorBrush Color="#000000" Opacity="0.1"/>
                 </Border.Background>
-                <Border Margin="0 0 32 0">
+                <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#b3b3b3">
                     <StackPanel Orientation="Vertical">
                         <Button x:Name="PlayPauseGreen" Template="{DynamicResource GreenPlayStyle}" Click="PlayPauseGreen_Click" Margin="16 12 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Padding="0" Height="80">
                             <Button.Background>
                                 <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                             </Button.Background>
                         </Button>
+
+                        <Grid Margin="0 24 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="475"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Foreground="#ffffff" Text="#"  Margin="16 0 0 0"/>
+                            <TextBlock Grid.Column="1" Foreground="#ffffff" Text="TITLE"/>
+                            <TextBlock Grid.Column="2" Foreground="#ffffff" Text="ALBUM"/>
+                            <TextBlock Grid.Column="3" Foreground="#ffffff" Text="DATE ADDED"/>
+                            <TextBlock Grid.Column="4" Foreground="#ffffff" Text="TIME" Margin="0 0 -12 0"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
             </Border>
             <Grid  Grid.Row="2">
-                <components:SongsView FavorIcon="{StaticResource HeartFillButton}" ItemSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedSong="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="137*"/>
+                    <ColumnDefinition Width="646*"/>
+                </Grid.ColumnDefinitions>
+                <components:SongsView 
+                    x:Name="ListLikeSongs"
+                    FavorIcon="{StaticResource HeartFillButton}"
+                    ItemSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    SelectedSong="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>
     </ScrollViewer>

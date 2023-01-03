@@ -57,6 +57,7 @@ namespace Spotify.Views.Pages
         public LikedSongsView()
         {
             InitializeComponent();
+            SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
@@ -68,17 +69,29 @@ namespace Spotify.Views.Pages
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.IsPlay == true)
+            if (SongBottom.Ins.SelectedSong == null)
             {
-                ImgBrush.ImageSource = Play;
-                SongBottom.Ins.IsPlay = false;
+                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
+                SongBottom.Ins.IsPlay = true;
+                ImgBrush.ImageSource = Pause;
+
             }
             else
             {
-                ImgBrush.ImageSource = Pause;
-                SongBottom.Ins.IsPlay = true;
+                
+                if (SongBottom.Ins.IsPlay == true)
+                {
+                    ImgBrush.ImageSource = Play;
+                    SongBottom.Ins.IsPlay = false;
+                }
+                else
+                {
+                    ImgBrush.ImageSource = Pause;
+                    SongBottom.Ins.IsPlay = true;
 
+                }
             }
+           
             //if (IsPlay == true)
             //{
             //    ImgBrush.ImageSource = Play;

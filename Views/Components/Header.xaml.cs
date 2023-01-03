@@ -176,6 +176,9 @@ namespace Spotify.Views.Components
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
                 ViewPage.Ins.CurrentIndexView--;
+                ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
+                if (count == 1) IsDisableBack = true;
+
                 IsDisableNext = false;
             }
             else
