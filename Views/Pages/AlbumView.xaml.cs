@@ -1,7 +1,9 @@
-﻿using Spotify.Views.Components;
+﻿using Spotify.Models;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,6 +26,8 @@ namespace Spotify.Views.Pages
         public AlbumView()
         {
             InitializeComponent();
+           
+            
         }
         ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
@@ -54,5 +58,26 @@ namespace Spotify.Views.Pages
             PlayPauseGreen.Background = ImgBrush;
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            Album.ApplyTemplate();
+            var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+            var listFavor = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).Select(a => a.Songs).FirstOrDefault();
+            foreach (Song a in listFavor)
+            {
+                for (int j = 0; j < Album.ItemSource.Count; j++)
+                {
+                    if (a.ID == Album.ItemSource[j].ID)
+                    {
+                        var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
+                        Button btn = template.Template.FindName("favorBtn", template) as Button;
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                        btn.Background = img;
+                    }
+                }
+            }
+        }
     }
 }

@@ -147,6 +147,7 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsFavor", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
         private void Favor_Click(object sender, RoutedEventArgs e)
         {
+            var BackGroundBtn = (sender as Button).Background as ImageBrush;
             var listview = GetTemplateChild("PART_Header") as ListView;
             Button btn = sender as Button;
             int index = int.Parse(btn.Tag.ToString());
@@ -174,10 +175,20 @@ namespace Spotify.Views.Components
             }
             else
             {
-                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                btn.Background = img;
-                playlist.Songs.Add(song);
-                playlist.SongsOfPlaylist.Add(song);
+    
+                var list = album.Songs;
+                int test = 0;
+                foreach(Song s in list)
+                {
+                    if (s.ID == song.ID) test++;
+                }
+                if(test == 0)
+                {
+                    img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                    btn.Background = img;
+                    album.Songs.Add(song);
+                    album.SongsOfAlbum.Add(song);
+                }
             }
             DataProvider.Ins.DB.SaveChanges();
         }
