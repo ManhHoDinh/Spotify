@@ -411,6 +411,7 @@
       <LastGenOutput>SpotifyModel.cs</LastGenOutput>
     </Content>
     <Resource Include="Resource\NoteModifySql.txt" />
+    <Resource Include="Resource\Icons\CloseBtn_S.png" />
     <Content Include="Resource\Images\InitImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
