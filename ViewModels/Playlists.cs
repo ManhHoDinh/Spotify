@@ -10,12 +10,12 @@ namespace Spotify.ViewModels
 {
     public class Playlists
     {
-        public static ObservableCollection<Playlist> AllPlaylist = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(a=>a.UserID==1).ToList());
+        public static ObservableCollection<Playlist> AllPlaylists = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.ToList());
         public static void InitUri()
         {
-            for (int i = 0; i < AllPlaylist.Count; i++)
+            for (int i = 0; i < AllPlaylists.Count; i++)
             {
-                Playlist playlist = AllPlaylist[i];
+                Playlist playlist = AllPlaylists[i];
                 Playlist.InitUri(ref playlist);
             }
         }

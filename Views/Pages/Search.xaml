@@ -113,6 +113,7 @@
         <Grid Background="#121212">
             <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding RecentSearch}"></ListView>
             <components:SongsView
+                   FavorIcon="{StaticResource HeartButton}" 
                    Margin="0 70 0 0" 
                    ItemSource="{Binding Source={x:Static vm:SearchVM.Ins},Path=filteredCollection}"
                    Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"          

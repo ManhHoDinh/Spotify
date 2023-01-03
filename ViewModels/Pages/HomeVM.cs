@@ -32,6 +32,26 @@ namespace Spotify.ViewModels.Pages
         private ObservableCollection<Album> _RecommendPlaylists;
         public ObservableCollection<Album> RecommendPlaylists { get; set; }
         public ICommand ClickCommand { get; set; }
+        void TranslatePage(object obj)
+        {
+            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
+            {
+                int currentId = ViewPage.Ins.CurrentIndexView;
+                int count = ViewPage.Ins.ListPage.Count;
+
+                if (currentId < count)
+                {
+                    for (int i = currentId + 1; i < count; i++)
+                    {
+                        ViewPage.Ins.ListPage.RemoveAt(1);
+                    }
+                }
+                ViewPage.Ins.CurrentView = obj;
+                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                ViewPage.Ins.CurrentIndexView++;
+                ViewPage.Ins.IsDisableBack = false;
+            }
+        }
         private Album _SelectedItem;
         public Album SelectedItem { get => _SelectedItem; 
             set { _SelectedItem = value; 
@@ -44,10 +64,8 @@ namespace Spotify.ViewModels.Pages
                   AlbumImage = SelectedItem.AlbumImageUri;
                   IsAlbumItemVisible = true; 
                   IsAlbumListVisible = false;
-                  ViewPage.Ins.CurrentView = new AlbumView();
-
-                  ViewPage.Ins.CurrentIndexView++;
-              }
+                  TranslatePage(new AlbumView());
+                }
             }
         }
         private Song _SelectedSongItem;
@@ -68,7 +86,6 @@ namespace Spotify.ViewModels.Pages
                 }
             }
         }
-
         private string _AlbumName;
         public string AlbumName { get => _AlbumName; set { _AlbumName = value; OnPropertyChanged(); } }
         private ObservableCollection<Song> _songsOfAlbum = new ObservableCollection<Song>();
@@ -85,6 +102,7 @@ namespace Spotify.ViewModels.Pages
         public Uri AlbumImage { get => _AlbumImage; set { _AlbumImage = value; OnPropertyChanged(); } }
         public HomeVM()
         {
+           
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
             RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;

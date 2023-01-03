@@ -40,6 +40,8 @@ namespace Spotify.ViewModels.Pages
 
         private ImageSource _imagePlaylist;
         public ImageSource ImagePlaylist { get => _imagePlaylist; set { _imagePlaylist = value; OnPropertyChanged(); } }
+        private ObservableCollection<Song> _songsOfPlaylist;
+        public ObservableCollection<Song> SongsOfPlaylist { get => _songsOfPlaylist; set { _songsOfPlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
         public Playlist SelectedPlaylist
         {
@@ -53,18 +55,45 @@ namespace Spotify.ViewModels.Pages
                     NamePlaylist = SelectedPlaylist.PlaylistName;
                     DescriptionPlaylist = SelectedPlaylist.Descriptions;
                     ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
+                    SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
                     ViewPage.Ins.CurrentView = new CreatePlaylist();
                 }
             }
         }
+        private Song _SelectedSongItem;
+        public Song SelectedSongItem
+        {
+            get => _SelectedSongItem;
+            set
+            {
+                _SelectedSongItem = value;
+                OnPropertyChanged();
+                if (SelectedSongItem != null)
+                {
+                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    
+
+
+                }
+            }
+        }
+
+
+
+
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
         public CreatePlaylistVM()
         {
-            ObservableCollection<Song> songs = new ObservableCollection<Song>();
-            songs.Add(Songs.CamNang);
-            songs.Add(Songs.BenTrenTangLau);
-            songs.Add(Songs.DauMua);
+           
+            ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
+            //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+            //songs.Add(Songs.CamNang);
+            //songs.Add(Songs.BenTrenTangLau);
+            //songs.Add(Songs.DauMua);
 
             SongItemsCollection = new CollectionViewSource { Source = songs };
             SongItemsCollection.Filter += MenuItems_Filter;
@@ -196,22 +225,7 @@ namespace Spotify.ViewModels.Pages
         private CollectionViewSource SongItemsCollection;
         public ICollectionView SongSourceCollection => SongItemsCollection.View;
 
-        private Song _SelectedSongItem;
-        public Song SelectedSongItem
-        {
-            get => _SelectedSongItem;
-            set
-            {
-                _SelectedSongItem = value;
-                OnPropertyChanged();
-                if (SelectedSongItem != null)
-                {
-                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
-                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.SongImageUri;
-                }
-            }
-        }
+       
 
         public static string RemoveSign4VietnameseString(string str)
         {

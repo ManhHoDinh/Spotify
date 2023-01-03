@@ -17,8 +17,7 @@
     </UserControl.Resources>
     <UserControl.Template>
         <ControlTemplate>
-
-                <Grid Margin="0 24 0 0" Background="#121212">
+            <Grid Margin="0 24 0 0"  Background="#121212">
                     <ListView Name="PART_Header"   
                       SelectionMode="Single"
                       Template="{StaticResource NonScrollableListView}" 

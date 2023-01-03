@@ -69,23 +69,12 @@ namespace Spotify.ViewModels.Pages
 
         public LikedSongsVM()
         {
-            Playlist ListLikeSong = Playlists.LikedSongsPlayplist;
-            listSong = ListLikeSong.SongsOfPlaylist;
-            //listSong.Add(Songs.CamNang);
-            //listSong.Add(Songs.BenTrenTangLau);
-            //listSong.Add(Songs.DauMua);
-
-            //listSong.Add(new SongItemModel { Id = "3", NameSong = "chúng ta không thuộc nhau", NameSinger = "Sơn Tùng", DurationSong = "3:231" });
-            //listSong.Add(new SongItemModel { Id = "4", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            //listSong.Add(new SongItemModel { Id = "5", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            //listSong.Add(new SongItemModel { Id = "6", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            //listSong.Add(new SongItemModel { Id = "7", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            //listSong.Add(new SongItemModel { Id = "8", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            //listSong.Add(new SongItemModel { Id = "9", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-            //listSong.Add(new SongItemModel { Id = "10", NameSong = "chúng ta không thuộc về nhau", NameSinger = "Sơn Tùng", DurationSong = "3:23" });
-            //listSong.Add(new SongItemModel { Id = "11", NameSong = "chúng ta không về nhau", NameSinger = "Sơn ùng", DurationSong = "3:25" });
-            //listSong.Add(new SongItemModel { Id = "12", NameSong = "chúng ta không thuộc nhau", NameSinger = "ơn Tùng", DurationSong = "3:231" });
-
+            Binding binding = new Binding("SelectedItem");
+            binding.Source = this;
+            binding.Mode = BindingMode.OneWayToSource;
+            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            var ListLikeSong = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).FirstOrDefault();
+            listSong = ListLikeSong.SongsOfAlbum;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

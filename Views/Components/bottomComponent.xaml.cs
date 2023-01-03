@@ -19,6 +19,7 @@ using Spotify.Models;
 using Spotify.Views.Pages;
 using Spotify.ViewModels.Pages;
 using System.Security.Policy;
+using System.Collections.ObjectModel;
 
 namespace Spotify.Views.Components
 {
@@ -56,7 +57,32 @@ namespace Spotify.Views.Components
             set { SetValue(ImageSongProperty, value); }
         }
 
-       
+
+        public Song SelectedSong
+        {
+            get { return (Song)GetValue(SelectedSongProperty); }
+            set { SetValue(SelectedSongProperty, value); }
+            
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedSongProperty =
+            DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongBottom), new PropertyMetadata(null));
+
+
+
+
+        public ObservableCollection<Song> ListSong
+        {
+            get { return (ObservableCollection<Song>)GetValue(ListSongProperty); }
+            set { SetValue(ListSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ListSong.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSongProperty =
+            DependencyProperty.Register("ListSong", typeof(ObservableCollection<Song>), typeof(SongBottom), new PropertyMetadata(null));
+
+
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageSongProperty =
@@ -99,8 +125,6 @@ namespace Spotify.Views.Components
                     ImageBrush ImgBrush = new ImageBrush();
                     ImgBrush.ImageSource = Pause;
                     PlayPauseBtn.Background = ImgBrush;
-                  
-                  
                 }
                 else
                 {
@@ -121,11 +145,14 @@ namespace Spotify.Views.Components
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(BottomControl, IsPlayProperty, binding);
+
+           
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
         }
+  
         public bool IsPlay
         {
             get { return (bool)GetValue(IsPlayProperty); }
@@ -346,47 +373,52 @@ namespace Spotify.Views.Components
 
         private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-        //    LikedSongsVM a = this.DataContext as LikedSongsVM;
-        //    if (a != null)
-        //    {
+           // LikedSongsVM a = this.DataContext as LikedSongsVM;
+            //if (a != null)
+            //{
 
-        //        int index = a.SelectedItem.ID;
-        //        if (RepeatState == "RepeatOne")
-        //        {
-        //            mePlayer.Position = TimeSpan.Zero;
-        //            playing.Content = mePlayer.Position.ToString(@"mm\:ss");
-        //        }
+                int id = 0;
+                
+                if (RepeatState == "RepeatOne")
+                {
+                    mePlayer.Position = TimeSpan.Zero;
+                    playing.Content = mePlayer.Position.ToString(@"mm\:ss");
+                }
 
-        //        else
-        //        {
-        //            if (!IsShuffle)
-        //            {
-        //                {
-        //                    if (index < LikedSongsVM.listSong.Count) a.SelectedItem = LikedSongsVM.listSong[index];
-        //                    else
-        //                    {
-        //                        a.SelectedItem = LikedSongsVM.listSong[0];
-        //                        if (RepeatState == "None")
-        //                        {
-        //                            mePlayer.Pause();
-        //                            ImageBrush img = new ImageBrush();
-        //                            img.ImageSource = Play;
-        //                            PlayPauseBtn.Background = img;
-        //                        }
+                else
+                {
+                    if (!IsShuffle)
+                    {
+                   
+
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                        {
+                            if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                            {
+                                id = i + 1;
+                            }
+                        }
+                        if (id < SongBottom.Ins.ListSong.Count)
+                        {
+                            SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
+                            SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
+                            SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
+                            SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
+                            SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
 
 
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
+                        }
 
-        //                Random rdm = new Random();
-        //                int x = rdm.Next(0, LikedSongsVM.listSong.Count);
-        //                a.SelectedItem = LikedSongsVM.listSong[index];
-        //            }
-        //        }
-        //    }
+                    }
+                    else
+                    {
+
+                        Random rdm = new Random();
+                        int x = rdm.Next(0, SongBottom.Ins.ListSong.Count - 1);
+                        SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[x];
+                    }
+                //}
+            }
         }
 
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
@@ -439,6 +471,49 @@ namespace Spotify.Views.Components
                 RepeatState = "None";
             }
 
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            int id = 0;
+            for(int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+            {
+                if(SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                {
+                    id = i + 1;
+                }
+            }
+            if(id < SongBottom.Ins.ListSong.Count)
+            {
+                SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
+                SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
+                SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
+                SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
+                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
+               
+
+            }
+        }
+        private void Prev_Click(object sender, RoutedEventArgs e)
+        {
+            int id = 0;
+           
+            for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+            {
+                if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                {
+                    id = i - 1;
+                }
+            }
+            if (id >= 0)
+            {
+                SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
+                SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
+                SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
+                SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
+                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
+                
+            }
         }
     }
 }

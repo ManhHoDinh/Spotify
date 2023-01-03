@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
@@ -55,11 +56,9 @@ namespace Spotify.Views.Components
                         }
                         btn.Background = img;
                     }
-
                 }
-
-
             }
+            
         }
         public SongsView()
         {
@@ -68,6 +67,8 @@ namespace Spotify.Views.Components
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(songview, IsPlayProperty, binding);
+
+            
             //if(LikedSongsView.SelectedItem != null)
             //{
             //    Binding bd = new Binding("IsPlay");
@@ -101,13 +102,11 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemSourceProperty =
             DependencyProperty.Register("ItemSource", typeof(ObservableCollection<Song>), typeof(SongsView), new PropertyMetadata(null));
-
-
-
         public Song SelectedSong
         {
             get { return (Song)GetValue(SelectedSongProperty); }
             set { SetValue(SelectedSongProperty, value); }
+       
         }
 
         // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
@@ -122,7 +121,8 @@ namespace Spotify.Views.Components
         public bool IsPlay
         {
             get { return (bool)GetValue(IsPlayProperty); }
-            set { SetValue(IsPlayProperty, value); }
+            set { SetValue(IsPlayProperty, value);  }
+            
         }
         public static readonly DependencyProperty IsPlayProperty =
             DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
@@ -182,14 +182,35 @@ namespace Spotify.Views.Components
             }
             DataProvider.Ins.DB.SaveChanges();
         }
+        void TranslatePage(object obj)
+        {
+            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
+            {
+                int currentId = ViewPage.Ins.CurrentIndexView;
+                int count = ViewPage.Ins.ListPage.Count;
 
+                if (currentId < count)
+                {
+                    for (int i = currentId + 1; i < count; i++)
+                    {
+                        ViewPage.Ins.ListPage.RemoveAt(1);
+                    }
+                }
+                SongView a = new SongView();
+                a.SelectedSong = SelectedSong;
+                ViewPage.Ins.CurrentView = a;
+                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                ViewPage.Ins.CurrentIndexView++;
+                ViewPage.Ins.IsDisableBack = false;
+            }
+        }
         private void NameSong_Click(object sender, RoutedEventArgs e)
         {
             var listview = GetTemplateChild("PART_Header") as ListView;
             Button btn = sender as Button;
             ListViewItem curItem = ((ListViewItem)listview.ContainerFromElement((Button)sender));
             curItem.IsSelected = true;
-            ViewPage.Ins.CurrentView = new SongView();
+            TranslatePage(new SongView());
         }
         ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
         ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
@@ -225,6 +246,8 @@ namespace Spotify.Views.Components
 
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            SongBottom.Ins.ListSong = ItemSource;
+            
             var listview = GetTemplateChild("PART_Header") as ListView;
             for (int i = 0; i < listview.Items.Count; i++)
             {

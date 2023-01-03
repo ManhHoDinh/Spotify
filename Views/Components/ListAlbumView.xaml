@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Spotify.Views.Components.ListAlbumView"
+             x:Name="listAlbum"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Spotify.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="4500" d:DesignWidth="8000">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
+            <ItemsPresenter/>
+        </ControlTemplate>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <UserControl.Template>
+        <ControlTemplate>
+            <StackPanel Margin="32 30 0 0">
+                <TextBlock Text="{TemplateBinding Tag}" FontSize="24" FontWeight="Bold" Foreground="#ffffff" TextWrapping="Wrap" Margin="21 0 0 10"/>
+                <ListView 
+                  Name="PART_Header"
+                  Template="{DynamicResource NonScrollableListView}" 
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  SelectedItem="{Binding SelectedItem,ElementName=listAlbum}" 
+                  ItemsSource="{Binding ItemsSource, ElementName=listAlbum}" 
+                  Background="Transparent" BorderBrush="Transparent">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="AntiqueWhite"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                        <Border x:Name="border" CornerRadius="8" Width="184" Height="275" Margin="0 0 20 0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#181818"/>
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Border.IsMouseOver" Value="True">
+                                                            <Setter Property="Border.Background" Value="#282828"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Grid>
+                                                <StackPanel Margin="16 10 16 0">
+                                                    <Border Width="150" Height="150" CornerRadius="8" Margin="0 0 0 20">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="{Binding AlbumImageUri}"/>
+                                                        </Border.Background>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding Descriptions}" FontSize="14" Foreground="#b3b3b3"/>
+                                                    <Button
+                                                        Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                                                        x:Name="PlayPauseGreen" 
+                                                        Tag="{Binding ID }"
+                                                        
+                                                        Template="{DynamicResource GreenPlayStyle}"
+                                                        Click="PlayPauseGreen_Click" 
+                                                       
+                                                        HorizontalAlignment="Center" 
+                                                        VerticalAlignment="Center"
+                                                        Width="80"
+                                                        Padding="0"
+                                                        Margin="76 -180 0 0 "
+                                                        Height="80">
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                                                        </Button.Background>
+                                                    </Button>
+
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </StackPanel>
+        </ControlTemplate>
+    </UserControl.Template>
+</UserControl>

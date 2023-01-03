@@ -102,6 +102,7 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for List.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ListProperty =
             DependencyProperty.Register("List", typeof(ObservableCollection<Playlist>), typeof(ListPlaylist), new PropertyMetadata(null));
+
         public static ListPlaylist Ins { get; private set; }
         static ListPlaylist()
         {
@@ -118,6 +119,10 @@ namespace Spotify.Views.Pages
         {
             InitializeComponent();
             CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            Binding bd = new Binding("SelectedSongItem");
+            bd.Source = playlist;
+            bd.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
             Binding binding = new Binding("SelectedPlaylist");
             binding.Source = playlist;
             binding.Mode = BindingMode.TwoWay;
@@ -139,5 +144,37 @@ namespace Spotify.Views.Pages
             }
             Application.Current.MainWindow.Opacity = 1;
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            CreatePlaylistVM vm = this.DataContext as CreatePlaylistVM;
+            int songId = int.Parse((sender as Button).Tag.ToString());
+            Song song = DataProvider.Ins.DB.Songs.Where(s => s.ID == songId).FirstOrDefault();
+            var playlist = DataProvider.Ins.DB.Playlists.Where(p => p.ID == vm.SelectedPlaylist.ID).FirstOrDefault();
+            if(playlist.Songs.Count == 0)
+            {
+                Random r = new Random();
+                Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
+                string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
+                color = "#" + hex;
+            }
+            playlist.Songs.Add(song);
+            vm.SongsOfPlaylist.Add(song);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+
+
+        public string color
+        {
+            get { return (string)GetValue(colorProperty); }
+            set { SetValue(colorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for color.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty colorProperty =
+            DependencyProperty.Register("color", typeof(string), typeof(CreatePlaylist), new PropertyMetadata("#545454"));
+
+
+
     }
 }

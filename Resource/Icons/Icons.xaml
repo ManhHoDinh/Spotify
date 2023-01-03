@@ -10,7 +10,7 @@
     <ImageSource x:Key="CloseBtn">./CloseBtn_S.png</ImageSource>
     <ImageSource x:Key="YourLibraryFillIcon">./Library_Fill_S.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
-    <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
+    <ImageSource x:Key="CreatePlaylistIcon">./AddLibrary.png</ImageSource>
     <ImageSource x:Key="PlayFill">./Play_GreemHover.png</ImageSource>
     <ImageSource x:Key="BackButton">./Back.png</ImageSource>
     <ImageSource x:Key="BackDisable">./BackDisable.png</ImageSource>

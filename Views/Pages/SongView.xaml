@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
-             DataContext ="{StaticResource LikedSongsVM}"
+             xmlns:components="clr-namespace:Spotify.Views.Components"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.Background>
@@ -29,13 +29,13 @@
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0">
                     <Border Margin="32 80 0 0"  Width="232" Height="232">
-                        <Image Source="{Binding Image}"/>
+                        <Image Source="{Binding SelectedSong.SongImageUri, ElementName=viewsong}"/>
                     </Border>
                 </WrapPanel>
                 <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
                     <TextBlock Text="SONG" FontSize="16" Foreground="#ffffff" />
-                    <TextBlock Text="{Binding Name}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
-                    <TextBlock Text="{Binding NameSinger}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                    <TextBlock Text="{Binding SelectedSong.SongName, ElementName=viewsong}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                    <TextBlock Text="{Binding SelectedSong.SingerName, ElementName=viewsong}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
                 </StackPanel>
             </Grid>
         </Border>

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -123,6 +123,7 @@ namespace Spotify.ViewModels
             DataProvider.Ins.DB.SaveChanges();
             ListPlaylist.Ins.List.Add(playlist);
             ViewPage.Ins.CurrentView = new CreatePlaylist();
+            //  MessageBox.Show(count.ToString());
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
             ListPlaylist.Ins.CountPlaylist++;
 
@@ -131,8 +132,9 @@ namespace Spotify.ViewModels
 
         private void LikedSongs(object obj)
         {
-            ChangeViewStyle("LikeSongs", obj);
+            ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
+           
 
         }
 
