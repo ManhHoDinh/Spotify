@@ -155,8 +155,8 @@ namespace Spotify.Views.Components
             int id = int.Parse(gr.Tag.ToString());
             ImageBrush img = new ImageBrush();
             var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
-            var album = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).FirstOrDefault();
-            if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
+            var playlist = Playlists.LikedSongsPlayplist;
+            if (FavorIcon == (ImageSource)Application.Current.Resources["HeartFillButton"])
             {
                 img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
                 btn.Background = img;
@@ -175,20 +175,10 @@ namespace Spotify.Views.Components
             }
             else
             {
-    
-                var list = album.Songs;
-                int test = 0;
-                foreach(Song s in list)
-                {
-                    if (s.ID == song.ID) test++;
-                }
-                if(test == 0)
-                {
-                    img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                    btn.Background = img;
-                    album.Songs.Add(song);
-                    album.SongsOfAlbum.Add(song);
-                }
+                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                btn.Background = img;
+                playlist.Songs.Add(song);
+                playlist.SongsOfPlaylist.Add(song);
             }
             DataProvider.Ins.DB.SaveChanges();
         }

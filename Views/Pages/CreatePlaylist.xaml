@@ -145,6 +145,7 @@
                 </Border>
             </Border>
             <component:SongsView
+                 FavorIcon="{StaticResource HeartButton}" 
                 Grid.Row="2"
                 SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -174,8 +175,7 @@
                     </Grid>
                     <ListView  
                         x:Name="BeginingSearch"
-                        Template="{StaticResource NonScrollableListView}"
-                        Width="1224" 
+                        Template="{StaticResource NonScrollableListView}"                     
                         ItemsSource="{Binding SongSourceCollection}"
                         Background="Transparent"
                         BorderBrush="Transparent" 
@@ -204,9 +204,9 @@
                                                 </Border.Style>
                                                 <Grid >
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="350"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="auto"/>
+                                                        <ColumnDefinition Width="33.4*"/>
+                                                        <ColumnDefinition Width="26.2*"/>
+                                                        <ColumnDefinition Width="17.78*"/>
                                                     </Grid.ColumnDefinitions>
                                                     <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
                                                         <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>

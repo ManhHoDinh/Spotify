@@ -103,10 +103,6 @@ namespace Spotify.Views.Pages
         public static readonly DependencyProperty ListProperty =
             DependencyProperty.Register("List", typeof(ObservableCollection<Playlist>), typeof(ListPlaylist), new PropertyMetadata(null));
 
-
-        
-
-
         public static ListPlaylist Ins { get; private set; }
         static ListPlaylist()
         {
