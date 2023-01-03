@@ -98,9 +98,7 @@ namespace Spotify.ViewModels
         {
             IsSearchView= true;
             ChangeViewStyle("Search", obj);
-            TranslatePage(new SearchVM());
-            MessageBox.Show(ListPlaylist.Ins.List[0].PlaylistImage);
-            
+            TranslatePage(new SearchVM()); 
         }
         private void YourLibrary(object obj)
         {
