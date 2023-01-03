@@ -95,6 +95,7 @@ namespace Spotify
             InitializeComponent();
             Songs.InitUri();
             Albums.InitUri();
+            Playlists.InitUri();
         }
         private void CloseRightSideBarButton_Click(object sender, RoutedEventArgs e)
         {

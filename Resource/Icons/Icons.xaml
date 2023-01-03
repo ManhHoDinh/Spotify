@@ -7,7 +7,7 @@
     <ImageSource x:Key="SearchIcon">./Search.png</ImageSource>
     <ImageSource x:Key="SearchFillIcon">./Search_Fill_S.png</ImageSource>
     <ImageSource x:Key="YourLibraryIcon">./Library_S.png</ImageSource>
-    <ImageSource x:Key="CloseBtn">./Close_S.png</ImageSource>
+    <ImageSource x:Key="CloseBtn">./CloseBtn_S.png</ImageSource>
     <ImageSource x:Key="YourLibraryFillIcon">./Library_Fill_S.png</ImageSource>
     <ImageSource x:Key="LikedSongsIcon">./LikedSongs.png</ImageSource>
     <ImageSource x:Key="AddLibraryIcon">./AddLibrary.png</ImageSource>
@@ -20,7 +20,6 @@
     <ImageSource x:Key="SearchBoxForm">./HeaderSearch.png</ImageSource>
     <ImageSource x:Key="Avatar">./Avatar.png</ImageSource>
     <ImageSource x:Key="SongIcon">./SongIcon.png</ImageSource>
-    <!--<ImageSource x:Key="CloseBtn">./Close_S.png</ImageSource>-->
     <ImageSource x:Key="OptionBtn">./Options_XS.png</ImageSource>
     <ImageSource x:Key="OptionHoverBtn">./Option.png</ImageSource>
     <ImageSource x:Key="PauseFill">./Pause_GreemHover.png</ImageSource>

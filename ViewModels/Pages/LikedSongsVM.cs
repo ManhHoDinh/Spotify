@@ -69,8 +69,8 @@ namespace Spotify.ViewModels.Pages
 
         public LikedSongsVM()
         {
-            var ListLikeSong = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).FirstOrDefault();
-            listSong = ListLikeSong.SongsOfAlbum;
+            Playlist ListLikeSong = Playlists.LikedSongsPlayplist;
+            listSong = ListLikeSong.SongsOfPlaylist;
             //listSong.Add(Songs.CamNang);
             //listSong.Add(Songs.BenTrenTangLau);
             //listSong.Add(Songs.DauMua);

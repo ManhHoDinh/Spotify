@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:components="clr-namespace:Spotify.Views.Components">
-    
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
@@ -45,16 +45,46 @@
                                                 </Style>
                                             </Border.Style>
                                             <Grid>
-                                                
-                                                    <StackPanel Margin="16 10 16 0">
-                                                        <Border Width="150" Height="150" CornerRadius="8" Margin="0 0 0 20">
-                                                            <Border.Background>
-                                                                <ImageBrush ImageSource="{Binding SongImageUri}"/>
-                                                            </Border.Background>
-                                                        </Border>
-                                                        <TextBlock Text="{Binding SongName}" FontSize="16" Foreground="#ffffff"/>
-                                                        <TextBlock TextWrapping="wrap" Text="{Binding SingerName}" FontSize="14" Foreground="#b3b3b3"/>
-                                                        <Button Template="{DynamicResource GreenStyle}" 
+
+                                                <StackPanel Margin="16 10 16 0">
+                                                    <Border Width="150" Height="150" CornerRadius="8" Margin="0 0 0 20">
+                                                        <Border.Background>
+                                                            <ImageBrush ImageSource="{Binding SongImageUri}"/>
+                                                        </Border.Background>
+                                                        <Button Margin="0 -5 -12 0" HorizontalAlignment="Right" VerticalAlignment="Top" Tag="{Binding ID}" Click="CloseBtn_Click">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="{StaticResource CloseBtn}"></ImageBrush>
+                                                            </Button.Background>
+                                                            <Button.Style>
+                                                                <Style TargetType="Button" >
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate>
+                                                                                <Border HorizontalAlignment="Right" 
+                                                                                        x:Name="BorderCloseBtn" 
+                                                                                        Background="#000" Opacity="0.8" 
+                                                                                        CornerRadius="36" 
+                                                                                        VerticalAlignment="Top"
+                                                                                        >
+                                                                                    <Image  Source="{StaticResource CloseBtn}" Height="26" Width="26" Opacity="1"/>
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="Border.IsMouseOver" Value="True" >
+                                                                                        <Setter Property="Width" Value="28" TargetName="BorderCloseBtn"></Setter>
+                                                                                        <Setter Property="Height" Value="28" TargetName="BorderCloseBtn"></Setter>
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+
+                                                            </Button.Style>
+                                                        </Button>
+                                                    </Border>
+                                                    <TextBlock Text="{Binding SongName}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding SingerName}" FontSize="14" Foreground="#b3b3b3"/>
+                                                    <Button Template="{DynamicResource GreenStyle}" 
                                                             Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                             Width="80" 
                                                             Height="80"
@@ -62,12 +92,12 @@
                                                             VerticalAlignment="Center"                      
                                                             Margin="76 -180 0 0 "
                                                              >
-                                                            <Button.Background>
-                                                                <ImageBrush ImageSource="{StaticResource PlayFill}"/>
-                                                            </Button.Background>
-                                                        </Button>
-                                                    </StackPanel>
-                                                
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                                                        </Button.Background>
+                                                    </Button>
+                                                </StackPanel>
+
                                             </Grid>
                                         </Border>
                                     </ControlTemplate>
@@ -79,18 +109,15 @@
             </StackPanel>
         </ControlTemplate>
     </UserControl.Resources>
-
-    
-        <ScrollViewer>
+    <ScrollViewer>
         <Grid Background="#121212">
-            <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding Source={x:Static vm:SearchVM.Ins},Path=filteredCollection}"></ListView>
+            <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding RecentSearch}"></ListView>
             <components:SongsView
                    Margin="0 70 0 0" 
                    ItemSource="{Binding Source={x:Static vm:SearchVM.Ins},Path=filteredCollection}"
-                   Visibility="Collapsed"           
+                   Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"          
                    SelectedSong="{Binding SelectedSongItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             />
-            <!--Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"-->
         </Grid>
     </ScrollViewer>
    
