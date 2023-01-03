@@ -1,4 +1,6 @@
-﻿using Spotify.ViewModels.Pages;
+﻿using Spotify.Models;
+using Spotify.ViewModels;
+using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,19 +53,15 @@ namespace Spotify.Views.Pages
         
         }
 
-        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    if (SearchBox.Text != string.Empty)
-        //    {
-        //        PreparingSearch.Visibility = Visibility.Hidden;
-        //        BeginingSearch.Visibility = Visibility.Visible;
-        //    }
-        //    else
-        //    {
-        //        PreparingSearch.Visibility = Visibility.Visible;
-        //        BeginingSearch.Visibility = Visibility.Hidden;
-        //    }
-        //}
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            int index = int.Parse(btn.Tag.ToString());
+            Song song = DataProvider.Ins.DB.Songs.Where(a => a.ID == index).First();
+            Playlists.RecentSearchPlaylist.SongsOfPlaylist.Remove(song);
+            Playlists.RecentSearchPlaylist.Songs.Remove(song);
+            DataProvider.Ins.DB.SaveChanges();
+        }
     }
        
     

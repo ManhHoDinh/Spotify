@@ -148,9 +148,6 @@
     <Compile Include="Views\Pages\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\ForgotPasswordForm.xaml.cs">
-      <DependentUpon>ForgotPasswordForm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Pages\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
@@ -313,10 +310,6 @@
     <Page Include="Views\Pages\CreatePlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Pages\ForgotPasswordForm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
