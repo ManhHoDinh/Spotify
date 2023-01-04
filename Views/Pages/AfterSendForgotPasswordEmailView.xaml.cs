@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,11 @@ namespace Spotify.Views.Pages
         public AfterSendForgotPasswordEmailView()
         {
             InitializeComponent();
+        }
+        private void HomeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.IsMainView = true;
+            LoginStatus.Current.IsAfterSendForgotPasswordEmail = false;
         }
     }
 }

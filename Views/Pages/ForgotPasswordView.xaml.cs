@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Spotify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -31,6 +32,17 @@ namespace Spotify.Views.Pages
         {
             string url = "https://support.spotify.com/vn-vi/";
             Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+        }
+
+        private void SendBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserNameOrEmail.Text == "")
+                Error.Visibility = Visibility.Visible;
+            else
+            {
+                LoginStatus.Current.IsForgotPassword = false;
+                LoginStatus.Current.IsAfterSendForgotPasswordEmail = true;
+            }
         }
     }
 }
