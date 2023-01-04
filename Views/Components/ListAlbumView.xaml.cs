@@ -29,7 +29,7 @@ namespace Spotify.Views.Components
     public partial class ListAlbumView : UserControl
     {
         private ListView listview;
-        private int id;
+        public static int id;
         public static bool IsClick;
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
@@ -105,18 +105,19 @@ namespace Spotify.Views.Components
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+
             ImageBrush ImgBrush = new ImageBrush();
             if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1)
             {
+                SongBottom.Ins.CountId = 0;
+
                 id = int.Parse((sender as Button).Tag.ToString()) - 1;
                 listview = GetTemplateChild("PART_Header") as ListView;
-                 for (int i = 0; i < ItemsSource.Count; i++)
+                for (int i = 0; i < ItemsSource.Count; i++)
                 {
                     var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                     var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
-                    if(int.Parse(btn.Tag.ToString()) != id + 1)
+                    if (int.Parse(btn.Tag.ToString()) != id + 1)
                     {
                         ImageBrush im = new ImageBrush();
                         im.ImageSource = Play;
@@ -127,18 +128,16 @@ namespace Spotify.Views.Components
                 int IdAlbum = int.Parse((sender as Button).Tag.ToString());
                 var AlbumPlay = DataProvider.Ins.DB.Albums.Where(a => a.ID == IdAlbum).FirstOrDefault();
                 IsClick = true;
-                SongBottom.Ins.ListSong = ItemsSource[id].SongsOfAlbum; 
+                SongBottom.Ins.ListSong = ItemsSource[id].SongsOfAlbum;
                 SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
-                
+
                 SongBottom.Ins.IsPlay = true;
                 ImgBrush.ImageSource = Pause;
-                
+
 
             }
             else
             {
-               
-
                 if (SongBottom.Ins.IsPlay == true)
                 {
                     ImgBrush.ImageSource = Play;
@@ -163,7 +162,6 @@ namespace Spotify.Views.Components
             //    IsPlay = true;
             //}
             (sender as Button).Background = ImgBrush;
-            
         }
 
 

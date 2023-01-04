@@ -258,6 +258,7 @@ namespace Spotify.Views.Components
             SongBottom.Ins.ListSong = ItemSource;
             
             var listview = GetTemplateChild("PART_Header") as ListView;
+            SongBottom.Ins.CountId = listview.SelectedIndex;
             for (int i = 0; i < listview.Items.Count; i++)
             {
                 var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;

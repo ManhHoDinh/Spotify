@@ -31,9 +31,14 @@ namespace Spotify.Views.Pages
             {
                 if (IsPlay == true)
                 {
-                    ImageBrush ImgBrush = new ImageBrush();
-                    ImgBrush.ImageSource = Pause;
-                    PlayPauseGreen.Background = ImgBrush;
+                    MessageBox.Show(SongBottom.Ins.CountId.ToString());
+                    if (SongBottom.Ins.CountId >= 0 || SongBottom.Ins.SelectedSong != null)
+                    {
+                        ImageBrush ImgBrush = new ImageBrush();
+                        ImgBrush.ImageSource = Pause;
+                        PlayPauseGreen.Background = ImgBrush;
+
+                    }
                 }
                 else
                 {
@@ -53,20 +58,22 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsPlayProperty =
             DependencyProperty.Register("IsPlay", typeof(bool), typeof(AlbumView), new PropertyMetadata(false));
+        public static int CountId = 0;
+
         public AlbumView()
         {
             InitializeComponent();
+            SongBottom.Ins.ListSong = Album.ItemSource;
             HomeVM vm = this.DataContext as HomeVM;
-           
+            int id = SongBottom.Ins.CountId;
             Binding binding = new Binding("SelectedSongItem");
             binding.Source = vm;
             binding.Mode = BindingMode.OneWayToSource;
             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-            if (ListAlbumView.IsClick == true)
+            if (id >= 0)
             {
                 SongBottom.Ins.ListSong = Album.ItemSource;
-                SongBottom.Ins.SelectedSong = Album.ItemSource[0];
-                ListAlbumView.IsClick = false;
+                SongBottom.Ins.SelectedSong = Album.ItemSource[id];
             }
             Binding bd = new Binding("IsPlay");
             bd.Source = SongBottom.Ins;
@@ -79,27 +86,26 @@ namespace Spotify.Views.Pages
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
             ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.IsPlay == true)
+            if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.CountId == -1)
             {
-                ImgBrush.ImageSource = Play;
-                SongBottom.Ins.IsPlay = false;
+                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
+                SongBottom.Ins.IsPlay = true;
+                ImgBrush.ImageSource = Pause;
             }
             else
             {
-                ImgBrush.ImageSource = Pause;
-                SongBottom.Ins.IsPlay = true;
+                if (SongBottom.Ins.IsPlay == true)
+                {
+                    ImgBrush.ImageSource = Play;
+                    SongBottom.Ins.IsPlay = false;
+                }
+                else
+                {
+                    ImgBrush.ImageSource = Pause;
+                    SongBottom.Ins.IsPlay = true;
 
+                }
             }
-            //if (IsPlay == true)
-            //{
-            //    ImgBrush.ImageSource = Play;
-            //    IsPlay = false;
-            //}
-            //else
-            //{
-            //    ImgBrush.ImageSource = Pause;
-            //    IsPlay = true;
-            //}
             PlayPauseGreen.Background = ImgBrush;
         }
 
@@ -108,7 +114,7 @@ namespace Spotify.Views.Pages
 
             Album.ApplyTemplate();
             var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
-            var listFavor = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).Select(a => a.Songs).FirstOrDefault();
+            var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).Select(a => a.Songs).FirstOrDefault();
             foreach (Song a in listFavor)
             {
                 for (int j = 0; j < Album.ItemSource.Count; j++)
