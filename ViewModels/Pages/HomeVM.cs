@@ -112,10 +112,7 @@ namespace Spotify.ViewModels.Pages
             RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             TopMix = new ObservableCollection<Album>();
-            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",
-                SongsOfAlbum = new ObservableCollection<Song>() { 
-                    Songs.DauMua, Songs.CamNang, Songs.BenTrenTangLau
-                } });
+            
             TopMix.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
             TopMix.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
             TopMix.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
