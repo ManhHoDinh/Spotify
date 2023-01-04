@@ -9,9 +9,14 @@
 
 namespace Spotify.Models
 {
+    using Spotify.ViewModels;
+    using Spotify.ViewModels.Pages;
     using System;
     using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+
     public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +24,22 @@ namespace Spotify.Models
         {
             this.Playlists = new HashSet<Playlist>();
         }
-    
+
         public int UserID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string UserImage { get; set; }
-    
+        public string Email { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<Playlist> Playlists { get; set; }
+
+        public static void InitUri(ref User user)
+        {
+            user.UserImageSource = new BitmapImage(new Uri(user.UserImage == null ? "" : user.UserImage, UriKind.RelativeOrAbsolute));
+        }
+
+        public ImageSource UserImageSource { get; set; }
     }
 }

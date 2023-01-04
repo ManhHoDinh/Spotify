@@ -4,6 +4,7 @@ using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
@@ -18,7 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace Spotify.Views.Components
 {
     /// <summary>
@@ -67,6 +67,39 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsSearchView", typeof(bool), typeof(Header), new PropertyMetadata(null));
 
 
+        public static readonly DependencyProperty IsLoggedInProperty = DependencyProperty.Register
+                   ("IsLoggedIn", typeof(bool), typeof(Header), new PropertyMetadata(null));
+
+        private bool _isLoggedIn;
+        public bool IsLoggedIn
+        {
+            get
+            {
+                return (bool)GetValue(IsLoggedInProperty);
+            }
+            set
+            {
+                _isLoggedIn = value;
+            }
+        }
+
+        public static readonly DependencyProperty HaveUserProperty = DependencyProperty.Register
+           ("HaveUser", typeof(bool), typeof(Header), new PropertyMetadata(null));
+
+        private bool _haveUser;
+        public bool HaveUser
+        {
+            get
+            {
+                return (bool)GetValue(HaveUserProperty);
+            }
+            set
+            {
+                _haveUser = value;
+            }
+        }
+
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
 
@@ -79,7 +112,7 @@ namespace Spotify.Views.Components
                 }
                 else IsDisableBack = false;
             }
-            if(e.Property== IsSearchViewProperty)
+            if (e.Property == IsSearchViewProperty)
             {
                 if (IsSearchView == true)
                 {
@@ -107,6 +140,7 @@ namespace Spotify.Views.Components
             bind.Source = ViewPage.Ins;
             bind.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(header, IsDisableNextProperty, bind);
+            DataContext= this;
         }
         public bool IsDisableBack
         {
@@ -251,6 +285,21 @@ namespace Spotify.Views.Components
             if (SearchTextbox.Text == "")
                 SearchVM.Ins.IsSearch = false;
             SearchVM.Ins.filteredCollection = new ObservableCollection<Song>(from item in Songs.AllSong where RemoveSign4VietnameseString(item.SongName).ToUpper().Contains(RemoveSign4VietnameseString(SearchTextbox.Text).ToUpper()) select item);
+        }
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsLogin = true;
+        }
+        private void SignIn_click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsSignUp = true;
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.IsShowDiaologAccount = !LoginStatus.Current.IsShowDiaologAccount;
         }
     }
 }

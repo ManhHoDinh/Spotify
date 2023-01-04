@@ -5,25 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
-              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             xmlns:vmp="clr-namespace:Spotify.ViewModels.Pages"
+             xmlns:vm="clr-namespace:Spotify.ViewModels" 
              mc:Ignorable="d" 
            
              >
-    <UserControl.DataContext>
-        <vm:SearchVM/>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="BaseHeaderButton">
-            <Border x:Name="border" 
-                    Height="32" 
-                    Width="32"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    CornerRadius="32" 
-                    >
-                <Border.Background>
-                    <SolidColorBrush Color="#ffffff" Opacity="0.2"/>
-                </Border.Background>
+            <Border x:Name="border" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="32" Background="#000">
                 <Image x:Name="img" Height="20" Width="20" Source="{TemplateBinding Tag}"></Image>
             </Border>
             <ControlTemplate.Triggers>
@@ -31,7 +20,6 @@
             </ControlTemplate.Triggers>
         </ControlTemplate>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"></BooleanToVisibilityConverter>
-
     </UserControl.Resources>
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -94,14 +82,44 @@
                 </Grid>
             </StackPanel>
         </Grid>
-        <StackPanel  Margin="-50,20,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Grid.Column="2">
-            <Rectangle Height="34" Width="34" Margin="3, 3, 3, 3">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="{Binding Avatar}"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Label Width="122" Height="40" Content="{Binding UserName}" Margin="3,0,0,0" FontFamily="Bahnschrift Light Condensed" FontSize="18" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" ></Label>
-        </StackPanel>
+        <Grid  Grid.Column="2">
+            <Button Click="Profile_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border Visibility="{Binding HaveUser,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"  Margin="-220,20,0,0" Width="150"  Background="#282828" Name="border" CornerRadius="20">
+                                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                                            <Rectangle Height="34" Width="34" Margin="3, 3, 3, 3">
+                                                <Rectangle.Fill>
+                                                    <ImageBrush ImageSource="{Binding Avatar}"/>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <Label Width="122" Height="40" Content="{Binding UserName}" Margin="3,0,0,0" FontFamily="Bahnschrift Light Condensed" FontSize="16" FontWeight="Bold" Foreground="White" VerticalContentAlignment="Center" ></Label>
+                                        </StackPanel>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Grid Visibility="{Binding IsLoggedIn,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"  Grid.Column="2" Margin="-50,15,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource SignUpBtn}" Grid.Column="0" Click="SignIn_click" VerticalAlignment="Center"  HorizontalAlignment="Left" Content="Sign Up"/>
+                <Button  VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Content="Login In" Margin="15 0 0 0" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" 
+                Style="{StaticResource LoginHomeBtn}" 
+                Background="#f6f6f6" Width="113" Height="46" 
+                Cursor="Hand"
+                Click="LoginBtn_Click"
+                />
+            </Grid>
+        </Grid>
+
     </Grid>
     <!--<StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Stretch">
         <Button x:Name="BackButton" 

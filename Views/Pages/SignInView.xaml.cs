@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Spotify.Models;
+using Spotify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +26,35 @@ namespace Spotify.Views.Pages
         public SignInView()
         {
             InitializeComponent();
+        }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            User user = DataProvider.Ins.DB.Users.FirstOrDefault(x => (x.Email == Email.Text) && x.Password == Password.Password);
+            if (user != null)
+            {
+                LoginStatus.Current.User = user;
+                User.InitUri(ref user);
+                Properties.Settings.Default.CurrentUserID = user.UserID;
+                LoginStatus.Current.ResetAllView();
+                LoginStatus.Current.IsMainView = true;
+                LoginStatus.Current.NeedLogin = false;
+                LoginStatus.Current.HaveUser = true;
+                Properties.Settings.Default.Save();
+            }
+            else
+                AnnouceLoginError.Visibility = Visibility.Visible;
+        }
+        private void SignUpBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsSignUp = true;
+        }
+
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsForgotPassword = true;
         }
     }
 }
