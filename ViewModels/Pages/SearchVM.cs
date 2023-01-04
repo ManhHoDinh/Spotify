@@ -78,7 +78,7 @@ namespace Spotify.ViewModels.Pages
                     Playlists.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
                    
                 }
-                //DataProvider.Ins.DB.Playlists.
+                DataProvider.Ins.DB.SaveChanges();
             }
         }
         public SearchVM()

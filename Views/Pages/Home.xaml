@@ -238,7 +238,7 @@
 
                                 </Grid>
                             </Grid>
-                            <Components:ListAlbumView Tag="binh day" ItemsSource="{Binding JumBack}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
+                            <!--<Components:ListAlbumView Tag="binh day" ItemsSource="{Binding JumBack}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>-->
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding MadeForYou}" ></ListView>
