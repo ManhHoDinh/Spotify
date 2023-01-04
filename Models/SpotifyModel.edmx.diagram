@@ -8,9 +8,8 @@
         <EntityTypeShape EntityType="SpotifyModel.Album" Width="1.5" PointX="3" PointY="5.5" />
         <EntityTypeShape EntityType="SpotifyModel.Playlist" Width="1.5" PointX="3" PointY="1.25" />
         <EntityTypeShape EntityType="SpotifyModel.Song" Width="1.5" PointX="5.25" PointY="1" />
-        <EntityTypeShape EntityType="SpotifyModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" />
         <EntityTypeShape EntityType="SpotifyModel.User" Width="1.5" PointX="0.75" PointY="1.5" />
-        <AssociationConnector Association="SpotifyModel.FK__Playlist__UserID__5CD6CB2B" />
+        <AssociationConnector Association="SpotifyModel.FK__Playlist__UserID__2A4B4B5E" />
         <AssociationConnector Association="SpotifyModel.AlbumAndSongRelation" />
         <AssociationConnector Association="SpotifyModel.PlaylistAndSongRelation" />
       </Diagram>

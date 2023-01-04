@@ -73,7 +73,6 @@ namespace Spotify.Views.Components
         public ListAlbumView()
         {
             InitializeComponent();
-
             Binding binding = new Binding("IsPlay");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;

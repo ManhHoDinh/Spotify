@@ -94,9 +94,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpotifyModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>SpotifyModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>SpotifyModel.tt</DependentUpon>
     </Compile>
