@@ -164,6 +164,30 @@ namespace Spotify.Views.Components
             (sender as Button).Background = ImgBrush;
         }
 
-
+        private void listAlbum_Loaded(object sender, RoutedEventArgs e)
+        {
+                listview = GetTemplateChild("PART_Header") as ListView;
+                for(int i = 0; i < ItemsSource.Count; i++)
+            {
+                for(int j = 0; j < ItemsSource[i].Songs.Count; j++)
+                {
+                    ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
+                    Song song = a[j];
+                    if(SongBottom.Ins.SelectedSong != null)
+                    {
+                        if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                        {
+                            var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                            var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = Pause;
+                            btn.Background = img;
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
     }
 }
