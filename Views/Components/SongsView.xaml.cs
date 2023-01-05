@@ -2,6 +2,7 @@ using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -413,7 +414,6 @@ namespace Spotify.Views.Components
 
           ImgBrush.ImageSource = PauseGreen;
           SongBottom.Ins.IsPlay = true;
-
         }
       }
 
@@ -426,19 +426,41 @@ namespace Spotify.Views.Components
       {
         listview = GetTemplateChild("PART_Header") as ListView;
         playButton = GetTemplateChild("PlayPauseGreen") as Button;
-        if (SongBottom.Ins.IsPlay == true && listview.SelectedIndex != -1)
-        {
-          ImageBrush img = new ImageBrush();
-          img.ImageSource = PauseGreen;
-          playButton.Background = img;
-        }
-        else
-        {
-          ImageBrush img = new ImageBrush();
-          img.ImageSource = PlayGreen;
-          playButton.Background = img;
-        }
-      }
+        if(listview.SelectedIndex == -1)
+                {
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = PlayGreen;
+                    playButton.Background = img;
+                }
+                else
+                {
+                    
+                    var template = listview.ItemContainerGenerator.ContainerFromIndex(SongBottom.Ins.CountId) as ListViewItem;
+                    Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                    Image image = template.Template.FindName("img", template) as Image;
+                    TextBlock tb = template.Template.FindName("Id", template) as TextBlock;
+                    ImageBrush imgPlay = new ImageBrush();
+
+                    if (SongBottom.Ins.IsPlay == true)
+                    {
+                        image.Visibility = Visibility.Visible;
+                        tb.Visibility = Visibility.Hidden;
+                        imgPlay.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
+                        btn.Background = imgPlay;
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PauseGreen;
+                        playButton.Background = img;
+                    }
+                    else
+                    {
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PlayGreen;
+                        playButton.Background = img;
+                    }
+                }
+
+
+            }
     }
   }
 }

@@ -71,8 +71,14 @@ namespace Spotify.Views.Pages
       Album.ApplyTemplate();
       if (SongBottom.Ins.CountId >= 0)
       {
-        Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
-      }
+        if(SongBottom.Ins.IsPlay == false)
+                {
+                    Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                    SongBottom.Ins.IsPlay = false;
+                }
+                else Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+
+            }
       var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
       var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).Select(a => a.Songs).FirstOrDefault();
       foreach (Song a in listFavor)
