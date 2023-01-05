@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Spotify.Views.Pages.Search"
+<UserControl x:Class="Spotify.Views.Pages.Search"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -114,7 +114,8 @@
             <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding RecentSearch}"></ListView>
             <components:SongsView
                    FavorIcon="{StaticResource HeartButton}" 
-                   Margin="0 70 0 0" 
+                   Margin="0 70 0 0"
+                   IsShowButton="False"
                    ItemSource="{Binding Source={x:Static vm:SearchVM.Ins},Path=filteredCollection}"
                    Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}"          
                    SelectedSong="{Binding SelectedSongItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
