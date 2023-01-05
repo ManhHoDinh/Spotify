@@ -132,8 +132,6 @@ namespace Spotify.ViewModels
         {
             ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
-           
-
         }
 
 
