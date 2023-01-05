@@ -66,10 +66,10 @@
                                                        
                                                         HorizontalAlignment="Center" 
                                                         VerticalAlignment="Center"
-                                                        Width="80"
+                                                        Width="72"
                                                         Padding="0"
                                                         Margin="76 -180 0 0 "
-                                                        Height="80">
+                                                        Height="72">
                                                         <Button.Background>
                                                             <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                                                         </Button.Background>

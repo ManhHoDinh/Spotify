@@ -106,12 +106,16 @@ namespace Spotify.ViewModels.Pages
            
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
-            RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
-            RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
-            RecommendPlaylists.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            for(int i = 0; i< 6; i++)
+            {
+                RecommendPlaylists.Add(Albums.AllAlbums[i]);
+            }
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
+            //RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             TopMix = new ObservableCollection<Album>();
             
             TopMix.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });

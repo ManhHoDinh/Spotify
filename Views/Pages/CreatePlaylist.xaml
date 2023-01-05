@@ -147,6 +147,7 @@
             <component:SongsView
                  FavorIcon="{StaticResource HeartButton}" 
                 Grid.Row="2"
+                
                 SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Grid.Row="3"  Margin="40 24 0 0" >

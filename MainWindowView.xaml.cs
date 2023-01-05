@@ -45,6 +45,7 @@ namespace Spotify
             Albums.InitUri();
             Playlists.InitUri();
             ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2).ToList());
+            
         }
         public string ViewPageSelected
         {

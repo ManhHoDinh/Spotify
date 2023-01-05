@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -209,6 +210,13 @@ namespace Spotify.Views.Components
             if (count > 0)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
+                if(ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
+                {
+                    int CountOfId = ListPlaylist.Ins.ListSelectedItem.Count;
+                    MessageBox.Show(CountOfId.ToString());
+                    //ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId - 1]];
+                    //ListPlaylist.Ins.ListSelectedItem.RemoveAt(CountOfId - 1);
+                }
                 ViewPage.Ins.CurrentIndexView--;
                 ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
                 if (count == 1) IsDisableBack = true;

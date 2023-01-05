@@ -44,6 +44,19 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for PlaylistName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlaylistNameProperty =
             DependencyProperty.Register("PlaylistName", typeof(string), typeof(ListPlaylist), new PropertyMetadata(string.Empty));
+
+
+        public List<int> ListSelectedItem
+        {
+            get { return (List<int>)GetValue(ListSelectedItemProperty); }
+            set { SetValue(ListSelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSelectedItemProperty =
+            DependencyProperty.Register("ListSelectedItem", typeof(List<int>), typeof(ListPlaylist), new PropertyMetadata(new List<int>{ }));
+
+
         public Playlist SelectedItem
         {
             get { return (Playlist)GetValue(SelectedItemProperty); }

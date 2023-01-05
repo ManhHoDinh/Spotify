@@ -151,7 +151,7 @@
                 </ListView>
             </StackPanel>
         </ControlTemplate>
-        <ControlTemplate TargetType="Components:RecommendAlbum" x:Key="RecommendAblum">
+        <!--<ControlTemplate TargetType="Components:RecommendAlbum" x:Key="RecommendAblum">
 
             <Button Template="{StaticResource HomeBtnBase}" Click="{Binding SelectedItem, Mode=OneWayToSource}">
                 <Grid HorizontalAlignment="Center" >
@@ -164,7 +164,7 @@
                 </Grid>
 
             </Button>
-        </ControlTemplate>
+        </ControlTemplate>-->
     </UserControl.Resources>
 
 
@@ -185,11 +185,11 @@
                     <Grid >
                         <Border x:Name="bgTopHome" Background="{StaticResource DefaultHomeColor}" Height="4000" Margin="0 -3870 0 0"/>
                         <StackPanel>
-                            <Grid Margin="16 0 16 0">
+                            <StackPanel Margin="16 0 16 0">
                                 <!--Header-->
 
                                 <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33">Good Afternoon</TextBlock>
-                                <Grid Height="180" Margin="32 68 0 0">
+                                <!--<Grid Height="180" Margin="32 68 0 0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" ></ColumnDefinition>
                                         <ColumnDefinition Width="*" ></ColumnDefinition>
@@ -236,8 +236,9 @@
 
                                     </Grid>
 
-                                </Grid>
-                            </Grid>
+                                </Grid>-->
+                                <Components:RecommendAlbum ItemsSource="{Binding RecommendPlaylists}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
+                            </StackPanel>
                             <Components:ListAlbumView Tag="binh day" ItemsSource="{Binding JumBack}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding JumBack}" ></ListView>
                             <ListView  Tag="Manh ho Dinh" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecommendPlaylists}" ></ListView>

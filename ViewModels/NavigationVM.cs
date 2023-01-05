@@ -113,19 +113,23 @@ namespace Spotify.ViewModels
                 ViewPage.Ins.CurrentIndexView++;
             }
 
+            //ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+            //ViewPage.Ins.CurrentIndexView++;
             int count = ListPlaylist.Ins.CountPlaylist - 2;
+            
             Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1, PlaylistType = 2 };
             Playlist.InitUri(ref playlist);
-            //MessageBox.Show(playlist.PlaylistName);
             DataProvider.Ins.DB.Playlists.Add(playlist);
             DataProvider.Ins.DB.SaveChanges();
             ListPlaylist.Ins.List.Add(playlist);
             ViewPage.Ins.CurrentView = new CreatePlaylist();
-            //  MessageBox.Show(count.ToString());
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+            //ListPlaylist.Ins.ListSelectedItem.Add();
             ListPlaylist.Ins.CountPlaylist++;
-
+            ViewPage.Ins.IsDisableBack = false;
             ChangeViewStyle("CreatePlaylist", obj);
+            
+
         }
 
         private void LikedSongs(object obj)
