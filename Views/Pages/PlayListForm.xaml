@@ -54,7 +54,7 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Image x:Name="img" Grid.Column="0" Width="180" Height="180"/>
-                <Button  Click="Button_Click" Name="btn" Width="180" Height="180" Margin="0 0 16 0">
+                <Button Click="Button_Click" Name="btn" Width="180" Height="180" Margin="0 0 16 0">
                     <Button.Template>
                         <ControlTemplate>
                             <Border x:Name="border" Opacity="1">

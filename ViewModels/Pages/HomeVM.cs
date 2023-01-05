@@ -1,4 +1,4 @@
-﻿using Spotify.Models;
+using Spotify.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +46,7 @@ namespace Spotify.ViewModels.Pages
                         ViewPage.Ins.ListPage.RemoveAt(1);
                     }
                 }
+       // MessageBox.Show(SongBottom.Ins.CountId.ToString());
                 ViewPage.Ins.CurrentView = obj;
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;

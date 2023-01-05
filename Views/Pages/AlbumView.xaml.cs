@@ -1,4 +1,4 @@
-﻿using Spotify.Models;
+using Spotify.Models;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
@@ -19,110 +19,76 @@ using System.Windows.Shapes;
 
 namespace Spotify.Views.Pages
 {
-    /// <summary>
-    /// Interaction logic for AlbumView.xaml
-    /// </summary>
-    public partial class AlbumView : UserControl
+  /// <summary>
+  /// Interaction logic for AlbumView.xaml
+  /// </summary>
+  public partial class AlbumView : UserControl
+  {
+
+    public AlbumView()
     {
-        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
-        {
-            base.OnPropertyChanged(e);
-            if (e.Property == IsPlayProperty)
-            {
-                if (IsPlay == true)
-                {
-                    ImageBrush ImgBrush = new ImageBrush();
-                    ImgBrush.ImageSource = Pause;
-                    PlayPauseGreen.Background = ImgBrush;
-                }
-                else
-                {
-                    ImageBrush ImgBrush = new ImageBrush();
-                    ImgBrush.ImageSource = Play;
-                    PlayPauseGreen.Background = ImgBrush;
-                }
-                // what is the code that would go here?
-            }
-        }
-        public bool IsPlay
-        {
-            get { return (bool)GetValue(IsPlayProperty); }
-            set { SetValue(IsPlayProperty, value); }
-        }
+      InitializeComponent();
 
-        // Using a DependencyProperty as the backing store for IsPlay.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsPlayProperty =
-            DependencyProperty.Register("IsPlay", typeof(bool), typeof(AlbumView), new PropertyMetadata(false));
-        public AlbumView()
-        {
-            InitializeComponent();
-            HomeVM vm = this.DataContext as HomeVM;
-           
-            Binding binding = new Binding("SelectedSongItem");
-            binding.Source = vm;
-            binding.Mode = BindingMode.OneWayToSource;
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-            if (ListAlbumView.IsClick == true)
-            {
-                SongBottom.Ins.ListSong = Album.ItemSource;
-                SongBottom.Ins.SelectedSong = Album.ItemSource[0];
-                ListAlbumView.IsClick = false;
-            }
-            Binding bd = new Binding("IsPlay");
-            bd.Source = SongBottom.Ins;
-            bd.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(Albumview, IsPlayProperty, bd);
+      //HomeVM vm = this.DataContext as HomeVM;
 
-        }
-        ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
-        ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
-        private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
-        {
-            ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.IsPlay == true)
-            {
-                ImgBrush.ImageSource = Play;
-                SongBottom.Ins.IsPlay = false;
-            }
-            else
-            {
-                ImgBrush.ImageSource = Pause;
-                SongBottom.Ins.IsPlay = true;
-
-            }
-            //if (IsPlay == true)
-            //{
-            //    ImgBrush.ImageSource = Play;
-            //    IsPlay = false;
-            //}
-            //else
-            //{
-            //    ImgBrush.ImageSource = Pause;
-            //    IsPlay = true;
-            //}
-            PlayPauseGreen.Background = ImgBrush;
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-
-            Album.ApplyTemplate();
-            var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
-            var listFavor = DataProvider.Ins.DB.Albums.Where(a => a.ID == 1).Select(a => a.Songs).FirstOrDefault();
-            foreach (Song a in listFavor)
-            {
-                for (int j = 0; j < Album.ItemSource.Count; j++)
-                {
-                    if (a.ID == Album.ItemSource[j].ID)
-                    {
-                        var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
-                        Button btn = template.Template.FindName("favorBtn", template) as Button;
-                        ImageBrush img = new ImageBrush();
-                        img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                        btn.Background = img;
-                    }
-                }
-            }
-        }
+      Binding binding = new Binding("SelectedSong");
+      binding.Source = Album;
+      binding.Mode = BindingMode.TwoWay;
+      BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
     }
+    ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
+    ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
+    //private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
+    //{
+    //    ImageBrush ImgBrush = new ImageBrush();
+    //    if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.CountId == -1)
+    //    {
+    //        SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
+    //        SongBottom.Ins.IsPlay = true;
+    //        ImgBrush.ImageSource = Pause;
+    //    }
+    //    else
+    //    {
+    //        if (SongBottom.Ins.IsPlay == true)
+    //        {
+    //            ImgBrush.ImageSource = Play;
+    //            SongBottom.Ins.IsPlay = false;
+    //        }
+    //        else
+    //        {
+    //            ImgBrush.ImageSource = Pause;
+    //            SongBottom.Ins.IsPlay = true;
+
+    //        }
+    //    }
+    //    PlayPauseGreen.Background = ImgBrush;
+    //}
+
+    private void UserControl_Loaded(object sender, RoutedEventArgs e)
+    {
+      
+
+      Album.ApplyTemplate();
+      if (SongBottom.Ins.CountId >= 0)
+      {
+        Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+      }
+      var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+      var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).Select(a => a.Songs).FirstOrDefault();
+      foreach (Song a in listFavor)
+      {
+        for (int j = 0; j < Album.ItemSource.Count; j++)
+        {
+          if (a.ID == Album.ItemSource[j].ID)
+          {
+            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
+            Button btn = template.Template.FindName("favorBtn", template) as Button;
+            ImageBrush img = new ImageBrush();
+            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+            btn.Background = img;
+          }
+        }
+      }
+    }
+  }
 }
