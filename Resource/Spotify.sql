@@ -228,10 +228,12 @@ update Song set Descriptions = N'Gửi anh người yêu ở nơi xa chẳng g�
 update Song set Descriptions = N'Yêu và xa xà quên tựa những xa xôi ngày ấy, kỉ niệm nơi đây thấy buồn biết mấy...' where ID = 85
 
 
-
+delete playlist
+delete PlaylistAndSongRelation
 insert into Users values ('Admin','Admin',null, 'manh@123A')
 insert into Playlist values('Likesong','','',1, 0)
-insert into Playlist values('Recently Search','','',1,0)
+insert into Playlist values('Recently Search','','',1,1)
+
 
 insert into AlbumAndSongRelation values (1,17)
 insert into AlbumAndSongRelation values (1, 33)
@@ -395,11 +397,13 @@ insert into AlbumAndSongRelation values (30, 66)
 insert into AlbumAndSongRelation values (30, 68)
 insert into AlbumAndSongRelation values (30, 78)
 insert into AlbumAndSongRelation values (30, 84)
+
 select *
 from Users
 
 select *
 from playlist
+
 select *
 from song
 select *
