@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,6 +117,7 @@ namespace Spotify.Views.Components
         static SongBottom()
         {
             Ins = new SongBottom();
+     
         }
     }
     public partial class bottomComponent : UserControl
