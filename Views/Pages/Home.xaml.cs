@@ -1,4 +1,4 @@
-﻿using Spotify.Models;
+using Spotify.Models;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;

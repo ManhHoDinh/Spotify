@@ -399,6 +399,21 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resource\Album\Binz\Binz.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\ChucXuan\ChucXuan.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\CuocDoi\CuocDoi.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\DinhCaoRemix\DinhCaoRemix.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\DongThoiGian\DongThoiGian.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Album\DreAMEE\DreAMEE.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -414,7 +429,352 @@
     </Content>
     <Resource Include="Resource\NoteModifySql.txt" />
     <Resource Include="Resource\Icons\CloseBtn_S.png" />
+    <Content Include="Resource\Album\EmVaNhac\EmVaNhac.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\Karik1\Karik.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\KarikAndFriends\KarikAndFriends.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\LoveSongs\LoveSongs.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\NhacTre\NhacTre.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\NhacXuanRemix\NhacXuanRemix.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\OnlyC3\OnlyC.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\PhanManhQuynh\PhanManhQuynh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\RapOfLove\RapOfLove.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\RapViet\RapViet.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\ShowCuaDen\ShowCuaDen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\Sky\Sky.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\SongsOfLife\SongsOfLife.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\SoobinHoangSon\SoobinHoangSon.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\ThoiXuanXanh\ThoiXuanXanh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\TinhCa\TinhCa.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\TinhYeuNgayDo\TinhYeuNgayDo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\TuyenTapNhacXuanRemix2023\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Album\VietRap\VietRap.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resource\Images\InitImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AnhKhongDoiQua\AnhKhongDoiQua.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AnhKhongDoiQua\AnhKhongDoiQua.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AnhNhaODauThe\AnhNhaODauThe.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\AnhNhaODauThe\DreAMEE.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BaiNayChillPhet\BaiNayChillPhet.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BaiNayChillPhet\BaiNayChillPhet.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BigCityBoi\BigCityBoi.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BigCityBoi\BigCityBoi.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BuongDoiTayNhauRa\BuongDoiTayNhauRa.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\BuongDoiTayNhauRa\BuongDoiTayNhauRa.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CayDanSinhVien\CayDanSinhVien.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CayDanSinhVien\CayDanSinhVien.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ChieuXuan-Remix\ChieuXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ChieuXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ChungTaKhongThuocVeNhau\ChungTaKhongThuocVeNhau.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ChungTaKhongThuocVeNhau\ChungTaKhongThuocVeNhau.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CoChoiCoChiu\CoChoiCoChiu.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\CoChoiCoChiu\CoChoiCoChiu.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ConBuomXuan-Remix\ConBuomXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ConBuomXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DeDanh\DeDanh.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DeDanh\TrinhAcoustic.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiDeTroVe\DiDeTroVe.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiDeTroVe\DiDeTroVe.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiepKhucMuaXuan-Remix\DiepKhucMuaXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiepKhucMuaXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiuDangSacXuan-Remix\DiuDangSacXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DiuDangSacXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DoiLaLamANghen\DoiLaLamANghen.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DoiLaLamANghen\DoiLaLamANghen.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DonXuan-Remix\DonXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DonXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DuaNhauDiTron\DuaNhauDiTron.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\DuaNhauDiTron\DuaNhauDiTron.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HaiTrieuNam\HaiTrieuNam.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HaiTrieuNam\HaiTrieuNam.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HoaCoMuaXuan-Remix\HoaCoMuaXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HoaCoMuaXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HuongMuaHe\HuongMuaHe.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\HuongMuaHe\HuongMuaHeEP.02.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\KhiNguoiMinhYeuKhoc\KhiNguoiMinhYeuKhoc.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\KhiNguoiMinhYeuKhoc\KhiNguoiMinhYeuKhoc.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\KhuTaoSong\KhuTaoSong.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\KhuTaoSong\KhuTaoSong.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LangNgheMuaXuanVe-Remix\LangNgheMuaXuanVe-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LangNgheMuaXuanVe-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LoiRuNgotNgao\LoiRuNgotNgao.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LoiRuNgotNgao\NhungBaiHatBatHuCuaAnhKhang%28Vol2%29.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LuatRung\LuatRung.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\LuatRung\LuatRung.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MotNamMoiBinhAn-Remix\MotNamMoiBinhAn-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MotNamMoiBinhAn-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MotNgayMuaDong\MotNgayMuaDong.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MotNgayMuaDong\TrinhAcoustic.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MuoiNam\MuoiNam.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\MuoiNam\MuoiNam.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NangCoConXuan-Remix\NangCoConXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NangCoConXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NaoCaVang\NaoCaVang.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NaoCaVang\NaoCaVang.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NguoiKhac\NguoiKhac.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NguoiKhac\NguoiKhac.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NoiNayCoAnh\NoiNayCoAnh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\NoiNayCoAnh\NoiNayCoAnh.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\OK\OK.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\OK\OK.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\PhiaSauMotCoGai\PhiaSauMotCoGai.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\PhiaSauMotCoGai\PhiaSauMotCoGai.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\QuanTrongLaThanThai\QuanTrongLaThanThai.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\QuanTrongLaThanThai\QuanTrongLaThanThai.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SacXuan-Remix\SacXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SacXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SaiGonBuonQuaEmOi\SaiGonBuonQuaEmOi.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SaiGonBuonQuaEmOi\SaiGonBuonQuaEmOi.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SaiGonLauPhai\SaiGonLauPhai.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SaiGonLauPhai\SaiGonLauPhai.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SimpleLove\HuongMuaHeEP.02.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SimpleLove\SimpleLove.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SoFar\SoFar.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\SoFar\SoFar.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ThichEmHoiNhieu\HuongMuaHeEP.01.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ThichEmHoiNhieu\ThichEmHoiNhieu.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ThiThamMuaXuan-Remix\ThiThamMuaXuan-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\ThiThamMuaXuan-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\VinhQuangDangChoTa\VinhQuangDangChoTa.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\VinhQuangDangChoTa\VinhQuangDangChoTa.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\VoNguoiTa\VoNguoiTa.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\VoNguoiTa\VoNguoiTa.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\XuanYeuThuong-Remix\TuyenTapNhacXuanRemix2023.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\XuanYeuThuong-Remix\XuanYeuThuong-Remix.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\Yeu5\Yeu5.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\Yeu5\Yeu5.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\YeuThuongNgayDo\YeuThuongNgayDo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resource\Songs\YeuThuongNgayDo\YeuThuongNgayDo.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resource\Spotify.sql" />
