@@ -213,8 +213,8 @@ namespace Spotify.Views.Components
                 if(ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
                 {
                     int CountOfId = ListPlaylist.Ins.ListSelectedItem.Count;
-                    MessageBox.Show(CountOfId.ToString());
-                    //ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId - 1]];
+                    
+                    ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId - 1]];
                     //ListPlaylist.Ins.ListSelectedItem.RemoveAt(CountOfId - 1);
                 }
                 ViewPage.Ins.CurrentIndexView--;

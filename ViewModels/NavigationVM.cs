@@ -14,6 +14,7 @@ using Spotify.Models;
 using System.Windows.Media;
 using System.Windows;
 using System.Management.Instrumentation;
+using System.Windows.Media.Media3D;
 
 namespace Spotify.ViewModels
 {
@@ -107,14 +108,14 @@ namespace Spotify.ViewModels
         }
         private void CreatePlaylist(object obj)
         {
-            if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
-            {
-                ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-                ViewPage.Ins.CurrentIndexView++;
-            }
+            //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
+            //{
+            //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+            //    ViewPage.Ins.CurrentIndexView++;
+            //}
 
-            //ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-            //ViewPage.Ins.CurrentIndexView++;
+            ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+            ViewPage.Ins.CurrentIndexView++;
             int count = ListPlaylist.Ins.CountPlaylist - 2;
             
             Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1, PlaylistType = 2 };
@@ -124,7 +125,7 @@ namespace Spotify.ViewModels
             ListPlaylist.Ins.List.Add(playlist);
             ViewPage.Ins.CurrentView = new CreatePlaylist();
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-            //ListPlaylist.Ins.ListSelectedItem.Add();
+            ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
             ListPlaylist.Ins.CountPlaylist++;
             ViewPage.Ins.IsDisableBack = false;
             ChangeViewStyle("CreatePlaylist", obj);
