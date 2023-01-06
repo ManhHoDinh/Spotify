@@ -61,7 +61,41 @@ namespace Spotify.ViewModels.Pages
                     ViewPage.Ins.CurrentIndexView++;
                     ListPlaylist.Ins.CurrentIdPlaylist++;
                     ViewPage.Ins.IsDisableBack = false;
-                    
+                    int currentId = ViewPage.Ins.CurrentIndexView;
+                    int count = ViewPage.Ins.ListPage.Count;
+
+                    if (currentId + 1 < count)
+                    {
+                        for (int i = currentId + 1; i < count; i++)
+                        {
+                            ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                        }
+
+                        if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                        {
+                            if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                            {
+                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                                {
+                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                }
+                            }
+
+                            else
+                            {
+                                
+                                int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                {
+                                    
+                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                }
+                       
+                            }
+                        }
+
+
+                    }
                     for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
                     {
                         if(SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)

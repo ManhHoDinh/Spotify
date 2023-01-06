@@ -93,15 +93,13 @@ namespace Spotify.ViewModels
 
                         else 
                         {
-                            MessageBox.Show(ListPlaylist.Ins.CurrentIdPlaylist.ToString() + ListPlaylist.Ins.ListSelectedItem.Count.ToString());
                             int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
                             for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
                             {
-                               // MessageBox.Show((ListPlaylist.Ins.CurrentIdPlaylist + 1).ToString());
+                               
                                 ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
                             }
-                            //
-                            //MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString() + ListPlaylist.Ins.ListSelectedItem[0].ToString() + ListPlaylist.Ins.ListSelectedItem[1].ToString());
+                          
                         }
                     }
                    

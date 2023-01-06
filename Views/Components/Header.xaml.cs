@@ -254,7 +254,7 @@ namespace Spotify.Views.Components
         {
 
             int count = ViewPage.Ins.CurrentIndexView;
-            MessageBox.Show(ViewPage.Ins.ListPage.Count.ToString());
+           
             if (count < ViewPage.Ins.ListPage.Count - 1)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
