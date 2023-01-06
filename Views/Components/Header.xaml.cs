@@ -202,25 +202,47 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsDisableNext", typeof(bool), typeof(Header), new PropertyMetadata(true));
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
             int count = ViewPage.Ins.CurrentIndexView;
             Button btn = sender as Button;
             Border bd = BackButton.Template.FindName("border", BackButton) as Border;
-            // MessageBox.Show(bd.ToString());
             if (count > 0)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
                 if(ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
                 {
-                    int CountOfId = ListPlaylist.Ins.ListSelectedItem.Count;
                     
-                    ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId - 1]];
-                    //ListPlaylist.Ins.ListSelectedItem.RemoveAt(CountOfId - 1);
-                }
-                ViewPage.Ins.CurrentIndexView--;
-                ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
-                if (count == 1) IsDisableBack = true;
+                    int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
+                    if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
+                    {
+                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                        ListPlaylist.Ins.CurrentIdPlaylist++;
+                    }
+                    else
+                    {
+                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[--CountOfId]];
+                        
 
+                    }
+                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                    ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
+                    ViewPage.Ins.CurrentIndexView--;
+                    ListPlaylist.Ins.CurrentIdPlaylist -= 2;
+                }
+                else
+                {
+                    if(ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
+                    {
+                        if(ListPlaylist.Ins.CurrentIdPlaylist > 0)
+                        {
+                            ListPlaylist.Ins.CurrentIdPlaylist--;
+
+                        }
+                     
+                    }
+                }
+                ViewPage.Ins.CurrentIndexView--;            
+                ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
+                if (count == 1) IsDisableBack = true;       
                 IsDisableNext = false;
             }
             else
@@ -232,9 +254,39 @@ namespace Spotify.Views.Components
         {
 
             int count = ViewPage.Ins.CurrentIndexView;
+            MessageBox.Show(ViewPage.Ins.ListPage.Count.ToString());
             if (count < ViewPage.Ins.ListPage.Count - 1)
             {
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
+                if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
+                {
+                    
+                    int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
+                    if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
+                    {
+                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                        ListPlaylist.Ins.CurrentIdPlaylist--;
+                        
+                    }
+                    else
+                    {
+                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[++CountOfId]];
+
+
+                    }
+                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                    ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
+                    ViewPage.Ins.CurrentIndexView--;
+                   
+
+                }
+                else
+                {
+                    if (ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
+                    {
+                        ListPlaylist.Ins.CurrentIdPlaylist++;
+                    }
+                }
 
                 ViewPage.Ins.CurrentIndexView++;
                 if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;

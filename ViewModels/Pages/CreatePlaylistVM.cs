@@ -57,6 +57,20 @@ namespace Spotify.ViewModels.Pages
                     ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
                     SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
                     ViewPage.Ins.CurrentView = new CreatePlaylist();
+                    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+                    ViewPage.Ins.CurrentIndexView++;
+                    ListPlaylist.Ins.CurrentIdPlaylist++;
+                    ViewPage.Ins.IsDisableBack = false;
+                    
+                    for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
+                    {
+                        if(SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                        {
+                            ListPlaylist.Ins.ListSelectedItem.Add(i);
+                        }
+                    }
+                    
+                    
                 }
             }
         }

@@ -23,7 +23,8 @@ namespace Spotify.Views.Pages
     /// <summary>
     /// Interaction logic for CreatePlaylist.xaml
     /// </summary>
-    public class ListPlaylist : DependencyObject
+    public class ListPlaylist
+        : DependencyObject
     {
         public string Image
         {
@@ -34,6 +35,17 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for Image.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(string), typeof(ListPlaylist), new PropertyMetadata(string.Empty));
+
+
+        public int CurrentIdPlaylist
+        {
+            get { return (int)GetValue(CurrentIdPlaylistProperty); }
+            set { SetValue(CurrentIdPlaylistProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentIdPlaylist.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentIdPlaylistProperty =
+            DependencyProperty.Register("CurrentIdPlaylist", typeof(int), typeof(ListPlaylist), new PropertyMetadata(-1));
 
         public string PlaylistName
         {
