@@ -33,11 +33,7 @@
                     <!--<Button Command="ApplicationCommands.Open" Content="open" Foreground="red" />-->
                     <!--<Button Click="Btn_"  Content="open"></Button>-->
                 </StackPanel>
-                <Button Click="Button_Click" Tag="{Binding isFavor, ElementName=BottomControl}" Margin="30 0 0 0" Grid.Column="2" Template="{DynamicResource HeartStyle}"  Style="{StaticResource ControlBtn}">
-                    <Button.Background>
-                        <ImageBrush ImageSource="{StaticResource HeartButton}"/>
-                    </Button.Background>
-                </Button>
+            
             </Grid>
             <Grid Grid.Column="1" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>

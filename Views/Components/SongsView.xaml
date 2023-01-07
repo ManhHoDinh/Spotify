@@ -9,7 +9,7 @@
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d"
              Loaded="songview_Loaded"
-             d:DesignHeight="450" d:DesignWidth="959" Background="#181818">
+             d:DesignHeight="450" d:DesignWidth="959" Background="#121212">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
@@ -93,12 +93,12 @@
                           </Button>
 
                           <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left" Margin="16 0 0 0">
-                            <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
+                            <Image Width="40" Name="songimg" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
                             <StackPanel Orientation="Vertical">
                               <Button Name="NameSong"  Click="NameSong_Click" Foreground="#ffffff">
                                 <Button.Template>
                                   <ControlTemplate>
-                                    <TextBlock  Text="{Binding SongName}" Foreground="{TemplateBinding Foreground}">
+                                    <TextBlock Name="namesong" Text="{Binding SongName}" Foreground="{TemplateBinding Foreground}">
                                       <TextBlock.Style>
                                         <Style TargetType="TextBlock">
 

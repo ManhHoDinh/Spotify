@@ -109,6 +109,7 @@ namespace Spotify.ViewModels
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
+                ListPlaylist.Ins.SelectedItem = null;
                 
 
             }

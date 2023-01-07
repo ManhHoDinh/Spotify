@@ -28,15 +28,28 @@ namespace Spotify.Views.Pages
     public AlbumView()
     {
       InitializeComponent();
+            Random r = new Random();
+            Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
+            string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
+            color = "#" + hex;
 
-      //HomeVM vm = this.DataContext as HomeVM;
+            //HomeVM vm = this.DataContext as HomeVM;
 
-      Binding binding = new Binding("SelectedSong");
+            Binding binding = new Binding("SelectedSong");
       binding.Source = Album;
       binding.Mode = BindingMode.TwoWay;
       BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
     }
-    ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
+        public string color
+        {
+            get { return (string)GetValue(colorProperty); }
+            set { SetValue(colorProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for color.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty colorProperty =
+            DependencyProperty.Register("color", typeof(string), typeof(AlbumView), new PropertyMetadata("red"));
+        ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
     ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
     //private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
     //{

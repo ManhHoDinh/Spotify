@@ -14,7 +14,7 @@
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                    <GradientStop Color="#503A9F" Offset="0"/>
+                    <GradientStop Color="{Binding color, ElementName=Albumview}" Offset="0"/>
                     <GradientStop Color="#121212" Offset="1"/>
                 </LinearGradientBrush>
             </Grid.Background>
@@ -33,12 +33,9 @@
                     <WrapPanel Grid.Column="0">
                         <Border Margin="32 80 0 0"  Width="232" Height="232">
                             <Border.Background>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="#3F13B8" Offset="0"/>
-                                    <GradientStop Color="#798C89" Offset="1"/>
-                                </LinearGradientBrush>
+                                <ImageBrush ImageSource="{Binding AlbumImage}"/>
                             </Border.Background>
-                            <!--<Image Source="{Binding AlbumImage}"/>-->
+                          
                         </Border>
                     </WrapPanel>
                     <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">

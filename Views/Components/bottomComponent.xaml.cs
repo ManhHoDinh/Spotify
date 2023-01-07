@@ -20,6 +20,8 @@ using Spotify.Views.Pages;
 using Spotify.ViewModels.Pages;
 using System.Security.Policy;
 using System.Collections.ObjectModel;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Spotify.Views.Components
 {
@@ -68,6 +70,18 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedSongProperty =
             DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongBottom), new PropertyMetadata(null));
+
+
+        public ObservableCollection<Song> SongSource
+        {
+            get { return (ObservableCollection<Song>)GetValue(SongSourceProperty); }
+            set { SetValue(SongSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SongSourceProperty =
+            DependencyProperty.Register("SongSource", typeof(ObservableCollection<Song>), typeof(SongBottom), new PropertyMetadata(null));
+
 
         public int CountId
         {
@@ -352,33 +366,55 @@ namespace Spotify.Views.Components
                 IsMute = false;
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Button HeartBtn = sender as Button;
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button HeartBtn = sender as Button;
+        //    //MessageBox.Show(SongBottom.Ins.SelectedSong.ID.ToString());
+        //    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SongBottom.Ins.SelectedSong.ID).FirstOrDefault();
+        //    MessageBox.Show(song.SongName);
+        //    var playlist = Playlists.LikedSongsPlayplist;
+        //    if (IsFavor)
+        //    {
+        //        //var list = playlist.Songs;
+        //        //foreach (Song s in list)
+        //        //{
+        //        //    if (s.ID == song.ID) { MessageBox.Show("haa"); break; }
+        //        //}
+        //        playlist.Songs.Remove(song);
+        //        playlist.SongsOfPlaylist.Remove(song);
+        //        ImageSource Heart = (ImageSource)Application.Current.Resources["HeartButton"];
+        //        ImageBrush ImgBrush = new ImageBrush();
+        //        ImgBrush.ImageSource = Heart;
+        //        HeartBtn.Background = ImgBrush;
+        //        IsFavor = false;
+        //        isFavor = "false";
 
-            if (IsFavor)
-            {
-                ImageSource Heart = (ImageSource)Application.Current.Resources["HeartButton"];
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Heart;
-                HeartBtn.Background = ImgBrush;
-                IsFavor = false;
-                isFavor = "false";
+        //    }
+        //    else
+        //    {
+        //        var list = playlist.Songs;
+        //        bool IsExistedPlaylist = false;
+        //        foreach (Song s in list)
+        //        {
+        //            if (s.ID == song.ID) { IsExistedPlaylist = true; break; }
+        //        }
+        //        if (!IsExistedPlaylist)
+        //        {
+        //            playlist.Songs.Add(song);
+        //            playlist.SongsOfPlaylist.Add(song);
+        //        }
+        //        ImageSource HeartFill = (ImageSource)Application.Current.Resources["HeartFillButton"];
+        //        ImageBrush ImgBrush = new ImageBrush();
+        //        ImgBrush.ImageSource = HeartFill;
+        //        HeartBtn.Background = ImgBrush;
+        //        IsFavor = true;
+        //        isFavor = "true";
 
-            }
-            else
-            {
-                ImageSource HeartFill = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = HeartFill;
-                HeartBtn.Background = ImgBrush;
-                IsFavor = true;
-                isFavor = "true";
-
-            }
+        //    }
+        //    DataProvider.Ins.DB.SaveChanges();
 
 
-        }
+        //}
 
         private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
@@ -396,40 +432,66 @@ namespace Spotify.Views.Components
 
                 else
                 {
-                    if (!IsShuffle)
-                    {
-                   
+                if (!IsShuffle)
+                {
 
                     for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                    {
+                        if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
                         {
-                            if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
-                            {
-                                id = i + 1;
-                            }
+                            id = i + 1;
                         }
-                        if (id < SongBottom.Ins.ListSong.Count)
-                        {
-                            SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
-                            SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
-                            SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
-                            SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
-                            SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
-
-
-                        }
-
+                    }
+                    if (id < SongBottom.Ins.ListSong.Count)
+                    {
+                        SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
+                        SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
+                        SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
+                        SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
+                        SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
                     }
                     else
                     {
-
-                        Random rdm = new Random();
-                        int x = rdm.Next(0, SongBottom.Ins.ListSong.Count - 1);
-                        SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[x];
+                        if (RepeatState == "Active")
+                        {
+                            id = 0;
+                            SongBottom.Ins.SongName = SongBottom.Ins.ListSong[0].SongName;
+                            SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[0].SingerName;
+                            SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[0].SongLinkUri;
+                            SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[0].SongImageUri;
+                            SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
+                        }
+                        else SongBottom.Ins.IsPlay = false;
                     }
+                }
+                else
+                {
+                    int RandomValue = RandomNumber();
+                    LoadSong(RandomValue);
+                }
                 //}
             }
         }
+        int RandomNumber()
+        {
+            Random rdn = new Random();
+            int x;
+            do
+            {
+                x = rdn.Next(0, SongBottom.Ins.ListSong.Count);
+            }
+            while (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[x].SongName);
+            return x;
 
+        }
+        void LoadSong(int index)
+        {
+            SongBottom.Ins.SongName = SongBottom.Ins.ListSong[index].SongName;
+            SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[index].SingerName;
+            SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[index].SongLinkUri;
+            SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[index].SongImageUri;
+            SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[index];
+        }
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
 
@@ -444,16 +506,12 @@ namespace Spotify.Views.Components
             }
             else
             {
-                ImageSource HeartFill = (ImageSource)Application.Current.Resources["ShuffleSButton"];
+                ImageSource HeartFill = (ImageSource)Application.Current.Resources["ShuffleActiveButton"];
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = HeartFill;
                 ShuffleBtn.Background = ImgBrush;
                 IsShuffle = true;
-
             }
-
-
-
         }
 
         private void Repeat_Click(object sender, RoutedEventArgs e)
@@ -462,14 +520,14 @@ namespace Spotify.Views.Components
             if (RepeatState == "None")
             {
 
-                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatSButton"];
+                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatBtn"];
                 RepeatBtn.Background = img;
                 RepeatState = "Active";
             }
             else if (RepeatState == "Active")
             {
 
-                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatOneButton"];
+                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatOneBtn"];
                 RepeatBtn.Background = img;
                 RepeatState = "RepeatOne";
             }
@@ -484,45 +542,54 @@ namespace Spotify.Views.Components
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            int id = 0;
-            for(int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+            if (!IsShuffle)
             {
-                if(SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                int id = 0;
+                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                 {
-                    id = i + 1;
+                    if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                    {
+                        id = i + 1;
+                    }
+                }
+                if (id < SongBottom.Ins.ListSong.Count)
+                {
+                    LoadSong(id);
                 }
             }
-            if(id < SongBottom.Ins.ListSong.Count)
+            else
             {
-                SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
-                SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
-                SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
-                SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
-                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
-               
-
+                int RandomValue = RandomNumber();
+                LoadSong(RandomValue);
             }
+            
         }
+        
         private void Prev_Click(object sender, RoutedEventArgs e)
         {
-            int id = 0;
-           
-            for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+            if (!IsShuffle)
             {
-                if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                int id = 0;
+
+                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                 {
-                    id = i - 1;
+                    if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                    {
+                        id = i - 1;
+                    }
+                }
+                if (id >= 0)
+                {
+                    LoadSong(id);
+
                 }
             }
-            if (id >= 0)
+            else
             {
-                SongBottom.Ins.SongName = SongBottom.Ins.ListSong[id].SongName;
-                SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[id].SingerName;
-                SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[id].SongLinkUri;
-                SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[id].SongImageUri;
-                SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[id];
-                
+                int RandomValue = RandomNumber();
+                LoadSong(RandomValue);
             }
+
         }
     }
 }
