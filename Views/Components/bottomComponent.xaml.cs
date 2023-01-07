@@ -297,12 +297,12 @@ namespace Spotify.Views.Components
                 slider.Value = mePlayer.Position.TotalSeconds;
                 playing.Content = mePlayer.Position.ToString(@"mm\:ss");
                 Duration.Content = mePlayer.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
-
             }
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            mePlayer.Position = TimeSpan.FromSeconds(slider.Value);
             playing.Content = String.Format("{0}", mePlayer.Position.ToString(@"mm\:ss"));
         }
         // event when drag the thumb of slider
@@ -328,13 +328,22 @@ namespace Spotify.Views.Components
                 VolumeButton.Background = brush;
                 VolumeStyle = "Medium";
             }
-            if (volumeSlider.Value <= 0.3)
+            if (volumeSlider.Value < 0.3)
             {
                 ImageSource VolumnMin = (ImageSource)Application.Current.Resources["VolumeMinButton"];
                 ImageBrush brush = new ImageBrush();
                 brush.ImageSource = VolumnMin;
                 VolumeButton.Background = brush;
                 VolumeStyle = "Min";
+
+            }
+            if (volumeSlider.Value == 0)
+            {
+                ImageSource MuteImg = (ImageSource)Application.Current.Resources["MuteBtn"];
+                ImageBrush brush = new ImageBrush();
+                brush.ImageSource = MuteImg;
+                VolumeButton.Background = brush;
+                VolumeStyle = "Mute";
 
             }
             if (volumeSlider.Value > 0.8)
@@ -350,6 +359,11 @@ namespace Spotify.Views.Components
         {
             if (IsMute == false)
             {
+                //ImageSource VolumnMax = (ImageSource)Application.Current.Resources["MuteBtn"];
+                //ImageBrush brush = new ImageBrush();
+                //brush.ImageSource = VolumnMax;
+                //VolumeButton.Background = brush;
+
                 //PrevVolumeIcon = VolumeIcon;
                 //VolumeIcon = "VolumeOff";
                 PrevVolumeSlider = volumeSlider.Value;
@@ -510,6 +524,7 @@ namespace Spotify.Views.Components
                 ImageBrush ImgBrush = new ImageBrush();
                 ImgBrush.ImageSource = HeartFill;
                 ShuffleBtn.Background = ImgBrush;
+
                 IsShuffle = true;
             }
         }
@@ -581,7 +596,6 @@ namespace Spotify.Views.Components
                 if (id >= 0)
                 {
                     LoadSong(id);
-
                 }
             }
             else

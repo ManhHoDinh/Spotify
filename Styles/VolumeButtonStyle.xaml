@@ -4,6 +4,7 @@
     <ImageBrush x:Key="VolumeMaxHover" ImageSource="{StaticResource VolumeMaxHoverButton}"/>
     <ImageBrush x:Key="VolumeMinHover" ImageSource="{StaticResource VolumeMinHoverButton}"/>
     <ImageBrush x:Key="VolumeMediumHover" ImageSource="{StaticResource VolumeMediumHoverButton}"/>
+    <ImageBrush x:Key="VolumeMuteHover" ImageSource="{StaticResource MuteHoverBtn}"/>
     <ControlTemplate x:Key="VolumeStyle" TargetType="{x:Type ButtonBase}">
         <Border x:Name="border" Background="{TemplateBinding Background}"/>
         <ControlTemplate.Triggers>
@@ -27,6 +28,13 @@
                     <Condition Property="IsMouseOver" Value="true"/>
                 </MultiTrigger.Conditions>
                 <Setter Property="Background" TargetName="border" Value="{StaticResource VolumeMinHover}"/>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Tag" Value="Mute"/>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" TargetName="border" Value="{StaticResource VolumeMuteHover}"/>
             </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

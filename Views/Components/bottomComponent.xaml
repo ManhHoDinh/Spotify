@@ -97,7 +97,16 @@
                     </Grid.ColumnDefinitions>
                     <!--<Button Content="open" Click="Btn_open" Margin="-123,-25,123,25"/>-->
                     <Label Grid.Column="0"  Foreground="White" Name="playing" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
-                    <Slider Grid.Column="1" Width="405" x:Name="slider" Thumb.DragStarted="slider_DragStarted" Thumb.DragCompleted="slider_DragCompleted" ValueChanged="slider_ValueChanged" Style="{DynamicResource SliderStyle}"/>
+                    <Slider 
+                        Grid.Column="1" 
+                        Width="405"
+                        x:Name="slider" 
+                        IsMoveToPointEnabled="True"
+                        Thumb.DragStarted="slider_DragStarted"
+                        Thumb.DragCompleted="slider_DragCompleted"
+                        
+                        ValueChanged="slider_ValueChanged" 
+                        Style="{DynamicResource SliderStyle}"/>
                     <Label  Grid.Column="2" Foreground="White" Content="..." Name="Duration" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,18"/>
                 </Grid>
             </Grid>
