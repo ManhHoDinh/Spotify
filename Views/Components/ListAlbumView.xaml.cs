@@ -32,7 +32,7 @@ namespace Spotify.Views.Components
     {
         private ListView listview;
         public static int id;
-        public static int PreId;
+        public static ObservableCollection<Album> PreItemSource = new ObservableCollection<Album>();
         public static bool IsClick;
         public static int temp = 0;
         public static string type = "";
@@ -209,7 +209,8 @@ namespace Spotify.Views.Components
                         }
 
                     }
-                    if (type == "Mood")
+                    if (type == "Mood" +
+                        "")
                     {
                         listview = GetTemplateChild("PART_Header") as ListView;
                         //if (PreId >= 0)
@@ -352,7 +353,7 @@ namespace Spotify.Views.Components
             if (ItemsSource == vm.Mood) temp = 18;
             if (ItemsSource == vm.Trending) temp = 24;
             ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp)
+            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp || PreItemSource != ItemsSource)
             {
                 
                 SongBottom.Ins.CountId = 0;
@@ -360,7 +361,7 @@ namespace Spotify.Views.Components
 
                 SongBottom.Ins.IsPlay = false;
                 id = int.Parse((sender as Button).Tag.ToString()) - 1 - temp;
-                PreId = id;
+               
                 listview = GetTemplateChild("PART_Header") as ListView;
                 for (int i = 0; i < ItemsSource.Count; i++)
                 {
@@ -388,6 +389,7 @@ namespace Spotify.Views.Components
             }
             else
             {
+
                 
                 if (SongBottom.Ins.IsPlay == true)
                 {
@@ -414,6 +416,7 @@ namespace Spotify.Views.Components
             //    IsPlay = true;
             //}
             (sender as Button).Background = ImgBrush;
+            PreItemSource = ItemsSource;
         }
 
         private void listAlbum_Loaded(object sender, RoutedEventArgs e)
