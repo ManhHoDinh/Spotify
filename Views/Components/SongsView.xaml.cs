@@ -430,7 +430,7 @@ namespace Spotify.Views.Components
 
     private void songview_Loaded(object sender, RoutedEventArgs e)
     {
-            SongBottom.Ins.SongSource = ItemSource;
+      SongBottom.Ins.SongSource = ItemSource;
       if(IsShowButton == true)
       {
         listview = GetTemplateChild("PART_Header") as ListView;
@@ -470,6 +470,42 @@ namespace Spotify.Views.Components
 
 
             }
+      
+
     }
-  }
+
+        //private void FavorBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button btn = sender as Button;
+        //    var background = (ImageBrush)btn.Background;
+        //    ImageBrush img = new ImageBrush();
+        //    Playlist playlist;
+        //    var albums = DataProvider.Ins.DB.Albums.ToList();
+        //    for (int i = 0; i < albums.Count; i++)
+        //    {
+        //        if (albums[i].SongsOfAlbum == ItemSource)
+        //        {
+        //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
+        //           Playlist.InitUri(ref playlist);
+        //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
+        //            {
+        //                DataProvider.Ins.DB.Playlists.Add(playlist);
+        //                ListPlaylist.Ins.List.Add(playlist);
+        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+
+        //            }
+        //            else
+        //            {
+        //                DataProvider.Ins.DB.Playlists.Remove(playlist);
+        //                ListPlaylist.Ins.List.Remove(playlist);
+        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
+
+        //            }
+        //            break;
+        //        }
+        //    }
+        //    btn.Background = img;
+        //    DataProvider.Ins.DB.SaveChanges();
+        //}
+    }
 }

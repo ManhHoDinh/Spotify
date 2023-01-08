@@ -83,9 +83,9 @@
                             </Button.Template>
                         </Button>
                     </Grid>
-                    <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
-                        <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
+                        <TextBlock Height="200" Cursor="Hand" Text="{Binding NamePlaylist}" TextWrapping="Wrap" FontSize="64" Foreground="#ffffff" FontWeight="Bold">
                             <TextBlock.InputBindings>
                                 <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
                             </TextBlock.InputBindings>
