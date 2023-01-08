@@ -290,7 +290,10 @@ namespace Spotify.Views.Components
 
                 ViewPage.Ins.CurrentIndexView++;
                 if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
+                IsDisableBack = false;
+
             }
+
             else
             {
                 IsDisableNext = true;

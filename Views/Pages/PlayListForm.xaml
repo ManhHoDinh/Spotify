@@ -61,7 +61,7 @@
 
                                 <ContentPresenter Name="content">
                                     <ContentPresenter.Content>
-                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{Binding ImagePlaylist}"/>
+                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{Binding ImagePlaylist, Mode=OneWay}"/>
                                     </ContentPresenter.Content>
                                 </ContentPresenter>
                             </Border>
@@ -101,7 +101,7 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <spotify:PlaceHolderTextbox
                         x:Name="NamePlaylist"
-                        Text="{Binding NamePlaylist}"
+                        Text="{Binding NamePlaylist, Mode=OneWay}"
                         Background="#3e3e3e"
                         FontSize="14"
                         Foreground="#ffffff"
@@ -114,7 +114,7 @@
                     </spotify:PlaceHolderTextbox>
                     <spotify:PlaceHolderTextbox
                         x:Name="DescriptionPlaylist"
-                        Text="{Binding DescriptionPlaylist}"
+                        Text="{Binding DescriptionPlaylist,Mode=OneWay}"
                         Background="#3e3e3e"
                         FontSize="14"
                         Foreground="#ffffff"
