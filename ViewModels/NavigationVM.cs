@@ -116,7 +116,7 @@ namespace Spotify.ViewModels
         }
         private void Home(object obj)
         {
-           
+            ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("Home", obj);
             TranslatePage(new HomeVM());
 
@@ -124,17 +124,19 @@ namespace Spotify.ViewModels
         }
         private void Search(object obj)
         {
-            IsSearchView= true;
+            ViewPage.Ins.IsSearchView = true;
             ChangeViewStyle("Search", obj);
             TranslatePage(new SearchVM()); 
         }
         private void YourLibrary(object obj)
         {
+            ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("YourLibrary", obj);
             TranslatePage(new YourLibraryVM());
         }
         private void CreatePlaylist(object obj)
         {
+            ViewPage.Ins.IsSearchView = false;
             //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
             //{
             //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
@@ -155,6 +157,7 @@ namespace Spotify.ViewModels
 
         private void LikedSongs(object obj)
         {
+            ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
             

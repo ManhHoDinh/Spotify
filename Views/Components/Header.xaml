@@ -7,6 +7,8 @@
              xmlns:local="clr-namespace:Spotify.Views.Components"
              xmlns:vmp="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:vm="clr-namespace:Spotify.ViewModels" 
+             xmlns:main="clr-namespace:Spotify"
+             
              mc:Ignorable="d" 
            
              >
@@ -49,7 +51,7 @@
 
         </StackPanel>
         <Grid x:Name="SearchBox" Grid.Column="1" HorizontalAlignment="Left" 
-                Visibility="{Binding IsSearchView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding Source={x:Static main:ViewPage.Ins}, Path=IsSearchView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Rectangle x:Name="searchBoxForm" Width="370" Height="40" Margin="30,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{StaticResource SearchBoxForm}"></ImageBrush>

@@ -28,6 +28,7 @@ namespace Spotify.Views.Components
         private ListView listview;
         public static int id;
         public static bool IsClick;
+        public static string type = "";
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
@@ -35,25 +36,28 @@ namespace Spotify.Views.Components
             {
                 if (GetTemplateChild("PART_Headerr") != null)
                 {
-
-                    listview = GetTemplateChild("PART_Headerr") as ListView;
-                    var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
-
-                    Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
-                    if (IsPlay == true)
+                    
+                    if(type == "recommend")
                     {
+                        listview = GetTemplateChild("PART_Headerr") as ListView;
+                        var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                        Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                        if (IsPlay == true)
+                        {
 
-                        ImageBrush ImgBrush = new ImageBrush();
-                        ImgBrush.ImageSource = Pause;
-                        PlayPauseGreen.Background = ImgBrush;
-                    }
-                    else
-                    {
+                            ImageBrush ImgBrush = new ImageBrush();
+                            ImgBrush.ImageSource = Pause;
+                            PlayPauseGreen.Background = ImgBrush;
+                        }
+                        else
+                        {
 
-                        ImageBrush ImgBrush = new ImageBrush();
-                        ImgBrush.ImageSource = Play;
-                        PlayPauseGreen.Background = ImgBrush;
+                            ImageBrush ImgBrush = new ImageBrush();
+                            ImgBrush.ImageSource = Play;
+                            PlayPauseGreen.Background = ImgBrush;
+                        }
                     }
+                   
                     // what is the code that would go here?
                 }
             }
@@ -100,7 +104,7 @@ namespace Spotify.Views.Components
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-
+            type = "Recommend";
             ImageBrush ImgBrush = new ImageBrush();
             if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1)
             {

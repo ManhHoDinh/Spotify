@@ -54,7 +54,7 @@
                                                             <ImageBrush ImageSource="{Binding AlbumImageUri}"/>
                                                         </Border.Background>
                                                     </Border>
-                                                    <TextBlock Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
                                                     <TextBlock TextWrapping="wrap" Text="{Binding Descriptions}" FontSize="14" Foreground="#b3b3b3"/>
                                                     <Button
                                                         Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
