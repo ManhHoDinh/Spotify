@@ -9,7 +9,7 @@
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d"
              Loaded="songview_Loaded"
-             d:DesignHeight="450" d:DesignWidth="959">
+             d:DesignHeight="450" d:DesignWidth="959" Background="#181818">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>

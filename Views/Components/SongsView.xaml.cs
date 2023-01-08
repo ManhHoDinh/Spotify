@@ -111,6 +111,11 @@ namespace Spotify.Views.Components
         DependencyProperty.Register("FavorIcon", typeof(ImageSource), typeof(SongsView), new PropertyMetadata(null));
 
 
+    public ObservableCollection<Song> ItemSource
+    {
+      get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
+      set { SetValue(ItemSourceProperty, value); }
+    }
 
     public bool IsShowButton
     {
@@ -122,6 +127,9 @@ namespace Spotify.Views.Components
     public static readonly DependencyProperty IsShowButtonProperty =
         DependencyProperty.Register("IsShowButton", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
 
+    // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SelectedSongProperty =
+        DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
 
     public ObservableCollection<Song> ItemSource
     {
@@ -508,4 +516,5 @@ namespace Spotify.Views.Components
         //    DataProvider.Ins.DB.SaveChanges();
         //}
     }
+  }
 }
