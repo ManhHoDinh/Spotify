@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d" 
+             Loaded="listAlbum_Loaded"
              d:DesignHeight="4500" d:DesignWidth="8000">
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
@@ -53,7 +54,7 @@
                                                             <ImageBrush ImageSource="{Binding AlbumImageUri}"/>
                                                         </Border.Background>
                                                     </Border>
-                                                    <TextBlock Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
+                                                    <TextBlock TextWrapping="wrap" Text="{Binding AlbumName}" FontSize="16" Foreground="#ffffff"/>
                                                     <TextBlock TextWrapping="wrap" Text="{Binding Descriptions}" FontSize="14" Foreground="#b3b3b3"/>
                                                     <Button
                                                         Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
@@ -65,10 +66,10 @@
                                                        
                                                         HorizontalAlignment="Center" 
                                                         VerticalAlignment="Center"
-                                                        Width="80"
+                                                        Width="72"
                                                         Padding="0"
                                                         Margin="76 -180 0 0 "
-                                                        Height="80">
+                                                        Height="72">
                                                         <Button.Background>
                                                             <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                                                         </Button.Background>

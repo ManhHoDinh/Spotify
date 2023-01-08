@@ -4,10 +4,12 @@ using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -30,35 +32,228 @@ namespace Spotify.Views.Components
     {
         private ListView listview;
         public static int id;
+        public static ObservableCollection<Album> PreItemSource = new ObservableCollection<Album>();
         public static bool IsClick;
+        public static int temp = 0;
+        public static string type = "";
+        public static object obj;
+        public static RoutedEventArgs ev;
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);
             if (e.Property == IsPlayProperty)
             {
+               
                 if (GetTemplateChild("PART_Header") != null)
                 {
+                    HomeVM vm = this.DataContext as HomeVM;
+                    
+                    if (type == "TopMix")
+                    {
+                            listview = GetTemplateChild("PART_Header") as ListView;
+                        //if (PreId >= 0)
+                        //{
+                            if (ItemsSource == vm.TopMix) {
+                                
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                                Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                if (IsPlay == true)
+                                {
 
-                    listview = GetTemplateChild("PART_Header") as ListView;
-                    var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
-                   
-                    Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
-                    if (IsPlay == true)
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Pause;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                                else
+                                {
+
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Play;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                               // PreId = -1;
+                            }
+                            else
+                            {
+                                
+                                for (int i = 0; i < ItemsSource.Count; i++)
+                                {
+                                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                                ImageBrush img = new ImageBrush();
+                                                img.ImageSource = Play;
+                                                btn.Background = img;
+
+                                }
+                            }
+
+                        }
+                    if (type == "Popular")
                     {
-                        
-                        ImageBrush ImgBrush = new ImageBrush();
-                        ImgBrush.ImageSource = Pause;
-                        PlayPauseGreen.Background = ImgBrush;
-                    }
-                    else
+                            listview = GetTemplateChild("PART_Header") as ListView;
+                        //if (PreId >= 0)
+                        //{
+                            if (ItemsSource == vm.Popular) {
+                                
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                                Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                if (IsPlay == true)
+                                {
+
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Pause;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                                else
+                                {
+
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Play;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                               // PreId = -1;
+                            }
+                            else
+                            {
+                                
+                                for (int i = 0; i < ItemsSource.Count; i++)
+                                {
+                                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                                ImageBrush img = new ImageBrush();
+                                                img.ImageSource = Play;
+                                                btn.Background = img;
+
+                                }
+                            }
+
+                        }
+                    if (type == "MadeForYou")
                     {
-                       
-                        ImageBrush ImgBrush = new ImageBrush();
-                        ImgBrush.ImageSource = Play;
-                        PlayPauseGreen.Background = ImgBrush;
+                            listview = GetTemplateChild("PART_Header") as ListView;
+                        //if (PreId >= 0)
+                        //{
+                            if (ItemsSource == vm.MadeForYou) {
+                                
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                                Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                if (IsPlay == true)
+                                {
+
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Pause;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                                else
+                                {
+
+                                    ImageBrush ImgBrush = new ImageBrush();
+                                    ImgBrush.ImageSource = Play;
+                                    PlayPauseGreen.Background = ImgBrush;
+                                }
+                               // PreId = -1;
+                            }
+                            else
+                            {
+                                
+                                for (int i = 0; i < ItemsSource.Count; i++)
+                                {
+                                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                                ImageBrush img = new ImageBrush();
+                                                img.ImageSource = Play;
+                                                btn.Background = img;
+
+                                }
+                            }
+
+                        }
+                    if (type == "Trending")
+                    {
+                        listview = GetTemplateChild("PART_Header") as ListView;
+                        //if (PreId >= 0)
+                        //{
+                        if (ItemsSource == vm.Trending)
+                        {
+
+                            var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                            Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                            if (IsPlay == true)
+                            {
+
+                                ImageBrush ImgBrush = new ImageBrush();
+                                ImgBrush.ImageSource = Pause;
+                                PlayPauseGreen.Background = ImgBrush;
+                            }
+                            else
+                            {
+
+                                ImageBrush ImgBrush = new ImageBrush();
+                                ImgBrush.ImageSource = Play;
+                                PlayPauseGreen.Background = ImgBrush;
+                            }
+                            // PreId = -1;
+                        }
+                        else
+                        {
+
+                            for (int i = 0; i < ItemsSource.Count; i++)
+                            {
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                ImageBrush img = new ImageBrush();
+                                img.ImageSource = Play;
+                                btn.Background = img;
+
+                            }
+                        }
+
                     }
-                    // what is the code that would go here?
+                    if (type == "Mood" +
+                        "")
+                    {
+                        listview = GetTemplateChild("PART_Header") as ListView;
+                        //if (PreId >= 0)
+                        //{
+                        if (ItemsSource == vm.Mood)
+                        {
+
+                            var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
+                            Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                            if (IsPlay == true)
+                            {
+
+                                ImageBrush ImgBrush = new ImageBrush();
+                                ImgBrush.ImageSource = Pause;
+                                PlayPauseGreen.Background = ImgBrush;
+                            }
+                            else
+                            {
+
+                                ImageBrush ImgBrush = new ImageBrush();
+                                ImgBrush.ImageSource = Play;
+                                PlayPauseGreen.Background = ImgBrush;
+                            }
+                            // PreId = -1;
+                        }
+                        else
+                        {
+
+                            for (int i = 0; i < ItemsSource.Count; i++)
+                            {
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                ImageBrush img = new ImageBrush();
+                                img.ImageSource = Play;
+                                btn.Background = img;
+
+                            }
+                        }
+
+                    }
+
                 }
+
             }
         }
         public bool IsPlay
@@ -91,6 +286,18 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("SelectedItem", typeof(Album), typeof(ListAlbumView), new PropertyMetadata(null));
 
 
+        public int SelectedId
+        {
+            get { return (int)GetValue(SelectedIdProperty); }
+            set { SetValue(SelectedIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedIdProperty =
+            DependencyProperty.Register("SelectedId", typeof(int), typeof(ListAlbumView), new PropertyMetadata(0));
+
+
+
 
         public ObservableCollection<Album> ItemsSource
         {
@@ -105,16 +312,60 @@ namespace Spotify.Views.Components
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-
-            ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1)
+            HomeVM vm = this.DataContext as HomeVM;
+            int xx = int.Parse((sender as Button).Tag.ToString());
+            if (xx <= 6)
             {
+                type = "TopMix";
+                ItemsSource = vm.TopMix;
+            }
+            if (xx >= 7 && xx <= 12)
+            {
+                type = "MadeForYou";
+
+                ItemsSource = vm.MadeForYou;
+
+            }
+            if (xx >= 13 && xx <= 18)
+            {
+
+                type = "Popular";
+
+                ItemsSource = vm.Popular;
+
+            }
+            if (xx >= 19 && xx <= 24)
+            {
+                type = "Mood";
+                ItemsSource = vm.Mood;
+
+            }
+            if (xx > 25)
+            {
+                type = "Trending";
+                ItemsSource = vm.Trending;
+            }
+
+
+            if (ItemsSource == vm.TopMix) temp = 0;
+            if (ItemsSource == vm.MadeForYou) temp = 6;
+            if (ItemsSource == vm.Popular) temp = 12;
+            if (ItemsSource == vm.Mood) temp = 18;
+            if (ItemsSource == vm.Trending) temp = 24;
+            ImageBrush ImgBrush = new ImageBrush();
+            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp || PreItemSource != ItemsSource)
+            {
+                
                 SongBottom.Ins.CountId = 0;
 
-                id = int.Parse((sender as Button).Tag.ToString()) - 1;
+
+                SongBottom.Ins.IsPlay = false;
+                id = int.Parse((sender as Button).Tag.ToString()) - 1 - temp;
+               
                 listview = GetTemplateChild("PART_Header") as ListView;
                 for (int i = 0; i < ItemsSource.Count; i++)
                 {
+
                     var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                     var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
                     if (int.Parse(btn.Tag.ToString()) != id + 1)
@@ -124,7 +375,7 @@ namespace Spotify.Views.Components
                         btn.Background = im;
                     }
                 }
-                HomeVM vm = this.DataContext as HomeVM;
+                
                 int IdAlbum = int.Parse((sender as Button).Tag.ToString());
                 var AlbumPlay = DataProvider.Ins.DB.Albums.Where(a => a.ID == IdAlbum).FirstOrDefault();
                 IsClick = true;
@@ -138,9 +389,12 @@ namespace Spotify.Views.Components
             }
             else
             {
+
+                
                 if (SongBottom.Ins.IsPlay == true)
                 {
-                    ImgBrush.ImageSource = Play;
+                  
+                   ImgBrush.ImageSource = Play;
                     SongBottom.Ins.IsPlay = false;
                 }
                 else
@@ -162,8 +416,36 @@ namespace Spotify.Views.Components
             //    IsPlay = true;
             //}
             (sender as Button).Background = ImgBrush;
+            PreItemSource = ItemsSource;
         }
 
+        private void listAlbum_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+            obj = sender;
+            ev = e;
+            listview = GetTemplateChild("PART_Header") as ListView;
+            for (int i = 0; i < ItemsSource.Count; i++)
+            {
+                for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
+                {
+                    ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
+                    Song song = a[j];
+                    if (SongBottom.Ins.SelectedSong != null)
+                    {
+                        if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                        {
+                            var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                            var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = Pause;
+                            btn.Background = img;
+                        }
+                    }
 
+                }
+
+            }
+        }
     }
 }

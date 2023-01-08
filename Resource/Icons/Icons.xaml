@@ -29,4 +29,7 @@
     <ImageSource x:Key="Bar2">./bar2.png</ImageSource>
     <ImageSource x:Key="Bar3">./bar3.png</ImageSource>
     <ImageSource x:Key="Bar4">./bar4.png</ImageSource>
+    <ImageSource x:Key="Heart">./Heart_XS.png</ImageSource>
+    <ImageSource x:Key="HeartFill">./Heart_XS _Fill.png</ImageSource>
+    
 </ResourceDictionary>

@@ -23,7 +23,8 @@ namespace Spotify.Views.Pages
     /// <summary>
     /// Interaction logic for CreatePlaylist.xaml
     /// </summary>
-    public class ListPlaylist : DependencyObject
+    public class ListPlaylist
+        : DependencyObject
     {
         public string Image
         {
@@ -35,6 +36,17 @@ namespace Spotify.Views.Pages
         public static readonly DependencyProperty ImageProperty =
             DependencyProperty.Register("Image", typeof(string), typeof(ListPlaylist), new PropertyMetadata(string.Empty));
 
+
+        public int CurrentIdPlaylist
+        {
+            get { return (int)GetValue(CurrentIdPlaylistProperty); }
+            set { SetValue(CurrentIdPlaylistProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentIdPlaylist.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentIdPlaylistProperty =
+            DependencyProperty.Register("CurrentIdPlaylist", typeof(int), typeof(ListPlaylist), new PropertyMetadata(-1));
+
         public string PlaylistName
         {
             get { return (string)GetValue(PlaylistNameProperty); }
@@ -44,6 +56,19 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for PlaylistName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PlaylistNameProperty =
             DependencyProperty.Register("PlaylistName", typeof(string), typeof(ListPlaylist), new PropertyMetadata(string.Empty));
+
+
+        public List<int> ListSelectedItem
+        {
+            get { return (List<int>)GetValue(ListSelectedItemProperty); }
+            set { SetValue(ListSelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSelectedItemProperty =
+            DependencyProperty.Register("ListSelectedItem", typeof(List<int>), typeof(ListPlaylist), new PropertyMetadata(new List<int>{ }));
+
+
         public Playlist SelectedItem
         {
             get { return (Playlist)GetValue(SelectedItemProperty); }

@@ -486,9 +486,16 @@
     <Content Include="Resource\Album\VietRap\VietRap.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\Icons\Heart_XS.png" />
+    <Resource Include="Resource\Icons\Heart_XS _Fill.png" />
     <Content Include="Resource\Images\InitImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\Images\RepeatOneBtn.png" />
+    <Resource Include="Resource\Images\Repeat_S.png" />
+    <Resource Include="Resource\Images\Shuffle_S.png" />
+    <Resource Include="Resource\Images\Volume_XS.png" />
+    <Resource Include="Resource\Images\Volume_XSHover.png" />
     <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -7,12 +7,17 @@
              xmlns:local="clr-namespace:Spotify.Views.Components"
              xmlns:vmp="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:vm="clr-namespace:Spotify.ViewModels" 
+             xmlns:main="clr-namespace:Spotify"
+             
              mc:Ignorable="d" 
            
              >
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="BaseHeaderButton">
-            <Border x:Name="border" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="32" Background="#000">
+            <Border x:Name="border" Height="32" Width="32" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="32">
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.2" Color="#ffffff"/>
+                </Border.Background>
                 <Image x:Name="img" Height="20" Width="20" Source="{TemplateBinding Tag}"></Image>
             </Border>
             <ControlTemplate.Triggers>
@@ -46,7 +51,7 @@
 
         </StackPanel>
         <Grid x:Name="SearchBox" Grid.Column="1" HorizontalAlignment="Left" 
-                Visibility="{Binding IsSearchView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                Visibility="{Binding Source={x:Static main:ViewPage.Ins}, Path=IsSearchView, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Rectangle x:Name="searchBoxForm" Width="370" Height="40" Margin="30,16,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="{StaticResource SearchBoxForm}"></ImageBrush>
