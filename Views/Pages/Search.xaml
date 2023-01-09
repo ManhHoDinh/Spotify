@@ -113,6 +113,7 @@
         <Grid Background="#121212">
             <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding RecentSearch}"></ListView>
             <components:SongsView
+                   Background="#181818"
                    FavorIcon="{StaticResource HeartButton}" 
                    Margin="0 70 0 0"
                    IsShowButton="False"
