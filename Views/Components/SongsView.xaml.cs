@@ -131,11 +131,7 @@ namespace Spotify.Views.Components
     public static readonly DependencyProperty SelectedSongProperty =
         DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
 
-    public ObservableCollection<Song> ItemSource
-    {
-      get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
-      set { SetValue(ItemSourceProperty, value); }
-    }
+    
 
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty ItemSourceProperty =
@@ -146,15 +142,6 @@ namespace Spotify.Views.Components
       set { SetValue(SelectedSongProperty, value); }
 
     }
-
-    // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty SelectedSongProperty =
-        DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
-
-
-
-
-
 
     public bool IsPlay
     {
@@ -517,4 +504,4 @@ namespace Spotify.Views.Components
         //}
     }
   }
-}
+
