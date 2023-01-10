@@ -117,7 +117,8 @@ namespace Spotify.Views.Pages
             }
             if(!bug)
             {
-                User user = new User{ Email = Email.Text, Password =Password.Password, UserName=profileName.Text };
+                //dateTime = DateTime.ParseExact(dateString, "MM-dd-yyyy", provider);
+                User user = new User{ Email = Email.Text, Password =Password.Password, UserName=profileName.Text,Birthday= dateTime };
                 DataProvider.Ins.DB.Users.Add(user);
                 LoginStatus.Current.User = user;
                 LoginStatus.Current.ResetAllView();

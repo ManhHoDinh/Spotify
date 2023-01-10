@@ -24,6 +24,10 @@ namespace Spotify.ViewModels
 
         private bool _isAfterSendForgotPasswordEmail { get; set; }
         public bool IsAfterSendForgotPasswordEmail { get { return _isAfterSendForgotPasswordEmail; } set { _isAfterSendForgotPasswordEmail = value; OnPropertyChanged(); } }
+        private bool _isPasswordUpdatedView { get; set; }
+        public bool IsPasswordUpdatedView { get { return _isPasswordUpdatedView; } set { _isPasswordUpdatedView = value; OnPropertyChanged(); } }
+        private bool _isChangePasswordView { get; set; }
+        public bool IsChangePasswordView { get { return _isAfterSendForgotPasswordEmail; } set { _isAfterSendForgotPasswordEmail = value; OnPropertyChanged(); } }
 
         private bool _needLoggedIn { get; set; }
         public bool NeedLogin { get { return _needLoggedIn; } set { _needLoggedIn = value; OnPropertyChanged(); } }
@@ -38,7 +42,30 @@ namespace Spotify.ViewModels
         public bool IsShowDiaologAccount { get { return _isShowDiaologAccount; } set { _isShowDiaologAccount = value; OnPropertyChanged(); } }
 
         private User _user { get; set; }
-        public User User { get { return _user; } set { _user = value; OnPropertyChanged(); } }
+        public User User { get {
+                return _user; } 
+            set { 
+                _user = value;
+                if (_user != DataProvider.Ins.DB.Users.FirstOrDefault(x => x.UserID == -1))
+                {
+                    Day = _user.Birthday.Value.Day.ToString();
+                    Month = _user.Birthday.Value.Month.ToString();
+                    Year = _user.Birthday.Value.Year.ToString();
+                }
+                OnPropertyChanged(); } }
+        private int _forgotPasswordUserID { get; set; }
+        public int ForgotPasswordUserID { get { return _forgotPasswordUserID; } set { _forgotPasswordUserID = value; OnPropertyChanged(); } }
+        private bool _isAccountView { get; set; }
+        public bool IsAccountView { get { return _isAccountView; } set { _isAccountView = value; OnPropertyChanged(); } }
+        private bool _isEditAccountView { get; set; }
+        public bool IsEditAccountView { get { return _isEditAccountView; } set { _isEditAccountView = value; OnPropertyChanged(); } }
+        private string _day { get; set; }
+        public string Day { get { return _day; } set { _day = value; OnPropertyChanged(); } }
+        private string _month { get; set; }
+        public string Month { get { return _month; } set { _month = value; OnPropertyChanged(); } }
+
+        private string _year { get; set; }
+        public string Year { get { return _year; } set { _year = value; OnPropertyChanged(); } }
 
         public void ResetAllView()
         {
@@ -46,7 +73,11 @@ namespace Spotify.ViewModels
             IsLogin = false;
             IsSignUp = false;
             IsForgotPassword = false;
-            IsAfterSendForgotPasswordEmail = false;
+            IsAfterSendForgotPasswordEmail = false; 
+            IsChangePasswordView = false;
+            IsPasswordUpdatedView = false;
+            IsAccountView= false;
+            IsEditAccountView = false;
         }
 
         public LoginStatus()

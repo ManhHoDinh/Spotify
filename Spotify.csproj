@@ -139,8 +139,17 @@
     <Compile Include="Views\Pages\AlbumView.xaml.cs">
       <DependentUpon>AlbumView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\ChangeForgotPassword.xaml.cs">
+      <DependentUpon>ChangeForgotPassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\CreatePlaylist.xaml.cs">
       <DependentUpon>CreatePlaylist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditPasswordView.xaml.cs">
+      <DependentUpon>EditPasswordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
@@ -148,8 +157,14 @@
     <Compile Include="Views\Pages\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\InfoAccount.xaml.cs">
+      <DependentUpon>InfoAccount.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\LikedSongsView.xaml.cs">
       <DependentUpon>LikedSongsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PasswordUpdatedView.xaml.cs">
+      <DependentUpon>PasswordUpdatedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PlayListForm.xaml.cs">
       <DependentUpon>PlayListForm.xaml</DependentUpon>
@@ -309,9 +324,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\ChangeForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\CreatePlaylist.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\EditPasswordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
@@ -321,9 +348,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\InfoAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\LikedSongsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Pages\PasswordUpdatedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\PlayListForm.xaml">
       <Generator>MSBuild:Compile</Generator>

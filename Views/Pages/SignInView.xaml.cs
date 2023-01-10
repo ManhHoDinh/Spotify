@@ -34,7 +34,8 @@ namespace Spotify.Views.Pages
             if (user != null)
             {
                 LoginStatus.Current.User = user;
-                User.InitUri(ref user);
+                //if(LoginStatus.Current.User.UserImageSource==null)
+                //    User.InitUri(ref user);
                 Properties.Settings.Default.CurrentUserID = user.UserID;
                 LoginStatus.Current.ResetAllView();
                 LoginStatus.Current.IsMainView = true;

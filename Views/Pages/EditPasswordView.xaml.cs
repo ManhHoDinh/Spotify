@@ -1,7 +1,10 @@
-﻿using Spotify.ViewModels;
+﻿using Spotify.Models;
+using Spotify.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,18 +20,16 @@ using System.Windows.Shapes;
 namespace Spotify.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for AfterSendForgotEmailView.xaml
+    /// Interaction logic for EditPasswordView.xaml
     /// </summary>
-    public partial class AfterSendForgotPasswordEmailView : UserControl
+    public partial class EditPasswordView : UserControl
     {
-        public AfterSendForgotPasswordEmailView()
+        public EditPasswordView()
         {
             InitializeComponent();
         }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
-        {
-            LoginStatus.Current.ResetAllView();
-            LoginStatus.Current.IsChangePasswordView = true;
-        }
+        private void Save_Click(object sender, RoutedEventArgs e) { }
+        private void Cancel_Click(object sender, RoutedEventArgs e) { }
+
     }
 }

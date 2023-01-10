@@ -25,5 +25,9 @@
         <Page:ForgotPasswordView Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsForgotPassword,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
         <Page:AfterSendForgotPasswordEmailView Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsAfterSendForgotPasswordEmail,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
         <Page:SignUpView Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsSignUp,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
+        <Page:ChangeForgotPassword Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsChangePasswordView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
+        <Page:PasswordUpdatedView Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsPasswordUpdatedView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
+        <Page:InfoAccount Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsAccountView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
+        <Page:EditProfile Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsEditAccountView,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalContentAlignment="Stretch"/>
     </Grid>
 </Window>

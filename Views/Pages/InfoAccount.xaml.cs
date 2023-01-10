@@ -17,18 +17,26 @@ using System.Windows.Shapes;
 namespace Spotify.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for AfterSendForgotEmailView.xaml
+    /// Interaction logic for InfoAccount.xaml
     /// </summary>
-    public partial class AfterSendForgotPasswordEmailView : UserControl
+    public partial class InfoAccount : UserControl
     {
-        public AfterSendForgotPasswordEmailView()
+        public InfoAccount()
         {
             InitializeComponent();
+            Birthday.ContentStringFormat = "dd/MM/yyyy";
         }
-        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+
+        private void Editbtn_Click(object sender, RoutedEventArgs e)
         {
             LoginStatus.Current.ResetAllView();
-            LoginStatus.Current.IsChangePasswordView = true;
+            LoginStatus.Current.IsEditAccountView= true;
+        }
+
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsMainView = true;
         }
     }
 }

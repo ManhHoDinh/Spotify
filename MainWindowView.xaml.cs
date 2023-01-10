@@ -103,13 +103,19 @@ namespace Spotify
         private void LogOut_click(object sender, RoutedEventArgs e)
         {
             LoginStatus.Current.IsShowDiaologAccount = false;
-            LoginStatus.Current.User = new Models.User();
+            LoginStatus.Current.User = DataProvider.Ins.DB.Users.FirstOrDefault(x => x.UserID == -1);
             LoginStatus.Current.ResetAllView();
             LoginStatus.Current.IsMainView = true;
             LoginStatus.Current.HaveUser = false;
             LoginStatus.Current.NeedLogin = true;
             Properties.Settings.Default.CurrentUserID = -1;
             Properties.Settings.Default.Save();
+        }
+
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsAccountView=true;
         }
     }
 }
