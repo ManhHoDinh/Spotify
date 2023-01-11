@@ -71,6 +71,11 @@ namespace Spotify.Views.Components
         public static readonly DependencyProperty SelectedSongProperty =
             DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongBottom), new PropertyMetadata(null));
 
+        public int CountId
+        {
+            get { return (int)GetValue(CountIdProperty); }
+            set { SetValue(CountIdProperty, value); }
+        }
 
         public ObservableCollection<Song> SongSource
         {
@@ -81,13 +86,6 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SongSourceProperty =
             DependencyProperty.Register("SongSource", typeof(ObservableCollection<Song>), typeof(SongBottom), new PropertyMetadata(null));
-
-
-        public int CountId
-        {
-            get { return (int)GetValue(CountIdProperty); }
-            set { SetValue(CountIdProperty, value); }
-        }
 
         // Using a DependencyProperty as the backing store for CountId.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CountIdProperty =
