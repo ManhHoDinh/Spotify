@@ -62,7 +62,7 @@
         <Grid Margin="0 24 0 0"  Background="Transparent">
           <ListView Name="PART_Header"   
                       SelectionMode="Single"
-                      Template="{StaticResource NonScrollableListView}" 
+                      
                       SelectionChanged="ListViewSong_SelectionChanged"
                       SelectedItem="{Binding SelectedSong,ElementName=songview,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding ItemSource,ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
