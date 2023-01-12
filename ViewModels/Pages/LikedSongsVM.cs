@@ -73,7 +73,7 @@ namespace Spotify.ViewModels.Pages
             binding.Source = this;
             binding.Mode = BindingMode.OneWayToSource;
             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-            listSong = Playlists.LikedSongsPlayplist.SongsOfPlaylist;
+            //listSong = Playlists.LikedSongsPlayplist.SongsOfPlaylist;
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

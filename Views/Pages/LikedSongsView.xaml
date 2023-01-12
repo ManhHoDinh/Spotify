@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
+             xmlns:vmodel="clr-namespace:Spotify.ViewModels"
              d:DesignHeight="1900" d:DesignWidth="800"
              DataContext="{StaticResource LikedSongsVM}" 
              xmlns:components="clr-namespace:Spotify.Views.Components">
@@ -59,7 +60,7 @@
                 <components:SongsView 
                     x:Name="ListLikeSongs"
                     FavorIcon="{StaticResource HeartFillButton}"
-                    ItemSource="{Binding listSong, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                    ItemSource="{Binding Source={x:Static vmodel:Playlists.Ins},Path=LikedSongsPlayplist.SongsOfPlaylist,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     SelectedSong="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
             </Grid>
         </Grid>

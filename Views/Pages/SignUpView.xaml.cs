@@ -115,10 +115,19 @@ namespace Spotify.Views.Pages
                 BirthdayError.Visibility= Visibility.Visible;
                 bug = true;
             }
-            if(!bug)
+            if (!bug)
             {
-                User user = new User{ Email = Email.Text, Password =Password.Password, UserName=profileName.Text };
+                //dateTime = DateTime.ParseExact(dateString, "MM-dd-yyyy", provider);
+                User user = new User { Email = Email.Text, Password = Password.Password, UserName = profileName.Text, Birthday = dateTime };
                 DataProvider.Ins.DB.Users.Add(user);
+                DataProvider.Ins.DB.Playlists.Add(new Playlist { 
+                    PlaylistType=0, UserID=user.UserID,
+                });
+                DataProvider.Ins.DB.Playlists.Add(new Playlist
+                {
+                    PlaylistType = 1,
+                    UserID = user.UserID,
+                });
                 LoginStatus.Current.User = user;
                 LoginStatus.Current.ResetAllView();
                 LoginStatus.Current.IsMainView = true;

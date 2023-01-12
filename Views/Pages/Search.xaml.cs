@@ -58,8 +58,8 @@ namespace Spotify.Views.Pages
             Button btn = sender as Button;
             int index = int.Parse(btn.Tag.ToString());
             Song song = DataProvider.Ins.DB.Songs.Where(a => a.ID == index).First();
-            Playlists.RecentSearchPlaylist.SongsOfPlaylist.Remove(song);
-            Playlists.RecentSearchPlaylist.Songs.Remove(song);
+            Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Remove(song);
+            Playlists.Ins.RecentSearchPlaylist.Songs.Remove(song);
             DataProvider.Ins.DB.SaveChanges();
         }
     }

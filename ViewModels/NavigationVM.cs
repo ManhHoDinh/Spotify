@@ -164,7 +164,6 @@ namespace Spotify.ViewModels
             //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
             ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
-           
         }
 
 

@@ -281,7 +281,7 @@ namespace Spotify.Views.Components
       int id = int.Parse(gr.Tag.ToString());
       ImageBrush img = new ImageBrush();
       var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
-      var playlist = Playlists.LikedSongsPlayplist;
+      var playlist = Playlists.Ins.LikedSongsPlayplist;
       if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
       {
         img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];

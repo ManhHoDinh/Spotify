@@ -88,7 +88,7 @@
             </StackPanel>
         </Grid>
         <Grid  Grid.Column="2">
-            <Button Click="Profile_Click">
+            <Button Cursor="Hand" Click="Profile_Click">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -115,8 +115,8 @@
                     <ColumnDefinition Width="0.3*"></ColumnDefinition>
                     <ColumnDefinition Width="0.7*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource SignUpBtn}" Grid.Column="0" Click="SignIn_click" VerticalAlignment="Center"  HorizontalAlignment="Left" Content="Sign Up"/>
-                <Button  VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Content="Login In" Margin="15 0 0 0" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" 
+                <Button Style="{StaticResource SignUpBtn}" Grid.Column="0" Click="SignIn_click" VerticalAlignment="Center"  HorizontalAlignment="Left" Content="Sign up"/>
+                <Button  VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Content="Log in" Margin="15 0 0 0" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" 
                 Style="{StaticResource LoginHomeBtn}" 
                 Background="#f6f6f6" Width="113" Height="46" 
                 Cursor="Hand"

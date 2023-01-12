@@ -1,9 +1,6 @@
-using Spotify.Models;
-using Spotify.ViewModels.Pages;
-using Spotify.Views.Components;
+﻿using Spotify.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,22 +17,19 @@ using System.Windows.Shapes;
 namespace Spotify.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for LikedSongsView.xaml
+    /// Interaction logic for PasswordUpdatedView.xaml
     /// </summary>
-    public partial class LikedSongsView : UserControl
+    public partial class PasswordUpdatedView : UserControl
     {
-        public static int id = 0;
-
-      
-        public LikedSongsView()
+        public PasswordUpdatedView()
         {
             InitializeComponent();
-            SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
- 
         }
 
-       
-      
-        
+        private void HomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsMainView = true;
+        }
     }
 }
