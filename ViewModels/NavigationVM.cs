@@ -14,6 +14,7 @@ using Spotify.Models;
 using System.Windows.Media;
 using System.Windows;
 using System.Management.Instrumentation;
+using System.Windows.Media.Media3D;
 
 namespace Spotify.ViewModels
 {
@@ -73,22 +74,49 @@ namespace Spotify.ViewModels
                 int currentId = ViewPage.Ins.CurrentIndexView;
                 int count = ViewPage.Ins.ListPage.Count;
 
-                if (currentId < count)
+                if (currentId + 1 < count)
                 {
                     for (int i = currentId + 1; i < count; i++)
                     {
-                        ViewPage.Ins.ListPage.RemoveAt(1);
+                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
                     }
+                    
+                   if(ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                    {
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1 )
+                        {
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+                        else 
+                        {
+                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            {
+                               
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+                          
+                        }
+                    }
+                   
+
                 }
                 ViewPage.Ins.CurrentView = obj;
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
+                ListPlaylist.Ins.SelectedItem = null;
+                
+
             }
         }
         private void Home(object obj)
         {
-           
+            ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("Home", obj);
             TranslatePage(new HomeVM());
 
@@ -96,40 +124,44 @@ namespace Spotify.ViewModels
         }
         private void Search(object obj)
         {
-            IsSearchView= true;
+            ViewPage.Ins.IsSearchView = true;
             ChangeViewStyle("Search", obj);
             TranslatePage(new SearchVM()); 
         }
         private void YourLibrary(object obj)
         {
+            ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("YourLibrary", obj);
             TranslatePage(new YourLibraryVM());
         }
         private void CreatePlaylist(object obj)
         {
-            if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
-            {
-                ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-                ViewPage.Ins.CurrentIndexView++;
-            }
+            ListPlaylist.Ins.IsCreate = true;
+            ViewPage.Ins.IsSearchView = false;
+            ViewPage.Ins.IsClick = false;
 
+            //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
+            //{
+            //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+            //    ViewPage.Ins.CurrentIndexView++;
             int count = ListPlaylist.Ins.CountPlaylist - 2;
             Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1, PlaylistType = 2 };
             Playlist.InitUri(ref playlist);
-            //MessageBox.Show(playlist.PlaylistName);
             DataProvider.Ins.DB.Playlists.Add(playlist);
             DataProvider.Ins.DB.SaveChanges();
             ListPlaylist.Ins.List.Add(playlist);
-            ViewPage.Ins.CurrentView = new CreatePlaylist();
-            //  MessageBox.Show(count.ToString());
+           // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
             ListPlaylist.Ins.CountPlaylist++;
-
             ChangeViewStyle("CreatePlaylist", obj);
+            
+
         }
 
         private void LikedSongs(object obj)
         {
+            ViewPage.Ins.IsSearchView = false;
+            //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
             ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
         }

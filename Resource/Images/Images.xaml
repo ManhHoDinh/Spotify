@@ -7,8 +7,11 @@
     <ImageSource x:Key="NextHoverButton">Next_Hover.png</ImageSource>
     <ImageSource x:Key="ShuffleButton">Shuffle.png</ImageSource>
     <ImageSource x:Key="ShuffleHoverButton">Shuffle_Hover.png</ImageSource>
+    <ImageSource x:Key="ShuffleActiveButton">Shuffle_S.png</ImageSource>
     <ImageSource x:Key="RepeatButton">Repeat.png</ImageSource>
     <ImageSource x:Key="RepeatHoverButton">Repeat_Hover.png</ImageSource>
+    <ImageSource x:Key="RepeatOneBtn">RepeatOneBtn.png</ImageSource>
+    <ImageSource x:Key="RepeatBtn">Repeat_S.png</ImageSource>
     <ImageSource x:Key="PlayButton">Play.png</ImageSource>
     <ImageSource x:Key="PlayHoverButton">Play_Hover.png</ImageSource>
     <ImageSource x:Key="PauseButton">Pause.png</ImageSource>
@@ -29,4 +32,6 @@
     <ImageSource x:Key="spotifyLoginLogo">spotifyLogo.png</ImageSource>
     <ImageSource x:Key="SongBackground">backgroundSong.png</ImageSource>
     <ImageSource x:Key="EditBtn">Edit.png</ImageSource>
+    <ImageSource x:Key="MuteBtn">Volume_XS.png</ImageSource>
+    <ImageSource x:Key="MuteHoverBtn">Volume_XSHover.png</ImageSource>
 </ResourceDictionary>

@@ -26,12 +26,16 @@ namespace Spotify.Views.Pages
     {
         public static int id = 0;
 
+      
         public LikedSongsView()
         {
             InitializeComponent();
             SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
+ 
         }
 
+       
+      
         
     }
 }

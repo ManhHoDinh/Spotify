@@ -25,6 +25,22 @@ namespace Spotify
     /// </summary>
     public class ViewPage : DependencyObject
     {
+
+
+
+       
+
+        public bool IsSearchView
+        {
+            get { return (bool)GetValue(IsSearchViewProperty); }
+            set { SetValue(IsSearchViewProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsSearchView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSearchViewProperty =
+            DependencyProperty.Register("IsSearchView", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
+
+
         public object CurrentView
         {
             get { return (object)GetValue(CurrentViewProperty); }
@@ -83,6 +99,19 @@ namespace Spotify
         // Using a DependencyProperty as the backing store for ViewPageSelected.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ViewPageSelectedProperty =
             DependencyProperty.Register("ViewPageSelected", typeof(string), typeof(ViewPage), new PropertyMetadata(string.Empty));
+
+
+        public bool IsClick
+        {
+            get { return (bool)GetValue(IsClickProperty); }
+            set { SetValue(IsClickProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsClick.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsClickProperty =
+            DependencyProperty.Register("IsClick", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
+
+
 
         public int CurrentIndexView
         {

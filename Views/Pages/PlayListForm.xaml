@@ -30,7 +30,7 @@
                     Margin="320,0,0,0"
                     Command="{Binding CloseCommand}" 
                     CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,  AncestorType={x:Type Window}}}">
-                    <!--<Button.Template>
+                    <Button.Template>
                         <ControlTemplate>
                             <Border Name="border" Background="Transparent" CornerRadius="50">
                                 <ContentPresenter>
@@ -45,7 +45,7 @@
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
-                    </Button.Template>-->
+                    </Button.Template>
                 </Button>
             </StackPanel>
             <Grid Grid.Row="1" Margin="24 0 0 0" VerticalAlignment="Top">
@@ -61,7 +61,7 @@
 
                                 <ContentPresenter Name="content">
                                     <ContentPresenter.Content>
-                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{Binding ImagePlaylist}"/>
+                                        <Image x:Name="imgInitial" Width="180" Height="180" Source="{Binding ImagePlaylist, Mode=OneWay}"/>
                                     </ContentPresenter.Content>
                                 </ContentPresenter>
                             </Border>
@@ -101,7 +101,8 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <spotify:PlaceHolderTextbox
                         x:Name="NamePlaylist"
-                        Text="{Binding NamePlaylist}"
+                        MaxLength="50"
+                        Text="{Binding NamePlaylist, Mode=OneWay}"
                         Background="#3e3e3e"
                         FontSize="14"
                         Foreground="#ffffff"
@@ -114,8 +115,11 @@
                     </spotify:PlaceHolderTextbox>
                     <spotify:PlaceHolderTextbox
                         x:Name="DescriptionPlaylist"
-                        Text="{Binding DescriptionPlaylist}"
+                        Text="{Binding DescriptionPlaylist,Mode=OneWay}"
+                        TextWrapping="Wrap"
+                    
                         Background="#3e3e3e"
+                        MaxLength="50"
                         FontSize="14"
                         Foreground="#ffffff"
                         Placeholder="Add an optional description" 

@@ -2,6 +2,7 @@ using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -11,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Spotify.Models;
+using Spotify.Utilities;
 using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Pages;
@@ -27,7 +29,9 @@ namespace Spotify.Views.Components
   {
     private ListView listview;
     private Button playButton;
-    protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        public ICommand RemoveCommand { get; set; }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
     {
 
       base.OnPropertyChanged(e);
@@ -84,7 +88,17 @@ namespace Spotify.Views.Components
       binding.Mode = BindingMode.TwoWay;
       BindingOperations.SetBinding(songview, IsPlayProperty, binding);
 
+            RemoveCommand = new RelayCommand<object>(
+                (p) =>
+                {
+                    return true;
+                }, (p) =>
+                {
+                    MessageBox.Show("haha");
+                    
 
+
+                });
 
       //if(LikedSongsView.SelectedItem != null)
       //{
@@ -110,6 +124,11 @@ namespace Spotify.Views.Components
         DependencyProperty.Register("FavorIcon", typeof(ImageSource), typeof(SongsView), new PropertyMetadata(null));
 
 
+    public ObservableCollection<Song> ItemSource
+    {
+      get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
+      set { SetValue(ItemSourceProperty, value); }
+    }
 
     public bool IsShowButton
     {
@@ -121,12 +140,23 @@ namespace Spotify.Views.Components
     public static readonly DependencyProperty IsShowButtonProperty =
         DependencyProperty.Register("IsShowButton", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
 
+    // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty SelectedSongProperty =
+        DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
 
-    public ObservableCollection<Song> ItemSource
-    {
-      get { return (ObservableCollection<Song>)GetValue(ItemSourceProperty); }
-      set { SetValue(ItemSourceProperty, value); }
-    }
+
+        public bool IsShow
+        {
+            get { return (bool)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsShow.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsShowProperty =
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
+
+
+      
 
     // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty ItemSourceProperty =
@@ -138,16 +168,24 @@ namespace Spotify.Views.Components
 
     }
 
-    // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
-    public static readonly DependencyProperty SelectedSongProperty =
-        DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
+   
+
+        //public Playlist SelectedPlaylist
+        //{
+        //    get { return (Playlist)GetValue(SelectedPlaylistProperty); }
+        //    set { SetValue(SelectedPlaylistProperty, value); }
+        //}
+
+        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty SelectedPlaylistProperty =
+        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
 
 
 
 
 
 
-    public bool IsPlay
+        public bool IsPlay
     {
       get { return (bool)GetValue(IsPlayProperty); }
       set
@@ -203,7 +241,19 @@ namespace Spotify.Views.Components
     public static readonly DependencyProperty IsPlayProperty =
         DependencyProperty.Register("IsPlay", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
 
-    public bool IsVisibleOption
+
+        public bool IsShowed
+        {
+            get { return (bool)GetValue(IsShowedProperty); }
+            set { SetValue(IsShowedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsShowed.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsShowedProperty =
+            DependencyProperty.Register("IsShowed", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
+
+
+        public bool IsVisibleOption
     {
       get { return (bool)GetValue(IsVisibleOptionProperty); }
       set { SetValue(IsVisibleOptionProperty, value); }
@@ -231,8 +281,8 @@ namespace Spotify.Views.Components
       int id = int.Parse(gr.Tag.ToString());
       ImageBrush img = new ImageBrush();
       var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
-      var playlist = Playlists.Ins.LikedSongsPlayplist;
-      if (FavorIcon == (ImageSource)Application.Current.Resources["HeartFillButton"])
+      var playlist = Playlists.LikedSongsPlayplist;
+      if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
       {
         img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
         btn.Background = img;
@@ -269,17 +319,39 @@ namespace Spotify.Views.Components
     }
     void TranslatePage(object obj)
     {
-      if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
-      {
-        int currentId = ViewPage.Ins.CurrentIndexView;
-        int count = ViewPage.Ins.ListPage.Count;
+            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
+            {
+                int currentId = ViewPage.Ins.CurrentIndexView;
+                int count = ViewPage.Ins.ListPage.Count;
 
-        if (currentId < count)
-        {
-          for (int i = currentId + 1; i < count; i++)
-          {
-            ViewPage.Ins.ListPage.RemoveAt(1);
-          }
+                if (currentId + 1 < count)
+                {
+                    for (int i = currentId + 1; i < count; i++)
+                    {
+                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                    }
+
+                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                    {
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+                        else
+                        {
+                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            {
+
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
+                    }
         }
         SongView a = new SongView();
         a.SelectedSong = SelectedSong;
@@ -294,8 +366,16 @@ namespace Spotify.Views.Components
       var listview = GetTemplateChild("PART_Header") as ListView;
       Button btn = sender as Button;
       ListViewItem curItem = ((ListViewItem)listview.ContainerFromElement((Button)sender));
-      curItem.IsSelected = true;
-      TranslatePage(new SongView());
+            var name = btn.Template.FindName("namesong", btn) as TextBlock;
+           var songClick = DataProvider.Ins.DB.Songs.Where(s => s.SongName == name.Text).FirstOrDefault();
+            SongSelect.Ins.SongName = songClick.SongName;
+            SongSelect.Ins.SingerName = songClick.SingerName;
+            SongSelect.Ins.ImageSong = songClick.SongImageUri;
+
+            ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
+            //MessageBox.Show(tb.Name);
+            //curItem.IsSelected = true;
+            TranslatePage(new SongView());
     }
     ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
     ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
@@ -413,7 +493,6 @@ namespace Spotify.Views.Components
 
           ImgBrush.ImageSource = PauseGreen;
           SongBottom.Ins.IsPlay = true;
-
         }
       }
 
@@ -422,23 +501,128 @@ namespace Spotify.Views.Components
 
     private void songview_Loaded(object sender, RoutedEventArgs e)
     {
+      SongBottom.Ins.SongSource = ItemSource;
+      if(ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
+            {
+                IsShowed = true;
+            }
+      
       if(IsShowButton == true)
       {
         listview = GetTemplateChild("PART_Header") as ListView;
         playButton = GetTemplateChild("PlayPauseGreen") as Button;
-        if (SongBottom.Ins.IsPlay == true && listview.SelectedIndex != -1)
-        {
-          ImageBrush img = new ImageBrush();
-          img.ImageSource = PauseGreen;
-          playButton.Background = img;
-        }
-        else
-        {
-          ImageBrush img = new ImageBrush();
-          img.ImageSource = PlayGreen;
-          playButton.Background = img;
-        }
-      }
+        if(listview.SelectedIndex == -1)
+                {
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = PlayGreen;
+                    playButton.Background = img;
+                }
+                else
+                {
+                    
+                    var template = listview.ItemContainerGenerator.ContainerFromIndex(SongBottom.Ins.CountId) as ListViewItem;
+                    Button btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                    Image image = template.Template.FindName("img", template) as Image;
+                    TextBlock tb = template.Template.FindName("Id", template) as TextBlock;
+                    ImageBrush imgPlay = new ImageBrush();
+
+                    if (SongBottom.Ins.IsPlay == true)
+                    {
+                        image.Visibility = Visibility.Visible;
+                        tb.Visibility = Visibility.Hidden;
+                        imgPlay.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];
+                        btn.Background = imgPlay;
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PauseGreen;
+                        playButton.Background = img;
+                    }
+                    else
+                    {
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PlayGreen;
+                        playButton.Background = img;
+                    }
+                }
+
+
+            }
+      
+
     }
-  }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            listview = GetTemplateChild("PART_Header") as ListView;
+            Button btn = sender as Button;
+            int id = int.Parse(btn.Tag.ToString());
+            var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
+            var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
+            playlist.Songs.Remove(song);
+            playlist.SongsOfPlaylist.Remove(song);
+            ItemSource.Remove(song);
+            for (int i = 0; i < listview.Items.Count; i++)
+            {
+                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                TextBlock tb = new TextBlock();
+
+                if (template != null)
+                {
+                    tb = template.Template.FindName("Id", template) as TextBlock;
+                    tb.Text = (i + 1).ToString();
+                }
+            }
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        private void option_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            StackPanel st = btn.Parent as StackPanel;
+            Button removeBtn = st.Children[2] as Button;
+            if (IsShow)
+            {
+                removeBtn.Visibility = Visibility.Hidden;
+                IsShow = false;
+            }
+            else
+            {
+                removeBtn.Visibility = Visibility.Visible;
+                IsShow = true;
+            }
+            }
+        }
+
+        //private void FavorBtn_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button btn = sender as Button;
+        //    var background = (ImageBrush)btn.Background;
+        //    ImageBrush img = new ImageBrush();
+        //    Playlist playlist;
+        //    var albums = DataProvider.Ins.DB.Albums.ToList();
+        //    for (int i = 0; i < albums.Count; i++)
+        //    {
+        //        if (albums[i].SongsOfAlbum == ItemSource)
+        //        {
+        //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
+        //           Playlist.InitUri(ref playlist);
+        //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
+        //            {
+        //                DataProvider.Ins.DB.Playlists.Add(playlist);
+        //                ListPlaylist.Ins.List.Add(playlist);
+        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+
+        //            }
+        //            else
+        //            {
+        //                DataProvider.Ins.DB.Playlists.Remove(playlist);
+        //                ListPlaylist.Ins.List.Remove(playlist);
+        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
+
+        //            }
+        //            break;
+        //        }
+        //    }
+        //    btn.Background = img;
+        //    DataProvider.Ins.DB.SaveChanges();
+        //}
+    
 }

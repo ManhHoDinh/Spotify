@@ -1,14 +1,80 @@
 ﻿<UserControl x:Class="Spotify.Views.Pages.SongView"
-             Name="viewsong"
+             Name="song"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
+             Loaded="song_Loaded"
              xmlns:components="clr-namespace:Spotify.Views.Components"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                <GradientStop Color="{Binding color, ElementName=song}" Offset="0"/>
+                <GradientStop Color="#121212" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="340"/>
+            <RowDefinition  Height="140"/>
+            <RowDefinition  Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0">
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="360"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Column="0">
+                    <Border Margin="32 80 0 0"  Width="232" Height="232">
+                        <Border.Background>
+                            <ImageBrush ImageSource="{Binding Source={x:Static local:SongSelect.Ins},Path=ImageSong}"/>
+                        </Border.Background>
+
+                    </Border>
+                </WrapPanel>
+                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
+                    <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
+                    <TextBlock Name="SongNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SongName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                    <TextBlock Name="SingerNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SingerName}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1">
+            <Border.Background>
+                <SolidColorBrush Color="#000000" Opacity="0.1"/>
+            </Border.Background>
+            <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#ffffff">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="PlayPauseGreen"
+               Click="PlayPauseGreen_Click"
+                Template="{DynamicResource GreenPlayStyle}" Margin="16 12 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Padding="0" Height="80">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                        </Button.Background>
+                    </Button>
+                    <Button 
+                        Click="Button_Click" 
+                        Tag="{Binding isFavor, ElementName=viewsong}"
+                        Width="52" 
+                        Height="52"
+                        Margin="64 0 0 42"
+                        Template="{DynamicResource HeartStyle}"
+                        Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource HeartButton}"/>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+              
+            </Border>
+        </Border>
+
+    </Grid>
+    <!--<Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
                 <GradientStop Color="{Binding color, ElementName=viewsong}" Offset="0"/>
@@ -73,5 +139,5 @@
                 <SolidColorBrush Color="#000000" Opacity="0.1"/>
             </Border.Background>
         </Border>
-    </Grid>
+    </Grid>-->
 </UserControl>

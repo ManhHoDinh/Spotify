@@ -21,16 +21,12 @@ namespace Spotify.ViewModels.Pages
 
     internal class HomeVM : BaseViewModel
     {
-        private ObservableCollection<Album> _TopMix;
         public ObservableCollection<Album> TopMix { get; set; }
-        private ObservableCollection<Album> _MadeForYou;
         public ObservableCollection<Album> MadeForYou { get; set; }
-        private ObservableCollection<Album> _Recently;
-        public ObservableCollection<Album> Recently { get; set; }
-        private ObservableCollection<Album> _JumBack;
-        public ObservableCollection<Album> JumBack { get; set; }
-        private ObservableCollection<Album> _RecommendPlaylists;
+        public ObservableCollection<Album> Mood { get; set; }
+        public ObservableCollection<Album> Popular { get; set; }
         public ObservableCollection<Album> RecommendPlaylists { get; set; }
+        public ObservableCollection<Album> Trending { get; set; }
         public ICommand ClickCommand { get; set; }
         void TranslatePage(object obj)
         {
@@ -39,11 +35,33 @@ namespace Spotify.ViewModels.Pages
                 int currentId = ViewPage.Ins.CurrentIndexView;
                 int count = ViewPage.Ins.ListPage.Count;
 
-                if (currentId < count)
+                if (currentId + 1 < count)
                 {
                     for (int i = currentId + 1; i < count; i++)
                     {
-                        ViewPage.Ins.ListPage.RemoveAt(1);
+                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                    }
+
+                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                    {
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+                        else
+                        {
+                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            {
+
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
                     }
                 }
        // MessageBox.Show(SongBottom.Ins.CountId.ToString());
@@ -106,40 +124,48 @@ namespace Spotify.ViewModels.Pages
            
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
-            RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
-            RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
-            RecommendPlaylists.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            for(int i = 0; i< 6; i++)
+            {
+                RecommendPlaylists.Add(Albums.AllAlbums[i]);
+            }
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
+            //RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
             TopMix = new ObservableCollection<Album>();
-            
-            TopMix.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
-            TopMix.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
-            TopMix.Add(new Album { AlbumName = "Có chắc yêu là đây", Descriptions = "Sơn Tùng MTP" });
-            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            TopMix.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            Popular = new ObservableCollection<Album>();
             MadeForYou = new ObservableCollection<Album>();
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",  });
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            MadeForYou.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            JumBack = Albums.AllAlbums;
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",AlbumImageUri = new Uri("pack://siteoforigin:,,,/Resource/Images/CamNangImg.jpg", UriKind.RelativeOrAbsolute) });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll", });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll}",  });
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",});
-            JumBack.Add(new Album { AlbumName = "chill", Descriptions = "chillllll",  });
-            Recently = new ObservableCollection<Album>();
-            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"  });
-            Recently.Add(new Album { AlbumName = "chill", Descriptions= "chillllll" });
-            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
-            Recently.Add(new Album { AlbumName = "chill", Descriptions = "chillllll" });
+            Mood = new ObservableCollection<Album>();
+            Trending = new ObservableCollection<Album>();
+            for (int i = 0; i < Albums.AllAlbums.Count; i++)
+            {
+                if(i < 6)
+                {
+                    TopMix.Add(Albums.AllAlbums[i]);
+                }
+                else if(i < 12)
+                {
+                    MadeForYou.Add(Albums.AllAlbums[i]);
+                }
+                else if(i < 18)
+                {
+                    Popular.Add(Albums.AllAlbums[i]);
+                }
+                else if (i < 24)
+                {
+                    Mood.Add(Albums.AllAlbums[i]); 
+                }
+                else
+                {
+                    Trending.Add(Albums.AllAlbums[i]);
+                }
+
+            }
+            
+           
+            
 
             ClickCommand = new RelayCommand<object>((p) =>
             {

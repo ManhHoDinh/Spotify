@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              x:Name="playlist"
              DataContext="{StaticResource createPlaylistVM}"
+             Loaded="playlist_Loaded"
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:spotify="clr-namespace:Spotify"
              d:DesignHeight="800" d:DesignWidth="800"
@@ -20,6 +21,12 @@
     </UserControl.Resources>
     <ScrollViewer  Background="#121212">
         <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                    <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
+                    <GradientStop Color="#2b2b2b" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition  Height="340"/>
                 <RowDefinition  Height="140"/>
@@ -27,12 +34,7 @@
                 <RowDefinition  Height="*"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                        <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
-                        <GradientStop Color="#2b2b2b" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+           
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="360"/>
@@ -83,9 +85,9 @@
                             </Button.Template>
                         </Button>
                     </Grid>
-                    <StackPanel Margin="-60 0 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
-                        <TextBlock Cursor="Hand" Text="{Binding NamePlaylist}" FontSize="112" Foreground="#ffffff" FontWeight="Bold">
+                        <TextBlock Height="200" Cursor="Hand" Text="{Binding NamePlaylist}" TextWrapping="Wrap" FontSize="64" Foreground="#ffffff" FontWeight="Bold">
                             <TextBlock.InputBindings>
                                 <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
                             </TextBlock.InputBindings>
@@ -95,12 +97,7 @@
                 </Grid>
             </Border>
             <Border Grid.Row="1">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="#1e1e1e" Offset="0"/>
-                        <GradientStop Color="#1e1e1e" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
+     
                 <Border Margin="32 0 32 0" BorderBrush="#bababa" BorderThickness="0 0 0 1">
 
                     <StackPanel  Orientation="Horizontal">
@@ -147,6 +144,8 @@
             <component:SongsView
                  FavorIcon="{StaticResource HeartButton}" 
                 Grid.Row="2"
+                
+                x:Name="songPlaylist"
                 SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <StackPanel Grid.Row="3"  Margin="40 24 0 0" >

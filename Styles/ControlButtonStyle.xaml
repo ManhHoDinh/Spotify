@@ -45,8 +45,8 @@
         <Border x:Name="border" Background="{TemplateBinding Background}"/>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Width" TargetName="border" Value="90"/>
-                <Setter Property="Height" TargetName="border" Value="90"/>
+                <Setter Property="Width" TargetName="border" Value="80"/>
+                <Setter Property="Height" TargetName="border" Value="80"/>
                 <Setter Property="VerticalAlignment" TargetName="border" Value="Center"/>
                 <Setter Property="HorizontalAlignment" TargetName="border" Value="center"/>
             </Trigger>

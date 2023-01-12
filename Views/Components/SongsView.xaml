@@ -9,7 +9,7 @@
              xmlns:components="clr-namespace:Spotify.Views.Components"
              mc:Ignorable="d"
              Loaded="songview_Loaded"
-             d:DesignHeight="450" d:DesignWidth="959" Background="#181818">
+             d:DesignHeight="450" d:DesignWidth="959" >
     <UserControl.Resources>
         <ControlTemplate x:Key="NonScrollableListView" TargetType="ListView">
             <ItemsPresenter/>
@@ -17,19 +17,52 @@
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
     <UserControl.Template>
-        <ControlTemplate>
-      <StackPanel>
-        <Button x:Name="PlayPauseGreen"
+        <ControlTemplate TargetType="UserControl">
+            <StackPanel Background="{TemplateBinding Background}">
+                <StackPanel
                 Visibility="{Binding IsShowButton, ElementName=songview, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    
+                    >
+                    <Button x:Name="PlayPauseGreen"
                 Template="{DynamicResource GreenPlayStyle}" Click="PlayPauseGreen_Click" Margin="16 12 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Padding="0" Height="80">
-          <Button.Background>
-            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
-          </Button.Background>
-        </Button>
-        <Grid Margin="0 24 0 0"  Background="#121212">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                        </Button.Background>
+                    </Button>
+                <Border BorderThickness="0 0 0 1" Margin="16 0 16 16" BorderBrush="#b3b3b3">
+                    <Grid  Margin="0 24 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="33.4*"/>
+                            <ColumnDefinition Width="26.2*"/>
+                            <ColumnDefinition Width="17.78*"/>
+                            <ColumnDefinition Width="17.62*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" FontSize="16" Foreground="#b3b3b3" Text="#" HorizontalAlignment="Left"  Margin="16 0 0 0"/>
+                        <TextBlock Grid.Column="1" FontSize="16" Foreground="#b3b3b3" Text="TITLE" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="2" FontSize="16" Foreground="#b3b3b3" Text="ALBUM" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="3" FontSize="16" Foreground="#b3b3b3" Text="DATE ADDED" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="4" FontSize="16" Foreground="#b3b3b3" Text="TIME"  HorizontalAlignment="Left" Margin="0 0 0 15"/>
+                    </Grid>
+                </Border>
+                <!--<Button 
+                        Name="FavorBtn"
+                        Click="FavorBtn_Click" 
+                        Tag="{Binding isFavor, ElementName=viewsong}"
+                        Width="52" 
+                        Height="52"
+                        Margin="64 0 0 0"
+                        Template="{DynamicResource HeartStyle}"
+                        Style="{StaticResource ControlBtn}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="{StaticResource HeartButton}"/>
+                        </Button.Background>
+                    </Button>-->
+                </StackPanel>
+        <Grid Margin="0 24 0 0"  Background="Transparent">
           <ListView Name="PART_Header"   
                       SelectionMode="Single"
-                      Template="{StaticResource NonScrollableListView}" 
+                      
                       SelectionChanged="ListViewSong_SelectionChanged"
                       SelectedItem="{Binding SelectedSong,ElementName=songview,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding ItemSource,ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
@@ -93,12 +126,12 @@
                           </Button>
 
                           <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left" Margin="16 0 0 0">
-                            <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
+                            <Image Width="40" Name="songimg" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
                             <StackPanel Orientation="Vertical">
                               <Button Name="NameSong"  Click="NameSong_Click" Foreground="#ffffff">
                                 <Button.Template>
                                   <ControlTemplate>
-                                    <TextBlock  Text="{Binding SongName}" Foreground="{TemplateBinding Foreground}">
+                                    <TextBlock Name="namesong" Text="{Binding SongName}" Foreground="{TemplateBinding Foreground}">
                                       <TextBlock.Style>
                                         <Style TargetType="TextBlock">
 
@@ -129,8 +162,45 @@
                               <ImageBrush ImageSource="{Binding FavorIcon, ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Button.Background>
                           </Button>
+                                                    <StackPanel Grid.Column="4" Orientation="Horizontal" Tag="{Binding ID}">
+                                                        <TextBlock Text="{Binding SongDuration}"  FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                                                        <Button
+                                                            Tag="{Binding ID}"
+                                                            x:Name="option"
+                                                            Visibility="{Binding IsShowed,ElementName=songview, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                            Click="option_Click"
+                                                            Width="24"
+                                                            Height="24" 
+                                                            Margin="16 0 0 0"
+                                                            HorizontalAlignment="Center">
+                                                            
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="{StaticResource OptionBtn}"/>
+                                                            </Button.Background>
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Border x:Name="border" Background="{TemplateBinding Background}"/>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                                            <Setter TargetName="border" Property="Background">
+                                                                                <Setter.Value>
+                                                                                    <ImageBrush ImageSource="{StaticResource OptionHoverBtn}"/>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
 
-                          <TextBlock Text="{Binding SongDuration}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                                                            </Button.Template>
+                                                        </Button>
+                                                        <Button
+                                                            Tag="{Binding ID}"
+                                                            x:Name="Remove"
+                                                            Click="Remove_Click"
+                                                            Visibility="Hidden"
+                                                            Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Remove from list"/>
+                                                    </StackPanel>
                         </Grid>
                         <Border.Style>
                           <Style TargetType="Border">
@@ -142,8 +212,6 @@
                                     <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
                                   </Setter.Value>
                                 </Setter>
-
-
                               </Trigger>
                             </Style.Triggers>
                           </Style>
