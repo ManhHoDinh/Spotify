@@ -51,7 +51,6 @@
                         <Button Name="YourLibrary" Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
                         <Button Name="CreatePlaylist" Margin="30 49 0 20" Content="Create Playlist" Tag="{StaticResource CreatePlaylistIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding CreatePlaylistCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
                         <Button Name="LikedSongs" Content="Liked Songs" Tag="{StaticResource LikedSongsIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding LikedSongsCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
-
                     </StackPanel>
 
                 </StackPanel>

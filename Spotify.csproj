@@ -524,6 +524,8 @@
     <Content Include="Resource\Images\InitImage.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resource\Images\Volume_XS.png" />
+    <Resource Include="Resource\Images\Volume_XSHover.png" />
     <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
