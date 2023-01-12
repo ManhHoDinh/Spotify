@@ -71,12 +71,11 @@ namespace Spotify.ViewModels.Pages
                     ViewPage.Ins.CurrentView = new SongView();
                     ViewPage.Ins.CurrentIndexView++;
                     var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SelectedSongItem.ID).FirstOrDefault();
-                    foreach (Song s in Playlists.RecentSearchPlaylist.Songs)
+                    foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
                         if (s.ID == SelectedSongItem.ID)
                             return;
-                    Playlists.RecentSearchPlaylist.Songs.Add(song);
-                    Playlists.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
-                   
+                    Playlists.Ins.RecentSearchPlaylist.Songs.Add(song);
+                    Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
                 }
                 DataProvider.Ins.DB.SaveChanges();
             }
@@ -85,7 +84,6 @@ namespace Spotify.ViewModels.Pages
         {
             SongSource = Songs.AllSong;
             filteredCollection = SongSource;
-            RecentSearch = Playlists.RecentSearchPlaylist.SongsOfPlaylist;
             IsSearch = false;
         }
     }

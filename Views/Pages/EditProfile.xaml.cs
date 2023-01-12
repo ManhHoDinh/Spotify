@@ -99,5 +99,12 @@ namespace Spotify.Views.Pages
             LoginStatus.Current.ResetAllView();
             LoginStatus.Current.IsAccountView = true;
         }
+
+        private void ChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            Error.Visibility = Visibility.Hidden;
+            LoginStatus.Current.ResetAllView();
+            LoginStatus.Current.IsEditPasswordView = true;
+        }
     }
 }

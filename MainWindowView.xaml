@@ -8,6 +8,7 @@
              xmlns:vm="clr-namespace:Spotify.ViewModels"
              xmlns:Page ="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d"
+             Loaded="window_Loaded"
              xmlns:Component ="clr-namespace:Spotify.Views.Components"
              x:Name="window"
         >

@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels;
+using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;

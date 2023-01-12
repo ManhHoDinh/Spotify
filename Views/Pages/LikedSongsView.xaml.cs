@@ -1,7 +1,9 @@
+using Spotify.Models;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,17 +24,14 @@ namespace Spotify.Views.Pages
     /// </summary>
     public partial class LikedSongsView : UserControl
     {
+        public static int id = 0;
 
-      
         public LikedSongsView()
         {
             InitializeComponent();
             SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
- 
         }
 
-       
-      
         
     }
 }

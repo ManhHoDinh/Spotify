@@ -1,11 +1,14 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
+using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Spotify.ViewModels
 {
@@ -27,7 +30,9 @@ namespace Spotify.ViewModels
         private bool _isPasswordUpdatedView { get; set; }
         public bool IsPasswordUpdatedView { get { return _isPasswordUpdatedView; } set { _isPasswordUpdatedView = value; OnPropertyChanged(); } }
         private bool _isChangePasswordView { get; set; }
-        public bool IsChangePasswordView { get { return _isAfterSendForgotPasswordEmail; } set { _isAfterSendForgotPasswordEmail = value; OnPropertyChanged(); } }
+        public bool IsChangePasswordView { get { return _isChangePasswordView; } set { _isChangePasswordView = value; OnPropertyChanged(); } }
+        private bool _isEditPasswordView { get; set; }
+        public bool IsEditPasswordView { get { return _isEditPasswordView; } set { _isEditPasswordView = value; OnPropertyChanged(); } }
 
         private bool _needLoggedIn { get; set; }
         public bool NeedLogin { get { return _needLoggedIn; } set { _needLoggedIn = value; OnPropertyChanged(); } }
@@ -41,18 +46,35 @@ namespace Spotify.ViewModels
         private bool _isShowDiaologAccount { get; set; }
         public bool IsShowDiaologAccount { get { return _isShowDiaologAccount; } set { _isShowDiaologAccount = value; OnPropertyChanged(); } }
 
+        private Playlist _likedSongsPlayplist { get; set; }
+        public Playlist LikedSongsPlayplist { get { return _likedSongsPlayplist; } set { _likedSongsPlayplist = value; OnPropertyChanged(); } }
+
+        private Playlist _recentSearchPlaylist { get; set; }
+        public Playlist RecentSearchPlaylist { get { return _recentSearchPlaylist; } set { _recentSearchPlaylist = value; OnPropertyChanged(); } }
+
         private User _user { get; set; }
         public User User { get {
                 return _user; } 
             set { 
                 _user = value;
-                if (_user != DataProvider.Ins.DB.Users.FirstOrDefault(x => x.UserID == -1))
+                OnPropertyChanged();
+                if (value != DataProvider.Ins.DB.Users.Where(x=>x.UserID==-1).FirstOrDefault())
                 {
-                    Day = _user.Birthday.Value.Day.ToString();
-                    Month = _user.Birthday.Value.Month.ToString();
-                    Year = _user.Birthday.Value.Year.ToString();
+                    Day = value.Birthday.Value.Day.ToString();
+                    Month = value.Birthday.Value.Month.ToString();
+                    Year = value.Birthday.Value.Year.ToString();
+                    RecentSearchPlaylist = value.Playlists.Where(x => x.PlaylistType == 1).FirstOrDefault();
+                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                    Playlists.Ins.LikedSongsPlayplist = value.Playlists.Where(x => x.PlaylistType == 0).FirstOrDefault();
+                    ViewPage.Ins.IsLoaded = true;
                 }
-                OnPropertyChanged(); } }
+                else
+                {
+                    RecentSearchPlaylist = new Playlist();
+                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                    Playlists.Ins.LikedSongsPlayplist = RecentSearchPlaylist;
+                }
+                } }
         private int _forgotPasswordUserID { get; set; }
         public int ForgotPasswordUserID { get { return _forgotPasswordUserID; } set { _forgotPasswordUserID = value; OnPropertyChanged(); } }
         private bool _isAccountView { get; set; }
@@ -78,6 +100,7 @@ namespace Spotify.ViewModels
             IsPasswordUpdatedView = false;
             IsAccountView= false;
             IsEditAccountView = false;
+            IsEditPasswordView = false;
         }
 
         public LoginStatus()

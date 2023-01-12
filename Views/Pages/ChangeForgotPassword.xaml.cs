@@ -36,7 +36,7 @@ namespace Spotify.Views.Pages
 
         private void Change_Click(object sender, RoutedEventArgs e)
         {
-            if(Password.Password=="" && ConfirmPassword.Password=="")
+            if(Password.Password=="" || ConfirmPassword.Password=="")
             {
                 Error.Text = "Please fill out all fields.";
                 Error.Visibility=Visibility.Visible;
@@ -46,9 +46,15 @@ namespace Spotify.Views.Pages
                 Error.Text = "Your password is too short.";
                 Error.Visibility = Visibility.Visible;
             }
+            else if (Password.Password != ConfirmPassword.Password)
+            {
+                Error.Text = "The new password don't match.";
+                Error.Visibility = Visibility.Visible;
+           }
             User user = DataProvider.Ins.DB.Users.FirstOrDefault(x=>x.UserID == LoginStatus.Current.ForgotPasswordUserID);
             if (user.verification == VerificationCode.Text)
             {
+                Error.Visibility = Visibility.Hidden;
                 string fromMail = "suportspotifycontract@gmail.com";
                 string fromPassword = "twiyqapcgpphwhvh";
                 MailMessage message = new MailMessage();
