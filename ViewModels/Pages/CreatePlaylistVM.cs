@@ -56,54 +56,62 @@ namespace Spotify.ViewModels.Pages
                     DescriptionPlaylist = SelectedPlaylist.Descriptions;
                     ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
                     SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+                    
+                    if(ViewPage.Ins.IsClick == false)
+                    {
+                        int currentId = ViewPage.Ins.CurrentIndexView;
+                        int count = ViewPage.Ins.ListPage.Count;
+                       // MessageBox.Show(currentId.ToString() + count.ToString());
+                        if (currentId + 1 < count)
+                        {
+                            for (int i = currentId + 1; i < count; i++)
+                            {
+                                ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                            }
+
+
+                            if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                            {
+                                if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                                {
+                                    for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                                    {
+                                        ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                    }
+                                }
+
+                                else
+                                {
+
+                                    int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                                    for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                    {
+
+                                        ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    //if(ListPlaylist.Ins.IsCreate == false)
+                    //{
+                        for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
+                        {
+                            if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.Add(i);
+                            }
+                        }
+                        ListPlaylist.Ins.IsCreate = false;
+                 //   }
+                    
                     ViewPage.Ins.CurrentView = new CreatePlaylist();
-                    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+                    ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                     ViewPage.Ins.CurrentIndexView++;
+                   // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString());
                     ListPlaylist.Ins.CurrentIdPlaylist++;
                     ViewPage.Ins.IsDisableBack = false;
-                    int currentId = ViewPage.Ins.CurrentIndexView;
-                    int count = ViewPage.Ins.ListPage.Count;
-
-                    if (currentId + 1 < count)
-                    {
-                        for (int i = currentId + 1; i < count; i++)
-                        {
-                            ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
-                        }
-
-                        if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
-                        {
-                            if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
-                            {
-                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
-                                {
-                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
-                                }
-                            }
-
-                            else
-                            {
-                                
-                                int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
-                                {
-                                    
-                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
-                                }
-                       
-                            }
-                        }
-
-
-                    }
-                    for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
-                    {
-                        if(SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
-                        {
-                            ListPlaylist.Ins.ListSelectedItem.Add(i);
-                        }
-                    }
-                    
                     
                 }
             }

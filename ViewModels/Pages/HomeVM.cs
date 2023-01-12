@@ -35,11 +35,33 @@ namespace Spotify.ViewModels.Pages
                 int currentId = ViewPage.Ins.CurrentIndexView;
                 int count = ViewPage.Ins.ListPage.Count;
 
-                if (currentId < count)
+                if (currentId + 1 < count)
                 {
                     for (int i = currentId + 1; i < count; i++)
                     {
-                        ViewPage.Ins.ListPage.RemoveAt(1);
+                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                    }
+
+                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                    {
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+                        else
+                        {
+                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            {
+
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
                     }
                 }
        // MessageBox.Show(SongBottom.Ins.CountId.ToString());

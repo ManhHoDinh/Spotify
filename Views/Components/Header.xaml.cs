@@ -202,6 +202,10 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsDisableNext", typeof(bool), typeof(Header), new PropertyMetadata(true));
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+           
+            //MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[0].ToString() + ListPlaylist.Ins.ListSelectedItem[1].ToString());
+
+            ViewPage.Ins.IsClick = true;
             int count = ViewPage.Ins.CurrentIndexView;
             Button btn = sender as Button;
             Border bd = BackButton.Template.FindName("border", BackButton) as Border;
@@ -223,13 +227,21 @@ namespace Spotify.Views.Components
                         
 
                     }
-                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                   // ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                    //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                    //{
+                    //    MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[i].ToString());
+                    //}
                     ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
                     ViewPage.Ins.CurrentIndexView--;
                     ListPlaylist.Ins.CurrentIdPlaylist -= 2;
                 }
                 else
                 {
+                    
+                    
+                    
+     
                     if(ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
                     {
                         if(ListPlaylist.Ins.CurrentIdPlaylist > 0)
@@ -252,25 +264,36 @@ namespace Spotify.Views.Components
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ViewPage.Ins.IsClick = true;
+            //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+            //{
+            //    MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[i].ToString());
+            //}
+            //MessageBox.Show(ListPlaylist.Ins.CurrentIdPlaylist.ToString());
             int count = ViewPage.Ins.CurrentIndexView;
-           
+            
             if (count < ViewPage.Ins.ListPage.Count - 1)
             {
+           
                 ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
                 if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
                 {
-                    
                     int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
+                    //MessageBox.Show(CountOfId.ToString());
+
                     if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
                     {
                         ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                        
                         ListPlaylist.Ins.CurrentIdPlaylist--;
                         
                     }
                     else
                     {
-                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[++CountOfId]];
+
+                        CountOfId++;
+
+                        ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
 
 
                     }

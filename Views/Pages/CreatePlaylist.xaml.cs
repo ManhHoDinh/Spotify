@@ -47,6 +47,18 @@ namespace Spotify.Views.Pages
         public static readonly DependencyProperty CurrentIdPlaylistProperty =
             DependencyProperty.Register("CurrentIdPlaylist", typeof(int), typeof(ListPlaylist), new PropertyMetadata(-1));
 
+
+        public bool IsCreate
+        {
+            get { return (bool)GetValue(IsCreateProperty); }
+            set { SetValue(IsCreateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsCreate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsCreateProperty =
+            DependencyProperty.Register("IsCreate", typeof(bool), typeof(ListPlaylist), new PropertyMetadata(false));
+
+
         public string PlaylistName
         {
             get { return (string)GetValue(PlaylistNameProperty); }
@@ -183,9 +195,20 @@ namespace Spotify.Views.Pages
                 string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
                 color = "#" + hex;
             }
-            playlist.Songs.Add(song);
-            vm.SongsOfPlaylist.Add(song);
-            DataProvider.Ins.DB.SaveChanges();
+            bool IsAdd = true;
+            for(int i = 0; i < playlist.SongsOfPlaylist.Count; i++) 
+            {
+                if (playlist.SongsOfPlaylist[i].ID == songId) 
+                {
+                    IsAdd = false;
+                }
+            }
+            if(IsAdd == true)
+            {
+                playlist.Songs.Add(song);
+                vm.SongsOfPlaylist.Add(song);
+                DataProvider.Ins.DB.SaveChanges();
+            }
         }
 
 
@@ -199,7 +222,15 @@ namespace Spotify.Views.Pages
         public static readonly DependencyProperty colorProperty =
             DependencyProperty.Register("color", typeof(string), typeof(CreatePlaylist), new PropertyMetadata("#545454"));
 
-
-
+        private void playlist_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(songPlaylist.ItemSource.Count > 0)
+            {
+                Random r = new Random();
+                Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
+                string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
+                color = "#" + hex;
+            }   
+        }
     }
 }

@@ -62,7 +62,7 @@
         <Grid Margin="0 24 0 0"  Background="Transparent">
           <ListView Name="PART_Header"   
                       SelectionMode="Single"
-                      Template="{StaticResource NonScrollableListView}" 
+                      
                       SelectionChanged="ListViewSong_SelectionChanged"
                       SelectedItem="{Binding SelectedSong,ElementName=songview,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                       ItemsSource="{Binding ItemSource,ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="Transparent"
@@ -162,8 +162,45 @@
                               <ImageBrush ImageSource="{Binding FavorIcon, ElementName=songview, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Button.Background>
                           </Button>
+                                                    <StackPanel Grid.Column="4" Orientation="Horizontal" Tag="{Binding ID}">
+                                                        <TextBlock Text="{Binding SongDuration}"  FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                                                        <Button
+                                                            Tag="{Binding ID}"
+                                                            x:Name="option"
+                                                            Visibility="{Binding IsShowed,ElementName=songview, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                            Click="option_Click"
+                                                            Width="24"
+                                                            Height="24" 
+                                                            Margin="16 0 0 0"
+                                                            HorizontalAlignment="Center">
+                                                            
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="{StaticResource OptionBtn}"/>
+                                                            </Button.Background>
+                                                            <Button.Template>
+                                                                <ControlTemplate>
+                                                                    <Border x:Name="border" Background="{TemplateBinding Background}"/>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="true">
+                                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                                            <Setter TargetName="border" Property="Background">
+                                                                                <Setter.Value>
+                                                                                    <ImageBrush ImageSource="{StaticResource OptionHoverBtn}"/>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
 
-                          <TextBlock Text="{Binding SongDuration}" Grid.Column="4" FontSize="14" Foreground="#ffffff" Padding="0 0 10 0"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+                                                            </Button.Template>
+                                                        </Button>
+                                                        <Button
+                                                            Tag="{Binding ID}"
+                                                            x:Name="Remove"
+                                                            Click="Remove_Click"
+                                                            Visibility="Hidden"
+                                                            Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Remove from list"/>
+                                                    </StackPanel>
                         </Grid>
                         <Border.Style>
                           <Style TargetType="Border">
@@ -175,8 +212,6 @@
                                     <SolidColorBrush Color="#2a2a2a" Opacity="0.5"/>
                                   </Setter.Value>
                                 </Setter>
-
-
                               </Trigger>
                             </Style.Triggers>
                           </Style>

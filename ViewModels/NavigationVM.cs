@@ -136,7 +136,10 @@ namespace Spotify.ViewModels
         }
         private void CreatePlaylist(object obj)
         {
+            ListPlaylist.Ins.IsCreate = true;
             ViewPage.Ins.IsSearchView = false;
+            ViewPage.Ins.IsClick = false;
+
             //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
             //{
             //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
@@ -147,9 +150,9 @@ namespace Spotify.ViewModels
             DataProvider.Ins.DB.Playlists.Add(playlist);
             DataProvider.Ins.DB.SaveChanges();
             ListPlaylist.Ins.List.Add(playlist);
+           // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-            ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
-            ListPlaylist.Ins.CountPlaylist++;    
+            ListPlaylist.Ins.CountPlaylist++;
             ChangeViewStyle("CreatePlaylist", obj);
             
 
@@ -158,9 +161,10 @@ namespace Spotify.ViewModels
         private void LikedSongs(object obj)
         {
             ViewPage.Ins.IsSearchView = false;
+            //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
             ChangeViewStyle("LikedSongs", obj);
             TranslatePage(new LikedSongsVM());
-            
+           
         }
 
 
