@@ -66,14 +66,20 @@ namespace Spotify.ViewModels.Pages
         public Uri LinkSong { get => _LinkSong; set { _LinkSong = value; OnPropertyChanged(); } }
         private Uri _Image;
         public Uri Image { get => _Image; set { _Image = value; OnPropertyChanged(); } }
-
+        private int _userId;
+        public int UserId { get => _userId; set { _userId = value; OnPropertyChanged(); } }
         public LikedSongsVM()
         {
+           
             Binding binding = new Binding("SelectedItem");
             binding.Source = this;
             binding.Mode = BindingMode.OneWayToSource;
             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-            //listSong = Playlists.LikedSongsPlayplist.SongsOfPlaylist;
+           
+            
+                //var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == ViewPage.Ins.UserId).Select(a=>a.Songs).FirstOrDefault();
+            
+                //listSong = new ObservableCollection<Song>(songs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

@@ -33,15 +33,37 @@ namespace Spotify
             {
                 ViewPageSelected = ViewPageSelected;
             }
-            if(e.Property== IsLoadedProperty) 
+            if(e.Property == IsLoadedProperty)
             {
-                if(ViewPage.Ins.IsLoaded==true)
+                if(IsLoaded == true)
                 {
                     window.window_Loaded(new object(), new RoutedEventArgs());
-                    ViewPage.Ins.IsLoaded = false;
+                    IsLoaded = false;
                 }
             }
         }
+        public MainWindowView()
+        {
+            InitializeComponent();
+            Binding binding = new Binding("ViewPageSelected");
+            binding.Source = window;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.ViewPageSelectedProperty, binding);
+            Binding bd = new Binding("IsLoaded");
+            bd.Source = window;
+            bd.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.IsLoadedProperty, bd);
+            Songs.InitUri();
+            Albums.InitUri();
+            Playlists.InitUri();
+            ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2).ToList());
+            //Binding bd = new Binding("IsLoaded");
+            //bd.Source = window;
+            //bd.Mode = BindingMode.TwoWay;
+            //BindingOperations.SetBinding(ViewPage.Ins, ViewPage.IsLoadedProperty, bd);
+        }
+
+
         public bool IsLoaded
         {
             get { return (bool)GetValue(IsLoadedProperty); }
@@ -51,22 +73,8 @@ namespace Spotify
         // Using a DependencyProperty as the backing store for IsLoaded.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsLoadedProperty =
             DependencyProperty.Register("IsLoaded", typeof(bool), typeof(MainWindowView), new PropertyMetadata(false));
-        public MainWindowView()
-        {
-            InitializeComponent();
-            Binding binding = new Binding("ViewPageSelected");
-            binding.Source = window;
-            binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.ViewPageSelectedProperty, binding);
-            Songs.InitUri();
-            Albums.InitUri();
-            Playlists.InitUri();
-            ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2).ToList());
-            Binding bd = new Binding("IsLoaded");
-            bd.Source = window;
-            bd.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.IsLoadedProperty, bd);
-        }
+
+
         public string ViewPageSelected
         {
             get { return (string)GetValue(ViewPageSelectedProperty); }
@@ -128,9 +136,34 @@ namespace Spotify
             LoginStatus.Current.IsMainView = true;
             LoginStatus.Current.HaveUser = false;
             LoginStatus.Current.NeedLogin = true;
+            ListPlaylist.Ins.List = null;
             Properties.Settings.Default.CurrentUserID = -1;
-            window_Loaded(sender, e);
             Properties.Settings.Default.Save();
+            ViewPage.Ins.CurrentView = new Home();
+            ViewPage.Ins.CurrentIndexView = 0;
+            ViewPage.Ins.IsDisableBack = true;
+            ViewPage.Ins.IsDisableNext = true;
+            ListPlaylist.Ins.CurrentIdPlaylist = -1;
+            ListPlaylist.Ins.ListSelectedItem = new List<int>();
+            ViewPage.Ins.ViewPageSelected = "Home";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ViewPage.Ins.UserId = 2;
+            
+        }
+        public static int id = 0;
+
+        private void window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(id != Properties.Settings.Default.CurrentUserID)
+            {
+                ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
+                id = ViewPage.Ins.UserId;
+                ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count;
+            }
+
         }
 
         private void Account_Click(object sender, RoutedEventArgs e)
@@ -139,15 +172,15 @@ namespace Spotify
             LoginStatus.Current.IsAccountView=true;
         }
         
-        public static int id = 0;
-        private void window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (id != Properties.Settings.Default.CurrentUserID)
-            {
-                ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
-                id = Properties.Settings.Default.CurrentUserID;
-                ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count + 1;
-            }
-        }
+        //public static int id = 0;
+        //private void window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (id != Properties.Settings.Default.CurrentUserID)
+        //    {
+        //        ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
+        //        id = Properties.Settings.Default.CurrentUserID;
+        //        ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count + 1;
+        //    }
+        //}
     }
 }

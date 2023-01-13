@@ -43,6 +43,16 @@ namespace Spotify.Views.Pages
                 LoginStatus.Current.NeedLogin = false;
                 LoginStatus.Current.HaveUser = true;
                 Properties.Settings.Default.Save();
+                ViewPage.Ins.IsLoaded = true;
+                ViewPage.Ins.CurrentView = new Home();
+                ViewPage.Ins.CurrentIndexView = 0;
+                ViewPage.Ins.IsDisableBack = true;
+                ViewPage.Ins.IsDisableNext = true;
+                ListPlaylist.Ins.CurrentIdPlaylist = -1;
+                ListPlaylist.Ins.ListSelectedItem = new List<int>();
+                ViewPage.Ins.ViewPageSelected = "Home";
+                
+
             }
             else
                 AnnouceLoginError.Visibility = Visibility.Visible;

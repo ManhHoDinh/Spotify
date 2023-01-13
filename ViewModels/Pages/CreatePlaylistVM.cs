@@ -246,7 +246,11 @@ namespace Spotify.ViewModels.Pages
            DataProvider.Ins.DB.SaveChanges();
            ListPlaylist.Ins.List.Remove(SelectedPlaylist);
            ListPlaylist.Ins.CountPlaylist--;
-           SelectedPlaylist = ListPlaylist.Ins.List[0];
+           if(ListPlaylist.Ins.List.Count > 0)
+           {
+               SelectedPlaylist = ListPlaylist.Ins.List[0];
+
+           }
            DeleteForm form = (DeleteForm)p;
            form.Close();
            IsVisibleOption = false;
