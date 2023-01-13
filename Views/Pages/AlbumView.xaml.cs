@@ -79,35 +79,38 @@ namespace Spotify.Views.Pages
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-      
 
-      Album.ApplyTemplate();
-      if (SongBottom.Ins.CountId >= 0)
-      {
-        if(SongBottom.Ins.IsPlay == false)
+            if (Properties.Settings.Default.CurrentUserID != -1)
+            {
+                Album.ApplyTemplate();
+                if (SongBottom.Ins.CountId >= 0)
                 {
-                    Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
-                    SongBottom.Ins.IsPlay = false;
-                }
-                else Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                    if (SongBottom.Ins.IsPlay == false)
+                    {
+                        Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                        SongBottom.Ins.IsPlay = false;
+                    }
+                    else Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
 
+                }
+                var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+                var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+                foreach (Song a in listFavor)
+                {
+                    for (int j = 0; j < Album.ItemSource.Count; j++)
+                    {
+                        if (a.ID == Album.ItemSource[j].ID)
+                        {
+                            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
+                            Button btn = template.Template.FindName("favorBtn", template) as Button;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                            btn.Background = img;
+                        }
+                    }
+                }
             }
-      var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
-      var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
-      foreach (Song a in listFavor)
-      {
-        for (int j = 0; j < Album.ItemSource.Count; j++)
-        {
-          if (a.ID == Album.ItemSource[j].ID)
-          {
-            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
-            Button btn = template.Template.FindName("favorBtn", template) as Button;
-            ImageBrush img = new ImageBrush();
-            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-            btn.Background = img;
-          }
-        }
-      }
+     
     }
   }
 }

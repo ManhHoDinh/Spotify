@@ -177,30 +177,6 @@ namespace Spotify.Views.Components
 
         }
 
-        //// Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedSongProperty =
-        //    DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
-
-
-
-        //public Playlist SelectedPlaylist
-        //{
-        //    get { return (Playlist)GetValue(SelectedPlaylistProperty); }
-        //    set { SetValue(SelectedPlaylistProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-
-
-
-
         public bool IsPlay
         {
             get { return (bool)GetValue(IsPlayProperty); }
@@ -289,49 +265,59 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsFavor", typeof(bool), typeof(SongsView), new PropertyMetadata(true));
         private void Favor_Click(object sender, RoutedEventArgs e)
         {
-            var BackGroundBtn = (sender as Button).Background as ImageBrush;
-            var listview = GetTemplateChild("PART_Header") as ListView;
-            Button btn = sender as Button;
-            int index = int.Parse(btn.Tag.ToString());
-            Grid gr = btn.Parent as Grid;
-            int id = int.Parse(gr.Tag.ToString());
-            ImageBrush img = new ImageBrush();
-            var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
-            var playlist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).FirstOrDefault();
-            if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
+            try
             {
-                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
-                btn.Background = img;
-                playlist.SongsOfPlaylist.Remove(song);
-                playlist.Songs.Remove(song);
-                for (int i = 0; i < listview.Items.Count; i++)
+                
+                var BackGroundBtn = (sender as Button).Background as ImageBrush;
+                var listview = GetTemplateChild("PART_Header") as ListView;
+                Button btn = sender as Button;
+                int index = int.Parse(btn.Tag.ToString());
+                Grid gr = btn.Parent as Grid;
+                int id = int.Parse(gr.Tag.ToString());
+                ImageBrush img = new ImageBrush();
+                var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
+                var playlist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).FirstOrDefault();
+                if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
                 {
-                    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                    TextBlock tb = new TextBlock();
-                    if (template != null)
+                    img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
+                    btn.Background = img;
+                    playlist.SongsOfPlaylist.Remove(song);
+                    playlist.Songs.Remove(song);
+                    for (int i = 0; i < listview.Items.Count; i++)
                     {
-                        tb = template.Template.FindName("Id", template) as TextBlock;
-                        tb.Text = (i + 1).ToString();
+                        var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                        TextBlock tb = new TextBlock();
+                        if (template != null)
+                        {
+                            tb = template.Template.FindName("Id", template) as TextBlock;
+                            tb.Text = (i + 1).ToString();
+                        }
                     }
                 }
+                else
+                {
+                    var list = playlist.Songs;
+                    bool IsExistedPlaylist = false;
+                    foreach (Song s in list)
+                    {
+                        if (s.ID == song.ID) { IsExistedPlaylist = true; break; }
+                    }
+                    if (!IsExistedPlaylist)
+                    {
+                        img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                        btn.Background = img;
+                        playlist.Songs.Add(song);
+                        playlist.SongsOfPlaylist.Add(song);
+                    }
+                }
+                DataProvider.Ins.DB.SaveChanges();
             }
-            else
+            catch 
             {
-                var list = playlist.Songs;
-                bool IsExistedPlaylist = false;
-                foreach (Song s in list)
-                {
-                    if (s.ID == song.ID) { IsExistedPlaylist = true; break; }
-                }
-                if (!IsExistedPlaylist)
-                {
-                    img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-                    btn.Background = img;
-                    playlist.Songs.Add(song);
-                    playlist.SongsOfPlaylist.Add(song);
-                }
+                ErrorForm form = new ErrorForm();
+                form.ShowDialog();
             }
-            DataProvider.Ins.DB.SaveChanges();
+          
         }
         void TranslatePage(object obj)
         {
