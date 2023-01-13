@@ -7,7 +7,7 @@
              xmlns:controls ="clr-namespace:Spotify.Views.Components"
              xmlns:vm="clr-namespace:Spotify.ViewModels"
              xmlns:Page ="clr-namespace:Spotify.Views.Pages"
-             
+             Loaded="window_Loaded"
              mc:Ignorable="d"
              xmlns:Component ="clr-namespace:Spotify.Views.Components"
              x:Name="window"
@@ -44,7 +44,10 @@
                     <RowDefinition  Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel x:Name="LeftSideBar" Grid.Row="0" Background="#000" Orientation="Vertical">
+                    <!--<Button Content="haha" Click="Button_Click"/>-->
+
                     <StackPanel Background="#000" Margin="0 80 0 0">
+                        
                         <Button Name="Home" Content="Home" Tag="{StaticResource HomeIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding HomeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
                         <Button Name="Search" Content="Search" Tag="{StaticResource SearchIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding SearchCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
                         <Button Name="YourLibrary" Content="Your Library" Tag="{StaticResource YourLibraryIcon}" Style="{StaticResource NavigateBtn}" Command="{Binding YourLibraryCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type StackPanel}}}"></Button>
@@ -72,7 +75,7 @@
                                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                                 <Border Height="32" Tag="{Binding ElementName= window}">
                                                     <Border.ContextMenu>
-                                                        <ContextMenu Width="176" Background="#282828" BorderBrush="Transparent">
+                                                        <ContextMenu Width="176" Background="#282828" BorderBrush="Transparent" BorderThickness="0">
                                                             <MenuItem Command="{Binding PlacementTarget.Tag.DataContext.LoadCommand,RelativeSource={RelativeSource AncestorType=ContextMenu}}" Template="{StaticResource MenuContextStyle}" Height="40" FontSize="16" Foreground="#ffffff" Header="Edit details"/>
                                                             <MenuItem Command="{Binding PlacementTarget.Tag.DataContext.OpenFormDeleteCommand,RelativeSource={RelativeSource AncestorType=ContextMenu}}"  Template="{StaticResource MenuContextStyle}" Height="40" FontSize="16" Foreground="#ffffff"  Header="Delete"/>
                                                         </ContextMenu>
@@ -128,6 +131,7 @@
         </Grid>
         <controls:bottomComponent Grid.Row="1" Loaded="bottomComponent_Loaded">
         </controls:bottomComponent>
+        
     </Grid>
 
 

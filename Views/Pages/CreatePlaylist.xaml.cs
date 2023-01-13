@@ -144,12 +144,14 @@ namespace Spotify.Views.Pages
         static ListPlaylist()
         {
             Ins = new ListPlaylist();
-            Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
+            
+           // Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
             Ins.SelectedItem = new Playlist();
 
         }
 
     }
+   
     public partial class CreatePlaylist : UserControl
     {
         public CreatePlaylist()
@@ -224,6 +226,7 @@ namespace Spotify.Views.Pages
 
         private void playlist_Loaded(object sender, RoutedEventArgs e)
         {
+          
             if(songPlaylist.ItemSource.Count > 0)
             {
                 Random r = new Random();
@@ -231,6 +234,14 @@ namespace Spotify.Views.Pages
                 string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
                 color = "#" + hex;
             }   
+        }
+
+        
+        private void playlist_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CreatePlaylistVM vm = this.DataContext as CreatePlaylistVM;
+            vm.IsVisibleOption = false;
+
         }
     }
 }

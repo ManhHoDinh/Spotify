@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:Spotify.Views.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="1900" d:DesignWidth="800"
+             Loaded="LikeSong_Loaded"
              DataContext="{StaticResource LikedSongsVM}" 
              xmlns:components="clr-namespace:Spotify.Views.Components">
     <UserControl.Resources>
@@ -14,7 +15,7 @@
             <ItemsPresenter/>
         </ControlTemplate>
     </UserControl.Resources>
-    <ScrollViewer>
+    <ScrollViewer Background="#121212">
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">

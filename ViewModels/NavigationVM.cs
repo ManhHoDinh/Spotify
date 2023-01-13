@@ -119,6 +119,7 @@ namespace Spotify.ViewModels
             ViewPage.Ins.IsSearchView = false;
             ChangeViewStyle("Home", obj);
             TranslatePage(new HomeVM());
+            ViewPage.Ins.IsDisableNext = true;
 
 
         }
@@ -144,8 +145,8 @@ namespace Spotify.ViewModels
             //{
             //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
             //    ViewPage.Ins.CurrentIndexView++;
-            int count = ListPlaylist.Ins.CountPlaylist - 2;
-            Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = 1, PlaylistType = 2 };
+            int count = ListPlaylist.Ins.CountPlaylist + 1;
+            Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
             Playlist.InitUri(ref playlist);
             DataProvider.Ins.DB.Playlists.Add(playlist);
             DataProvider.Ins.DB.SaveChanges();
