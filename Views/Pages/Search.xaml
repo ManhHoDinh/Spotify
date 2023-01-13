@@ -112,9 +112,9 @@
     </UserControl.Resources>
     <ScrollViewer>
         <Grid Background="#121212">
-            <ListView  Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}" ItemsSource="{Binding RecentSearch}"></ListView>
-            <components:SongsView
-                   Background="#181818"
+            <ListView Margin="0 70 0 0"  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding Source={x:Static vmodel:Playlists.Ins},Path=RecentSearchPlaylist.SongsOfPlaylist,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ListView>
+            <Grid Background="#121212" Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <components:SongsView
                    FavorIcon="{StaticResource HeartButton}" 
                    Margin="0 70 0 0"
                    IsShowButton="False"
@@ -123,7 +123,7 @@
             />
 
             </Grid>
-  
+        </Grid>
     </ScrollViewer>
-   
+
 </UserControl>

@@ -136,9 +136,16 @@ namespace Spotify
             LoginStatus.Current.IsMainView = true;
             LoginStatus.Current.HaveUser = false;
             LoginStatus.Current.NeedLogin = true;
+            ListPlaylist.Ins.List = null;
             Properties.Settings.Default.CurrentUserID = -1;
             Properties.Settings.Default.Save();
-            ListPlaylist.Ins.List = null;
+            ViewPage.Ins.CurrentView = new Home();
+            ViewPage.Ins.CurrentIndexView = 0;
+            ViewPage.Ins.IsDisableBack = true;
+            ViewPage.Ins.IsDisableNext = true;
+            ListPlaylist.Ins.CurrentIdPlaylist = -1;
+            ListPlaylist.Ins.ListSelectedItem = new List<int>();
+            ViewPage.Ins.ViewPageSelected = "Home";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
