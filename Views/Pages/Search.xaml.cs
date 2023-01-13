@@ -50,7 +50,7 @@ namespace Spotify.Views.Pages
 
             //PreparingSearch.Visibility = Visibility.Visible;
             //BeginingSearch.Visibility = Visibility.Hidden;
-        
+
         }
 
         private void CloseBtn_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace Spotify.Views.Pages
             DataProvider.Ins.DB.SaveChanges();
         }
     }
-       
-    
+
+
 }
 
