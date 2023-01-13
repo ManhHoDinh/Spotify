@@ -138,6 +138,7 @@ namespace Spotify
             LoginStatus.Current.NeedLogin = true;
             Properties.Settings.Default.CurrentUserID = -1;
             Properties.Settings.Default.Save();
+            ListPlaylist.Ins.List = null;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

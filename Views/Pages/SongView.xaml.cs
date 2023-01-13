@@ -55,6 +55,19 @@ namespace Spotify.Views.Pages
         }
         public static readonly DependencyProperty ImageSongProperty =
            DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
+
+
+        public string Description
+        {
+            get { return (string)GetValue(DescriptionProperty); }
+            set { SetValue(DescriptionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DescriptionProperty =
+            DependencyProperty.Register("Description", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+
+
         public static SongSelect Ins { get; private set; }
         static SongSelect()
         {

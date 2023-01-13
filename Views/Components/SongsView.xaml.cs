@@ -387,7 +387,7 @@ namespace Spotify.Views.Components
             SongSelect.Ins.SongName = songClick.SongName;
             SongSelect.Ins.SingerName = songClick.SingerName;
             SongSelect.Ins.ImageSong = songClick.SongImageUri;
-
+            SongSelect.Ins.Description = songClick.Descriptions;
             ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
             //MessageBox.Show(tb.Name);
             //curItem.IsSelected = true;
