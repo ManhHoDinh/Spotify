@@ -80,8 +80,7 @@ namespace Spotify.Views.Pages
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
 
-            if (Properties.Settings.Default.CurrentUserID != -1)
-            {
+            
                 Album.ApplyTemplate();
                 if (SongBottom.Ins.CountId >= 0)
                 {
@@ -94,6 +93,8 @@ namespace Spotify.Views.Pages
 
                 }
                 var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+            if (Properties.Settings.Default.CurrentUserID != -1)
+            {
                 var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
                 foreach (Song a in listFavor)
                 {
