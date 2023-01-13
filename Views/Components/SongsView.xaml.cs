@@ -193,6 +193,9 @@ namespace Spotify.Views.Components
         //public static readonly DependencyProperty SelectedPlaylistProperty =
         //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
 
+        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
+        //public static readonly DependencyProperty SelectedPlaylistProperty =
+        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
 
 
 
@@ -622,6 +625,47 @@ namespace Spotify.Views.Components
                     IsShow = true;
             }
             PrevBtn = btn;
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            listview = GetTemplateChild("PART_Header") as ListView;
+            Button btn = sender as Button;
+            int id = int.Parse(btn.Tag.ToString());
+            var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
+            var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
+            playlist.Songs.Remove(song);
+            playlist.SongsOfPlaylist.Remove(song);
+            ItemSource.Remove(song);
+            for (int i = 0; i < listview.Items.Count; i++)
+            {
+                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                TextBlock tb = new TextBlock();
+
+                if (template != null)
+                {
+                    tb = template.Template.FindName("Id", template) as TextBlock;
+                    tb.Text = (i + 1).ToString();
+                }
+            }
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        private void option_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = sender as Button;
+            StackPanel st = btn.Parent as StackPanel;
+            Button removeBtn = st.Children[2] as Button;
+            if (IsShow)
+            {
+                removeBtn.Visibility = Visibility.Hidden;
+                IsShow = false;
+            }
+            else
+            {
+                removeBtn.Visibility = Visibility.Visible;
+                IsShow = true;
+            }
+            }
         }
 
         //private void FavorBtn_Click(object sender, RoutedEventArgs e)

@@ -118,12 +118,10 @@ namespace Spotify.Views.Pages
             if (!bug)
             {
                 //dateTime = DateTime.ParseExact(dateString, "MM-dd-yyyy", provider);
-                User user = new User { Email = Email.Text, Password = Password.Password, UserName = profileName.Text};
+                User user = new User { Email = Email.Text, Password = Password.Password, UserName = profileName.Text, Birthday = dateTime };
                 DataProvider.Ins.DB.Users.Add(user);
-                DataProvider.Ins.DB.Playlists.Add(new Playlist
-                {
-                    PlaylistType = 0,
-                    UserID = user.UserID,
+                DataProvider.Ins.DB.Playlists.Add(new Playlist { 
+                    PlaylistType=0, UserID=user.UserID,
                 });
                 DataProvider.Ins.DB.Playlists.Add(new Playlist
                 {

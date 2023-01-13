@@ -150,6 +150,15 @@ namespace Spotify
             Ins = new ViewPage();
 
         }
+        public bool IsLoaded
+        {
+            get { return (bool)GetValue(IsLoadedProperty); }
+            set { SetValue(IsLoadedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsLoaded.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsLoadedProperty =
+            DependencyProperty.Register("IsLoaded", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
     }
     public partial class MainWindow : Window
     {
