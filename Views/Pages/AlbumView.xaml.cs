@@ -36,9 +36,9 @@ namespace Spotify.Views.Pages
             //HomeVM vm = this.DataContext as HomeVM;
 
             Binding binding = new Binding("SelectedSong");
-      binding.Source = Album;
-      binding.Mode = BindingMode.TwoWay;
-      BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            binding.Source = Album;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
     }
         public string color
         {

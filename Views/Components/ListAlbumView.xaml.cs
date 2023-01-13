@@ -312,6 +312,7 @@ namespace Spotify.Views.Components
         {
             HomeVM vm = this.DataContext as HomeVM;
             int xx = int.Parse((sender as Button).Tag.ToString());
+          
             if (xx <= 6)
             {
                 type = "TopMix";
@@ -420,6 +421,7 @@ namespace Spotify.Views.Components
         private void listAlbum_Loaded(object sender, RoutedEventArgs e)
         {
 
+          
             obj = sender;
             ev = e;
             listview = GetTemplateChild("PART_Header") as ListView;
@@ -435,6 +437,7 @@ namespace Spotify.Views.Components
                         {
                             if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
                             {
+                                
                                 var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                                 var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
                                 ImageBrush img = new ImageBrush();

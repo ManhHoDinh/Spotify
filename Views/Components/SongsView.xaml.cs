@@ -38,7 +38,7 @@ namespace Spotify.Views.Components
             base.OnPropertyChanged(e);
             if (e.Property == IsPlayProperty)
             {
-                
+
                 if (GetTemplateChild("PART_Header") != null)
                 {
                     if (type == "songview")
@@ -78,7 +78,7 @@ namespace Spotify.Views.Components
                             }
                         }
                     }
-                 
+
                 }
             }
 
@@ -297,7 +297,7 @@ namespace Spotify.Views.Components
             int id = int.Parse(gr.Tag.ToString());
             ImageBrush img = new ImageBrush();
             var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == index).FirstOrDefault();
-            var playlist = DataProvider.Ins.DB.Playlists.Where(p=> p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).FirstOrDefault() ;
+            var playlist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).FirstOrDefault();
             if (BackGroundBtn.ImageSource == (ImageSource)Application.Current.Resources["HeartFillButton"])
             {
                 img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
@@ -621,86 +621,86 @@ namespace Spotify.Views.Components
 
                     }
                 }
-                    removeBtn.Visibility = Visibility.Visible;
-                    IsShow = true;
+                removeBtn.Visibility = Visibility.Visible;
+                IsShow = true;
             }
             PrevBtn = btn;
         }
 
-        private void Remove_Click(object sender, RoutedEventArgs e)
-        {
-            listview = GetTemplateChild("PART_Header") as ListView;
-            Button btn = sender as Button;
-            int id = int.Parse(btn.Tag.ToString());
-            var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
-            var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
-            playlist.Songs.Remove(song);
-            playlist.SongsOfPlaylist.Remove(song);
-            ItemSource.Remove(song);
-            for (int i = 0; i < listview.Items.Count; i++)
-            {
-                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                TextBlock tb = new TextBlock();
-
-                if (template != null)
-                {
-                    tb = template.Template.FindName("Id", template) as TextBlock;
-                    tb.Text = (i + 1).ToString();
-                }
-            }
-            DataProvider.Ins.DB.SaveChanges();
-        }
-        private void option_Click(object sender, RoutedEventArgs e)
-        {
-            Button btn = sender as Button;
-            StackPanel st = btn.Parent as StackPanel;
-            Button removeBtn = st.Children[2] as Button;
-            if (IsShow)
-            {
-                removeBtn.Visibility = Visibility.Hidden;
-                IsShow = false;
-            }
-            else
-            {
-                removeBtn.Visibility = Visibility.Visible;
-                IsShow = true;
-            }
-            }
-        }
-
-        //private void FavorBtn_Click(object sender, RoutedEventArgs e)
+        //private void Remove_Click(object sender, RoutedEventArgs e)
         //{
+        //    listview = GetTemplateChild("PART_Header") as ListView;
         //    Button btn = sender as Button;
-        //    var background = (ImageBrush)btn.Background;
-        //    ImageBrush img = new ImageBrush();
-        //    Playlist playlist;
-        //    var albums = DataProvider.Ins.DB.Albums.ToList();
-        //    for (int i = 0; i < albums.Count; i++)
+        //    int id = int.Parse(btn.Tag.ToString());
+        //    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
+        //    var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
+        //    playlist.Songs.Remove(song);
+        //    playlist.SongsOfPlaylist.Remove(song);
+        //    ItemSource.Remove(song);
+        //    for (int i = 0; i < listview.Items.Count; i++)
         //    {
-        //        if (albums[i].SongsOfAlbum == ItemSource)
+        //        var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+        //        TextBlock tb = new TextBlock();
+
+        //        if (template != null)
         //        {
-        //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
-        //           Playlist.InitUri(ref playlist);
-        //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
-        //            {
-        //                DataProvider.Ins.DB.Playlists.Add(playlist);
-        //                ListPlaylist.Ins.List.Add(playlist);
-        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-
-        //            }
-        //            else
-        //            {
-        //                DataProvider.Ins.DB.Playlists.Remove(playlist);
-        //                ListPlaylist.Ins.List.Remove(playlist);
-        //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
-
-        //            }
-        //            break;
+        //            tb = template.Template.FindName("Id", template) as TextBlock;
+        //            tb.Text = (i + 1).ToString();
         //        }
         //    }
-        //    btn.Background = img;
         //    DataProvider.Ins.DB.SaveChanges();
         //}
-
+        //private void option_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Button btn = sender as Button;
+        //    StackPanel st = btn.Parent as StackPanel;
+        //    Button removeBtn = st.Children[2] as Button;
+        //    if (IsShow)
+        //    {
+        //        removeBtn.Visibility = Visibility.Hidden;
+        //        IsShow = false;
+        //    }
+        //    else
+        //    {
+        //        removeBtn.Visibility = Visibility.Visible;
+        //        IsShow = true;
+        //    }
+        //}
     }
+
+    //private void FavorBtn_Click(object sender, RoutedEventArgs e)
+    //{
+    //    Button btn = sender as Button;
+    //    var background = (ImageBrush)btn.Background;
+    //    ImageBrush img = new ImageBrush();
+    //    Playlist playlist;
+    //    var albums = DataProvider.Ins.DB.Albums.ToList();
+    //    for (int i = 0; i < albums.Count; i++)
+    //    {
+    //        if (albums[i].SongsOfAlbum == ItemSource)
+    //        {
+    //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
+    //           Playlist.InitUri(ref playlist);
+    //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
+    //            {
+    //                DataProvider.Ins.DB.Playlists.Add(playlist);
+    //                ListPlaylist.Ins.List.Add(playlist);
+    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+
+    //            }
+    //            else
+    //            {
+    //                DataProvider.Ins.DB.Playlists.Remove(playlist);
+    //                ListPlaylist.Ins.List.Remove(playlist);
+    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
+
+    //            }
+    //            break;
+    //        }
+    //    }
+    //    btn.Background = img;
+    //    DataProvider.Ins.DB.SaveChanges();
+    //}
+
+
 }

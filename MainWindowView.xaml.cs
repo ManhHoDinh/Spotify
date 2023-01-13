@@ -57,10 +57,10 @@ namespace Spotify
             Albums.InitUri();
             Playlists.InitUri();
             ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2).ToList());
-            Binding bd = new Binding("IsLoaded");
-            bd.Source = window;
-            bd.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(ViewPage.Ins, ViewPage.IsLoadedProperty, bd);
+            //Binding bd = new Binding("IsLoaded");
+            //bd.Source = window;
+            //bd.Mode = BindingMode.TwoWay;
+            //BindingOperations.SetBinding(ViewPage.Ins, ViewPage.IsLoadedProperty, bd);
         }
 
 
@@ -164,15 +164,15 @@ namespace Spotify
             LoginStatus.Current.IsAccountView=true;
         }
         
-        public static int id = 0;
-        private void window_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (id != Properties.Settings.Default.CurrentUserID)
-            {
-                ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
-                id = Properties.Settings.Default.CurrentUserID;
-                ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count + 1;
-            }
-        }
+        //public static int id = 0;
+        //private void window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    if (id != Properties.Settings.Default.CurrentUserID)
+        //    {
+        //        ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
+        //        id = Properties.Settings.Default.CurrentUserID;
+        //        ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count + 1;
+        //    }
+        //}
     }
 }
