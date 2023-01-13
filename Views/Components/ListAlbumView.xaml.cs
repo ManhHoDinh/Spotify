@@ -47,14 +47,13 @@ namespace Spotify.Views.Components
                 if (GetTemplateChild("PART_Header") != null)
                 {
                     HomeVM vm = this.DataContext as HomeVM;
-                    
                     if (type == "TopMix")
                     {
                             listview = GetTemplateChild("PART_Header") as ListView;
                         //if (PreId >= 0)
                         //{
                             if (ItemsSource == vm.TopMix) {
-                                
+                            
                                 var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
                                 Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
                                 if (IsPlay == true)
@@ -209,8 +208,7 @@ namespace Spotify.Views.Components
                         }
 
                     }
-                    if (type == "Mood" +
-                        "")
+                    if (type == "Mood")
                     {
                         listview = GetTemplateChild("PART_Header") as ListView;
                         //if (PreId >= 0)
@@ -314,6 +312,7 @@ namespace Spotify.Views.Components
         {
             HomeVM vm = this.DataContext as HomeVM;
             int xx = int.Parse((sender as Button).Tag.ToString());
+          
             if (xx <= 6)
             {
                 type = "TopMix";
@@ -421,26 +420,32 @@ namespace Spotify.Views.Components
 
         private void listAlbum_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
+          
             obj = sender;
             ev = e;
             listview = GetTemplateChild("PART_Header") as ListView;
-            for (int i = 0; i < ItemsSource.Count; i++)
+            if (type == "TopMix" || type == "Popular" || type=="Trending" || type == "Mood" || type == "Made for you")
             {
-                for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
+                for (int i = 0; i < ItemsSource.Count; i++)
                 {
-                    ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
-                    Song song = a[j];
-                    if (SongBottom.Ins.SelectedSong != null)
+                    for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
                     {
-                        if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                        ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
+                        Song song = a[j];
+                        if (SongBottom.Ins.SelectedSong != null)
                         {
-                            var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                            var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
-                            ImageBrush img = new ImageBrush();
-                            img.ImageSource = Pause;
-                            btn.Background = img;
+                            if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                            {
+                                
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                ImageBrush img = new ImageBrush();
+                                img.ImageSource = Pause;
+                                btn.Background = img;
+                            }
                         }
+
                     }
 
                 }

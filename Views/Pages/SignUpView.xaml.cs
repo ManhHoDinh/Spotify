@@ -43,7 +43,7 @@ namespace Spotify.Views.Pages
         private void SignUpBtn_Click(object sender, RoutedEventArgs e)
         {
             bool bug = false;
-            User userEmail = DataProvider.Ins.DB.Users.FirstOrDefault(x=>x.Email==Email.Text);
+            User userEmail = DataProvider.Ins.DB.Users.FirstOrDefault(x => x.Email == Email.Text);
             EmailErorr.Visibility = passwordErorr.Visibility = ConfirmEmailErorr.Visibility
                 = profileSub.Visibility = BirthdayError.Visibility = Visibility.Hidden;
             var email = new EmailAddressAttribute();
@@ -59,13 +59,13 @@ namespace Spotify.Views.Pages
                 EmailErorr.Text = "This email is invalid. Make sure it's written like example@email.com";
                 bug = true;
             }
-            else if (userEmail!=null)
+            else if (userEmail != null)
             {
                 EmailErorr.Visibility = Visibility.Visible;
                 EmailErorr.Text = "This email is already connected to an account. Login in below!";
                 bug = true;
             }
-            if (ConfirmEmail.Text=="")
+            if (ConfirmEmail.Text == "")
             {
                 ConfirmEmailErorr.Visibility = Visibility.Visible;
                 ConfirmEmailErorr.Text = "You need to confirm your email.";
@@ -77,19 +77,19 @@ namespace Spotify.Views.Pages
                 ConfirmEmailErorr.Text = "The email addresses don't match.";
                 bug = true;
             }
-            if(Password.Password=="")
+            if (Password.Password == "")
             {
                 passwordErorr.Visibility = Visibility.Visible;
                 passwordErorr.Text = "You need to enter a password.";
                 bug = true;
             }
-            else if (Password.Password.Length<8)
+            else if (Password.Password.Length < 8)
             {
                 passwordErorr.Visibility = Visibility.Visible;
                 passwordErorr.Text = "Your password is too short.";
                 bug = true;
             }
-            if(profileName.Text=="")
+            if (profileName.Text == "")
             {
                 profileSub.Visibility = Visibility.Visible;
                 profileSub.Text = "Enter a name for your profile.";
@@ -101,24 +101,33 @@ namespace Spotify.Views.Pages
                 profileSub.Text = "This appears on your profile.";
                 profileSub.Foreground = new SolidColorBrush(Colors.Black);
             }
-            string month= Month.Text, day= Day.Text, year= Year.Text;
+            string month = Month.Text, day = Day.Text, year = Year.Text;
             if (month.Length < 2)
                 month = "0" + month;
             if (day.Length < 2)
                 day = "0" + day;
-            string dateString = month+"-"+day+"-"+year;
+            string dateString = month + "-" + day + "-" + year;
 
             DateTime dateTime; // 10/22/2015 12:00:00 AM
-            CultureInfo provider = CultureInfo.InvariantCulture; 
+            CultureInfo provider = CultureInfo.InvariantCulture;
             if (!DateTime.TryParseExact(dateString, "MM-dd-yyyy", provider, DateTimeStyles.None, out dateTime))
             {
-                BirthdayError.Visibility= Visibility.Visible;
+                BirthdayError.Visibility = Visibility.Visible;
                 bug = true;
             }
-            if(!bug)
+            if (!bug)
             {
-                User user = new User{ Email = Email.Text, Password =Password.Password, UserName=profileName.Text };
+                //dateTime = DateTime.ParseExact(dateString, "MM-dd-yyyy", provider);
+                User user = new User { Email = Email.Text, Password = Password.Password, UserName = profileName.Text, Birthday = dateTime };
                 DataProvider.Ins.DB.Users.Add(user);
+                DataProvider.Ins.DB.Playlists.Add(new Playlist { 
+                    PlaylistType=0, UserID=user.UserID,
+                });
+                DataProvider.Ins.DB.Playlists.Add(new Playlist
+                {
+                    PlaylistType = 1,
+                    UserID = user.UserID,
+                });
                 LoginStatus.Current.User = user;
                 LoginStatus.Current.ResetAllView();
                 LoginStatus.Current.IsMainView = true;
@@ -127,9 +136,17 @@ namespace Spotify.Views.Pages
                 DataProvider.Ins.DB.SaveChanges();
                 Properties.Settings.Default.CurrentUserID = DataProvider.Ins.DB.Users.FirstOrDefault(x => x.Email == user.Email).UserID;
                 Properties.Settings.Default.Save();
+                ViewPage.Ins.IsLoaded = true;
+                ViewPage.Ins.CurrentView = new Home();
+                ViewPage.Ins.CurrentIndexView = 0;
+                ViewPage.Ins.IsDisableBack = true;
+                ViewPage.Ins.IsDisableNext = true;
+                ListPlaylist.Ins.CurrentIdPlaylist = -1;
+                ListPlaylist.Ins.ListSelectedItem = new List<int>();
+                ViewPage.Ins.ViewPageSelected = "Home";
             }
         }
-        
+
         private void SignInBtn_Click(object sender, RoutedEventArgs e)
         {
             LoginStatus.Current.ResetAllView();

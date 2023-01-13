@@ -1,7 +1,9 @@
+using Spotify.Models;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,7 +24,7 @@ namespace Spotify.Views.Pages
     /// </summary>
     public partial class LikedSongsView : UserControl
     {
-
+        public static int id = 0;
       
         public LikedSongsView()
         {
@@ -31,8 +33,18 @@ namespace Spotify.Views.Pages
  
         }
 
-       
-      
-        
+        private void LikeSong_Loaded(object sender, RoutedEventArgs e)
+        {
+            LikedSongsVM vm = this.DataContext as LikedSongsVM;
+            
+            var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+            if(id != ViewPage.Ins.UserId)
+            {
+                vm.listSong = new ObservableCollection<Song>(songs);
+                id = ViewPage.Ins.UserId;
+            }
+            
+            
+        }
     }
 }

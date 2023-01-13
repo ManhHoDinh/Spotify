@@ -9,6 +9,8 @@
              x:Name="playlist"
              DataContext="{StaticResource createPlaylistVM}"
              Loaded="playlist_Loaded"
+             MouseLeftButtonUp="playlist_MouseLeftButtonUp"
+          
              xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
              xmlns:spotify="clr-namespace:Spotify"
              d:DesignHeight="800" d:DesignWidth="800"
@@ -128,7 +130,7 @@
                             </Button.Template>
                         </Button>
                         <StackPanel
-                            
+                            x:Name="option"
                             Height="80"
                             Visibility="{Binding IsVisibleOption,Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Orientation="Vertical" 

@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels;
+using Spotify.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,13 +35,24 @@ namespace Spotify.Views.Pages
             if (user != null)
             {
                 LoginStatus.Current.User = user;
-                User.InitUri(ref user);
+                //if(LoginStatus.Current.User.UserImageSource==null)
+                //    User.InitUri(ref user);
                 Properties.Settings.Default.CurrentUserID = user.UserID;
                 LoginStatus.Current.ResetAllView();
                 LoginStatus.Current.IsMainView = true;
                 LoginStatus.Current.NeedLogin = false;
                 LoginStatus.Current.HaveUser = true;
                 Properties.Settings.Default.Save();
+                ViewPage.Ins.IsLoaded = true;
+                ViewPage.Ins.CurrentView = new Home();
+                ViewPage.Ins.CurrentIndexView = 0;
+                ViewPage.Ins.IsDisableBack = true;
+                ViewPage.Ins.IsDisableNext = true;
+                ListPlaylist.Ins.CurrentIdPlaylist = -1;
+                ListPlaylist.Ins.ListSelectedItem = new List<int>();
+                ViewPage.Ins.ViewPageSelected = "Home";
+                
+
             }
             else
                 AnnouceLoginError.Visibility = Visibility.Visible;

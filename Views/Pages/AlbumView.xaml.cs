@@ -36,9 +36,9 @@ namespace Spotify.Views.Pages
             //HomeVM vm = this.DataContext as HomeVM;
 
             Binding binding = new Binding("SelectedSong");
-      binding.Source = Album;
-      binding.Mode = BindingMode.TwoWay;
-      BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            binding.Source = Album;
+            binding.Mode = BindingMode.TwoWay;
+            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
     }
         public string color
         {
@@ -93,7 +93,7 @@ namespace Spotify.Views.Pages
 
             }
       var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
-      var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).Select(a => a.Songs).FirstOrDefault();
+      var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
       foreach (Song a in listFavor)
       {
         for (int j = 0; j < Album.ItemSource.Count; j++)

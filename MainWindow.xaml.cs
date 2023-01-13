@@ -28,7 +28,7 @@ namespace Spotify
 
 
 
-       
+
 
         public bool IsSearchView
         {
@@ -124,6 +124,26 @@ namespace Spotify
             DependencyProperty.Register("CurrentIndexView", typeof(int), typeof(ViewPage), new PropertyMetadata(0));
 
 
+        public int UserId
+        {
+            get { return (int)GetValue(UserIdProperty); }
+            set { SetValue(UserIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UserId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UserIdProperty =
+            DependencyProperty.Register("UserId", typeof(int), typeof(ViewPage), new PropertyMetadata(1));
+
+
+        public bool IsLoaded
+        {
+            get { return (bool)GetValue(IsLoadedProperty); }
+            set { SetValue(IsLoadedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsLoaded.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsLoadedProperty =
+            DependencyProperty.Register("IsLoaded", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
         public static ViewPage Ins { get; private set; }
         static ViewPage()
         {
@@ -131,12 +151,23 @@ namespace Spotify
 
         }
     }
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        //    public bool IsLoaded
+        //    {
+        //        get { return (bool)GetValue(IsLoadedProperty); }
+        //        set { SetValue(IsLoadedProperty, value); }
+        //    }
 
+        //    // Using a DependencyProperty as the backing store for IsLoaded.  This enables animation, styling, binding, etc...
+        //    public static readonly DependencyProperty IsLoadedProperty =
+        //        DependencyProperty.Register("IsLoaded", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
+        //}
+        public partial class MainWindow : Window
+        {
+            public MainWindow()
+            {
+                InitializeComponent();
+            }
+
+        }
     }
-}
+

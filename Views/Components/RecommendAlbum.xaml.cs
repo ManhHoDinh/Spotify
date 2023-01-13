@@ -169,22 +169,26 @@ namespace Spotify.Views.Components
         private void recommend_Loaded(object sender, RoutedEventArgs e)
         {
             listview = GetTemplateChild("PART_Headerr") as ListView;
-            for (int i = 0; i < ItemsSource.Count; i++)
+            if(type == "recommend")
             {
-                for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
+                for (int i = 0; i < ItemsSource.Count; i++)
                 {
-                    ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
-                    Song song = a[j];
-                    if (SongBottom.Ins.SelectedSong != null)
+                    for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
                     {
-                        if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                        ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
+                        Song song = a[j];
+                        if (SongBottom.Ins.SelectedSong != null)
                         {
-                            var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                            var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
-                            ImageBrush img = new ImageBrush();
-                            img.ImageSource = Pause;
-                            btn.Background = img;
+                            if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                            {
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                ImageBrush img = new ImageBrush();
+                                img.ImageSource = Pause;
+                                btn.Background = img;
+                            }
                         }
+
                     }
 
                 }

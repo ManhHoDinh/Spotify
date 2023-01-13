@@ -102,6 +102,42 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                     SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
                     SongBottom.Ins.IsPlay = true;
+                    var albums = DataProvider.Ins.DB.Albums.ToList();
+                    foreach (var album in albums)
+                    {
+                        for (int i = 0; i < album.SongsOfAlbum.Count; i++)
+                        {
+                            if (album.SongsOfAlbum[i].ID == SelectedSongItem.ID)
+                            {
+                               
+                                int xx = album.ID;
+                               
+                                if (xx <= 6)
+                                {
+                                    ListAlbumView.type = "TopMix";
+                                }
+                                if (xx >= 7 && xx <= 12)
+                                {
+                                    ListAlbumView.type = "MadeForYou";
+
+                                }
+                                if (xx >= 13 && xx <= 18)
+                                {
+
+                                    ListAlbumView.type = "Popular";
+                                }
+                                if (xx >= 19 && xx <= 24)
+                                {
+                                    ListAlbumView.type = "Mood";
+                                }
+                                if (xx > 25)
+                                {
+                                    ListAlbumView.type = "Trending";
+
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

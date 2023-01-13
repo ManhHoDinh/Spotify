@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ControlTemplate x:Key="MenuContextStyle" TargetType="MenuItem">
-        <Border Name="border" CornerRadius="4" Background="#282828" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+        <Border Name="border" CornerRadius="4" BorderBrush="Transparent" Background="#282828" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
             <ContentPresenter Margin="10 0 0 0" VerticalAlignment="Center" Content="{TemplateBinding Header}"/>
         </Border>
         <ControlTemplate.Triggers>

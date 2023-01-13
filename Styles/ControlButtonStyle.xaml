@@ -10,6 +10,9 @@
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Margin" Value="0 0 30 0"/>
     </Style>
+    <Style TargetType="Button" x:Key="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
     <!--prevbtn-->
     <ImageBrush x:Key="PrevHover" ImageSource="{StaticResource PrevHoverButton}"/>
     <ImageBrush x:Key="Prev" ImageSource="{StaticResource PrevButton}"/>
