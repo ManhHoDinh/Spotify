@@ -422,6 +422,7 @@ namespace Spotify.Views.Components
             {
                 SongBottom.Ins.ListSong = ItemSource;
                 SongBottom.Ins.CountId = listview.SelectedIndex;
+               
             }
             for (int i = 0; i < listview.Items.Count; i++)
             {

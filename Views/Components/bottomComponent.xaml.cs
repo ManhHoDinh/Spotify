@@ -30,6 +30,20 @@ namespace Spotify.Views.Components
     /// </summary>
     public class SongBottom: DependencyObject
     {
+
+
+        public ObservableCollection<Album> PreItemSource
+
+        {
+            get { return (ObservableCollection<Album>)GetValue(PreItemSourceProperty); }
+            set { SetValue(PreItemSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PreItemSourceProperty =
+            DependencyProperty.Register("PreItemSource", typeof(ObservableCollection<Album>), typeof(SongBottom), new PropertyMetadata(null));
+
+
         public string SongName
         {
             get { return (string)GetValue(SongNameProperty); }

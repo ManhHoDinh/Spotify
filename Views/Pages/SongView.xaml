@@ -57,18 +57,7 @@
                                 <ImageBrush ImageSource="{StaticResource PlayFill}"/>
                             </Button.Background>
                         </Button>
-                        <Button 
-                        Click="Button_Click" 
-                        Tag="{Binding isFavor, ElementName=viewsong}"
-                        Width="52" 
-                        Height="52"
-                        Margin="64 0 0 42"
-                        Template="{DynamicResource HeartStyle}"
-                        Style="{StaticResource ControlBtn}">
-                            <Button.Background>
-                                <ImageBrush ImageSource="{StaticResource HeartButton}"/>
-                            </Button.Background>
-                        </Button>
+                  
                     </StackPanel>
 
                 </Border>
