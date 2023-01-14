@@ -80,7 +80,7 @@ namespace Spotify.Views.Pages
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
 
-            
+        
                 Album.ApplyTemplate();
                 if (SongBottom.Ins.CountId >= 0)
                 {

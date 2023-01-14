@@ -258,7 +258,12 @@ namespace Spotify.ViewModels.Pages
                if (ListPlaylist.Ins.List.Count > 0)
                {
                    SelectedPlaylist = ListPlaylist.Ins.List[0];
-
+                 
+               }
+               else
+               {
+                   ViewPage.Ins.CurrentView = new Home();
+                   ViewPage.Ins.ViewPageSelected = "Home";
                }
                DeleteForm form = (DeleteForm)p;
                form.Close();

@@ -42,7 +42,10 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                        <Border x:Name="border" CornerRadius="8" Height="64" Width="390" Margin="5" Background="#5B524F">
+                                        <Border x:Name="border" CornerRadius="8" Height="64" Width="390" Margin="5">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="gray" Opacity="0.8"/>
+                                            </Border.Background>
                                     <Grid>
                                         <Grid Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center">
                                             <Grid.ColumnDefinitions>
