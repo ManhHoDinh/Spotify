@@ -157,7 +157,6 @@ namespace Spotify
 
         private void window_Loaded(object sender, RoutedEventArgs e)
         {
-           
             if(id != Properties.Settings.Default.CurrentUserID)
             {
                 ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
