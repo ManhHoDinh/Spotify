@@ -59,25 +59,28 @@ namespace Spotify.ViewModels.Pages
             get => _SelectedSongItem;
             set
             {
-                _SelectedSongItem = value;
-                OnPropertyChanged();
-                if (SelectedSongItem != null)
-                {
-                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
-                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
-                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
-                    SongBottom.Ins.IsPlay = true;
-                    ViewPage.Ins.CurrentView = new SongView();
-                    ViewPage.Ins.CurrentIndexView++;
-                    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SelectedSongItem.ID).FirstOrDefault();
-                    foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
-                        if (s.ID == SelectedSongItem.ID)
-                            return;
-                    Playlists.Ins.RecentSearchPlaylist.Songs.Add(song);
-                    Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
+                try {
+                    _SelectedSongItem = value;
+                    OnPropertyChanged();
+                    if (SelectedSongItem != null)
+                    {
+                        SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                        SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                        SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                        SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                        SongBottom.Ins.IsPlay = true;
+                        ViewPage.Ins.CurrentView = new SongView();
+                        ViewPage.Ins.CurrentIndexView++;
+                        var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SelectedSongItem.ID).FirstOrDefault();
+                        foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
+                            if (s.ID == SelectedSongItem.ID)
+                                return;
+                        Playlists.Ins.RecentSearchPlaylist.Songs.Add(song);
+                        Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
+                    }
+                    DataProvider.Ins.DB.SaveChanges();
                 }
-                DataProvider.Ins.DB.SaveChanges();
+                catch { }
             }
         }
         public SearchVM()

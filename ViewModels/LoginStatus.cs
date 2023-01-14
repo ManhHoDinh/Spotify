@@ -55,25 +55,29 @@ namespace Spotify.ViewModels
         private User _user { get; set; }
         public User User { get {
                 return _user; } 
-            set { 
-                _user = value;
-                OnPropertyChanged();
-                if (value != DataProvider.Ins.DB.Users.Where(x=>x.UserID==-1).FirstOrDefault())
-                {
-                    Day = value.Birthday.Value.Day.ToString();
-                    Month = value.Birthday.Value.Month.ToString();
-                    Year = value.Birthday.Value.Year.ToString();
-                    RecentSearchPlaylist = value.Playlists.Where(x => x.PlaylistType == 1).FirstOrDefault();
-                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
-                    Playlists.Ins.LikedSongsPlayplist = value.Playlists.Where(x => x.PlaylistType == 0).FirstOrDefault();
-                    ViewPage.Ins.IsLoaded = true;
+            set
+            {
+                try {
+                    _user = value;
+                    OnPropertyChanged();
+                    if (value != DataProvider.Ins.DB.Users.Where(x => x.UserID == -1).FirstOrDefault())
+                    {
+                        Day = value.Birthday.Value.Day.ToString();
+                        Month = value.Birthday.Value.Month.ToString();
+                        Year = value.Birthday.Value.Year.ToString();
+                        RecentSearchPlaylist = value.Playlists.Where(x => x.PlaylistType == 1).FirstOrDefault();
+                        Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                        Playlists.Ins.LikedSongsPlayplist = value.Playlists.Where(x => x.PlaylistType == 0).FirstOrDefault();
+                        ViewPage.Ins.IsLoaded = true;
+                    }
+                    else
+                    {
+                        RecentSearchPlaylist = new Playlist();
+                        Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                        Playlists.Ins.LikedSongsPlayplist = RecentSearchPlaylist;
+                    }
                 }
-                else
-                {
-                    RecentSearchPlaylist = new Playlist();
-                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
-                    Playlists.Ins.LikedSongsPlayplist = RecentSearchPlaylist;
-                }
+                catch { }
                 } }
         private int _forgotPasswordUserID { get; set; }
         public int ForgotPasswordUserID { get { return _forgotPasswordUserID; } set { _forgotPasswordUserID = value; OnPropertyChanged(); } }

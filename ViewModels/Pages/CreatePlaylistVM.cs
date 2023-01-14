@@ -16,6 +16,7 @@ using Microsoft.Win32;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Controls;
+using System.Linq.Expressions;
 
 namespace Spotify.ViewModels.Pages
 {
@@ -48,54 +49,56 @@ namespace Spotify.ViewModels.Pages
             get => _SelectedPlaylist;
             set
             {
-                _SelectedPlaylist = value;
-                OnPropertyChanged();
-                if (SelectedPlaylist != null)
+                try
                 {
-                    NamePlaylist = SelectedPlaylist.PlaylistName;
-                    DescriptionPlaylist = SelectedPlaylist.Descriptions;
-                    ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
-                    SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
-                    
-                    if(ViewPage.Ins.IsClick == false)
+                    _SelectedPlaylist = value;
+                    OnPropertyChanged();
+                    if (SelectedPlaylist != null)
                     {
-                        int currentId = ViewPage.Ins.CurrentIndexView;
-                        int count = ViewPage.Ins.ListPage.Count;
-                       // MessageBox.Show(currentId.ToString() + count.ToString());
-                        if (currentId + 1 < count)
+                        NamePlaylist = SelectedPlaylist.PlaylistName;
+                        DescriptionPlaylist = SelectedPlaylist.Descriptions;
+                        ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
+                        SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+
+                        if (ViewPage.Ins.IsClick == false)
                         {
-                            for (int i = currentId + 1; i < count; i++)
+                            int currentId = ViewPage.Ins.CurrentIndexView;
+                            int count = ViewPage.Ins.ListPage.Count;
+                            // MessageBox.Show(currentId.ToString() + count.ToString());
+                            if (currentId + 1 < count)
                             {
-                                ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
-                            }
-
-
-                            if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
-                            {
-                                if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                                for (int i = currentId + 1; i < count; i++)
                                 {
-                                    for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
-                                    {
-                                        ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
-                                    }
+                                    ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
                                 }
 
-                                else
+
+                                if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
                                 {
-
-                                    int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                                    for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                    if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                                     {
-
-                                        ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                                        {
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                        }
                                     }
 
+                                    else
+                                    {
+
+                                        int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                        {
+
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                        }
+
+                                    }
                                 }
                             }
                         }
-                    }
-                    //if(ListPlaylist.Ins.IsCreate == false)
-                    //{
+                        //if(ListPlaylist.Ins.IsCreate == false)
+                        //{
                         for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
                         {
                             if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
@@ -104,16 +107,19 @@ namespace Spotify.ViewModels.Pages
                             }
                         }
                         ListPlaylist.Ins.IsCreate = false;
-                 //   }
-                    
-                    ViewPage.Ins.CurrentView = new CreatePlaylist();
-                    ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
-                    ViewPage.Ins.CurrentIndexView++;
-                   // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString());
-                    ListPlaylist.Ins.CurrentIdPlaylist++;
-                    ViewPage.Ins.IsDisableBack = false;
-                    
+                        //   }
+
+                        ViewPage.Ins.CurrentView = new CreatePlaylist();
+                        ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                        ViewPage.Ins.CurrentIndexView++;
+                        // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString());
+                        ListPlaylist.Ins.CurrentIdPlaylist++;
+                        ViewPage.Ins.IsDisableBack = false;
+
+                    }
                 }
+
+                catch { }
             }
         }
         private Song _SelectedSongItem;
@@ -122,16 +128,19 @@ namespace Spotify.ViewModels.Pages
             get => _SelectedSongItem;
             set
             {
-                _SelectedSongItem = value;
-                OnPropertyChanged();
-                if (SelectedSongItem != null)
-                {
-                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
-                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
-                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
-                    SongBottom.Ins.IsPlay = true;
+                try {
+                    _SelectedSongItem = value;
+                    OnPropertyChanged();
+                    if (SelectedSongItem != null)
+                    {
+                        SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                        SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                        SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                        SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                        SongBottom.Ins.IsPlay = true;
+                    }
                 }
+                catch { }
             }
         }
 
@@ -140,132 +149,134 @@ namespace Spotify.ViewModels.Pages
 
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
-        public CreatePlaylistVM()
-        {
-           
-            ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
-            //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
-            //songs.Add(Songs.CamNang);
-            //songs.Add(Songs.BenTrenTangLau);
-            //songs.Add(Songs.DauMua);
+        public CreatePlaylistVM() {
+            try
+            {
 
-            SongItemsCollection = new CollectionViewSource { Source = songs };
-            SongItemsCollection.Filter += MenuItems_Filter;
-            LoadCommand = new RelayCommand<object>(
-                (p) =>
-                {
-                    return true;
-                }, (p) =>
-                {
-                    PlayListForm form = new PlayListForm();
-                    Application.Current.MainWindow.Opacity = 0.3;
-                    form.ShowDialog();
-                    Application.Current.MainWindow.Opacity = 1;
-                    IsVisibleOption = false;
-                });
-            CloseCommand = new RelayCommand<object>(
+                ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
+                //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+                //songs.Add(Songs.CamNang);
+                //songs.Add(Songs.BenTrenTangLau);
+                //songs.Add(Songs.DauMua);
+
+                SongItemsCollection = new CollectionViewSource { Source = songs };
+                SongItemsCollection.Filter += MenuItems_Filter;
+                LoadCommand = new RelayCommand<object>(
+                    (p) =>
+                    {
+                        return true;
+                    }, (p) =>
+                    {
+                        PlayListForm form = new PlayListForm();
+                        Application.Current.MainWindow.Opacity = 0.3;
+                        form.ShowDialog();
+                        Application.Current.MainWindow.Opacity = 1;
+                        IsVisibleOption = false;
+                    });
+                CloseCommand = new RelayCommand<object>(
+                  (p) =>
+                  {
+                      return true;
+                  }, (p) =>
+                  {
+
+                      ((Window)p).Close();
+                  });
+                SaveCommand = new RelayCommand<object>(
+                  (p) =>
+                  {
+                      return true;
+                  }, (p) =>
+                  {
+                      PlayListForm SaveForm = (PlayListForm)p;
+                      NamePlaylist = SaveForm.NamePlaylist.Text;
+                      if (SaveForm.img.Source != null)
+                      {
+                          ImagePlaylist = SaveForm.img.Source;
+                      }
+                      else ImagePlaylist = (ImageSource)Application.Current.Resources["SongBackground"];
+
+                      DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
+                      SaveForm.Close();
+                      Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
+                      SelectedPlaylist.PlaylistName = NamePlaylist;
+                      SelectedPlaylist.Descriptions = DescriptionPlaylist;
+                      SelectedPlaylist.PlaylistImageSource = ImagePlaylist;
+                      if (ListPlaylist.Ins.Image != "")
+                      {
+                          playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+
+                      }
+                      else
+                      {
+                          playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png";
+
+                      }
+
+                      playlist.PlaylistName = NamePlaylist;
+                      playlist.Descriptions = DescriptionPlaylist;
+                      playlist.PlaylistImageSource = ImagePlaylist;
+
+                      DataProvider.Ins.DB.Entry(playlist).State = System.Data.Entity.EntityState.Modified;
+                      DataProvider.Ins.DB.SaveChanges();
+                      SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
+                      ListPlaylist.Ins.Image = "";
+
+                  });
+                OptionCommand = new RelayCommand<object>(
               (p) =>
               {
                   return true;
               }, (p) =>
               {
-
-                  ((Window)p).Close();
+                  if (IsVisibleOption == false) IsVisibleOption = true;
+                  else IsVisibleOption = false;
               });
-            SaveCommand = new RelayCommand<object>(
-              (p) =>
-              {
-                  return true;
-              }, (p) =>
-              {
-                  PlayListForm SaveForm = (PlayListForm)p;
-                  NamePlaylist = SaveForm.NamePlaylist.Text;
-                  if (SaveForm.img.Source != null)
-                  {
-                      ImagePlaylist = SaveForm.img.Source;
-                  }
-                  else ImagePlaylist = (ImageSource)Application.Current.Resources["SongBackground"];
+                OpenFormDeleteCommand = new RelayCommand<object>(
+            (p) =>
+            {
+                return true;
+            }, (p) =>
+            {
+                DeleteForm form = new DeleteForm();
+                Application.Current.MainWindow.Opacity = 0.3;
+                form.ShowDialog();
+                Application.Current.MainWindow.Opacity = 1;
+            });
+                DeleteCommand = new RelayCommand<object>(
+           (p) =>
+           {
+               return true;
+           }, (p) =>
+           {
+               Playlist playlist = DataProvider.Ins.DB.Playlists.Where(ob => ob.ID == SelectedPlaylist.ID).FirstOrDefault();
+               DataProvider.Ins.DB.Playlists.Remove(playlist);
+               DataProvider.Ins.DB.SaveChanges();
+               ListPlaylist.Ins.List.Remove(SelectedPlaylist);
+               ListPlaylist.Ins.CountPlaylist--;
+               if (ListPlaylist.Ins.List.Count > 0)
+               {
+                   SelectedPlaylist = ListPlaylist.Ins.List[0];
 
-                  DescriptionPlaylist = SaveForm.DescriptionPlaylist.Text;
-                  SaveForm.Close();
-                  Playlist playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == SelectedPlaylist.ID).FirstOrDefault();
-                  SelectedPlaylist.PlaylistName = NamePlaylist;
-                  SelectedPlaylist.Descriptions = DescriptionPlaylist;
-                  SelectedPlaylist.PlaylistImageSource = ImagePlaylist;
-                  if (ListPlaylist.Ins.Image != "")
-                  {
-                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
-
-                  }
-                  else
-                  {
-                      playlist.PlaylistImage = SelectedPlaylist.PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png";
-       
-                  }
-
-                  playlist.PlaylistName = NamePlaylist;
-                  playlist.Descriptions = DescriptionPlaylist;
-                  playlist.PlaylistImageSource = ImagePlaylist;
-                  
-                  DataProvider.Ins.DB.Entry(playlist).State = System.Data.Entity.EntityState.Modified;
-                  DataProvider.Ins.DB.SaveChanges();
-                  SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
-                  ListPlaylist.Ins.Image = "";
-
-              });
-            OptionCommand = new RelayCommand<object>(
+               }
+               DeleteForm form = (DeleteForm)p;
+               form.Close();
+               IsVisibleOption = false;
+           });
+                CancelCommand = new RelayCommand<object>(
           (p) =>
           {
               return true;
           }, (p) =>
           {
-              if (IsVisibleOption == false) IsVisibleOption = true;
-              else IsVisibleOption = false;
+              DeleteForm form = (DeleteForm)p;
+              form.Close();
+              IsVisibleOption = false;
+
           });
-            OpenFormDeleteCommand = new RelayCommand<object>(
-        (p) =>
-        {
-            return true;
-        }, (p) =>
-        {
-            DeleteForm form = new DeleteForm();
-            Application.Current.MainWindow.Opacity = 0.3;
-            form.ShowDialog();
-            Application.Current.MainWindow.Opacity = 1;
-        });
-            DeleteCommand = new RelayCommand<object>(
-       (p) =>
-       {
-           return true;
-       }, (p) =>
-       {
-           Playlist playlist = DataProvider.Ins.DB.Playlists.Where(ob => ob.ID == SelectedPlaylist.ID).FirstOrDefault();
-           DataProvider.Ins.DB.Playlists.Remove(playlist);
-           DataProvider.Ins.DB.SaveChanges();
-           ListPlaylist.Ins.List.Remove(SelectedPlaylist);
-           ListPlaylist.Ins.CountPlaylist--;
-           if(ListPlaylist.Ins.List.Count > 0)
-           {
-               SelectedPlaylist = ListPlaylist.Ins.List[0];
-
-           }
-           DeleteForm form = (DeleteForm)p;
-           form.Close();
-           IsVisibleOption = false;
-       });
-            CancelCommand = new RelayCommand<object>(
-      (p) =>
-      {
-          return true;
-      }, (p) =>
-      {
-          DeleteForm form = (DeleteForm)p;
-          form.Close();
-          IsVisibleOption = false;
-
-      });
-        }
-        //    LoadImageCommand = new RelayCommand<object>(
+            }
+            catch { }
+        }        //    LoadImageCommand = new RelayCommand<object>(
         //      (p) =>
         //      {
         //          return true;

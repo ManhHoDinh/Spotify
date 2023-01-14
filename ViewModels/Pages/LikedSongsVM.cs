@@ -47,8 +47,6 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.SongName;
-                    NameSinger = SelectedItem.SingerName;
                     LinkSong = new Uri(SelectedItem.SongLink);
                     Image = new Uri(SelectedItem.SongImage);
                     SongBottom.Ins.SongName = Name;

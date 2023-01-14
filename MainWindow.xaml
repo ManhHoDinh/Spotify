@@ -9,7 +9,7 @@
         xmlns:Page ="clr-namespace:Spotify.Views.Pages"
         mc:Ignorable="d"
         xmlns:Component ="clr-namespace:Spotify.Views.Components"
-        Title="MainWindow" Height="700" Width="1200"
+        Title="Spotify" Height="700" Width="1200"
         WindowStartupLocation="CenterScreen"
         >
     <Window.Resources>

@@ -32,7 +32,7 @@
             </ListView.ItemsPanel>
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="Background" Value="AntiqueWhite"/>
+                    <Setter Property="Background" Value="gray"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type ListViewItem}">
