@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Spotify.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,5 +54,6 @@ namespace Spotify.Views.Pages
             }
 
         }
+       
     }
 }

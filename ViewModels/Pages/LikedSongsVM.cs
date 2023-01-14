@@ -47,15 +47,15 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.SongName;
-                    NameSinger = SelectedItem.SingerName;
                     LinkSong = new Uri(SelectedItem.SongLink);
                     Image = new Uri(SelectedItem.SongImage);
-                    SongBottom.Ins.SongName = Name;
-                    SongBottom.Ins.SingerName = NameSinger;
+                    SongBottom.Ins.SongName = SelectedItem.SongName;
+                    SongBottom.Ins.SingerName = SelectedItem.SingerName;
                     SongBottom.Ins.LinkSong = LinkSong;
                     SongBottom.Ins.ImageSong = Image;
                     SongBottom.Ins.IsPlay = true;
+                    Properties.Settings.Default.CurrentSongID = SelectedItem.ID;
+                    Properties.Settings.Default.Save();
                 }
             }
         }

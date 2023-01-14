@@ -32,7 +32,8 @@ namespace Spotify.Views.Components
     {
         private ListView listview;
         public static int id;
-        public static ObservableCollection<Album> PreItemSource = new ObservableCollection<Album>();
+        public static ObservableCollection<Album> PreItemSource;
+        public static string PreType = "";
         public static bool IsClick;
         public static int temp = 0;
         public static string type = "";
@@ -312,7 +313,7 @@ namespace Spotify.Views.Components
         {
             HomeVM vm = this.DataContext as HomeVM;
             int xx = int.Parse((sender as Button).Tag.ToString());
-          
+
             if (xx <= 6)
             {
                 type = "TopMix";
@@ -337,6 +338,7 @@ namespace Spotify.Views.Components
             {
                 type = "Mood";
                 ItemsSource = vm.Mood;
+                MessageBox.Show(xx.ToString());
 
             }
             if (xx > 25)
@@ -352,9 +354,11 @@ namespace Spotify.Views.Components
             if (ItemsSource == vm.Mood) temp = 18;
             if (ItemsSource == vm.Trending) temp = 24;
             ImageBrush ImgBrush = new ImageBrush();
-            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp || PreItemSource != ItemsSource)
+           
+         
+            if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp ||PreType != type)
             {
-                
+
                 SongBottom.Ins.CountId = 0;
 
 
@@ -380,7 +384,6 @@ namespace Spotify.Views.Components
                 IsClick = true;
                 SongBottom.Ins.ListSong = ItemsSource[id].SongsOfAlbum;
                 SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
-
                 SongBottom.Ins.IsPlay = true;
                 ImgBrush.ImageSource = Pause;
 
@@ -392,30 +395,22 @@ namespace Spotify.Views.Components
                 
                 if (SongBottom.Ins.IsPlay == true)
                 {
-                  
                    ImgBrush.ImageSource = Play;
                     SongBottom.Ins.IsPlay = false;
                 }
                 else
                 {
+                    
                     ImgBrush.ImageSource = Pause;
                     SongBottom.Ins.IsPlay = true;
 
                 }
             }
-
-            //if (IsPlay == true)
-            //{
-            //    ImgBrush.ImageSource = Play;
-            //    IsPlay = false;
-            //}
-            //else
-            //{
-            //    ImgBrush.ImageSource = Pause;
-            //    IsPlay = true;
-            //}
             (sender as Button).Background = ImgBrush;
-            PreItemSource = ItemsSource;
+            //PreItemSource = ItemsSource;
+            PreType = type;
+                       
+           
         }
 
         private void listAlbum_Loaded(object sender, RoutedEventArgs e)

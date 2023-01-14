@@ -151,7 +151,7 @@
                 </ListView>
             </StackPanel>
         </ControlTemplate>
-  
+
     </UserControl.Resources>
 
 
@@ -163,9 +163,9 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Border x:Name="bgHeader" Background="{StaticResource DefaultHomeColor}" Height="4000" Margin="0 -3000 0 0"   />
+                <Border x:Name="bgHeader" Background="{StaticResource DefaultHomeColor}" Height="4000" Margin="0 -2826 0 0"   />
             </Grid>
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
                 <StackPanel  >
                     <!--Content-->
                     <!--#region Content-->
@@ -176,7 +176,7 @@
                                 <!--Header-->
 
                                 <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33">Good Afternoon</TextBlock>
-                          
+
                                 <Components:RecommendAlbum ItemsSource="{Binding RecommendPlaylists}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
                             </StackPanel>
                             <Components:ListAlbumView Tag="Your top mixes" ItemsSource="{Binding TopMix}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
@@ -184,7 +184,7 @@
                             <Components:ListAlbumView Tag="Popular albums" ItemsSource="{Binding Popular}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
                             <Components:ListAlbumView Tag="Mood" ItemsSource="{Binding Mood}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
                             <Components:ListAlbumView Tag="Trending now" ItemsSource="{Binding Trending}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
-             
+
                         </StackPanel>
                     </Grid>
                     <!--#endregion Content-->

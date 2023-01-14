@@ -151,6 +151,9 @@
     <Compile Include="Views\Pages\EditProfile.xaml.cs">
       <DependentUpon>EditProfile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\ErrorForm.xaml.cs">
+      <DependentUpon>ErrorForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
     </Compile>
@@ -163,8 +166,14 @@
     <Compile Include="Views\Pages\LikedSongsView.xaml.cs">
       <DependentUpon>LikedSongsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\LikeSongError.xaml.cs">
+      <DependentUpon>LikeSongError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\PasswordUpdatedView.xaml.cs">
       <DependentUpon>PasswordUpdatedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PlaylistError.xaml.cs">
+      <DependentUpon>PlaylistError.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PlayListForm.xaml.cs">
       <DependentUpon>PlayListForm.xaml</DependentUpon>
@@ -340,6 +349,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\ErrorForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\ForgotPasswordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -356,7 +369,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\LikeSongError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\PasswordUpdatedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PlaylistError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,6 +547,9 @@
     </Content>
     <Resource Include="Resource\Images\Volume_XS.png" />
     <Resource Include="Resource\Images\Volume_XSHover.png" />
+    <Resource Include="Resource\Images\RepeatOneBtn.png" />
+    <Resource Include="Resource\Images\Repeat_S.png" />
+    <Resource Include="Resource\Images\Shuffle_S.png" />
     <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

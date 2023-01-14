@@ -9,135 +9,66 @@
              Loaded="song_Loaded"
              xmlns:components="clr-namespace:Spotify.Views.Components"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                <GradientStop Color="{Binding color, ElementName=song}" Offset="0"/>
-                <GradientStop Color="#121212" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition  Height="340"/>
-            <RowDefinition  Height="140"/>
-            <RowDefinition  Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0">
+    <ScrollViewer Background="#121212">
+        <Grid>
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
+                    <GradientStop Color="{Binding color, ElementName=song}" Offset="0"/>
+                    <GradientStop Color="#121212" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="340"/>
+                <RowDefinition  Height="140"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0">
 
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="360"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Column="0">
-                    <Border Margin="32 80 0 0"  Width="232" Height="232">
-                        <Border.Background>
-                            <ImageBrush ImageSource="{Binding Source={x:Static local:SongSelect.Ins},Path=ImageSong}"/>
-                        </Border.Background>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="360"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <WrapPanel Grid.Column="0">
+                        <Border Margin="32 80 0 0"  Width="232" Height="232">
+                            <Border.Background>
+                                <ImageBrush ImageSource="{Binding Source={x:Static local:SongSelect.Ins},Path=ImageSong}"/>
+                            </Border.Background>
 
-                    </Border>
-                </WrapPanel>
-                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
-                    <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
-                    <TextBlock Name="SongNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SongName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
-                    <TextBlock Name="SingerNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SingerName}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
-                </StackPanel>
-            </Grid>
-        </Border>
-        <Border Grid.Row="1">
-            <Border.Background>
-                <SolidColorBrush Color="#000000" Opacity="0.1"/>
-            </Border.Background>
-            <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#ffffff">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="PlayPauseGreen"
+                        </Border>
+                    </WrapPanel>
+                    <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
+                        <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
+                        <TextBlock Name="SongNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SongName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                        <TextBlock Name="SingerNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SingerName}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1">
+                <Border.Background>
+                    <SolidColorBrush Color="#000000" Opacity="0.1"/>
+                </Border.Background>
+                <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#ffffff">
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="PlayPauseGreen"
                Click="PlayPauseGreen_Click"
                 Template="{DynamicResource GreenPlayStyle}" Margin="16 12 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Padding="0" Height="80">
-                        <Button.Background>
-                            <ImageBrush ImageSource="{StaticResource PlayFill}"/>
-                        </Button.Background>
-                    </Button>
-                    <Button 
-                        Click="Button_Click" 
-                        Tag="{Binding isFavor, ElementName=viewsong}"
-                        Width="52" 
-                        Height="52"
-                        Margin="64 0 0 42"
-                        Template="{DynamicResource HeartStyle}"
-                        Style="{StaticResource ControlBtn}">
-                        <Button.Background>
-                            <ImageBrush ImageSource="{StaticResource HeartButton}"/>
-                        </Button.Background>
-                    </Button>
-                </StackPanel>
-              
+                            <Button.Background>
+                                <ImageBrush ImageSource="{StaticResource PlayFill}"/>
+                            </Button.Background>
+                        </Button>
+                  
+                    </StackPanel>
+
+                </Border>
             </Border>
-        </Border>
-
-    </Grid>
-    <!--<Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                <GradientStop Color="{Binding color, ElementName=viewsong}" Offset="0"/>
-                <GradientStop Color="#121212" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition  Height="340"/>
-            <RowDefinition  Height="140"/>
-            <RowDefinition  Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0">
-
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="360"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Column="0">
-                    <Border Margin="32 80 0 0"  Width="232" Height="232">
-                        <Image Source="{Binding SelectedSong.SongImageUri, ElementName=viewsong}"/>
-                    </Border>
-                </WrapPanel>
-                <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
-                    <TextBlock Text="SONG" FontSize="16" Foreground="#ffffff" />
-                    <TextBlock Text="{Binding SelectedSong.SongName, ElementName=viewsong}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
-                    <TextBlock Text="{Binding SelectedSong.SingerName, ElementName=viewsong}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
-                </StackPanel>
-            </Grid>
-        </Border>
-        <Border Grid.Row="1">
-            <Border.Background>
-                <SolidColorBrush Color="#000000" Opacity="0.1"/>
-            </Border.Background>
-            <Border Margin="32 0 32 0" BorderThickness="0 0 0 1" BorderBrush="#ffffff">
-                <StackPanel Orientation="Vertical">
-                    <Button Margin="32 24 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="52" Height="52">
-                        <Button.Background>
-                            <ImageBrush ImageSource="https://cdn-icons-png.flaticon.com/512/0/375.png"/>
-                        </Button.Background>
-                    </Button>
-                    <Grid Margin="0 24 0 0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="475"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="300"/>
-                            <ColumnDefinition Width="50"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Foreground="#ffffff" Text="#"  Margin="16 0 0 0"/>
-                        <TextBlock Grid.Column="1" Foreground="#ffffff" Text="TITLE"/>
-                        <TextBlock Grid.Column="2" Foreground="#ffffff" Text="ALBUM"/>
-                        <TextBlock Grid.Column="3" Foreground="#ffffff" Text="DATE ADDED"/>
-                        <TextBlock Grid.Column="4" Foreground="#ffffff" Text="TIME" Margin="0 0 -12 0"/>
-                    </Grid>
-
+            <Border Margin="32 0 32 0" Grid.Row="2">
+                <StackPanel>
+                    <TextBlock Margin="0 0 0 16" FontSize="24" FontWeight="DemiBold" Foreground="#ffffff" Text="Lyrics"/>
+                    <TextBlock FontSize="16" FontWeight="DemiBold" Foreground="#ffffff" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=Description}"/>
                 </StackPanel>
             </Border>
-        </Border>
-        <Border Grid.Row="2">
-            <Border.Background>
-                <SolidColorBrush Color="#000000" Opacity="0.1"/>
-            </Border.Background>
-        </Border>
-    </Grid>-->
+        </Grid>
+    </ScrollViewer>
+
 </UserControl>
