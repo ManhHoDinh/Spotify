@@ -175,7 +175,7 @@
                             <StackPanel Margin="16 0 16 0">
                                 <!--Header-->
 
-                                <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33">Good Afternoon</TextBlock>
+                                <TextBlock FontSize="39" Margin="32 24 0 0"  Foreground="#fff" FontWeight="Medium" LineHeight="49.33" x:Name="timeText"/>
 
                                 <Components:RecommendAlbum ItemsSource="{Binding RecommendPlaylists}" SelectedItem="{Binding SelectedItem,Mode=OneWayToSource}"/>
                             </StackPanel>

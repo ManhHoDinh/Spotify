@@ -146,16 +146,24 @@ namespace Spotify.ViewModels
                 //{
                 //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
                 //    ViewPage.Ins.CurrentIndexView++;
-                int count = ListPlaylist.Ins.CountPlaylist + 1;
-                Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
-                Playlist.InitUri(ref playlist);
-                DataProvider.Ins.DB.Playlists.Add(playlist);
-                DataProvider.Ins.DB.SaveChanges();
-                ListPlaylist.Ins.List.Add(playlist);
-                // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
-                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-                ListPlaylist.Ins.CountPlaylist++;
-                ChangeViewStyle("CreatePlaylist", obj);
+                if (Properties.Settings.Default.CurrentUserID == -1)
+                {
+                    PlaylistError form = new PlaylistError();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    int count = ListPlaylist.Ins.CountPlaylist + 1;
+                    Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
+                    Playlist.InitUri(ref playlist);
+                    DataProvider.Ins.DB.Playlists.Add(playlist);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListPlaylist.Ins.List.Add(playlist);
+                    // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
+                    ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+                    ListPlaylist.Ins.CountPlaylist++;
+                    ChangeViewStyle("CreatePlaylist", obj);
+                }
             }
             catch { }
 
@@ -166,11 +174,17 @@ namespace Spotify.ViewModels
 
             ViewPage.Ins.IsSearchView = false;
             //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
-            ChangeViewStyle("LikedSongs", obj);
-            TranslatePage(new LikedSongsVM());
-           
+            if (Properties.Settings.Default.CurrentUserID == -1)
+            {
+                LikeSongError form = new LikeSongError();
+                form.ShowDialog();
+            }
+            else
+            {
+                ChangeViewStyle("LikedSongs", obj);
+                TranslatePage(new LikedSongsVM());
+            }
         }
-
 
         public NavigationVM()
         {

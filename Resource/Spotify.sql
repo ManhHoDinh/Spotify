@@ -410,7 +410,7 @@ select *
 from album
 alter table Users add Birthday nvarchar(max)
 alter table Users alter column Birthday smalldatetime
-
+alter table Users add verification nvarchar(max)
 
 
 

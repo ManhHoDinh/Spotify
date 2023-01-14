@@ -144,7 +144,11 @@ namespace Spotify.Views.Pages
                     NotHaveSong.Visibility = Visibility.Hidden;
                 }
             }
-
+            else
+            {
+                HaveSong.Visibility = Visibility.Hidden;
+                NotHaveSong.Visibility = Visibility.Visible;
+            }
            
         }
     }
