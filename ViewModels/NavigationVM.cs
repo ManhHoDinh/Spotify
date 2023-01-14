@@ -137,15 +137,17 @@ namespace Spotify.ViewModels
         }
         private void CreatePlaylist(object obj)
         {
-            try {
+            
                 ListPlaylist.Ins.IsCreate = true;
                 ViewPage.Ins.IsSearchView = false;
                 ViewPage.Ins.IsClick = false;
-
-                //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
-                //{
-                //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-                //    ViewPage.Ins.CurrentIndexView++;
+            if(Properties.Settings.Default.CurrentUserID == -1)
+            {
+                PlaylistError form = new PlaylistError();
+                form.ShowDialog();
+            }
+            else
+            {
                 int count = ListPlaylist.Ins.CountPlaylist + 1;
                 Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
                 Playlist.InitUri(ref playlist);
@@ -156,17 +158,28 @@ namespace Spotify.ViewModels
                 ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
                 ListPlaylist.Ins.CountPlaylist++;
                 ChangeViewStyle("CreatePlaylist", obj);
+
             }
-            catch { }
+
 
         }
 
         private void LikedSongs(object obj)
         {
+
             ViewPage.Ins.IsSearchView = false;
             //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
-            ChangeViewStyle("LikedSongs", obj);
-            TranslatePage(new LikedSongsVM());
+            if (Properties.Settings.Default.CurrentUserID == -1)
+            {
+                LikeSongError form = new LikeSongError();
+                form.ShowDialog();
+            }
+            else
+            {
+                ChangeViewStyle("LikedSongs", obj);
+                TranslatePage(new LikedSongsVM());
+            }
+           
            
         }
 

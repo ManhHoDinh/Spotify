@@ -166,8 +166,14 @@
     <Compile Include="Views\Pages\LikedSongsView.xaml.cs">
       <DependentUpon>LikedSongsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\LikeSongError.xaml.cs">
+      <DependentUpon>LikeSongError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\PasswordUpdatedView.xaml.cs">
       <DependentUpon>PasswordUpdatedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PlaylistError.xaml.cs">
+      <DependentUpon>PlaylistError.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PlayListForm.xaml.cs">
       <DependentUpon>PlayListForm.xaml</DependentUpon>
@@ -363,7 +369,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Pages\LikeSongError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\PasswordUpdatedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PlaylistError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

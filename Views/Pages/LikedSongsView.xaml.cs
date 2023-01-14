@@ -131,16 +131,21 @@ namespace Spotify.Views.Pages
 
         private void LikeSong_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ListLikeSongs.ItemSource.Count == 0)
+            if(Properties.Settings.Default.CurrentUserID != -1)
             {
-                HaveSong.Visibility = Visibility.Hidden;
-                NotHaveSong.Visibility = Visibility.Visible;
+                if (ListLikeSongs.ItemSource.Count == 0)
+                {
+                    HaveSong.Visibility = Visibility.Hidden;
+                    NotHaveSong.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    HaveSong.Visibility = Visibility.Visible;
+                    NotHaveSong.Visibility = Visibility.Hidden;
+                }
             }
-            else
-            {
-                HaveSong.Visibility = Visibility.Visible;
-                NotHaveSong.Visibility = Visibility.Hidden;
-            }
+
+           
         }
     }
 }
