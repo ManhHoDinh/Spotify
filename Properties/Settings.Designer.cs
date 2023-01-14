@@ -34,5 +34,17 @@ namespace Spotify.Properties {
                 this["CurrentUserID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int CurrentSongID {
+            get {
+                return ((int)(this["CurrentSongID"]));
+            }
+            set {
+                this["CurrentSongID"] = value;
+            }
+        }
     }
 }

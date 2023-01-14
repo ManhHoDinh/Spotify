@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -112,6 +113,16 @@ namespace Spotify.ViewModels
             //Properties.Settings.Default.CurrentUserID = -1;
             //Properties.Settings.Default.Save();
             User = DataProvider.Ins.DB.Users.FirstOrDefault(x => x.UserID == Properties.Settings.Default.CurrentUserID);
+            //Song song = DataProvider.Ins.DB.Songs.FirstOrDefault(x=>x.ID== Properties.Settings.Default.CurrentSongID);
+            //if (song != null)
+            //{
+            //    SongBottom.Ins.SongName = song.SongName;
+            //    SongBottom.Ins.SingerName = song.SingerName;
+            //    SongBottom.Ins.LinkSong = song.SongLinkUri;
+            //    SongBottom.Ins.ImageSong = song.SongImageUri;               
+            //    Properties.Settings.Default.CurrentSongID= song.ID;
+            //    Properties.Settings.Default.Save();
+            //}
             if (User != null)
             {
                 NeedLogin = false;

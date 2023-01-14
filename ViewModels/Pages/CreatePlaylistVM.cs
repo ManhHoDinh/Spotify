@@ -137,7 +137,8 @@ namespace Spotify.ViewModels.Pages
                         SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                         SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                         SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
-                        SongBottom.Ins.IsPlay = true;
+                        Properties.Settings.Default.CurrentSongID = SelectedSongItem.ID;
+                        Properties.Settings.Default.Save();
                     }
                 }
                 catch { }
