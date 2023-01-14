@@ -460,7 +460,6 @@ namespace Spotify.Views.Components
                                 ImageBrush img = new ImageBrush();
                                 img.ImageSource = Pause;
                                 btn.Background = img;
-                                
                             }
                         }
 

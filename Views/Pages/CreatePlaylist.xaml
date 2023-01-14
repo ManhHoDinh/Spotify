@@ -20,142 +20,179 @@
             <ItemsPresenter/>
         </ControlTemplate>
     </UserControl.Resources>
-    <ScrollViewer  Background="#121212">
+    <Grid Background="#000">
         <Grid>
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0"  EndPoint="0,1">
-                    <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
-                    <GradientStop Color="#2b2b2b" Offset="1"/>
-                </LinearGradientBrush>
-            </Grid.Background>
             <Grid.RowDefinitions>
-                <RowDefinition  Height="340"/>
-                <RowDefinition  Height="140"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition  Height="*"/>
+                <RowDefinition Height="76"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0">
-           
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="360"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0" 
+            <Grid Grid.Row="0">
+                <Border x:Name="bgHeader"  Height="4000" Margin="0 -1000 0 0"   >
+                    <Border.Background>
+                        <LinearGradientBrush 
+                            EndPoint="0,1" 
+                            StartPoint="0,0">
+                            <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
+                            <GradientStop Color="#000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+            </Grid>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <Border x:Name="bgCreatePlaylist">
+                        <Border.Background>
+                            <LinearGradientBrush 
+                            EndPoint="0,1" 
+                            StartPoint="0,0.7">
+                                <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
+                                <GradientStop Color="#000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                    </Border>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition  Height="340"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition  Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Border x:Name="bgTopHome" Height="4000" Margin="0 -1100 0 0">
+                                <Border.Background>
+                                    <LinearGradientBrush 
+                            EndPoint="0,1" 
+                            StartPoint="0,0">
+                                        <GradientStop Color="{Binding color,ElementName=playlist}" Offset="0"/>
+                                        <GradientStop Color="#000" Offset="1"/>
+                                    </LinearGradientBrush>
+
+                                </Border.Background>
+                            </Border>
+
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="360"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" 
                           Margin="32 0 0 0"
                           Width="232"
                           Height="232" 
                           VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="img" Grid.Column="0"/>
-                        <Button
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image x:Name="img" Grid.Column="0"/>
+                                    <Button
                             Click="Button_Click" Name="btn">
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border x:Name="border" Opacity="1" Width="232" Height="232">
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border x:Name="border" Opacity="1" Width="232" Height="232">
 
-                                        <ContentPresenter Name="content">
-                                            <ContentPresenter.Content>
-                                                <Image x:Name="imgInitial" Source="{Binding ImagePlaylist}"/>
-                                            </ContentPresenter.Content>
-                                        </ContentPresenter>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Opacity" Value="1"/>
-                                            <Setter TargetName="border" Property="Cursor" Value="Hand"/>
-                                            <Setter TargetName="content" Property="ContentPresenter.Content">
-                                                <Setter.Value>
-                                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
-                                                        <Image Width="48" Height="48" Source="{StaticResource EditBtn}"/>
-                                                        <TextBlock Foreground="#ffffff" FontSize="16" Text="Choose Photo"/>
-                                                    </StackPanel>
-                                                </Setter.Value>
-                                            </Setter>
-                                            <Setter TargetName="border" Property="Background">
-                                                <Setter.Value>
-                                                    <SolidColorBrush Color="#ffffff" Opacity="0.6"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </Grid>
-                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-                        <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
-                        <TextBlock Height="200" Cursor="Hand" Text="{Binding NamePlaylist}" TextWrapping="Wrap" FontSize="64" Foreground="#ffffff" FontWeight="Bold">
-                            <TextBlock.InputBindings>
-                                <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
-                            </TextBlock.InputBindings>
-                        </TextBlock>
-                        <TextBlock Cursor="Hand" Text="{Binding DescriptionPlaylist}" Foreground="#b3b3b3" FontSize="16"/>
-                    </StackPanel>
-                </Grid>
-            </Border>
-            <Border Grid.Row="1">
-     
-                <Border Margin="32 0 32 0" BorderBrush="#bababa" BorderThickness="0 0 0 1">
+                                                    <ContentPresenter Name="content">
+                                                        <ContentPresenter.Content>
+                                                            <Image x:Name="imgInitial" Source="{Binding ImagePlaylist}"/>
+                                                        </ContentPresenter.Content>
+                                                    </ContentPresenter>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Opacity" Value="1"/>
+                                                        <Setter TargetName="border" Property="Cursor" Value="Hand"/>
+                                                        <Setter TargetName="content" Property="ContentPresenter.Content">
+                                                            <Setter.Value>
+                                                                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                                                                    <Image Width="48" Height="48" Source="{StaticResource EditBtn}"/>
+                                                                    <TextBlock Foreground="#ffffff" FontSize="16" Text="Choose Photo"/>
+                                                                </StackPanel>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                        <Setter TargetName="border" Property="Background">
+                                                            <Setter.Value>
+                                                                <SolidColorBrush Color="#ffffff" Opacity="0.6"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </Grid>
+                                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                                    <TextBlock Text="PLAYLIST" FontSize="16" Foreground="#ffffff"/>
+                                    <TextBlock Height="200" Cursor="Hand" Text="{Binding NamePlaylist}" TextWrapping="Wrap" FontSize="64" Foreground="#ffffff" FontWeight="Bold">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding LoadCommand}" MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBlock Cursor="Hand" Text="{Binding DescriptionPlaylist}" Foreground="#b3b3b3" FontSize="16"/>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.Background>
+                                <SolidColorBrush Color="#121212" Opacity="0.52"></SolidColorBrush>
+                            </Grid.Background>
+                            <Canvas>
+                                <StackPanel Height="150"  Margin="100 -38 32 0"  Orientation="Horizontal">
+                                    <Button
+                                        Command="{Binding OptionCommand}"
+                                        Width="32"
+                                        Height="32" 
+                                        Margin="16 24 20 0"
+                                        HorizontalAlignment="Left">
+                                        <Button.Background>
+                                            <ImageBrush ImageSource="{StaticResource OptionBtn}"/>
+                                        </Button.Background>
+                                        <Button.Template>
+                                            <ControlTemplate>
+                                                <Border x:Name="border" Background="{TemplateBinding Background}"/>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="true">
+                                                        <Setter Property="Cursor" Value="Hand"/>
+                                                        <Setter TargetName="border" Property="Background">
+                                                            <Setter.Value>
+                                                                <ImageBrush ImageSource="{StaticResource OptionHoverBtn}"/>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
 
-                    <StackPanel  Orientation="Horizontal">
-                        <Button
-                        Command="{Binding OptionCommand}"
-                        Width="32"
-                        Height="32" 
-                        Margin="16 24 0 0"
-                        HorizontalAlignment="Left">
-                            <Button.Background>
-                                <ImageBrush ImageSource="{StaticResource OptionBtn}"/>
-                            </Button.Background>
-                            <Button.Template>
-                                <ControlTemplate>
-                                    <Border x:Name="border" Background="{TemplateBinding Background}"/>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="true">
-                                            <Setter Property="Cursor" Value="Hand"/>
-                                            <Setter TargetName="border" Property="Background">
-                                                <Setter.Value>
-                                                    <ImageBrush ImageSource="{StaticResource OptionHoverBtn}"/>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-
-                            </Button.Template>
-                        </Button>
-                        <StackPanel
+                                        </Button.Template>
+                                    </Button>
+                                    <StackPanel
                             x:Name="option"
                             Height="80"
                             Visibility="{Binding IsVisibleOption,Converter={StaticResource BooleanToVisibilityConverter}}" 
                             Orientation="Vertical" 
                             Width="176" 
                             Background="#282828" Margin="0,51,0,0">
-                            <Button Command="{Binding LoadCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Edit details"/>
-                            <Button Command="{Binding OpenFormDeleteCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16"  Foreground="#ffffff" Content="Delete"/>
-                        </StackPanel>
-                    </StackPanel>
+                                        <Button Command="{Binding LoadCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Edit details"/>
+                                        <Button Command="{Binding OpenFormDeleteCommand}" Template="{StaticResource OptionStyle}" Height="40" FontSize="16"  Foreground="#ffffff" Content="Delete"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Canvas>
+                            <component:SongsView
+                        FavorIcon="{StaticResource HeartButton}" 
+                        x:Name="songPlaylist"
+                        SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
 
-                </Border>
-            </Border>
-            <component:SongsView
-                 FavorIcon="{StaticResource HeartButton}" 
-                Grid.Row="2"
-                
-                x:Name="songPlaylist"
-                SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <StackPanel Grid.Row="3"  Margin="40 24 0 0" >
-                <TextBlock Margin="0 24 0 24" Text="Let's find something for your playlist" FontWeight="Medium"  FontSize="24" Foreground="#ffffff" FontFamily="{StaticResource CircularStdBlack}" />
+                        <Grid Grid.Row="2">
+                            <Grid.Background>
+                                <SolidColorBrush Color="#121212" Opacity="0.52"></SolidColorBrush>
+                            </Grid.Background>
+                            <StackPanel  Margin="40 24 0 0" >
+                                <TextBlock Margin="0 24 0 24" Text="Let's find something for your playlist" FontWeight="Medium"  FontSize="24" Foreground="#ffffff" FontFamily="{StaticResource CircularStdBlack}" />
 
-                <Border Background="#282828" Width="365" Height="40" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Center">
-                    <StackPanel   Orientation="Horizontal" >
-                        <Image  Source="{StaticResource SearchIcon}"  Margin="10 8 5 8"></Image>
-                        <spotify:PlaceHolderTextbox
+                                <Border Background="#282828" Width="365" Height="40" CornerRadius="8" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <StackPanel   Orientation="Horizontal" >
+                                        <Image  Source="{StaticResource SearchIcon}"  Margin="10 8 5 8"></Image>
+                                        <spotify:PlaceHolderTextbox
                         Background="transparent"                        
                         FontSize="18"
                         Foreground="#ffffff"
@@ -168,12 +205,12 @@
                         VerticalAlignment="Center"
                         Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
                         />
-                    </StackPanel>
-                </Border>
-                <Grid Margin="0 24">
-                    <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
-                    </Grid>
-                    <ListView  
+                                    </StackPanel>
+                                </Border>
+                                <Grid Margin="0 24">
+                                    <Grid Background="blue" Visibility="Hidden" x:Name="PreparingSearch">
+                                    </Grid>
+                                    <ListView  
                         x:Name="BeginingSearch"
                         Template="{StaticResource NonScrollableListView}"                     
                         ItemsSource="{Binding SongSourceCollection}"
@@ -181,43 +218,43 @@
                         BorderBrush="Transparent" 
                         SelectedItem="{Binding SelectedSongItem, Mode=TwoWay}" >
 
-                        <!--Text Index-->
-                        <ListView.Resources>
-                            <vm:OrdinalConverter x:Key="OrdinalConverter" />
-                        </ListView.Resources>
-                        <ListView.ItemContainerStyle >
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Background" Value="AntiqueWhite"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <Border Cursor="Hand" CornerRadius="8" BorderThickness="0" Padding="8 0 0 0" Height="54">
-                                                <Border.Style>
-                                                    <Style TargetType="Border">
-                                                        <Setter Property="Background" Value="Transparent"/>
-                                                        <Style.Triggers>
-                                                            <Trigger Property="Border.IsMouseOver" Value="True">
-                                                                <Setter Property="Border.Background" Value="#5b5a5e"/>
-                                                            </Trigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </Border.Style>
-                                                <Grid >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="33.4*"/>
-                                                        <ColumnDefinition Width="26.2*"/>
-                                                        <ColumnDefinition Width="17.78*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
-                                                        <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
-                                                        <StackPanel Orientation="Vertical">
-                                                            <TextBlock Text="{Binding SongName}" FontWeight="DemiBold" Foreground="#ffffff" FontSize="16"/>
-                                                            <TextBlock Text="{Binding SingerName}" FontWeight="DemiBold" Foreground="#b3b3b3" FontSize="14"/>
-                                                        </StackPanel>
-                                                    </StackPanel>
-                                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" FontSize="14" FontWeight="DemiBold" Margin="300 0 0 0" Foreground="#b3b3b3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                                    <Grid  Grid.Column="3" HorizontalAlignment="Right">
-                                                        <Button
+                                        <!--Text Index-->
+                                        <ListView.Resources>
+                                            <vm:OrdinalConverter x:Key="OrdinalConverter" />
+                                        </ListView.Resources>
+                                        <ListView.ItemContainerStyle >
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Background" Value="AntiqueWhite"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                                            <Border Cursor="Hand" CornerRadius="8" BorderThickness="0" Padding="8 0 0 0" Height="54">
+                                                                <Border.Style>
+                                                                    <Style TargetType="Border">
+                                                                        <Setter Property="Background" Value="Transparent"/>
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="Border.IsMouseOver" Value="True">
+                                                                                <Setter Property="Border.Background" Value="#5b5a5e"/>
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Border.Style>
+                                                                <Grid >
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="33.4*"/>
+                                                                        <ColumnDefinition Width="26.2*"/>
+                                                                        <ColumnDefinition Width="17.78*"/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="center" HorizontalAlignment="Left">
+                                                                        <Image Width="40" Source="{Binding SongImageUri}" Margin="0 0 20 0"/>
+                                                                        <StackPanel Orientation="Vertical">
+                                                                            <TextBlock Text="{Binding SongName}" FontWeight="DemiBold" Foreground="#ffffff" FontSize="16"/>
+                                                                            <TextBlock Text="{Binding SingerName}" FontWeight="DemiBold" Foreground="#b3b3b3" FontSize="14"/>
+                                                                        </StackPanel>
+                                                                    </StackPanel>
+                                                                    <TextBlock Grid.Column="1" Text="{Binding AlbumName}" FontSize="14" FontWeight="DemiBold" Margin="300 0 0 0" Foreground="#b3b3b3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                                    <Grid  Grid.Column="3" HorizontalAlignment="Right">
+                                                                        <Button
                                                             Tag="{Binding ID}"
                                                             Click="Add_Click"
                                                             Margin="0 0 16 0"
@@ -225,23 +262,29 @@
                                                             FontWeight="DemiBold"
                                                             Foreground="#ffffff"
                                                             Template="{StaticResource AddBtnStyle}" >
-                                                            
-                                                           Add
-                                                        </Button>
-                                                    </Grid>
 
-                                                </Grid>
-                                            </Border>
+                                                                            Add
+                                                                        </Button>
+                                                                    </Grid>
 
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
+                                                                </Grid>
+                                                            </Border>
 
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
                 </Grid>
-            </StackPanel>
+            </ScrollViewer>
+
         </Grid>
-    </ScrollViewer>
+    </Grid>
+
 </UserControl>

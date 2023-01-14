@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.Utilities;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -55,25 +56,29 @@ namespace Spotify.ViewModels
         private User _user { get; set; }
         public User User { get {
                 return _user; } 
-            set { 
-                _user = value;
-                OnPropertyChanged();
-                if (value != DataProvider.Ins.DB.Users.Where(x=>x.UserID==-1).FirstOrDefault())
-                {
-                    Day = value.Birthday.Value.Day.ToString();
-                    Month = value.Birthday.Value.Month.ToString();
-                    Year = value.Birthday.Value.Year.ToString();
-                    RecentSearchPlaylist = value.Playlists.Where(x => x.PlaylistType == 1).FirstOrDefault();
-                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
-                    Playlists.Ins.LikedSongsPlayplist = value.Playlists.Where(x => x.PlaylistType == 0).FirstOrDefault();
-                    ViewPage.Ins.IsLoaded = true;
+            set
+            {
+                try {
+                    _user = value;
+                    OnPropertyChanged();
+                    if (value != DataProvider.Ins.DB.Users.Where(x => x.UserID == -1).FirstOrDefault())
+                    {
+                        Day = value.Birthday.Value.Day.ToString();
+                        Month = value.Birthday.Value.Month.ToString();
+                        Year = value.Birthday.Value.Year.ToString();
+                        RecentSearchPlaylist = value.Playlists.Where(x => x.PlaylistType == 1).FirstOrDefault();
+                        Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                        Playlists.Ins.LikedSongsPlayplist = value.Playlists.Where(x => x.PlaylistType == 0).FirstOrDefault();
+                        ViewPage.Ins.IsLoaded = true;
+                    }
+                    else
+                    {
+                        RecentSearchPlaylist = new Playlist();
+                        Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
+                        Playlists.Ins.LikedSongsPlayplist = RecentSearchPlaylist;
+                    }
                 }
-                else
-                {
-                    RecentSearchPlaylist = new Playlist();
-                    Playlists.Ins.RecentSearchPlaylist = RecentSearchPlaylist;
-                    Playlists.Ins.LikedSongsPlayplist = RecentSearchPlaylist;
-                }
+                catch { }
                 } }
         private int _forgotPasswordUserID { get; set; }
         public int ForgotPasswordUserID { get { return _forgotPasswordUserID; } set { _forgotPasswordUserID = value; OnPropertyChanged(); } }
@@ -108,6 +113,16 @@ namespace Spotify.ViewModels
             //Properties.Settings.Default.CurrentUserID = -1;
             //Properties.Settings.Default.Save();
             User = DataProvider.Ins.DB.Users.FirstOrDefault(x => x.UserID == Properties.Settings.Default.CurrentUserID);
+            //Song song = DataProvider.Ins.DB.Songs.FirstOrDefault(x=>x.ID== Properties.Settings.Default.CurrentSongID);
+            //if (song != null)
+            //{
+            //    SongBottom.Ins.SongName = song.SongName;
+            //    SongBottom.Ins.SingerName = song.SingerName;
+            //    SongBottom.Ins.LinkSong = song.SongLinkUri;
+            //    SongBottom.Ins.ImageSong = song.SongImageUri;               
+            //    Properties.Settings.Default.CurrentSongID= song.ID;
+            //    Properties.Settings.Default.Save();
+            //}
             if (User != null)
             {
                 NeedLogin = false;

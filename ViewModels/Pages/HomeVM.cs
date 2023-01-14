@@ -74,18 +74,22 @@ namespace Spotify.ViewModels.Pages
         }
         private Album _SelectedItem;
         public Album SelectedItem { get => _SelectedItem; 
-            set { _SelectedItem = value; 
-                OnPropertyChanged(); 
-                if (SelectedItem != null) 
-                { 
-                  AlbumName = SelectedItem.AlbumName; 
-                  AlbumDescription = SelectedItem.Descriptions;
-                  SongsOfAlbum = SelectedItem.SongsOfAlbum;
-                  AlbumImage = SelectedItem.AlbumImageUri;
-                  IsAlbumItemVisible = true; 
-                  IsAlbumListVisible = false;
-                  TranslatePage(new AlbumView());
+            set {
+                try {
+                    _SelectedItem = value;
+                    OnPropertyChanged();
+                    if (SelectedItem != null)
+                    {
+                        AlbumName = SelectedItem.AlbumName;
+                        AlbumDescription = SelectedItem.Descriptions;
+                        SongsOfAlbum = SelectedItem.SongsOfAlbum;
+                        AlbumImage = SelectedItem.AlbumImageUri;
+                        IsAlbumItemVisible = true;
+                        IsAlbumListVisible = false;
+                        TranslatePage(new AlbumView());
+                    }
                 }
+                catch { }
             }
         }
         private Song _SelectedSongItem;
@@ -115,67 +119,29 @@ namespace Spotify.ViewModels.Pages
                         ListAlbumView.PreType = ListAlbumView.type = "MadeForYou";
                         ListAlbumView.id = xx - 7;
 
-                    }
-                    if (xx >= 13 && xx <= 18)
-                    {
+                        }
+                        if (xx >= 13 && xx <= 18)
+                        {
 
-                        ListAlbumView.PreType = ListAlbumView.type = "Popular";
-                        ListAlbumView.id = xx - 13;
+                            ListAlbumView.PreType = ListAlbumView.type = "Popular";
+                            ListAlbumView.id = xx - 13;
 
-                    }
-                    if (xx >= 19 && xx <= 24)
-                    {
-                        ListAlbumView.PreType = ListAlbumView.type = "Mood";
-                        ListAlbumView.id = xx - 19;
+                        }
+                        if (xx >= 19 && xx <= 24)
+                        {
+                            ListAlbumView.PreType = ListAlbumView.type = "Mood";
+                            ListAlbumView.id = xx - 19;
 
-                    }
-                    if (xx > 25)
-                    {
-                        ListAlbumView.PreType = ListAlbumView.type = "Trending";
-                        ListAlbumView.id = xx - 25;
+                        }
+                        if (xx > 25)
+                        {
+                            ListAlbumView.PreType = ListAlbumView.type = "Trending";
+                            ListAlbumView.id = xx - 25;
 
+                        }
                     }
                 }
-            
-                //var albums = DataProvider.Ins.DB.Albums.ToList();
-                //foreach (var album in albums)
-                //{
-                //    for (int i = 0; i < album.SongsOfAlbum.Count; i++)
-                //    {
-                //        if (album.SongsOfAlbum[i].ID == SelectedSongItem.ID)
-                //        {
-
-                //            int xx = album.ID;
-
-                //            if (xx <= 6)
-                //            {
-                //               ListAlbumView.type = "TopMix";
-
-
-                //            }
-                //            if (xx >= 7 && xx <= 12)
-                //            {
-                //                ListAlbumView.type = "MadeForYou";
-
-                //            }
-                //            if (xx >= 13 && xx <= 18)
-                //            {
-
-                //                ListAlbumView.type = "Popular";
-                //            }
-                //            if (xx >= 19 && xx <= 24)
-                //            {
-                //                ListAlbumView.type = "Mood";
-                //            }
-                //            if (xx > 25)
-                //            {
-                //                ListAlbumView.type = "Trending";
-
-                //            }
-                //        }
-                //    }
-                //}
-            
+                catch { }
             }
         }
         private string _AlbumName;
