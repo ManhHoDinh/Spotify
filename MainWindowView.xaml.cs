@@ -171,7 +171,12 @@ namespace Spotify
             LoginStatus.Current.ResetAllView();
             LoginStatus.Current.IsAccountView=true;
         }
-        
+
+        private void window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            LoginStatus.Current.IsShowDiaologAccount = false;
+        }
+
         //public static int id = 0;
         //private void window_Loaded(object sender, RoutedEventArgs e)
         //{

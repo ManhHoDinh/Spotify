@@ -9,6 +9,7 @@
              xmlns:Page ="clr-namespace:Spotify.Views.Pages"
              Loaded="window_Loaded"
              mc:Ignorable="d"
+             MouseLeftButtonUp="window_MouseLeftButtonUp"
              xmlns:Component ="clr-namespace:Spotify.Views.Components"
              x:Name="window"
         >
