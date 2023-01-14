@@ -78,6 +78,7 @@
                          FontSize="18" 
                          Width="300"
                          CaretBrush="#000"
+                         Text="{Binding Source={x:Static vm:LoginStatus.Current},Path=SearchText,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          TextChanged="SearchTextbox_TextChanged"
                          Foreground="#000" />
                     <TextBlock 

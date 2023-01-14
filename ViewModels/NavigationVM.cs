@@ -39,6 +39,7 @@ namespace Spotify.ViewModels
             set { _isSearchView = value; OnPropertyChanged(); } }
         public void ChangeViewStyle(string value, object obj)
         {
+            LoginStatus.Current.SearchText = "";
             StackPanel stack = obj as StackPanel;
             foreach (object p in stack.Children)
             {
