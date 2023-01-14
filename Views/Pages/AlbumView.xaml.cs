@@ -111,22 +111,7 @@ namespace Spotify.Views.Pages
                     }
                 }
             }
-      var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
-      var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
-      foreach (Song a in listFavor)
-      {
-        for (int j = 0; j < Album.ItemSource.Count; j++)
-        {
-          if (a.ID == Album.ItemSource[j].ID)
-          {
-            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
-            Button btn = template.Template.FindName("favorBtn", template) as Button;
-            ImageBrush img = new ImageBrush();
-            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-            btn.Background = img;
-          }
-        }
-      }
+      
     }
   }
 }

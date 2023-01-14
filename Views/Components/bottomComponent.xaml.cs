@@ -90,7 +90,15 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for CountId.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CountIdProperty =
             DependencyProperty.Register("CountId", typeof(int), typeof(SongBottom), new PropertyMetadata(-1));
+        public bool IsEmpty
+        {
+            get { return (bool)GetValue(IsEmptyProperty); }
+            set { SetValue(IsEmptyProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for IsEmpty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEmptyProperty =
+            DependencyProperty.Register("IsEmpty", typeof(bool), typeof(SongBottom), new PropertyMetadata(false));
 
         public ObservableCollection<Song> ListSong
         {
