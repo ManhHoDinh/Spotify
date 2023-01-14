@@ -5,6 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Spotify.Views.Components"
+             xmlns:vm="clr-namespace:Spotify.ViewModels.Pages"
+             
              mc:Ignorable="d" 
              Loaded="recommend_Loaded"
              d:DesignHeight="64" d:DesignWidth="390">
@@ -25,12 +27,16 @@
                   SelectedItem="{Binding SelectedItem,ElementName=recommend}" 
                   ItemsSource="{Binding ItemsSource, ElementName=recommend}" 
                   Background="Transparent" BorderBrush="Transparent">
-            <ListView.ItemsPanel>
+                    <ListView.Resources>
+                        <vm:OrdinalConverter x:Key="OrdinalConverter" />
+                    </ListView.Resources>
+                    <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsItemsHost="True"></WrapPanel>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
-            <ListView.ItemContainerStyle>
+                  
+                    <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Background" Value="AntiqueWhite"/>
                     <Setter Property="Template">
@@ -79,7 +85,7 @@
                                         <Button
                                                         Visibility="{Binding Path=IsMouseOver,ElementName=border, Converter={StaticResource BooleanToVisibilityConverter}}" 
                                                         x:Name="PlayPauseGreen" 
-                                                        Tag="{Binding ID }"
+                                                        Tag="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListViewItem},Converter={StaticResource OrdinalConverter}}"
                                                        
                                                         Template="{DynamicResource GreenPlayStyle}"
                                                         Click="PlayPauseGreen_Click" 

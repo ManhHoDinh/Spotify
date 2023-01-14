@@ -28,6 +28,7 @@ namespace Spotify.ViewModels.Pages
         public ObservableCollection<Album> RecommendPlaylists { get; set; }
         public ObservableCollection<Album> Trending { get; set; }
         public ICommand ClickCommand { get; set; }
+        
         void TranslatePage(object obj)
         {
             if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
@@ -102,12 +103,12 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                     SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
                     SongBottom.Ins.IsPlay = true;
-                    
                     int xx = SelectedItem.ID;
+                    
                     if (xx <= 6)
                     {
                        ListAlbumView.PreType = ListAlbumView.type = "TopMix";
-                        ListAlbumView.id = xx - 1;
+                       ListAlbumView.id = xx - 1;
                     }
                     if (xx >= 7 && xx <= 12)
                     {
@@ -196,10 +197,14 @@ namespace Spotify.ViewModels.Pages
            
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            for(int i = 0; i< 6; i++)
-            {
-                RecommendPlaylists.Add(Albums.AllAlbums[i]);
-            }
+ 
+                RecommendPlaylists.Add(Albums.AllAlbums[10]);
+                RecommendPlaylists.Add(Albums.AllAlbums[12]);
+                RecommendPlaylists.Add(Albums.AllAlbums[24]);
+                RecommendPlaylists.Add(Albums.AllAlbums[21]);
+                RecommendPlaylists.Add(Albums.AllAlbums[11]);
+                RecommendPlaylists.Add(Albums.AllAlbums[22]);
+
             //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
             //RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
             //RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
