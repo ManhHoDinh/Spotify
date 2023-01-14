@@ -533,6 +533,9 @@
     </Content>
     <Resource Include="Resource\Images\Volume_XS.png" />
     <Resource Include="Resource\Images\Volume_XSHover.png" />
+    <Resource Include="Resource\Images\RepeatOneBtn.png" />
+    <Resource Include="Resource\Images\Repeat_S.png" />
+    <Resource Include="Resource\Images\Shuffle_S.png" />
     <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

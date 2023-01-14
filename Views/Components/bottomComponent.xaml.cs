@@ -44,6 +44,18 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("PreItemSource", typeof(ObservableCollection<Album>), typeof(SongBottom), new PropertyMetadata(null));
 
 
+        public bool IsEmpty
+        {
+            get { return (bool)GetValue(IsEmptyProperty); }
+            set { SetValue(IsEmptyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsEmpty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEmptyProperty =
+            DependencyProperty.Register("IsEmpty", typeof(bool), typeof(SongBottom), new PropertyMetadata(false));
+
+
+
         public string SongName
         {
             get { return (string)GetValue(SongNameProperty); }

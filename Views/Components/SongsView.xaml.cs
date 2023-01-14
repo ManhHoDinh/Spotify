@@ -1,6 +1,7 @@
 using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Security.Cryptography;
@@ -24,6 +25,8 @@ namespace Spotify.Views.Components
     /// </summary>
     [TemplatePart(Name = "PART_Header", Type = typeof(ListView))]
     [TemplatePart(Name = "PlayPauseGreen", Type = typeof(Button))]
+    [TemplatePart(Name = "HaveSong", Type = typeof(StackPanel))]
+    [TemplatePart(Name = "NotHaveSong", Type = typeof(StackPanel))]
 
     public partial class SongsView : UserControl
     {
@@ -43,6 +46,7 @@ namespace Spotify.Views.Components
                 {
                     if (type == "songview")
                     {
+                        
                         listview = GetTemplateChild("PART_Header") as ListView;
                         playButton = GetTemplateChild("PlayPauseGreen") as Button;
                         if (listview.SelectedItem != null)
@@ -245,6 +249,18 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsShowed", typeof(bool), typeof(SongsView), new PropertyMetadata(false));
 
 
+
+        public bool IsEmpty
+        {
+            get { return (bool)GetValue(IsEmptyProperty); }
+            set { SetValue(IsEmptyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsEmpty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEmptyProperty =
+            DependencyProperty.Register("IsEmpty", typeof(bool), typeof(SongView), new PropertyMetadata(false));
+
+
         public bool IsVisibleOption
         {
             get { return (bool)GetValue(IsVisibleOptionProperty); }
@@ -267,9 +283,10 @@ namespace Spotify.Views.Components
         {
             try
             {
-                
+
                 var BackGroundBtn = (sender as Button).Background as ImageBrush;
                 var listview = GetTemplateChild("PART_Header") as ListView;
+                var PlayBtn = GetTemplateChild("PlayPauseGreen") as Button;
                 Button btn = sender as Button;
                 int index = int.Parse(btn.Tag.ToString());
                 Grid gr = btn.Parent as Grid;
@@ -283,6 +300,19 @@ namespace Spotify.Views.Components
                     btn.Background = img;
                     playlist.SongsOfPlaylist.Remove(song);
                     playlist.Songs.Remove(song);
+                    if (playlist.SongsOfPlaylist.Count == 0)
+                    {
+                        SongBottom.Ins.IsEmpty = true;
+                    }
+                    //{
+                    //    var HaveSongSt = GetTemplateChild("HaveSong") as StackPanel;
+                    //    var NotHaveSongSt = GetTemplateChild("NotHaveSong") as StackPanel;
+                    //    NotHaveSongSt.Visibility = Visibility.Visible;
+                    //    HaveSongSt.Visibility = Visibility.Hidden;
+
+
+                    //}
+                    
                     for (int i = 0; i < listview.Items.Count; i++)
                     {
                         var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
@@ -308,16 +338,18 @@ namespace Spotify.Views.Components
                         btn.Background = img;
                         playlist.Songs.Add(song);
                         playlist.SongsOfPlaylist.Add(song);
+                        
+                        SongBottom.Ins.IsEmpty = false;
                     }
                 }
                 DataProvider.Ins.DB.SaveChanges();
             }
-            catch 
+            catch
             {
                 ErrorForm form = new ErrorForm();
                 form.ShowDialog();
             }
-          
+
         }
         void TranslatePage(object obj)
         {
@@ -355,9 +387,10 @@ namespace Spotify.Views.Components
                         }
                     }
                 }
-                SongView a = new SongView();
-                a.SelectedSong = SelectedSong;
-                ViewPage.Ins.CurrentView = a;
+                //SongView a = new SongView();
+                //a.SelectedSong = SelectedSong;
+                ViewPage.Ins.CurrentView = obj;
+                //ViewPage.Ins.CurrentView = a;
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
@@ -377,7 +410,10 @@ namespace Spotify.Views.Components
             ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
             //MessageBox.Show(tb.Name);
             //curItem.IsSelected = true;
-            TranslatePage(new SongView());
+            SongView a = new SongView();
+            TranslatePage(a);
+            a.SelectedSong = SelectedSong;
+            
         }
         ImageSource Play = (ImageSource)Application.Current.Resources["Playxs"];
         ImageSource Pause = (ImageSource)Application.Current.Resources["Pausexs"];
@@ -462,6 +498,7 @@ namespace Spotify.Views.Components
         {
             type = "songview";
             listview = GetTemplateChild("PART_Header") as ListView;
+           
             ImageBrush ImgBrush = new ImageBrush();
             if (SongBottom.Ins.SelectedSong == null || listview.SelectedIndex == -1)
             {
@@ -505,6 +542,20 @@ namespace Spotify.Views.Components
 
         private void songview_Loaded(object sender, RoutedEventArgs e)
         {
+            type = "songview";
+            //var listview = GetTemplateChild("PART_Header") as ListView;
+            //var HaveSongSt = GetTemplateChild("HaveSong") as StackPanel;
+            //var NotHaveSongSt = GetTemplateChild("NotHaveSong") as StackPanel;
+            //if (listview.Items.Count == 0)
+            //{
+            //    NotHaveSongSt.Visibility = Visibility.Visible;
+            //    HaveSongSt.Visibility = Visibility.Hidden;
+            //}
+            //else
+            //{
+            //    NotHaveSongSt.Visibility = Visibility.Hidden;
+            //    HaveSongSt.Visibility = Visibility.Visible;
+            //}
             SongBottom.Ins.SongSource = ItemSource;
             if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
             {
@@ -612,6 +663,11 @@ namespace Spotify.Views.Components
                 IsShow = true;
             }
             PrevBtn = btn;
+        }
+
+        private void Find_Click(object sender, RoutedEventArgs e)
+        {
+            TranslatePage(new SearchVM());
         }
 
         //private void Remove_Click(object sender, RoutedEventArgs e)
