@@ -141,7 +141,7 @@ namespace Spotify.Views.Components
             bind.Source = ViewPage.Ins;
             bind.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(header, IsDisableNextProperty, bind);
-            DataContext= this;
+            DataContext = this;
         }
         public bool IsDisableBack
         {
@@ -202,7 +202,8 @@ namespace Spotify.Views.Components
             DependencyProperty.Register("IsDisableNext", typeof(bool), typeof(Header), new PropertyMetadata(true));
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 //MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[0].ToString() + ListPlaylist.Ins.ListSelectedItem[1].ToString());
 
                 ViewPage.Ins.IsClick = true;
@@ -263,11 +264,12 @@ namespace Spotify.Views.Components
                 }
             }
             catch { }
-         
+
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 ViewPage.Ins.IsClick = true;
                 //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
                 //{

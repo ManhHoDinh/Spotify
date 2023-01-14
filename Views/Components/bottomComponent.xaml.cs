@@ -28,34 +28,8 @@ namespace Spotify.Views.Components
     /// <summary>
     /// Interaction logic for bottomComponent.xaml
     /// </summary>
-    public class SongBottom: DependencyObject
+    public class SongBottom : DependencyObject
     {
-
-
-        public ObservableCollection<Album> PreItemSource
-
-        {
-            get { return (ObservableCollection<Album>)GetValue(PreItemSourceProperty); }
-            set { SetValue(PreItemSourceProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PreItemSourceProperty =
-            DependencyProperty.Register("PreItemSource", typeof(ObservableCollection<Album>), typeof(SongBottom), new PropertyMetadata(null));
-
-
-        public bool IsEmpty
-        {
-            get { return (bool)GetValue(IsEmptyProperty); }
-            set { SetValue(IsEmptyProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for IsEmpty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IsEmptyProperty =
-            DependencyProperty.Register("IsEmpty", typeof(bool), typeof(SongBottom), new PropertyMetadata(false));
-
-
-
         public string SongName
         {
             get { return (string)GetValue(SongNameProperty); }
@@ -70,7 +44,7 @@ namespace Spotify.Views.Components
             get { return (string)GetValue(SingerNameProperty); }
             set { SetValue(SingerNameProperty, value); }
         }
-        
+
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SingerNameProperty =
             DependencyProperty.Register("SingerName", typeof(string), typeof(SongBottom), new PropertyMetadata(string.Empty));
@@ -90,7 +64,7 @@ namespace Spotify.Views.Components
         {
             get { return (Song)GetValue(SelectedSongProperty); }
             set { SetValue(SelectedSongProperty, value); }
-            
+
         }
 
         // Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
@@ -155,7 +129,7 @@ namespace Spotify.Views.Components
         static SongBottom()
         {
             Ins = new SongBottom();
-     
+
         }
     }
     public partial class bottomComponent : UserControl
@@ -179,7 +153,7 @@ namespace Spotify.Views.Components
                     ImageBrush ImgBrush = new ImageBrush();
                     ImgBrush.ImageSource = Play;
                     PlayPauseBtn.Background = ImgBrush;
-                    mediaPlayerIsPlaying = false;   
+                    mediaPlayerIsPlaying = false;
 
                 }
                 // what is the code that would go here?
@@ -193,13 +167,13 @@ namespace Spotify.Views.Components
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(BottomControl, IsPlayProperty, binding);
 
-           
+
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += timer_Tick;
             timer.Start();
         }
-  
+
         public bool IsPlay
         {
             get { return (bool)GetValue(IsPlayProperty); }
@@ -381,28 +355,33 @@ namespace Spotify.Views.Components
         }
         private void MuteVolume_Click(object sender, RoutedEventArgs e)
         {
-            if (IsMute == false)
+            try
             {
-                //ImageSource VolumnMax = (ImageSource)Application.Current.Resources["MuteBtn"];
-                //ImageBrush brush = new ImageBrush();
-                //brush.ImageSource = VolumnMax;
-                //VolumeButton.Background = brush;
 
-                //PrevVolumeIcon = VolumeIcon;
-                //VolumeIcon = "VolumeOff";
-                PrevVolumeSlider = volumeSlider.Value;
-                volumeSlider.Value = 0;
-                PrevVolume = mediaPlayer.Volume;
-                mePlayer.Volume = 0;
-                IsMute = true;
+                if (IsMute == false)
+                {
+                    //ImageSource VolumnMax = (ImageSource)Application.Current.Resources["MuteBtn"];
+                    //ImageBrush brush = new ImageBrush();
+                    //brush.ImageSource = VolumnMax;
+                    //VolumeButton.Background = brush;
+
+                    //PrevVolumeIcon = VolumeIcon;
+                    //VolumeIcon = "VolumeOff";
+                    PrevVolumeSlider = volumeSlider.Value;
+                    volumeSlider.Value = 0;
+                    PrevVolume = mediaPlayer.Volume;
+                    mePlayer.Volume = 0;
+                    IsMute = true;
+                }
+                else
+                {
+                    mePlayer.Volume = PrevVolume;
+                    //VolumeIcon = PrevVolumeIcon;
+                    volumeSlider.Value = PrevVolumeSlider;
+                    IsMute = false;
+                }
             }
-            else
-            {
-                mePlayer.Volume = PrevVolume;
-                //VolumeIcon = PrevVolumeIcon;
-                volumeSlider.Value = PrevVolumeSlider;
-                IsMute = false;
-            }
+            catch { }
         }
         //private void Button_Click(object sender, RoutedEventArgs e)
         //{
@@ -456,20 +435,20 @@ namespace Spotify.Views.Components
 
         private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
-           // LikedSongsVM a = this.DataContext as LikedSongsVM;
+            // LikedSongsVM a = this.DataContext as LikedSongsVM;
             //if (a != null)
             //{
 
-                int id = 0;
-                
-                if (RepeatState == "RepeatOne")
-                {
-                    mePlayer.Position = TimeSpan.Zero;
-                    playing.Content = mePlayer.Position.ToString(@"mm\:ss");
-                }
+            int id = 0;
 
-                else
-                {
+            if (RepeatState == "RepeatOne")
+            {
+                mePlayer.Position = TimeSpan.Zero;
+                playing.Content = mePlayer.Position.ToString(@"mm\:ss");
+            }
+
+            else
+            {
                 if (!IsShuffle)
                 {
 
@@ -533,101 +512,117 @@ namespace Spotify.Views.Components
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
 
-            if (IsShuffle)
+            try
             {
-                ImageSource Heart = (ImageSource)Application.Current.Resources["ShuffleButton"];
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = Heart;
-                ShuffleBtn.Background = ImgBrush;
-                IsShuffle = false;
+                if (IsShuffle)
+                {
+                    ImageSource Heart = (ImageSource)Application.Current.Resources["ShuffleButton"];
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = Heart;
+                    ShuffleBtn.Background = ImgBrush;
+                    IsShuffle = false;
 
-            }
-            else
-            {
-                ImageSource HeartFill = (ImageSource)Application.Current.Resources["ShuffleActiveButton"];
-                ImageBrush ImgBrush = new ImageBrush();
-                ImgBrush.ImageSource = HeartFill;
-                ShuffleBtn.Background = ImgBrush;
+                }
+                else
+                {
+                    ImageSource HeartFill = (ImageSource)Application.Current.Resources["ShuffleActiveButton"];
+                    ImageBrush ImgBrush = new ImageBrush();
+                    ImgBrush.ImageSource = HeartFill;
+                    ShuffleBtn.Background = ImgBrush;
 
-                IsShuffle = true;
+                    IsShuffle = true;
+                }
             }
+            catch { }
         }
 
         private void Repeat_Click(object sender, RoutedEventArgs e)
         {
-            ImageBrush img = new ImageBrush();
-            if (RepeatState == "None")
+            try
             {
+                ImageBrush img = new ImageBrush();
+                if (RepeatState == "None")
+                {
 
-                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatBtn"];
-                RepeatBtn.Background = img;
-                RepeatState = "Active";
-            }
-            else if (RepeatState == "Active")
-            {
+                    img.ImageSource = (ImageSource)Application.Current.Resources["RepeatBtn"];
+                    RepeatBtn.Background = img;
+                    RepeatState = "Active";
+                }
+                else if (RepeatState == "Active")
+                {
 
-                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatOneBtn"];
-                RepeatBtn.Background = img;
-                RepeatState = "RepeatOne";
-            }
-            else if (RepeatState == "RepeatOne")
-            {
-                img.ImageSource = (ImageSource)Application.Current.Resources["RepeatButton"];
-                RepeatBtn.Background = img;
-                RepeatState = "None";
-            }
+                    img.ImageSource = (ImageSource)Application.Current.Resources["RepeatOneBtn"];
+                    RepeatBtn.Background = img;
+                    RepeatState = "RepeatOne";
+                }
+                else if (RepeatState == "RepeatOne")
+                {
+                    img.ImageSource = (ImageSource)Application.Current.Resources["RepeatButton"];
+                    RepeatBtn.Background = img;
+                    RepeatState = "None";
+                }
 
+            }
+            catch { }
         }
 
         private void Next_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsShuffle)
+            try
             {
-                int id = 0;
-                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                if (!IsShuffle)
                 {
-                    if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                    int id = 0;
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                     {
-                        id = i + 1;
+                        if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                        {
+                            id = i + 1;
+                        }
+                    }
+                    if (id < SongBottom.Ins.ListSong.Count)
+                    {
+                        LoadSong(id);
                     }
                 }
-                if (id < SongBottom.Ins.ListSong.Count)
+                else
                 {
-                    LoadSong(id);
+                    int RandomValue = RandomNumber();
+                    LoadSong(RandomValue);
                 }
+
             }
-            else
-            {
-                int RandomValue = RandomNumber();
-                LoadSong(RandomValue);
-            }
-            
+            catch { }
         }
-        
+
         private void Prev_Click(object sender, RoutedEventArgs e)
         {
-            if (!IsShuffle)
+            try
             {
-                int id = 0;
-
-                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                if (!IsShuffle)
                 {
-                    if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                    int id = 0;
+
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                     {
-                        id = i - 1;
+                        if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
+                        {
+                            id = i - 1;
+                        }
+                    }
+                    if (id >= 0)
+                    {
+                        LoadSong(id);
                     }
                 }
-                if (id >= 0)
+                else
                 {
-                    LoadSong(id);
+                    int RandomValue = RandomNumber();
+                    LoadSong(RandomValue);
                 }
-            }
-            else
-            {
-                int RandomValue = RandomNumber();
-                LoadSong(RandomValue);
-            }
 
+            }
+            catch { }
         }
     }
 }
