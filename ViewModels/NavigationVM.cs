@@ -185,7 +185,6 @@ namespace Spotify.ViewModels
             }
         }
 
-
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);

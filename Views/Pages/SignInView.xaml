@@ -9,7 +9,7 @@
              d:DesignHeight="1000" d:DesignWidth="800">
     <StackPanel Background="#ffffff">
         <Image Source="{StaticResource spotifyLoginLogo}" Width="182" Height="56" Margin="0 30 0 20"/>
-        <Line X1="1000" Stroke="Gray"></Line>
+        <Line X1="10000" Stroke="Gray"></Line>
         <StackPanel HorizontalAlignment="Center" Width="450">
             <TextBlock Margin="0 20 0 0" HorizontalAlignment="Center" 
                        Text="To continue, log in to Spotify."

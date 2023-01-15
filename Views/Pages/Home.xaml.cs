@@ -30,6 +30,18 @@ namespace Spotify.Views.Pages
         public Home()
         {
           InitializeComponent();
+            if(DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 12)
+            {
+                timeText.Text = "Good Morning";
+            }
+            else if(DateTime.Now.Hour > 12 && DateTime.Now.Hour<18)
+            {
+                timeText.Text = "Good Afternoon";
+            }
+            else 
+            {
+                timeText.Text = "Good Evening";
+            }
         }
         private void Favor_Click(object sender, RoutedEventArgs e)
         {
