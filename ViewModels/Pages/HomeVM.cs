@@ -80,6 +80,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedItem != null)
                     {
+                        
                         AlbumName = SelectedItem.AlbumName;
                         AlbumDescription = SelectedItem.Descriptions;
                         SongsOfAlbum = SelectedItem.SongsOfAlbum;
@@ -102,6 +103,7 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedSongItem != null)
                 {
+                   AlbumView.type = "album";
                     SongBottom.Ins.SongName = SelectedSongItem.SongName;
                     SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                     SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;

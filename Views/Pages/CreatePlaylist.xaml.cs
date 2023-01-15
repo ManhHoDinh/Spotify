@@ -166,6 +166,7 @@ namespace Spotify.Views.Pages
             binding.Source = playlist;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
+            SongsView.CurrentType = "playlist";
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

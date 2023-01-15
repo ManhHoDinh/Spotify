@@ -38,6 +38,7 @@ namespace Spotify
                 if(IsLoaded == true)
                 {
                     window.window_Loaded(new object(), new RoutedEventArgs());
+                    
                     IsLoaded = false;
                 }
             }

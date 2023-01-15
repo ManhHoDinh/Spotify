@@ -28,6 +28,19 @@ namespace Spotify
 
 
 
+        public ObservableCollection<Song> LikeSongSource
+        {
+            get { return (ObservableCollection<Song>)GetValue(LikeSongSourceProperty); }
+            set { SetValue(LikeSongSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LikeSongSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LikeSongSourceProperty =
+            DependencyProperty.Register("LikeSongSource", typeof(ObservableCollection<Song>), typeof(ViewPage), new PropertyMetadata(null));
+
+
+
+
 
 
         public bool IsSearchView
@@ -166,6 +179,7 @@ namespace Spotify
             public MainWindow()
             {
                 InitializeComponent();
+
             }
 
         }

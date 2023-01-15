@@ -24,7 +24,7 @@ namespace Spotify.Views.Pages
   /// </summary>
   public partial class AlbumView : UserControl
   {
-
+        public static string type = "";
     public AlbumView()
     {
       InitializeComponent();
@@ -79,9 +79,11 @@ namespace Spotify.Views.Pages
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-
-        
+            SongsView.CurrentType = "album";
+            
                 Album.ApplyTemplate();
+            if (type == "album")
+            {
                 if (SongBottom.Ins.CountId >= 0)
                 {
                     if (SongBottom.Ins.IsPlay == false)
@@ -89,10 +91,19 @@ namespace Spotify.Views.Pages
                         Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
                         SongBottom.Ins.IsPlay = false;
                     }
-                    else Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                    else
+                    {
+                       
+                            Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+
+
+
+                    }
 
                 }
-                var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+            }
+
+            var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
             if (Properties.Settings.Default.CurrentUserID != -1)
             {
                 var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
@@ -111,7 +122,7 @@ namespace Spotify.Views.Pages
                     }
                 }
             }
-      
+           
     }
   }
 }

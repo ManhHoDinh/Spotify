@@ -41,7 +41,7 @@ namespace Spotify.ViewModels.Pages
 
         private ImageSource _imagePlaylist;
         public ImageSource ImagePlaylist { get => _imagePlaylist; set { _imagePlaylist = value; OnPropertyChanged(); } }
-        private ObservableCollection<Song> _songsOfPlaylist;
+        private ObservableCollection<Song> _songsOfPlaylist = new ObservableCollection<Song>();
         public ObservableCollection<Song> SongsOfPlaylist { get => _songsOfPlaylist; set { _songsOfPlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
         public Playlist SelectedPlaylist
@@ -137,7 +137,9 @@ namespace Spotify.ViewModels.Pages
                         SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                         SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                         SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                        SongBottom.Ins.IsPlay = true;
                         Properties.Settings.Default.CurrentSongID = SelectedSongItem.ID;
+
                         Properties.Settings.Default.Save();
                     }
                 }
