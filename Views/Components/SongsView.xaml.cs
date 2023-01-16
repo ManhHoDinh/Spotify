@@ -33,6 +33,7 @@ namespace Spotify.Views.Components
         public static string type = "";
         public static string CurrentType = "";
         public static bool IsChanged = false;
+        public static bool IsNextBack = false;
         public ICommand RemoveCommand { get; set; }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -95,7 +96,7 @@ namespace Spotify.Views.Components
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(songview, IsPlayProperty, binding);
-
+          
             RemoveCommand = new RelayCommand<object>(
                 (p) =>
                 {
@@ -465,24 +466,20 @@ namespace Spotify.Views.Components
             catch { }
         }
 
+       
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 
-                var listview = GetTemplateChild("PART_Header") as ListView;
+                    var listview = GetTemplateChild("PART_Header") as ListView;
+                    if (listview.SelectedIndex != -1)
+                    {
+                        SongBottom.Ins.ListSong = ItemSource;
+                        SongBottom.Ins.CountId = listview.SelectedIndex;
+                        
+                    }
 
-
-                if (listview.SelectedIndex != -1)
-                {
-                   
-                    SongBottom.Ins.ListSong = ItemSource;
-                    SongBottom.Ins.CountId = listview.SelectedIndex;
-                   
-                    
-
-
-                }
                 for (int i = 0; i < listview.Items.Count; i++)
                 {
                     var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
@@ -516,8 +513,6 @@ namespace Spotify.Views.Components
                         }
                     }
                 }
-                
-                
             }
             catch { }
         }
@@ -576,8 +571,8 @@ namespace Spotify.Views.Components
 
 
             SongBottom.Ins.SongSource = ItemSource;
-
-
+            if(SongBottom.Ins.ListSong != null)
+           
             if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
             {
                 IsShowed = true;
@@ -603,6 +598,7 @@ namespace Spotify.Views.Components
                         }
                     }
 
+
                 }
 
                 if (listview.SelectedIndex == -1)
@@ -627,6 +623,7 @@ namespace Spotify.Views.Components
 
                         if (SongBottom.Ins.IsPlay == true)
                         {
+                            
                             image.Visibility = Visibility.Visible;
                             tb.Visibility = Visibility.Hidden;
                             imgPlay.ImageSource = (ImageSource)Application.Current.Resources["Pausexs"];

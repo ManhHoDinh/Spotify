@@ -515,7 +515,11 @@ namespace Spotify.Views.Components
             SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[index].SingerName;
             SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[index].SongLinkUri;
             SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[index].SongImageUri;
+          //  MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
             SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[index];
+           
+            //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+
         }
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -578,9 +582,11 @@ namespace Spotify.Views.Components
         {
             try
             {
+                SongsView.IsNextBack = true;
                 if (!IsShuffle)
                 {
                     int id = 0;
+                   
                     for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                     {
                         if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
@@ -591,6 +597,7 @@ namespace Spotify.Views.Components
                     if (id < SongBottom.Ins.ListSong.Count)
                     {
                         LoadSong(id);
+
                     }
                 }
                 else
@@ -607,6 +614,8 @@ namespace Spotify.Views.Components
         {
             try
             {
+                SongsView.IsNextBack = true;
+
                 if (!IsShuffle)
                 {
                     int id = 0;
@@ -620,7 +629,9 @@ namespace Spotify.Views.Components
                     }
                     if (id >= 0)
                     {
+
                         LoadSong(id);
+                        
                     }
                 }
                 else

@@ -37,6 +37,8 @@ namespace Spotify.ViewModels.Pages
         }
         private bool _IsSelected;
         public bool IsSelected { get => _IsSelected; set { _IsSelected = value; OnPropertyChanged(); } }
+
+
         private Song _SelectedItem;
         public Song SelectedItem
         {
@@ -47,7 +49,7 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    
+                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
                     AlbumView.type = "likesong";
                     LinkSong = new Uri(SelectedItem.SongLink);
                     Image = new Uri(SelectedItem.SongImage);
@@ -75,12 +77,7 @@ namespace Spotify.ViewModels.Pages
         public LikedSongsVM()
         {
 
-                //Binding bd = new Binding("SelectedItem");
-                //bd.Source = this;
-                //bd.Mode = BindingMode.TwoWay;
-                //BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
-            
-         
+          
 
 
 

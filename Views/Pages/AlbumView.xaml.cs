@@ -25,6 +25,7 @@ namespace Spotify.Views.Pages
   public partial class AlbumView : UserControl
   {
         public static string type = "";
+        public static Binding binding;
     public AlbumView()
     {
       InitializeComponent();
@@ -32,14 +33,21 @@ namespace Spotify.Views.Pages
             Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
             string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
             color = "#" + hex;
-
+            
             //HomeVM vm = this.DataContext as HomeVM;
+            //if (AlbumView.type=="album" || SongBottom.Ins.ListSong == null)
+            //{
+                binding = new Binding("SelectedSong");
+                binding.Source = Album;
+                binding.Mode = BindingMode.TwoWay;
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            if(SongBottom.Ins.ListSong != Album.ItemSource && SongBottom.Ins.ListSong != null)
+            {
+                BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+            }
+          //  }
 
-            Binding binding = new Binding("SelectedSong");
-            binding.Source = Album;
-            binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-    }
+        }
         public string color
         {
             get { return (string)GetValue(colorProperty); }
