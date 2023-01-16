@@ -515,9 +515,10 @@ namespace Spotify.Views.Components
             SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[index].SingerName;
             SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[index].SongLinkUri;
             SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[index].SongImageUri;
-          //  MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+            //  MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+            SongBottom.Ins.CountId = index;
             SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[index];
-           
+            
             //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
 
         }

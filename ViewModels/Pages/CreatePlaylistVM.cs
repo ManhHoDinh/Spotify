@@ -133,6 +133,8 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedSongItem != null)
                     {
+                        //  BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+                        AlbumView.type = "playlist";
                         SongBottom.Ins.SongName = SelectedSongItem.SongName;
                         SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                         SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;

@@ -470,13 +470,32 @@ namespace Spotify.Views.Components
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
-            {
+            { 
                 
+             
                     var listview = GetTemplateChild("PART_Header") as ListView;
                     if (listview.SelectedIndex != -1)
                     {
-                        SongBottom.Ins.ListSong = ItemSource;
+                    if (SongBottom.Ins.ListSong != ItemSource && SongBottom.Ins.ListSong != null)
+                    {
+                        BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                        if (CurrentType == "likesong")
+                        {
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                        }
+                        else if (CurrentType == "album")
+                        {
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
+                        }
+                        else if (CurrentType == "playlist")
+                        {
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+
+                        }
+                    }
+                    SongBottom.Ins.ListSong = ItemSource;
                         SongBottom.Ins.CountId = listview.SelectedIndex;
+                        
                         
                     }
 

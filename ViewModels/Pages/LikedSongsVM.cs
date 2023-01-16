@@ -49,8 +49,10 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                    
+                    //BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
                     AlbumView.type = "likesong";
+                  // MessageBox.Show("haha");
                     LinkSong = new Uri(SelectedItem.SongLink);
                     Image = new Uri(SelectedItem.SongImage);
                     SongBottom.Ins.SongName = SelectedItem.SongName;

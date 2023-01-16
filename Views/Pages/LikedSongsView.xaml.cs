@@ -54,28 +54,28 @@ namespace Spotify.Views.Pages
         public static int id = 0;
 
         public static Binding bd;
-        public static ObservableCollection<Song> binh = new ObservableCollection<Song>();
+        public static SongsView binh;
         public LikedSongsView()
         {
             InitializeComponent();
-            binh = ListLikeSongs.ItemSource;
+            binh = ListLikeSongs;
             //SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
             Binding binding = new Binding("IsEmpty");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(this, IsEmptyProperty,binding);
-            //if (SongBottom.Ins.ListSong == ListLikeSongs.ItemSource || SongBottom.Ins.ListSong == null )
-            //{
-            
-                bd = new Binding("SelectedSong");
-                bd.Source = ListLikeSongs;
-                bd.Mode = BindingMode.TwoWay;
-                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
-
-            if(SongBottom.Ins.ListSong != ListLikeSongs.ItemSource && SongBottom.Ins.ListSong != null)
+            bd = new Binding("SelectedSong");
+            bd.Source = ListLikeSongs;
+            bd.Mode = BindingMode.TwoWay;
+            if (AlbumView.type != "album" && AlbumView.type != "playlist")
             {
-                BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
             }
+
+            //if (SongBottom.Ins.ListSong != ListLikeSongs.ItemSource && SongBottom.Ins.ListSong != null)
+            //{
+            //    BindingOperations.ClearBinding(ListLikeSongs, SongsView.SelectedSongProperty);
+            //}
 
 
             // }
@@ -163,7 +163,6 @@ namespace Spotify.Views.Pages
 
         private void LikeSong_Loaded(object sender, RoutedEventArgs e)
         {
-            
 
             SongsView.CurrentType = "likesong";
             LikedSongsVM vm = this.DataContext as LikedSongsVM;
@@ -190,7 +189,7 @@ namespace Spotify.Views.Pages
                 var playBtn = ListLikeSongs.Template.FindName("PlayPauseGreen", ListLikeSongs) as Button;
                 if (SongBottom.Ins.IsPlay == true && SongBottom.Ins.ListSong == ListLikeSongs.ItemSource)
                 {
-
+                    
                     int index = 0;
 
                     for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
@@ -201,6 +200,7 @@ namespace Spotify.Views.Pages
                             index = i; break;
                         }
                     }
+
 
                     list.SelectedIndex = index;
                     SongsView.IsChanged = true;

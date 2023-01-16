@@ -33,19 +33,25 @@ namespace Spotify.Views.Pages
             Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
             string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
             color = "#" + hex;
-            
+
             //HomeVM vm = this.DataContext as HomeVM;
             //if (AlbumView.type=="album" || SongBottom.Ins.ListSong == null)
             //{
-                binding = new Binding("SelectedSong");
-                binding.Source = Album;
-                binding.Mode = BindingMode.TwoWay;
-                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-            if(SongBottom.Ins.ListSong != Album.ItemSource && SongBottom.Ins.ListSong != null)
+
+            binding = new Binding("SelectedSong");
+            binding.Source = Album;
+            binding.Mode = BindingMode.TwoWay;
+            if (type != "likesong" && type != "playlist")
             {
-                BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
             }
-          //  }
+
+
+            //if (SongBottom.Ins.ListSong != Album.ItemSource && SongBottom.Ins.ListSong != null)
+            //{
+            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+            //}
+            //  }
 
         }
         public string color
@@ -92,6 +98,7 @@ namespace Spotify.Views.Pages
                 Album.ApplyTemplate();
             if (type == "album")
             {
+
                 if (SongBottom.Ins.CountId >= 0)
                 {
                     if (SongBottom.Ins.IsPlay == false)
@@ -101,8 +108,8 @@ namespace Spotify.Views.Pages
                     }
                     else
                     {
-                       
-                            Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                        
+                        Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
 
 
 
