@@ -38,7 +38,7 @@ Tận hưởng âm nhạc theo cách riêng của bạn.
 ## I. Mở đầu
 Với Spotify, bạn có thể dễ dàng tìm nhạc hoặc podcast thích hợp cho từng khoảnh khắc.
 
-Có hàng triệu bản nhạc và tập nội dung trên Spotify. Vì vậy, dù đang lái xe, tập thể dục, dự tiệc hay thư giãn, bạn luôn có thể dễ dàng chọn được nhạc hoặc podcast phù hợp. Chọn nội dung bạn muốn nghe hoặc tận hưởng điều ngạc nhiên từ Spotify.
+Trên Spotify có danh sách nhạc và các tập nội dung phong phú. Vì vậy, dù đang lái xe, tập thể dục, dự tiệc hay thư giãn, bạn luôn có thể dễ dàng chọn được nhạc hoặc podcast phù hợp. Chọn nội dung bạn muốn nghe hoặc tận hưởng điều ngạc nhiên từ Spotify.
 
 Hãy để cuộc sống của bạn tràn ngập tiếng nhạc với Spotify. Bạn có thể đăng ký hoặc nghe miễn phí.
 
@@ -84,7 +84,7 @@ Hệ thống nghe nhạc Spotify gồm:
  * <strong>Ứng dụng thực tế</strong>
  
     * Đáp ứng được các yêu cầu của khách hàng đặt ra, hệ thống mang tính ổn định cao, dễ sử dụng, không gây khó khăn cho người dùng, thiết kế dựa trên cơ sở sử dụng cho khách hàng là người quốc tế.
-    * Được sử dụng nghe nhạc rộng rãi, thay thế cho các ứng dụng cũ còn nhiều hạn chế, giao diện lỗi thời hoặc các tạo sửa playlist lỗi thời.
+    * Được sử dụng nghe nhạc rộng rãi, thay thế cho các ứng dụng cũ còn nhiều hạn chế, giao diện lỗi thời hoặc cách tạo sửa playlist lỗi thời.
     * Trở thành một trong những ứng dụng được khách hàng lựa chọn, tin tưởng sử dụng.
 
 
@@ -131,7 +131,7 @@ Quản lý album
 ## III. Hướng dẫn cài đặt
 * Bước 1 : Tải source từ : https://github.com/ManhHoDinh/Spotify
 * Bước 2 : Chạy local database : spotify.sql trong folder resource.
-* Bước 3 : Sửa tên local database từ DinhManh\SQLEXPRESS sang local database của bạn.
+* Bước 3 : Sửa tên local database từ DinhManh\SQLEXPRESS sang local database của bạn bên trong file app.config.
 
 <div id="Tacgia"></div>
 
