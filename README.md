@@ -124,7 +124,6 @@ Quản lý playlist
 * Cho phép người dùng thay đổi tên, mô tả, ảnh đại diện của từng playlist.
 
 Quản lý album
-* Cho phép người dùng có thể tìm kiếm các album.
 * Cho phép người dùng phát tất cả các bài hát từ album.
 
 <div id="CaiDat"></div>
