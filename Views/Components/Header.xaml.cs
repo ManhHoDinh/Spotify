@@ -205,7 +205,7 @@ namespace Spotify.Views.Components
             try
             {
                 //MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[0].ToString() + ListPlaylist.Ins.ListSelectedItem[1].ToString());
-
+                
                 ViewPage.Ins.IsClick = true;
                 int count = ViewPage.Ins.CurrentIndexView;
                 Button btn = sender as Button;
@@ -213,6 +213,10 @@ namespace Spotify.Views.Components
                 if (count > 0)
                 {
                     ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
+                    if (ViewPage.Ins.CurrentView.GetType().Name != "SearchVM")
+                        ViewPage.Ins.IsSearchView = false;
+                    else
+                        ViewPage.Ins.IsSearchView = true;
                     if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
                     {
 
@@ -270,6 +274,7 @@ namespace Spotify.Views.Components
         {
             try
             {
+                
                 ViewPage.Ins.IsClick = true;
                 //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
                 //{
@@ -282,6 +287,10 @@ namespace Spotify.Views.Components
                 {
 
                     ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
+                    if (ViewPage.Ins.CurrentView.GetType().Name != "SearchVM")
+                        ViewPage.Ins.IsSearchView = false;
+                    else
+                        ViewPage.Ins.IsSearchView = true;
                     if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
                     {
                         int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;

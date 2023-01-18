@@ -410,6 +410,7 @@ namespace Spotify.Views.Components
         {
             try
             {
+                ViewPage.Ins.IsSearchView = false;
                 var listview = GetTemplateChild("PART_Header") as ListView;
                 Button btn = sender as Button;
                 ListViewItem curItem = ((ListViewItem)listview.ContainerFromElement((Button)sender));

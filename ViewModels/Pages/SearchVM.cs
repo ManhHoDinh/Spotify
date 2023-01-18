@@ -64,27 +64,69 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedSongItem != null)
                     {
-                        SongBottom.Ins.SongName = SelectedSongItem.SongName;
-                        SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                        SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
-                        SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
-                        SongBottom.Ins.IsPlay = true;
+                        ViewPage.Ins.IsSearchView = false;
                         SongSelect.Ins.SongName = SelectedSongItem.SongName;
                         SongSelect.Ins.SingerName = SelectedSongItem.SingerName;
+                        SongSelect.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                         SongSelect.Ins.ImageSong = SelectedSongItem.SongImageUri;
                         SongSelect.Ins.Description = SelectedSongItem.Descriptions;
-                        ViewPage.Ins.CurrentView = new SongView();
-                        ViewPage.Ins.CurrentIndexView++;
                         var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SelectedSongItem.ID).FirstOrDefault();
+                        SongView a = new SongView();
+                        TranslatePage(a);
+                        a.SelectedSong = SelectedSongItem;
                         foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
                             if (s.ID == SelectedSongItem.ID)
                                 return;
                         Playlists.Ins.RecentSearchPlaylist.Songs.Add(song);
                         Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
-                    }
-                    DataProvider.Ins.DB.SaveChanges();
+                        DataProvider.Ins.DB.SaveChanges();
+                    } 
                 }
+            
                 catch { }
+            }
+        }
+        void TranslatePage(object obj)
+        {
+            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
+            {
+                int currentId = ViewPage.Ins.CurrentIndexView;
+                int count = ViewPage.Ins.ListPage.Count;
+
+                if (currentId + 1 < count)
+                {
+                    for (int i = currentId + 1; i < count; i++)
+                    {
+                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                    }
+
+                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                    {
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+                        else
+                        {
+                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            {
+
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
+                    }
+                }
+                // MessageBox.Show(SongBottom.Ins.CountId.ToString());
+                ViewPage.Ins.CurrentView = obj;
+                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                ViewPage.Ins.CurrentIndexView++;
+                ViewPage.Ins.IsDisableBack = false;
             }
         }
         public SearchVM()
