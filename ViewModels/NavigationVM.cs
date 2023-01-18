@@ -69,6 +69,7 @@ namespace Spotify.ViewModels
         }
         void TranslatePage(object obj)
         {
+            LoginStatus.Current.SearchText = "";
             if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
             {
                 int currentId = ViewPage.Ins.CurrentIndexView;

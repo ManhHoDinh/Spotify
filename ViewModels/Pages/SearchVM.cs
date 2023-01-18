@@ -69,8 +69,10 @@ namespace Spotify.ViewModels.Pages
                         SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                         SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
                         SongBottom.Ins.IsPlay = true;
-                        Properties.Settings.Default.CurrentSongID = SelectedSongItem.ID;
-                        Properties.Settings.Default.Save();
+                        SongSelect.Ins.SongName = SelectedSongItem.SongName;
+                        SongSelect.Ins.SingerName = SelectedSongItem.SingerName;
+                        SongSelect.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                        SongSelect.Ins.Description = SelectedSongItem.Descriptions;
                         ViewPage.Ins.CurrentView = new SongView();
                         ViewPage.Ins.CurrentIndexView++;
                         var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SelectedSongItem.ID).FirstOrDefault();

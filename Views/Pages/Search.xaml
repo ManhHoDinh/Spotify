@@ -128,7 +128,10 @@
                     <!--#endregion Content-->
                     <Grid Background="#121212">
                         <Border x:Name="bgTopHome" Background="{StaticResource DefaultHomeColor}" Height="4000" Margin="0 -2076 0 0"/>
-                        <ListView  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   ItemsSource="{Binding Source={x:Static vmodel:Playlists.Ins},Path=RecentSearchPlaylist.SongsOfPlaylist,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ListView>
+                        <ListView  Tag="Recent Search" Template="{StaticResource TopicAlbum}"   
+                                   ItemsSource="{Binding Source={x:Static vmodel:Playlists.Ins},Path=RecentSearchPlaylist.SongsOfPlaylist,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedItem="{Binding SelectedSongItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  ></ListView>
                         <Grid Background="#121212" Visibility="{Binding Source={x:Static vm:SearchVM.Ins},Path=IsSearch,Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <Border  Background="{StaticResource DefaultHomeColor}" Height="4000" Margin="0 -3000 0 0"/>
                             <components:SongsView
