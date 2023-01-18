@@ -110,6 +110,12 @@ namespace Spotify.ViewModels.Pages
                     SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                     SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                     SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    SongSelect.Ins.SongName = SelectedSongItem.SongName;
+                    SongSelect.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongSelect.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongSelect.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    SongSelect.Ins.Description = SelectedSongItem.Descriptions;
+
                     SongBottom.Ins.IsPlay = true;
                     int xx = SelectedItem.ID;
                     

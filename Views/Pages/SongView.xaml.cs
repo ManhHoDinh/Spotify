@@ -115,7 +115,6 @@ namespace Spotify.Views.Pages
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(song, IsPlayProperty, binding);
-            
         }
 
 
@@ -164,28 +163,46 @@ namespace Spotify.Views.Pages
             DependencyProperty.Register("isFavor", typeof(bool), typeof(SongView), new PropertyMetadata(true));
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-            if(SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
+            if (SongSelect.Ins.SongName != null)
             {
-                
-                SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-                ImageBrush img = new ImageBrush();
-                img.ImageSource = PauseGreen;
-                PlayPauseGreen.Background = img;
-            }
-            else
-            {
-                if (SongBottom.Ins.IsPlay == true)
+                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
                 {
-
-                    SongBottom.Ins.IsPlay = false;
-                }
-                else
-                {
-
+                    SongBottom.Ins.SongName = SongSelect.Ins.SongName;
+                    SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
+                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                    SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = PauseGreen;
+                    PlayPauseGreen.Background = img;
                     SongBottom.Ins.IsPlay = true;
                 }
             }
-               
+            if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
+                {
+                    SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = PauseGreen;
+                    PlayPauseGreen.Background = img;
+                SongBottom.Ins.IsPlay = true;
+                }
+                else
+                {
+                    if (SongBottom.Ins.IsPlay == true)
+                    {
+
+                        SongBottom.Ins.IsPlay = false;
+                    }
+                    else
+                    {
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PauseGreen;
+                        PlayPauseGreen.Background = img;
+                        SongBottom.Ins.IsPlay = true;
+                    }
+                }
+
+            
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -218,17 +235,13 @@ namespace Spotify.Views.Pages
 
         private void song_Loaded(object sender, RoutedEventArgs e)
         {
-           if(SongBottom.Ins.SelectedSong != null)
-            {
-                if (SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
+                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
                 {
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PlayGreen;
                     PlayPauseGreen.Background = img;
                 }
-            }
-           
-
+         
         }
     }
 }

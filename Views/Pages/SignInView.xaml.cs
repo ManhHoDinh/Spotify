@@ -51,8 +51,7 @@ namespace Spotify.Views.Pages
                 ListPlaylist.Ins.CurrentIdPlaylist = -1;
                 ListPlaylist.Ins.ListSelectedItem = new List<int>();
                 ViewPage.Ins.ViewPageSelected = "Home";
-                
-
+                AnnouceLoginError.Visibility = Visibility.Hidden;
             }
             else
                 AnnouceLoginError.Visibility = Visibility.Visible;

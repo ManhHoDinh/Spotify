@@ -74,9 +74,12 @@ namespace Spotify.ViewModels.Pages
                         SongView a = new SongView();
                         TranslatePage(a);
                         a.SelectedSong = SelectedSongItem;
-                        foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
-                            if (s.ID == SelectedSongItem.ID)
-                                return;
+                        try {
+                            foreach (Song s in Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist)
+                                if (s.ID == SelectedSongItem.ID)
+                                    return;
+                        }
+                        catch { }
                         Playlists.Ins.RecentSearchPlaylist.Songs.Add(song);
                         Playlists.Ins.RecentSearchPlaylist.SongsOfPlaylist.Add(song);
                         DataProvider.Ins.DB.SaveChanges();
