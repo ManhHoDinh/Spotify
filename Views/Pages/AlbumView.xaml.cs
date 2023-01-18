@@ -24,7 +24,8 @@ namespace Spotify.Views.Pages
   /// </summary>
   public partial class AlbumView : UserControl
   {
-
+        public static string type = "";
+        public static Binding binding;
     public AlbumView()
     {
       InitializeComponent();
@@ -34,12 +35,25 @@ namespace Spotify.Views.Pages
             color = "#" + hex;
 
             //HomeVM vm = this.DataContext as HomeVM;
+            //if (AlbumView.type=="album" || SongBottom.Ins.ListSong == null)
+            //{
 
-            Binding binding = new Binding("SelectedSong");
+            binding = new Binding("SelectedSong");
             binding.Source = Album;
             binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-    }
+            if (type != "likesong" && type != "playlist")
+            {
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
+            }
+
+
+            //if (SongBottom.Ins.ListSong != Album.ItemSource && SongBottom.Ins.ListSong != null)
+            //{
+            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+            //}
+            //  }
+
+        }
         public string color
         {
             get { return (string)GetValue(colorProperty); }
@@ -79,9 +93,12 @@ namespace Spotify.Views.Pages
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
-
+            SongsView.CurrentType = "album";
             
                 Album.ApplyTemplate();
+            if (type == "album")
+            {
+
                 if (SongBottom.Ins.CountId >= 0)
                 {
                     if (SongBottom.Ins.IsPlay == false)
@@ -89,10 +106,19 @@ namespace Spotify.Views.Pages
                         Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
                         SongBottom.Ins.IsPlay = false;
                     }
-                    else Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                    else
+                    {
+                        
+                        Album.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+
+
+
+                    }
 
                 }
-                var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
+            }
+
+            var ListSong = Album.Template.FindName("PART_Header", Album) as ListView;
             if (Properties.Settings.Default.CurrentUserID != -1)
             {
                 var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
@@ -111,6 +137,7 @@ namespace Spotify.Views.Pages
                     }
                 }
             }
+           
     }
   }
 }

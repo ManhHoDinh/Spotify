@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,7 +31,7 @@ namespace Spotify.Views.Pages
             base.OnPropertyChanged(e);
             if (e.Property == IsEmptyProperty)
             {
-                if(IsEmpty == true)
+                if (IsEmpty == true)
                 {
                     HaveSong.Visibility = Visibility.Hidden;
                     NotHaveSong.Visibility = Visibility.Visible;
@@ -42,6 +43,7 @@ namespace Spotify.Views.Pages
                     NotHaveSong.Visibility = Visibility.Hidden;
 
                 }
+                
 
 
 
@@ -49,14 +51,44 @@ namespace Spotify.Views.Pages
 
         }
 
+        public static int id = 0;
+
+        public static Binding bd;
+        public static SongsView binh;
         public LikedSongsView()
         {
             InitializeComponent();
-            SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
+            binh = ListLikeSongs;
+            //SongBottom.Ins.ListSong = ListLikeSongs.ItemSource;
             Binding binding = new Binding("IsEmpty");
             binding.Source = SongBottom.Ins;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(this, IsEmptyProperty,binding);
+            bd = new Binding("SelectedSong");
+            bd.Source = ListLikeSongs;
+            bd.Mode = BindingMode.TwoWay;
+            if (AlbumView.type != "album" && AlbumView.type != "playlist")
+            {
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
+            }
+
+            //if (SongBottom.Ins.ListSong != ListLikeSongs.ItemSource && SongBottom.Ins.ListSong != null)
+            //{
+            //    BindingOperations.ClearBinding(ListLikeSongs, SongsView.SelectedSongProperty);
+            //}
+
+
+            // }
+            ////if(SongBottom.Ins.SelectedSong == null)
+            //{
+            //    SongBottom.Ins.SelectedSong = song;
+            //}
+
+            //}
+
+
+
+
 
         }
 
@@ -131,8 +163,18 @@ namespace Spotify.Views.Pages
 
         private void LikeSong_Loaded(object sender, RoutedEventArgs e)
         {
-            if(Properties.Settings.Default.CurrentUserID != -1)
+
+            SongsView.CurrentType = "likesong";
+            LikedSongsVM vm = this.DataContext as LikedSongsVM;
+           
+            if (Properties.Settings.Default.CurrentUserID != -1)
             {
+                
+                if(id != Properties.Settings.Default.CurrentUserID)
+                {
+                    var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+                    vm.listSong = new ObservableCollection<Song>(songs);
+                }
                 if (ListLikeSongs.ItemSource.Count == 0)
                 {
                     HaveSong.Visibility = Visibility.Hidden;
@@ -143,13 +185,36 @@ namespace Spotify.Views.Pages
                     HaveSong.Visibility = Visibility.Visible;
                     NotHaveSong.Visibility = Visibility.Hidden;
                 }
+                var list = ListLikeSongs.Template.FindName("PART_Header", ListLikeSongs) as ListView;
+                var playBtn = ListLikeSongs.Template.FindName("PlayPauseGreen", ListLikeSongs) as Button;
+                if (SongBottom.Ins.IsPlay == true && SongBottom.Ins.ListSong == ListLikeSongs.ItemSource)
+                {
+                    
+                    int index = 0;
+
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                    {
+                        if (SongBottom.Ins.ListSong[i].SongName == SongBottom.Ins.SongName)
+                        {
+
+                            index = i; break;
+                        }
+                    }
+
+
+                    list.SelectedIndex = index;
+                    SongsView.IsChanged = true;
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = (ImageSource)Application.Current.Resources["PauseFill"];
+                    playBtn.Background = img;
+                }
+                else list.SelectedIndex = -1;
+                id = Properties.Settings.Default.CurrentUserID;
+               
+
             }
-            else
-            {
-                HaveSong.Visibility = Visibility.Hidden;
-                NotHaveSong.Visibility = Visibility.Visible;
-            }
-           
+
+
         }
     }
 }

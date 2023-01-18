@@ -41,7 +41,7 @@ namespace Spotify.ViewModels.Pages
 
         private ImageSource _imagePlaylist;
         public ImageSource ImagePlaylist { get => _imagePlaylist; set { _imagePlaylist = value; OnPropertyChanged(); } }
-        private ObservableCollection<Song> _songsOfPlaylist;
+        private ObservableCollection<Song> _songsOfPlaylist = new ObservableCollection<Song>();
         public ObservableCollection<Song> SongsOfPlaylist { get => _songsOfPlaylist; set { _songsOfPlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
         public Playlist SelectedPlaylist
@@ -133,12 +133,15 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedSongItem != null)
                     {
+                        //  BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+                        AlbumView.type = "playlist";
                         SongBottom.Ins.SongName = SelectedSongItem.SongName;
                         SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
                         SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
                         SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
                         SongBottom.Ins.IsPlay = true;
                         Properties.Settings.Default.CurrentSongID = SelectedSongItem.ID;
+
                         Properties.Settings.Default.Save();
                     }
                 }
@@ -259,7 +262,12 @@ namespace Spotify.ViewModels.Pages
                if (ListPlaylist.Ins.List.Count > 0)
                {
                    SelectedPlaylist = ListPlaylist.Ins.List[0];
-
+                 
+               }
+               else
+               {
+                   ViewPage.Ins.CurrentView = new Home();
+                   ViewPage.Ins.ViewPageSelected = "Home";
                }
                DeleteForm form = (DeleteForm)p;
                form.Close();

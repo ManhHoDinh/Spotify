@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using Spotify.Models;
 using Spotify.Views.Pages;
 using System.Collections.ObjectModel;
+using Spotify.Views.Components;
 
 namespace Spotify
 {
@@ -38,6 +39,7 @@ namespace Spotify
                 if(IsLoaded == true)
                 {
                     window.window_Loaded(new object(), new RoutedEventArgs());
+                    
                     IsLoaded = false;
                 }
             }
@@ -130,22 +132,38 @@ namespace Spotify
 
         private void LogOut_click(object sender, RoutedEventArgs e)
         {
-            LoginStatus.Current.IsShowDiaologAccount = false;
-            LoginStatus.Current.User = DataProvider.Ins.DB.Users.Where(x => x.UserID == -1).FirstOrDefault();
-            LoginStatus.Current.ResetAllView();
-            LoginStatus.Current.IsMainView = true;
-            LoginStatus.Current.HaveUser = false;
-            LoginStatus.Current.NeedLogin = true;
-            ListPlaylist.Ins.List = null;
-            Properties.Settings.Default.CurrentUserID = -1;
-            Properties.Settings.Default.Save();
-            ViewPage.Ins.CurrentView = new Home();
-            ViewPage.Ins.CurrentIndexView = 0;
-            ViewPage.Ins.IsDisableBack = true;
-            ViewPage.Ins.IsDisableNext = true;
-            ListPlaylist.Ins.CurrentIdPlaylist = -1;
-            ListPlaylist.Ins.ListSelectedItem = new List<int>();
-            ViewPage.Ins.ViewPageSelected = "Home";
+            try {
+
+                LoginStatus.Current.IsShowDiaologAccount = false;
+                LoginStatus.Current.User = DataProvider.Ins.DB.Users.Where(x => x.UserID == -1).FirstOrDefault();
+                LoginStatus.Current.ResetAllView();
+                LoginStatus.Current.IsMainView = true;
+                LoginStatus.Current.HaveUser = false;
+                LoginStatus.Current.NeedLogin = true;
+                ListPlaylist.Ins.List = null;
+                Properties.Settings.Default.CurrentUserID = -1;
+                Properties.Settings.Default.Save();
+                ViewPage.Ins.CurrentView = new Home();
+                ViewPage.Ins.CurrentIndexView = 0;
+                ViewPage.Ins.IsDisableBack = true;
+                ViewPage.Ins.IsDisableNext = true;
+                ListPlaylist.Ins.CurrentIdPlaylist = -1;
+                ListPlaylist.Ins.ListSelectedItem = new List<int>();
+                ViewPage.Ins.ViewPageSelected = "Home";
+                SongSelect.Ins.SongName = null;
+                SongBottom.Ins.SongName = null;
+                SongBottom.Ins.IsPlay = false;
+                SongSelect.Ins.LinkSong = null;
+                SongBottom.Ins.LinkSong = null;
+                SongBottom.Ins.ImageSong = null;
+                SongSelect.Ins.ImageSong = null;
+                SongBottom.Ins.SongName = null;
+                SongSelect.Ins.SongName = null;
+                SongBottom.Ins.SingerName = null;
+                SongBottom.Ins.SelectedSong = null;
+                SongBottom.Ins.SelectedSong.SongDuration = "_";
+            }
+            catch { }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

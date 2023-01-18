@@ -550,6 +550,7 @@
     <Resource Include="Resource\Images\RepeatOneBtn.png" />
     <Resource Include="Resource\Images\Repeat_S.png" />
     <Resource Include="Resource\Images\Shuffle_S.png" />
+    <Resource Include="Resource\Images\Spotify.png" />
     <Content Include="Resource\Songs\AiCungCoNgayXua\AiCungCoNgayXua.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

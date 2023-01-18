@@ -90,7 +90,15 @@ namespace Spotify.Views.Components
         // Using a DependencyProperty as the backing store for CountId.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CountIdProperty =
             DependencyProperty.Register("CountId", typeof(int), typeof(SongBottom), new PropertyMetadata(-1));
+        public bool IsEmpty
+        {
+            get { return (bool)GetValue(IsEmptyProperty); }
+            set { SetValue(IsEmptyProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for IsEmpty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsEmptyProperty =
+            DependencyProperty.Register("IsEmpty", typeof(bool), typeof(SongBottom), new PropertyMetadata(false));
 
         public ObservableCollection<Song> ListSong
         {
@@ -507,7 +515,12 @@ namespace Spotify.Views.Components
             SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[index].SingerName;
             SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[index].SongLinkUri;
             SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[index].SongImageUri;
+            //  MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+            SongBottom.Ins.CountId = index;
             SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[index];
+            
+            //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+
         }
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -570,9 +583,11 @@ namespace Spotify.Views.Components
         {
             try
             {
+                SongsView.IsNextBack = true;
                 if (!IsShuffle)
                 {
                     int id = 0;
+                   
                     for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
                     {
                         if (SongBottom.Ins.SongName == SongBottom.Ins.ListSong[i].SongName)
@@ -583,6 +598,7 @@ namespace Spotify.Views.Components
                     if (id < SongBottom.Ins.ListSong.Count)
                     {
                         LoadSong(id);
+
                     }
                 }
                 else
@@ -599,6 +615,8 @@ namespace Spotify.Views.Components
         {
             try
             {
+                SongsView.IsNextBack = true;
+
                 if (!IsShuffle)
                 {
                     int id = 0;
@@ -612,7 +630,9 @@ namespace Spotify.Views.Components
                     }
                     if (id >= 0)
                     {
+
                         LoadSong(id);
+                        
                     }
                 }
                 else
