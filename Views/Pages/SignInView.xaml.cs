@@ -1,6 +1,7 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,15 @@ namespace Spotify.Views.Pages
                 ListPlaylist.Ins.CurrentIdPlaylist = -1;
                 ListPlaylist.Ins.ListSelectedItem = new List<int>();
                 ViewPage.Ins.ViewPageSelected = "Home";
+                SongBottom.Ins.SelectedSong = null;
+                SongBottom.Ins.ListSong = null;
+                SongBottom.Ins.SongName = "";
+                SongBottom.Ins.SingerName = "";
+                SongBottom.Ins.ImageSong = null;
+                SongBottom.Ins.LinkSong = null;
+                SongBottom.Ins.IsPlay = false;
+                SongBottom.Ins.CountId = -1;
+
                 AnnouceLoginError.Visibility = Visibility.Hidden;
             }
             else

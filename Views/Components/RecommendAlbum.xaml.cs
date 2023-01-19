@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -120,8 +121,16 @@ namespace Spotify.Views.Components
             
             type = "Recommend";
             ImageBrush ImgBrush = new ImageBrush();
+            HomeVM data = this.DataContext as HomeVM;
             if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1)
             {
+                if (AlbumView.type != "likesong" && AlbumView.type != "playlist")
+                {
+                    Binding binh = new Binding("SelectedSongItem");
+                    binh.Source = data;
+                    binh.Mode = BindingMode.TwoWay;
+                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binh);
+                }
                 SongBottom.Ins.IsPlay = false;
                 SongBottom.Ins.CountId = 0;
 

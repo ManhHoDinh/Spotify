@@ -360,7 +360,7 @@ namespace Spotify.Views.Components
             {
                 type = "Mood";
                 ItemsSource = vm.Mood;
-                MessageBox.Show(xx.ToString());
+              
 
             }
             if (xx > 25)
@@ -380,7 +380,13 @@ namespace Spotify.Views.Components
          
             if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1 - temp ||PreType != type)
             {
-
+                if (AlbumView.type != "likesong" && AlbumView.type != "playlist")
+                {
+                    Binding binh = new Binding("SelectedSongItem");
+                    binh.Source = vm;
+                    binh.Mode = BindingMode.TwoWay;
+                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binh);
+                }
                 SongBottom.Ins.CountId = 0;
 
 
