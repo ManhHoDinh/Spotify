@@ -8,6 +8,7 @@
              xmlns:vm="clr-namespace:Spotify.ViewModels"
              xmlns:Page ="clr-namespace:Spotify.Views.Pages"
              Loaded="window_Loaded"
+             MouseLeftButtonUp="window_MouseLeftButtonUp"
              mc:Ignorable="d"
              xmlns:Component ="clr-namespace:Spotify.Views.Components"
              x:Name="window"
@@ -121,7 +122,7 @@
                     VerticalAlignment="Top" 
                     IsLoggedIn="{Binding Source={x:Static vm:LoginStatus.Current},Path=NeedLogin,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
                     HaveUser="{Binding Source={x:Static vm:LoginStatus.Current},Path=HaveUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
-                <StackPanel Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsShowDiaologAccount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" Height="120" Margin="470 -300 0 0" Grid.Column="2" Orientation="Vertical" Width="196" Background="#282828">
+                <StackPanel Name="HeaderOption" Visibility="{Binding Source={x:Static vm:LoginStatus.Current},Path=IsShowDiaologAccount,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BooleanToVisibilityConverter}}" Height="120" Margin="470 -300 0 0" Grid.Column="2" Orientation="Vertical" Width="196" Background="#282828">
                     <Button Margin="5 0 0 0" Click="Account_Click" Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Account"></Button>
                     <Button Margin="5 0 0 0"  Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Settings"></Button>
                     <Button Margin="5 0 0 0" Click="LogOut_click"  Template="{StaticResource OptionStyle}" Height="40" FontSize="16" Foreground="#ffffff" Content="Log out"></Button>

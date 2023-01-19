@@ -161,7 +161,7 @@ namespace Spotify
                 SongSelect.Ins.SongName = null;
                 SongBottom.Ins.SingerName = null;
                 SongBottom.Ins.SelectedSong = null;
-                SongBottom.Ins.SelectedSong.SongDuration = "_";
+                SongBottom.Ins.CountId = -1;
             }
             catch { }
         }
@@ -189,7 +189,12 @@ namespace Spotify
             LoginStatus.Current.ResetAllView();
             LoginStatus.Current.IsAccountView=true;
         }
-        
+
+        private void window_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            HeaderOption.Visibility = Visibility.Hidden;
+        }
+
         //public static int id = 0;
         //private void window_Loaded(object sender, RoutedEventArgs e)
         //{
