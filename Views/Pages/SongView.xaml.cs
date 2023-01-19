@@ -163,9 +163,9 @@ namespace Spotify.Views.Pages
             DependencyProperty.Register("isFavor", typeof(bool), typeof(SongView), new PropertyMetadata(true));
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-            if (SongSelect.Ins.SongName != null)
-            {
-                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
+            try {
+
+                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
                 {
                     SongBottom.Ins.SongName = SongSelect.Ins.SongName;
                     SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
@@ -176,15 +176,15 @@ namespace Spotify.Views.Pages
                     PlayPauseGreen.Background = img;
                     SongBottom.Ins.IsPlay = true;
                 }
-            }
-            if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
+
+                if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
                 {
                     SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
                     SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PauseGreen;
                     PlayPauseGreen.Background = img;
-                SongBottom.Ins.IsPlay = true;
+                    SongBottom.Ins.IsPlay = true;
                 }
                 else
                 {
@@ -201,8 +201,8 @@ namespace Spotify.Views.Pages
                         SongBottom.Ins.IsPlay = true;
                     }
                 }
-
-            
+            }
+            catch { }
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -216,8 +216,6 @@ namespace Spotify.Views.Pages
                 ImgBrush.ImageSource = Heart;
                 HeartBtn.Background = ImgBrush;
                 isFavor = false;
-                
-
             }
             else
             {
@@ -241,7 +239,7 @@ namespace Spotify.Views.Pages
                     img.ImageSource = PlayGreen;
                     PlayPauseGreen.Background = img;
                 }
-         
+                
         }
     }
 }
