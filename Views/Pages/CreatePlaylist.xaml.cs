@@ -151,21 +151,30 @@ namespace Spotify.Views.Pages
         }
 
     }
-   
+  
     public partial class CreatePlaylist : UserControl
     {
+        public static Binding bd;
         public CreatePlaylist()
         {
             InitializeComponent();
             CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
-            Binding bd = new Binding("SelectedSongItem");
-            bd.Source = playlist;
+            bd = new Binding("SelectedSong");
+            bd.Source = songPlaylist;
             bd.Mode = BindingMode.TwoWay;
+            if(AlbumView.type != "album" && AlbumView.type != "likesong")
+            {
             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
+            }
             Binding binding = new Binding("SelectedPlaylist");
             binding.Source = playlist;
             binding.Mode = BindingMode.TwoWay;
             BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
+            
+            //if(SongBottom.Ins.ListSong != songPlaylist.ItemSource && SongBottom.Ins.ListSong != null)
+            //{
+            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+            //}
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -226,7 +235,7 @@ namespace Spotify.Views.Pages
 
         private void playlist_Loaded(object sender, RoutedEventArgs e)
         {
-          
+            SongsView.CurrentType = "playlist";
             if(songPlaylist.ItemSource.Count > 0)
             {
                 Random r = new Random();

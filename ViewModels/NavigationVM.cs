@@ -70,6 +70,7 @@ namespace Spotify.ViewModels
         }
         void TranslatePage(object obj)
         {
+            LoginStatus.Current.SearchText = "";
             if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
             {
                 int currentId = ViewPage.Ins.CurrentIndexView;
@@ -138,35 +139,34 @@ namespace Spotify.ViewModels
         }
         private void CreatePlaylist(object obj)
         {
-            try {
+          
                 ListPlaylist.Ins.IsCreate = true;
                 ViewPage.Ins.IsSearchView = false;
                 ViewPage.Ins.IsClick = false;
 
-                //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
-                //{
-                //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-                //    ViewPage.Ins.CurrentIndexView++;
-                if (Properties.Settings.Default.CurrentUserID == -1)
-                {
-                    PlaylistError form = new PlaylistError();
-                    form.ShowDialog();
-                }
-                else
-                {
-                    int count = ListPlaylist.Ins.CountPlaylist + 1;
-                    Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
-                    Playlist.InitUri(ref playlist);
-                    DataProvider.Ins.DB.Playlists.Add(playlist);
-                    DataProvider.Ins.DB.SaveChanges();
-                    ListPlaylist.Ins.List.Add(playlist);
-                    // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
-                    ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-                    ListPlaylist.Ins.CountPlaylist++;
-                    ChangeViewStyle("CreatePlaylist", obj);
-                }
+            //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
+            //{
+            //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+            //    ViewPage.Ins.CurrentIndexView++;
+            if (Properties.Settings.Default.CurrentUserID == -1)
+            {
+                PlaylistError form = new PlaylistError();
+                form.ShowDialog();
             }
-            catch { }
+            else
+            {
+                int count = ListPlaylist.Ins.CountPlaylist + 1;
+                Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
+                Playlist.InitUri(ref playlist);
+                DataProvider.Ins.DB.Playlists.Add(playlist);
+                DataProvider.Ins.DB.SaveChanges();
+                ListPlaylist.Ins.List.Add(playlist);
+                // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
+                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+                ListPlaylist.Ins.CountPlaylist++;
+                ChangeViewStyle("CreatePlaylist", obj);
+            }
+            
 
         }
 

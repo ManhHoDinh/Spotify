@@ -1,5 +1,6 @@
 ﻿using Spotify.Models;
 using Spotify.ViewModels.Pages;
+using Spotify.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -36,10 +37,9 @@ namespace Spotify.Views.Components
             {
                 if (GetTemplateChild("PART_Headerr") != null)
                 {
-                    
-                    if(type == "recommend")
+                    listview = GetTemplateChild("PART_Headerr") as ListView;
+                    if (type == "recommend")
                     {
-                        listview = GetTemplateChild("PART_Headerr") as ListView;
                         var template = listview.ItemContainerGenerator.ContainerFromIndex(id) as ListViewItem;
                         Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
                         if (IsPlay == true)
@@ -57,7 +57,21 @@ namespace Spotify.Views.Components
                             PlayPauseGreen.Background = ImgBrush;
                         }
                     }
-                   
+                    else
+                    {
+                      
+                            for (int i = 0; i < listview.Items.Count; i++)
+                            {
+                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                                Button PlayPauseGreen = template.Template.FindName("PlayPauseGreen", template) as Button;
+                                ImageBrush ImgBrush = new ImageBrush();
+                                ImgBrush.ImageSource = Play;
+                                PlayPauseGreen.Background = ImgBrush;
+                            }
+                       
+                      
+                    }
+
                     // what is the code that would go here?
                 }
             }
@@ -104,12 +118,22 @@ namespace Spotify.Views.Components
         ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
+            
             type = "Recommend";
             ImageBrush ImgBrush = new ImageBrush();
+            HomeVM data = this.DataContext as HomeVM;
             if (SongBottom.Ins.SelectedSong == null || id != int.Parse((sender as Button).Tag.ToString()) - 1)
             {
+                if (AlbumView.type != "likesong" && AlbumView.type != "playlist")
+                {
+                    Binding binh = new Binding("SelectedSongItem");
+                    binh.Source = data;
+                    binh.Mode = BindingMode.TwoWay;
+                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binh);
+                }
+                SongBottom.Ins.IsPlay = false;
                 SongBottom.Ins.CountId = 0;
-               
+
                 id = int.Parse((sender as Button).Tag.ToString()) - 1;
                 listview = GetTemplateChild("PART_Headerr") as ListView;
 
@@ -150,18 +174,8 @@ namespace Spotify.Views.Components
 
                 }
             }
-
-         //if (IsPlay == true)
-         //{
-         //    ImgBrush.ImageSource = Play;
-         //    IsPlay = false;
-         //}
-         //else
-         //{
-         //    ImgBrush.ImageSource = Pause;
-         //    IsPlay = true;
-         //}
          (sender as Button).Background = ImgBrush;
+            ListAlbumView.PreType = type;
         }
 
       
@@ -169,29 +183,39 @@ namespace Spotify.Views.Components
         private void recommend_Loaded(object sender, RoutedEventArgs e)
         {
             listview = GetTemplateChild("PART_Headerr") as ListView;
-            if(type == "recommend")
-            {
+            //if (type == "recommend")
+            //{
+               
                 for (int i = 0; i < ItemsSource.Count; i++)
                 {
-                    for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
-                    {
-                        ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
-                        Song song = a[j];
-                        if (SongBottom.Ins.SelectedSong != null)
-                        {
-                            if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
-                            {
-                                var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                                var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
-                                ImageBrush img = new ImageBrush();
-                                img.ImageSource = Pause;
-                                btn.Background = img;
-                            }
-                        }
-
-                    }
-
+                if (ItemsSource[i].SongsOfAlbum == SongBottom.Ins.ListSong && SongBottom.Ins.IsPlay == true)
+                {
+                    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                    var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                    ImageBrush img = new ImageBrush();
+                    img.ImageSource = Pause;
+                    btn.Background = img;
                 }
+
+                //for (int j = 0; j < ItemsSource[i].Songs.Count; j++)
+                //{
+                //    ObservableCollection<Song> a = new ObservableCollection<Song>(ItemsSource[i].Songs);
+                //    Song song = a[j];
+                //    if (SongBottom.Ins.SelectedSong != null)
+                //    {
+                //        if (SongBottom.Ins.SelectedSong.ID == song.ID && SongBottom.Ins.IsPlay == true)
+                //        {
+                //            var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                //            var btn = template.Template.FindName("PlayPauseGreen", template) as Button;
+                //            ImageBrush img = new ImageBrush();
+                //            img.ImageSource = Pause;
+                //            btn.Background = img;
+                //        }
+                //    }
+
+                //}
+
+                // }
 
             }
         }

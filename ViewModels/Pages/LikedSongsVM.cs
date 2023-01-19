@@ -37,6 +37,8 @@ namespace Spotify.ViewModels.Pages
         }
         private bool _IsSelected;
         public bool IsSelected { get => _IsSelected; set { _IsSelected = value; OnPropertyChanged(); } }
+
+
         private Song _SelectedItem;
         public Song SelectedItem
         {
@@ -47,15 +49,21 @@ namespace Spotify.ViewModels.Pages
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
+                    
+                    //BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                    AlbumView.type = "likesong";
+                  // MessageBox.Show("haha");
                     LinkSong = new Uri(SelectedItem.SongLink);
                     Image = new Uri(SelectedItem.SongImage);
                     SongBottom.Ins.SongName = SelectedItem.SongName;
                     SongBottom.Ins.SingerName = SelectedItem.SingerName;
                     SongBottom.Ins.LinkSong = LinkSong;
                     SongBottom.Ins.ImageSong = Image;
+                   // SongBottom.Ins.SelectedSong = SelectedItem;
                     SongBottom.Ins.IsPlay = true;
                     Properties.Settings.Default.CurrentSongID = SelectedItem.ID;
                     Properties.Settings.Default.Save();
+                   
                 }
             }
         }
@@ -70,16 +78,15 @@ namespace Spotify.ViewModels.Pages
         public int UserId { get => _userId; set { _userId = value; OnPropertyChanged(); } }
         public LikedSongsVM()
         {
-           
-            Binding binding = new Binding("SelectedItem");
-            binding.Source = this;
-            binding.Mode = BindingMode.OneWayToSource;
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
-           
-            
-                //var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == ViewPage.Ins.UserId).Select(a=>a.Songs).FirstOrDefault();
-            
-                //listSong = new ObservableCollection<Song>(songs);
+
+          
+
+
+
+
+            //var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+
+            //listSong = new ObservableCollection<Song>(songs);
             AddCommand = new RelayCommand<object>((p) =>
             {
                 if (string.IsNullOrEmpty(Name)) return false;

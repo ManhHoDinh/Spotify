@@ -136,7 +136,7 @@
                    
                    IsShowButton="False"
                    ItemSource="{Binding Source={x:Static vm:SearchVM.Ins},Path=filteredCollection}"
-                   SelectedSong="{Binding SelectedSongItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   SelectedSong="{Binding SelectedSongItem, Mode=OneWayToSource}" 
                     />
 
                         </Grid>

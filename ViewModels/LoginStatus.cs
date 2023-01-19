@@ -91,6 +91,9 @@ namespace Spotify.ViewModels
         private string _month { get; set; }
         public string Month { get { return _month; } set { _month = value; OnPropertyChanged(); } }
 
+        private string _searchText = "";
+        public string SearchText { get { return _searchText; } set { _searchText = value; OnPropertyChanged(); } }
+
         private string _year { get; set; }
         public string Year { get { return _year; } set { _year = value; OnPropertyChanged(); } }
         private string _searchText = "";

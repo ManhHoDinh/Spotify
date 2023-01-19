@@ -28,6 +28,7 @@ namespace Spotify.ViewModels.Pages
         public ObservableCollection<Album> RecommendPlaylists { get; set; }
         public ObservableCollection<Album> Trending { get; set; }
         public ICommand ClickCommand { get; set; }
+        
         void TranslatePage(object obj)
         {
             if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
@@ -79,6 +80,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedItem != null)
                     {
+                        
                         AlbumName = SelectedItem.AlbumName;
                         AlbumDescription = SelectedItem.Descriptions;
                         SongsOfAlbum = SelectedItem.SongsOfAlbum;
@@ -97,29 +99,35 @@ namespace Spotify.ViewModels.Pages
             get => _SelectedSongItem;
             set
             {
-                try {
+                _SelectedSongItem = value;
+                OnPropertyChanged();
+                if (SelectedSongItem != null)
+                {
 
-                    _SelectedSongItem = value;
-                    OnPropertyChanged();
-                    if (SelectedSongItem != null)
+                   // BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
+                    AlbumView.type = "album";
+                    SongBottom.Ins.SongName = SelectedSongItem.SongName;
+                    SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    SongSelect.Ins.SongName = SelectedSongItem.SongName;
+                    SongSelect.Ins.SingerName = SelectedSongItem.SingerName;
+                    SongSelect.Ins.LinkSong = SelectedSongItem.SongLinkUri;
+                    SongSelect.Ins.ImageSong = SelectedSongItem.SongImageUri;
+                    SongSelect.Ins.Description = SelectedSongItem.Descriptions;
+
+                    SongBottom.Ins.IsPlay = true;
+                    int xx = SelectedItem.ID;
+                    
+                    if (xx <= 6)
                     {
-                        SongBottom.Ins.SongName = SelectedSongItem.SongName;
-                        SongBottom.Ins.SingerName = SelectedSongItem.SingerName;
-                        SongBottom.Ins.LinkSong = SelectedSongItem.SongLinkUri;
-                        SongBottom.Ins.ImageSong = SelectedSongItem.SongImageUri;
-                        SongBottom.Ins.IsPlay = true;
-                        Properties.Settings.Default.CurrentSongID = SelectedSongItem.ID;
-                        Properties.Settings.Default.Save();
-                        int xx = SelectedItem.ID;
-                        if (xx <= 6)
-                        {
-                            ListAlbumView.PreType = ListAlbumView.type = "TopMix";
-                            ListAlbumView.id = xx - 1;
-                        }
-                        if (xx >= 7 && xx <= 12)
-                        {
-                            ListAlbumView.PreType = ListAlbumView.type = "MadeForYou";
-                            ListAlbumView.id = xx - 7;
+                       ListAlbumView.PreType = ListAlbumView.type = "TopMix";
+                       ListAlbumView.id = xx - 1;
+                    }
+                    if (xx >= 7 && xx <= 12)
+                    {
+                        ListAlbumView.PreType = ListAlbumView.type = "MadeForYou";
+                        ListAlbumView.id = xx - 7;
 
                         }
                         if (xx >= 13 && xx <= 18)
@@ -143,8 +151,8 @@ namespace Spotify.ViewModels.Pages
                         }
                     }
                 }
-                catch { }
-            }
+               
+            
         }
         private string _AlbumName;
         public string AlbumName { get => _AlbumName; set { _AlbumName = value; OnPropertyChanged(); } }
@@ -165,10 +173,14 @@ namespace Spotify.ViewModels.Pages
            
             IsAlbumListVisible = true;
             RecommendPlaylists = new ObservableCollection<Album>();
-            for(int i = 0; i< 6; i++)
-            {
-                RecommendPlaylists.Add(Albums.AllAlbums[i]);
-            }
+ 
+                RecommendPlaylists.Add(Albums.AllAlbums[10]);
+                RecommendPlaylists.Add(Albums.AllAlbums[12]);
+                RecommendPlaylists.Add(Albums.AllAlbums[24]);
+                RecommendPlaylists.Add(Albums.AllAlbums[21]);
+                RecommendPlaylists.Add(Albums.AllAlbums[11]);
+                RecommendPlaylists.Add(Albums.AllAlbums[22]);
+
             //RecommendPlaylists.Add(new Album { AlbumName = "chill", Descriptions = "chillllll"}); ;
             //RecommendPlaylists.Add(new Album { AlbumName = "Bên trên tâng lầu", Descriptions = "Tăng Duy Tân" });
             //RecommendPlaylists.Add(new Album { AlbumName = "Say nắng", Descriptions = "Suni Hạ Linh" });
