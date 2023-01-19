@@ -10,6 +10,7 @@
              Loaded="window_Loaded"
              MouseLeftButtonUp="window_MouseLeftButtonUp"
              mc:Ignorable="d"
+             MouseLeftButtonUp="window_MouseLeftButtonUp"
              xmlns:Component ="clr-namespace:Spotify.Views.Components"
              x:Name="window"
         >
