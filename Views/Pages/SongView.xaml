@@ -39,7 +39,7 @@
                     </WrapPanel>
                     <StackPanel Margin="-60 40 0 0" Grid.Column="1" Orientation="Vertical" VerticalAlignment="center">
                         <TextBlock Text="PLAYLIST" FontSize="12" Foreground="#ffffff" />
-                        <TextBlock Name="SongNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SongName}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
+                        <TextBlock Name="SongNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SongName, Mode=TwoWay}" TextWrapping="Wrap" FontSize="60" Foreground="#ffffff" FontWeight="Bold" />
                         <TextBlock Name="SingerNameTb" Text="{Binding Source={x:Static local:SongSelect.Ins},Path=SingerName}" TextWrapping="Wrap"  FontSize="16" Foreground="#ffffff" />
                     </StackPanel>
                 </Grid>
