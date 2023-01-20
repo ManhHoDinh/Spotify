@@ -421,7 +421,7 @@ namespace Spotify.Views.Components
                 Button btn = sender as Button;
                 ListViewItem template = btn.TemplatedParent as ListViewItem;
 
-                if (SongBottom.Ins.IsPlay == true)
+                if (SongBottom.Ins.IsPlay == true )
                 {
                     if (template.IsSelected == false)
                     {
@@ -664,8 +664,6 @@ namespace Spotify.Views.Components
 
 
             }
-
-
         }
         public Button PrevBtn = new Button();
         private void Remove_Click(object sender, RoutedEventArgs e)

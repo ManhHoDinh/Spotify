@@ -242,10 +242,6 @@ namespace Spotify.Views.Components
                     }
                     else
                     {
-
-
-
-
                         if (ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
                         {
                             if (ListPlaylist.Ins.CurrentIdPlaylist > 0)
