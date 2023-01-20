@@ -297,7 +297,11 @@ namespace Spotify.Views.Components
 
                         if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
                         {
-                            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                            if (ViewPage.Ins.ListPage[count].GetType().Name != "SongView")
+                            {
+                                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+
+                            }
 
                             ListPlaylist.Ins.CurrentIdPlaylist--;
 
