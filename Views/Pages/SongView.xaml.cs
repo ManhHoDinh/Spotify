@@ -196,10 +196,12 @@ namespace Spotify.Views.Pages
                     SongBottom.Ins.IsPlay = true;
                 }
 
-                if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
+                if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
                 {
-                    SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                    
+                    SongBottom.Ins.SelectedSong = DataProvider.Ins.DB.Songs.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+        
+                   // SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PauseGreen;
                     PlayPauseGreen.Background = img;
@@ -253,7 +255,8 @@ namespace Spotify.Views.Pages
 
         private void song_Loaded(object sender, RoutedEventArgs e)
         {
-                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
+           
+                if (SongBottom.Ins.SongName != SongNameTb.Text)
                 {
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PlayGreen;
