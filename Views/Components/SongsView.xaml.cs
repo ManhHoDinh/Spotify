@@ -181,27 +181,6 @@ namespace Spotify.Views.Components
 
         }
 
-        //// Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedSongProperty =
-        //    DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
-
-
-
-        //public Playlist SelectedPlaylist
-        //{
-        //    get { return (Playlist)GetValue(SelectedPlaylistProperty); }
-        //    set { SetValue(SelectedPlaylistProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-
 
 
 
@@ -472,9 +451,9 @@ namespace Spotify.Views.Components
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
-            { 
+            {
+
                 
-             
                     var listview = GetTemplateChild("PART_Header") as ListView;
                     if (listview.SelectedIndex != -1)
                     {
@@ -487,16 +466,18 @@ namespace Spotify.Views.Components
                         }
                         else if (CurrentType == "album")
                         {
+                           
                             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
                         }
                         else if (CurrentType == "playlist")
                         {
+                            
                             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
 
                         }
                     }
                     SongBottom.Ins.ListSong = ItemSource;
-                        SongBottom.Ins.CountId = listview.SelectedIndex;
+                    SongBottom.Ins.CountId = listview.SelectedIndex;
                         
                         
                     }
@@ -589,7 +570,7 @@ namespace Spotify.Views.Components
 
         private void songview_Loaded(object sender, RoutedEventArgs e)
         {
-
+          
 
             SongBottom.Ins.SongSource = ItemSource;
             if(SongBottom.Ins.ListSong != null)
@@ -737,80 +718,8 @@ namespace Spotify.Views.Components
             catch { }
         }
 
-        //private void Remove_Click(object sender, RoutedEventArgs e)
-        //{
-        //    listview = GetTemplateChild("PART_Header") as ListView;
-        //    Button btn = sender as Button;
-        //    int id = int.Parse(btn.Tag.ToString());
-        //    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
-        //    var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
-        //    playlist.Songs.Remove(song);
-        //    playlist.SongsOfPlaylist.Remove(song);
-        //    ItemSource.Remove(song);
-        //    for (int i = 0; i < listview.Items.Count; i++)
-        //    {
-        //        var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-        //        TextBlock tb = new TextBlock();
 
-        //        if (template != null)
-        //        {
-        //            tb = template.Template.FindName("Id", template) as TextBlock;
-        //            tb.Text = (i + 1).ToString();
-        //        }
-        //    }
-        //    DataProvider.Ins.DB.SaveChanges();
-        //}
-        //private void option_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Button btn = sender as Button;
-        //    StackPanel st = btn.Parent as StackPanel;
-        //    Button removeBtn = st.Children[2] as Button;
-        //    if (IsShow)
-        //    {
-        //        removeBtn.Visibility = Visibility.Hidden;
-        //        IsShow = false;
-        //    }
-        //    else
-        //    {
-        //        removeBtn.Visibility = Visibility.Visible;
-        //        IsShow = true;
-        //    }
-        //}
     }
-
-    //private void FavorBtn_Click(object sender, RoutedEventArgs e)
-    //{
-    //    Button btn = sender as Button;
-    //    var background = (ImageBrush)btn.Background;
-    //    ImageBrush img = new ImageBrush();
-    //    Playlist playlist;
-    //    var albums = DataProvider.Ins.DB.Albums.ToList();
-    //    for (int i = 0; i < albums.Count; i++)
-    //    {
-    //        if (albums[i].SongsOfAlbum == ItemSource)
-    //        {
-    //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
-    //           Playlist.InitUri(ref playlist);
-    //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
-    //            {
-    //                DataProvider.Ins.DB.Playlists.Add(playlist);
-    //                ListPlaylist.Ins.List.Add(playlist);
-    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-
-    //            }
-    //            else
-    //            {
-    //                DataProvider.Ins.DB.Playlists.Remove(playlist);
-    //                ListPlaylist.Ins.List.Remove(playlist);
-    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
-
-    //            }
-    //            break;
-    //        }
-    //    }
-    //    btn.Background = img;
-    //    DataProvider.Ins.DB.SaveChanges();
-    //}
 
 
 }

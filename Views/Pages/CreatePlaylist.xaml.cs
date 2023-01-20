@@ -89,6 +89,7 @@ namespace Spotify.Views.Pages
                 SetValue(SelectedItemProperty, value);
                 if (SelectedItem != null)
                 {
+                    
                     Ins.PlaylistName = SelectedItem.PlaylistName;
                     Ins.PlaylistDescription = SelectedItem.Descriptions;
                     Ins.ImagePlaylist = SelectedItem.PlaylistImageSource;
@@ -147,34 +148,26 @@ namespace Spotify.Views.Pages
             
            // Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
             Ins.SelectedItem = new Playlist();
-
         }
-
     }
-  
     public partial class CreatePlaylist : UserControl
     {
         public static Binding bd;
         public CreatePlaylist()
         {
             InitializeComponent();
-            CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            //CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            //Binding binding = new Binding("SelectedPlaylist");
+            //binding.Source = playlist;
+            //binding.Mode = BindingMode.TwoWay;
+            //BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
             bd = new Binding("SelectedSong");
             bd.Source = songPlaylist;
             bd.Mode = BindingMode.TwoWay;
             if(AlbumView.type != "album" && AlbumView.type != "likesong")
             {
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
-            }
-            Binding binding = new Binding("SelectedPlaylist");
-            binding.Source = playlist;
-            binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
-            
-            //if(SongBottom.Ins.ListSong != songPlaylist.ItemSource && SongBottom.Ins.ListSong != null)
-            //{
-            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
-            //}
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);  
+            }   
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -236,13 +229,58 @@ namespace Spotify.Views.Pages
         private void playlist_Loaded(object sender, RoutedEventArgs e)
         {
             SongsView.CurrentType = "playlist";
-            if(songPlaylist.ItemSource.Count > 0)
+
+            if (songPlaylist.ItemSource.Count > 0)
             {
                 Random r = new Random();
                 Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
                 string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
                 color = "#" + hex;
-            }   
+            }
+
+            songPlaylist.ApplyTemplate();
+            if (AlbumView.type == "playlist")
+            {
+               
+                if (SongBottom.Ins.CountId >= 0)
+                {
+                    
+                    if (SongBottom.Ins.IsPlay == false)
+                    {
+                       
+                        songPlaylist.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                        SongBottom.Ins.IsPlay = false;
+                    }
+                    else
+                    {
+                        
+                        
+                        songPlaylist.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                      
+                    }
+
+                }
+            }
+
+            var ListSong = songPlaylist.Template.FindName("PART_Header", songPlaylist) as ListView;
+            if (Properties.Settings.Default.CurrentUserID != -1)
+            {
+                var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+                foreach (Song a in listFavor)
+                {
+                    for (int j = 0; j < songPlaylist.ItemSource.Count; j++)
+                    {
+                        if (a.ID == songPlaylist.ItemSource[j].ID)
+                        {
+                            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
+                            Button btn = template.Template.FindName("favorBtn", template) as Button;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                            btn.Background = img;
+                        }
+                    }
+                }
+            }
         }
 
         

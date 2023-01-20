@@ -178,7 +178,7 @@
                             <component:SongsView
                         FavorIcon="{StaticResource HeartButton}" 
                         x:Name="songPlaylist"
-                        SelectedSong="{Binding SelectedSongItem,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" 
+                        SelectedSong="{Binding SelectedSongItem,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         ItemSource="{Binding SongsOfPlaylist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
 

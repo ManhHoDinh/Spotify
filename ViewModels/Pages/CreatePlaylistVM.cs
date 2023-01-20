@@ -133,6 +133,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedSongItem != null)
                     {
+                        
                         //  BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
                         AlbumView.type = "playlist";
                         SongBottom.Ins.SongName = SelectedSongItem.SongName;
@@ -159,6 +160,11 @@ namespace Spotify.ViewModels.Pages
             {
 
                 ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
+               
+                Binding binding = new Binding("SelectedPlaylist");
+                binding.Source = this;
+                binding.Mode = BindingMode.OneWayToSource;
+                BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
                 //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
                 //songs.Add(Songs.CamNang);
                 //songs.Add(Songs.BenTrenTangLau);

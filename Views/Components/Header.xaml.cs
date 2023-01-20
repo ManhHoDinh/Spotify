@@ -223,7 +223,10 @@ namespace Spotify.Views.Components
                         int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
                         if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
                         {
-                            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                            if(ViewPage.Ins.ListPage[count].GetType().Name != "SongView")
+                            {
+                                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                            }
                             ListPlaylist.Ins.CurrentIdPlaylist++;
                         }
                         else
@@ -232,11 +235,7 @@ namespace Spotify.Views.Components
 
 
                         }
-                        // ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
-                        //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
-                        //{
-                        //    MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[i].ToString());
-                        //}
+                       
                         ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
                         ViewPage.Ins.CurrentIndexView--;
                         ListPlaylist.Ins.CurrentIdPlaylist -= 2;

@@ -33,25 +33,15 @@ namespace Spotify.Views.Pages
             Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
             string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
             color = "#" + hex;
-
-            //HomeVM vm = this.DataContext as HomeVM;
-            //if (AlbumView.type=="album" || SongBottom.Ins.ListSong == null)
-            //{
-
             binding = new Binding("SelectedSong");
             binding.Source = Album;
             binding.Mode = BindingMode.TwoWay;
             if (type != "likesong" && type != "playlist")
             {
+               
                 BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
             }
-
-
-            //if (SongBottom.Ins.ListSong != Album.ItemSource && SongBottom.Ins.ListSong != null)
-            //{
-            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
-            //}
-            //  }
+          
 
         }
         public string color
@@ -65,31 +55,7 @@ namespace Spotify.Views.Pages
             DependencyProperty.Register("color", typeof(string), typeof(AlbumView), new PropertyMetadata("red"));
         ImageSource Play = (ImageSource)Application.Current.Resources["PlayFill"];
     ImageSource Pause = (ImageSource)Application.Current.Resources["PauseFill"];
-    //private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
-    //{
-    //    ImageBrush ImgBrush = new ImageBrush();
-    //    if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.CountId == -1)
-    //    {
-    //        SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
-    //        SongBottom.Ins.IsPlay = true;
-    //        ImgBrush.ImageSource = Pause;
-    //    }
-    //    else
-    //    {
-    //        if (SongBottom.Ins.IsPlay == true)
-    //        {
-    //            ImgBrush.ImageSource = Play;
-    //            SongBottom.Ins.IsPlay = false;
-    //        }
-    //        else
-    //        {
-    //            ImgBrush.ImageSource = Pause;
-    //            SongBottom.Ins.IsPlay = true;
-
-    //        }
-    //    }
-    //    PlayPauseGreen.Background = ImgBrush;
-    //}
+   
 
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
