@@ -164,13 +164,32 @@ namespace Spotify.Views.Pages
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
             try {
+                if (SongBottom.Ins.ListSong != null)
+                {
+                    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                    if (SongsView.CurrentType == "likesong")
+                    {
+                        BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                    }
+                    else if (SongsView.CurrentType == "album")
+                    {
 
+                        BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
+                    }
+                    else if (SongsView.CurrentType == "playlist")
+                    {
+
+                        BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+
+                    }
+                }
                 if (SongBottom.Ins.SongName != SongSelect.Ins.SongName || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
                 {
                     SongBottom.Ins.SongName = SongSelect.Ins.SongName;
                     SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
                     SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
                     SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+                  
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PauseGreen;
                     PlayPauseGreen.Background = img;
@@ -201,6 +220,7 @@ namespace Spotify.Views.Pages
                         SongBottom.Ins.IsPlay = true;
                     }
                 }
+                
             }
             catch { }
 
