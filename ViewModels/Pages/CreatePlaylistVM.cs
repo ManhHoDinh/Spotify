@@ -55,6 +55,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedPlaylist != null)
                     {
+                        ViewPage.Ins.ViewPageSelected = "null";
                         NamePlaylist = SelectedPlaylist.PlaylistName;
                         DescriptionPlaylist = SelectedPlaylist.Descriptions;
                         ImagePlaylist = SelectedPlaylist.PlaylistImageSource;

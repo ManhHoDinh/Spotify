@@ -93,6 +93,7 @@ namespace Spotify.Views.Pages
                     Ins.PlaylistName = SelectedItem.PlaylistName;
                     Ins.PlaylistDescription = SelectedItem.Descriptions;
                     Ins.ImagePlaylist = SelectedItem.PlaylistImageSource;
+                    
                     CreatePlaylist a = new CreatePlaylist();
                 }
             }
@@ -281,6 +282,31 @@ namespace Spotify.Views.Pages
                     }
                 }
             }
+            
+            var playBtn = songPlaylist.Template.FindName("PlayPauseGreen", songPlaylist) as Button;
+            if (SongBottom.Ins.IsPlay == true && SongBottom.Ins.ListSong == songPlaylist.ItemSource)
+            {
+
+                int index = 0;
+
+                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                {
+                    if (SongBottom.Ins.ListSong[i].SongName == SongBottom.Ins.SongName)
+                    {
+
+                        index = i; break;
+                    }
+                }
+
+
+                ListSong.SelectedIndex = index;
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = (ImageSource)Application.Current.Resources["PauseFill"];
+                playBtn.Background = img;
+            }
+            else ListSong.SelectedIndex = -1;
+
+
         }
 
         

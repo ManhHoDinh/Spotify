@@ -527,7 +527,25 @@ namespace Spotify.Views.Components
                 ImageBrush ImgBrush = new ImageBrush();
                 if (SongBottom.Ins.SelectedSong == null || listview.SelectedIndex == -1)
                 {
-                    
+                    if (SongBottom.Ins.ListSong != ItemSource && SongBottom.Ins.ListSong != null)
+                    {
+                        BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                        if (CurrentType == "likesong")
+                        {
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                        }
+                        else if (CurrentType == "album")
+                        {
+
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
+                        }
+                        else if (CurrentType == "playlist")
+                        {
+
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+
+                        }
+                    }
                     SongBottom.Ins.ListSong = ItemSource;
                     SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
                     SongBottom.Ins.IsPlay = true;
