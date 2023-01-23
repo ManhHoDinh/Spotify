@@ -1,4 +1,5 @@
 ﻿using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,11 @@ namespace Spotify.Views.Pages
         {
             ViewPage.Ins.IsSearchView = false;
             TranslatePage(new LikedSongsVM());
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+          
         }
     }
 }

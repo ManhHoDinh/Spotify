@@ -87,15 +87,8 @@ namespace Spotify.Views.Pages
             set
             {
                 SetValue(SelectedItemProperty, value);
-                if (SelectedItem != null)
-                {
-                    
-                    Ins.PlaylistName = SelectedItem.PlaylistName;
-                    Ins.PlaylistDescription = SelectedItem.Descriptions;
-                    Ins.ImagePlaylist = SelectedItem.PlaylistImageSource;
-                    
-                    CreatePlaylist a = new CreatePlaylist();
-                }
+               
+
             }
         }
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
@@ -146,9 +139,11 @@ namespace Spotify.Views.Pages
         static ListPlaylist()
         {
             Ins = new ListPlaylist();
-            
+        
            // Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
             Ins.SelectedItem = new Playlist();
+            CreatePlaylist a = new CreatePlaylist();
+
         }
     }
     public partial class CreatePlaylist : UserControl
@@ -168,7 +163,8 @@ namespace Spotify.Views.Pages
             if(AlbumView.type != "album" && AlbumView.type != "likesong")
             {
                 BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);  
-            }   
+            }
+           
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -226,9 +222,20 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for color.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty colorProperty =
             DependencyProperty.Register("color", typeof(string), typeof(CreatePlaylist), new PropertyMetadata("#545454"));
-
+        public static Song SongSelect;
         private void playlist_Loaded(object sender, RoutedEventArgs e)
         {
+            
+           
+
+            SongSelect = songPlaylist.SelectedSong;
+            //if (songPlaylist.SelectedSong != null)
+            //{
+            //    SongSelect = songPlaylist.SelectedSong;
+            //  }
+
+
+
             SongsView.CurrentType = "playlist";
 
             if (songPlaylist.ItemSource.Count > 0)
@@ -242,7 +249,7 @@ namespace Spotify.Views.Pages
             songPlaylist.ApplyTemplate();
             if (AlbumView.type == "playlist")
             {
-               
+                
                 if (SongBottom.Ins.CountId >= 0)
                 {
                     
@@ -257,6 +264,7 @@ namespace Spotify.Views.Pages
                         
                         
                         songPlaylist.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                       
                       
                     }
 
@@ -284,7 +292,26 @@ namespace Spotify.Views.Pages
             }
             
             var playBtn = songPlaylist.Template.FindName("PlayPauseGreen", songPlaylist) as Button;
-            if (SongBottom.Ins.IsPlay == true && SongBottom.Ins.ListSong == songPlaylist.ItemSource)
+
+            int temp = 0;
+            if(SongBottom.Ins.ListSong != null)
+            {
+                if (SongBottom.Ins.ListSong.Count == songPlaylist.ItemSource.Count)
+                {
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                    {
+                        if (SongBottom.Ins.ListSong[i] == songPlaylist.ItemSource[i])
+                        {
+                            temp++;
+                        }
+                    }
+                }
+                else temp = -1;
+               
+            }
+           
+           
+            if (SongBottom.Ins.IsPlay == true &&  temp == songPlaylist.ItemSource.Count)
             {
 
                 int index = 0;
@@ -298,7 +325,7 @@ namespace Spotify.Views.Pages
                     }
                 }
 
-
+                
                 ListSong.SelectedIndex = index;
                 ImageBrush img = new ImageBrush();
                 img.ImageSource = (ImageSource)Application.Current.Resources["PauseFill"];
