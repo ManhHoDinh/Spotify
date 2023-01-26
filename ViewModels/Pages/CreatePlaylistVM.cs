@@ -110,17 +110,12 @@ namespace Spotify.ViewModels.Pages
                             }
                         }
                         ListPlaylist.Ins.IsCreate = false;
-
-
-
-
-                        //   }
-
                        ViewPage.Ins.CurrentView = new CreatePlaylist();
                         ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                         ViewPage.Ins.CurrentIndexView++;
                         ListPlaylist.Ins.CurrentIdPlaylist++;
                         ViewPage.Ins.IsDisableBack = false;
+                       // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString() + ListPlaylist.Ins.CurrentIdPlaylist.ToString());
                        
                     }
                 }

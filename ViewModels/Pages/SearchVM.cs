@@ -125,6 +125,28 @@ namespace Spotify.ViewModels.Pages
 
                         }
                     }
+                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                    {
+                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < ListAlbum.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+
+                        else
+                        {
+                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum + 1; i < countAlbum; i++)
+                            {
+
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
+                    }
                 }
                 // MessageBox.Show(SongBottom.Ins.CountId.ToString());
                 ViewPage.Ins.CurrentView = obj;

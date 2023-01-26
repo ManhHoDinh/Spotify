@@ -31,7 +31,7 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SongNameProperty =
-            DependencyProperty.Register("SongName", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("SongName", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
         public string SingerName
         {
             get { return (string)GetValue(SingerNameProperty); }
@@ -40,24 +40,46 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SingerNameProperty =
-            DependencyProperty.Register("SingerName", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("SingerName", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
         public Uri LinkSong
         {
             get { return (Uri)GetValue(LinkSongProperty); }
             set { SetValue(LinkSongProperty, value); }
         }
         public static readonly DependencyProperty LinkSongProperty =
-          DependencyProperty.Register("LinkSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
+          DependencyProperty.Register("LinkSong", typeof(Uri), typeof(SongSelect), new PropertyMetadata(null));
         public Uri ImageSong
         {
             get { return (Uri)GetValue(ImageSongProperty); }
             set { SetValue(ImageSongProperty, value); }
         }
         public static readonly DependencyProperty ImageSongProperty =
-           DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
+           DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongSelect), new PropertyMetadata(null));
+
+        public int CurrentIdSong
+        {
+            get { return (int)GetValue(CurrentIdSongProperty); }
+            set { SetValue(CurrentIdSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentIdAlbum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentIdSongProperty =
+            DependencyProperty.Register("CurrentIdSong", typeof(int), typeof(SongSelect), new PropertyMetadata(-1));
 
 
-        
+
+
+
+
+        public List<int> ListSelectedItem
+        {
+            get { return (List<int>)GetValue(ListSelectedItemProperty); }
+            set { SetValue(ListSelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSelectedItemProperty =
+            DependencyProperty.Register("ListSelectedItem", typeof(List<int>), typeof(SongSelect), new PropertyMetadata(new List<int> { }));
 
 
 
@@ -69,7 +91,7 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Description", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
 
 
         public static SongSelect Ins { get; private set; }
@@ -169,6 +191,7 @@ namespace Spotify.Views.Pages
         {
             try {
                 if (SongBottom.Ins.ListSong != null)
+                    
                 {
                     BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
                     if (SongsView.CurrentType == "likesong")
@@ -259,7 +282,9 @@ namespace Spotify.Views.Pages
 
         private void song_Loaded(object sender, RoutedEventArgs e)
         {
-           
+
+            
+            
                 if (SongBottom.Ins.SongName != SongNameTb.Text)
                 {
                     ImageBrush img = new ImageBrush();

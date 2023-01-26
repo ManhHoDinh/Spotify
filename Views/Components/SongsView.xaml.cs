@@ -375,6 +375,28 @@ namespace Spotify.Views.Components
 
                         }
                     }
+                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                    {
+                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                        {
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < ListAlbum.Ins.ListSelectedItem.Count; i++)
+                            {
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+                        }
+
+
+                        else
+                        {
+                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum + 1; i < countAlbum; i++)
+                            {
+
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                            }
+
+                        }
+                    }
                 }
                 //SongView a = new SongView();
                 //a.SelectedSong = SelectedSong;
@@ -400,6 +422,9 @@ namespace Spotify.Views.Components
                 SongSelect.Ins.ImageSong = songClick.SongImageUri;
                 SongSelect.Ins.Description = songClick.Descriptions;
                 SongSelect.Ins.LinkSong = songClick.SongLinkUri;
+                SongSelect.Ins.ListSelectedItem.Add(songClick.ID);
+
+                SongSelect.Ins.CurrentIdSong++;
               
                 ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
                 //MessageBox.Show(tb.Name);

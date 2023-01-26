@@ -34,8 +34,10 @@ namespace Spotify.ViewModels.Pages
             if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
             {
                 
+                
                 if (ViewPage.Ins.IsClick == false)
                 {
+                   
                     int currentId = ViewPage.Ins.CurrentIndexView;
                     int count = ViewPage.Ins.ListPage.Count;
                     if (currentId + 1 < count)
@@ -91,6 +93,8 @@ namespace Spotify.ViewModels.Pages
                         }
 
                     }
+                  
+
                 }
                    
        // MessageBox.Show(SongBottom.Ins.CountId.ToString());
@@ -98,6 +102,7 @@ namespace Spotify.ViewModels.Pages
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
+                
             }
         }
         private Album _SelectedItem;
@@ -108,12 +113,17 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedItem != null)
                     {
+                        
                         Binding binding = new Binding("SelectedItem");
                         binding.Source = this;
                         binding.Mode = BindingMode.TwoWay;
                         BindingOperations.SetBinding(ListAlbum.Ins, ListAlbum.SelectedAlbumProperty, binding);
-                        ListAlbum.Ins.ListSelectedItem.Add(SelectedItem.ID);
-                        ListAlbum.Ins.CurrentIdAlbum++;
+                        if(ViewPage.Ins.IsClick == false)
+                        {
+                            ListAlbum.Ins.ListSelectedItem.Add(SelectedItem.ID);
+                            ListAlbum.Ins.CurrentIdAlbum++;
+                        }
+                        
                         AlbumName = SelectedItem.AlbumName;
                         AlbumDescription = SelectedItem.Descriptions;
                         SongsOfAlbum = SelectedItem.SongsOfAlbum;

@@ -24,6 +24,7 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                   SelectedItem="{Binding SelectedItem,ElementName=listAlbum}" 
                   ItemsSource="{Binding ItemsSource, ElementName=listAlbum}" 
+                 
                   Background="Transparent" BorderBrush="Transparent">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>

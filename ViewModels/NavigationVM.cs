@@ -111,7 +111,7 @@ namespace Spotify.ViewModels
                         {
                             for (int i = ListAlbum.Ins.CurrentIdAlbum; i < ListAlbum.Ins.ListSelectedItem.Count; i++)
                             {
-                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
                             }
                         }
 
@@ -121,7 +121,7 @@ namespace Spotify.ViewModels
                             for (int i = ListAlbum.Ins.CurrentIdAlbum + 1; i < countAlbum; i++)
                             {
 
-                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum + 1);
                             }
 
                         }
