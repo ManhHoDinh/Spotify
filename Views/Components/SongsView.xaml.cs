@@ -401,6 +401,7 @@ namespace Spotify.Views.Components
                 SongSelect.Ins.ImageSong = songClick.SongImageUri;
                 SongSelect.Ins.Description = songClick.Descriptions;
                 SongSelect.Ins.LinkSong = songClick.SongLinkUri;
+              
                 ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
                 //MessageBox.Show(tb.Name);
                 //curItem.IsSelected = true;
@@ -526,8 +527,11 @@ namespace Spotify.Views.Components
                 type = "songview";
                 listview = GetTemplateChild("PART_Header") as ListView;
                 ImageBrush ImgBrush = new ImageBrush();
+               
                 if (SongBottom.Ins.SelectedSong == null || listview.SelectedIndex == -1)
                 {
+                    
+
                     if (SongBottom.Ins.ListSong != ItemSource && SongBottom.Ins.ListSong != null)
                     {
                         BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
@@ -551,6 +555,8 @@ namespace Spotify.Views.Components
                     SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
                     SongBottom.Ins.IsPlay = true;
                     ImgBrush.ImageSource = PauseGreen;
+                    //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+
 
                 }
                 else

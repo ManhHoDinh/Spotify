@@ -153,6 +153,7 @@ namespace Spotify
                 SongSelect.Ins.SongName = null;
                 SongBottom.Ins.SongName = null;
                 SongBottom.Ins.IsPlay = false;
+               
                 SongSelect.Ins.LinkSong = null;
                 SongBottom.Ins.LinkSong = null;
                 SongBottom.Ins.ImageSong = null;
@@ -177,8 +178,10 @@ namespace Spotify
         {
             if(id != Properties.Settings.Default.CurrentUserID)
             {
+                
                 ListPlaylist.Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList());
                 id = ViewPage.Ins.UserId;
+                
                 ListPlaylist.Ins.CountPlaylist = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 2 && p.UserID == Properties.Settings.Default.CurrentUserID).ToList().Count;
             }
 

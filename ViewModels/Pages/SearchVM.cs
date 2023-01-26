@@ -65,6 +65,7 @@ namespace Spotify.ViewModels.Pages
                     if (SelectedSongItem != null)
                     {
                         ViewPage.Ins.IsSearchView = false;
+                      
                         SongSelect.Ins.SongName = SelectedSongItem.SongName;
                         SongSelect.Ins.SingerName = SelectedSongItem.SingerName;
                         SongSelect.Ins.LinkSong = SelectedSongItem.SongLinkUri;

@@ -3,6 +3,7 @@ using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -22,6 +23,61 @@ namespace Spotify.Views.Pages
   /// <summary>
   /// Interaction logic for AlbumView.xaml
   /// </summary>
+  public class ListAlbum : DependencyObject
+    {
+        
+
+        public int CurrentIdAlbum
+        {
+            get { return (int)GetValue(CurrentIdAlbumProperty); }
+            set { SetValue(CurrentIdAlbumProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentIdAlbum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentIdAlbumProperty =
+            DependencyProperty.Register("CurrentIdAlbum", typeof(int), typeof(ListAlbum), new PropertyMetadata(-1));
+
+        public List<int> ListSelectedItem
+        {
+            get { return (List<int>)GetValue(ListSelectedItemProperty); }
+            set { SetValue(ListSelectedItemProperty, value); }
+        }
+
+
+        public ObservableCollection<Album> List 
+        {
+            get { return (ObservableCollection<Album>)GetValue(ListProperty); }
+            set { SetValue(ListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListProperty =
+            DependencyProperty.Register("List", typeof(ObservableCollection<Album>), typeof(ListAlbum), new PropertyMetadata(null));
+
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSelectedItemProperty =
+            DependencyProperty.Register("ListSelectedItem", typeof(List<int>), typeof(ListAlbum), new PropertyMetadata(new List<int> { }));
+
+
+        public Album SelectedAlbum
+        {
+            get { return (Album)GetValue(SelectedAlbumProperty); }
+            set { SetValue(SelectedAlbumProperty, value);
+            }
+        }
+        // Using a DependencyProperty as the backing store for SelectedAlbum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedAlbumProperty =
+            DependencyProperty.Register("SelectedAlbum", typeof(Album), typeof(ListAlbum), new PropertyMetadata(null));
+
+
+        public static ListAlbum Ins { get; private set; }
+        static ListAlbum()
+        {
+            Ins = new ListAlbum();
+           
+        }
+    }
   public partial class AlbumView : UserControl
   {
         public static string type = "";
@@ -38,7 +94,6 @@ namespace Spotify.Views.Pages
             binding.Mode = BindingMode.TwoWay;
             if (type != "likesong" && type != "playlist")
             {
-               
                 BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, binding);
             }
           
@@ -60,7 +115,7 @@ namespace Spotify.Views.Pages
     private void UserControl_Loaded(object sender, RoutedEventArgs e)
     {
             SongsView.CurrentType = "album";
-            
+           
                 Album.ApplyTemplate();
             if (type == "album")
             {

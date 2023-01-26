@@ -44,6 +44,7 @@ namespace Spotify.ViewModels.Pages
         private ObservableCollection<Song> _songsOfPlaylist = new ObservableCollection<Song>();
         public ObservableCollection<Song> SongsOfPlaylist { get => _songsOfPlaylist; set { _songsOfPlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
+
         public Playlist SelectedPlaylist
         {
             get => _SelectedPlaylist;
@@ -55,6 +56,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedPlaylist != null)
                     {
+
                         ViewPage.Ins.ViewPageSelected = "null";
                         NamePlaylist = SelectedPlaylist.PlaylistName;
                         DescriptionPlaylist = SelectedPlaylist.Descriptions;
@@ -108,15 +110,18 @@ namespace Spotify.ViewModels.Pages
                             }
                         }
                         ListPlaylist.Ins.IsCreate = false;
+
+
+
+
                         //   }
 
-                        ViewPage.Ins.CurrentView = new CreatePlaylist();
+                       ViewPage.Ins.CurrentView = new CreatePlaylist();
                         ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                         ViewPage.Ins.CurrentIndexView++;
-                        // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString());
                         ListPlaylist.Ins.CurrentIdPlaylist++;
                         ViewPage.Ins.IsDisableBack = false;
-
+                       
                     }
                 }
 
@@ -156,20 +161,17 @@ namespace Spotify.ViewModels.Pages
 
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
+        public static Binding binding;
         public CreatePlaylistVM() {
             try
             {
-
+                binding = new Binding("SelectedPlaylist");
+                binding.Source = this;
+                binding.Mode = BindingMode.TwoWay;
+                BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding); 
                 ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
                
-                Binding binding = new Binding("SelectedPlaylist");
-                binding.Source = this;
-                binding.Mode = BindingMode.OneWayToSource;
-                BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
-                //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
-                //songs.Add(Songs.CamNang);
-                //songs.Add(Songs.BenTrenTangLau);
-                //songs.Add(Songs.DauMua);
+               
 
                 SongItemsCollection = new CollectionViewSource { Source = songs };
                 SongItemsCollection.Filter += MenuItems_Filter;
@@ -233,6 +235,7 @@ namespace Spotify.ViewModels.Pages
                       DataProvider.Ins.DB.SaveChanges();
                       SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
                       ListPlaylist.Ins.Image = "";
+                     
 
                   });
                 OptionCommand = new RelayCommand<object>(

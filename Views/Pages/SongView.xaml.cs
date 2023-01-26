@@ -58,6 +58,10 @@ namespace Spotify.Views.Pages
            DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
 
 
+        
+
+
+
         public string Description
         {
             get { return (string)GetValue(DescriptionProperty); }
@@ -173,6 +177,7 @@ namespace Spotify.Views.Pages
                     SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
                     SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
                     SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+      
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PauseGreen;
                     PlayPauseGreen.Background = img;
@@ -188,7 +193,7 @@ namespace Spotify.Views.Pages
                     SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
                     
                     SongBottom.Ins.SelectedSong = DataProvider.Ins.DB.Songs.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-        
+   
                    // SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
                     ImageBrush img = new ImageBrush();
                     img.ImageSource = PauseGreen;
