@@ -383,6 +383,7 @@ namespace Spotify.Views.Components
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
+                ViewPage.Ins.IsDisableNext = true;
             }
         }
         private void NameSong_Click(object sender, RoutedEventArgs e)
@@ -482,39 +483,39 @@ namespace Spotify.Views.Components
                         
                     }
 
-                for (int i = 0; i < listview.Items.Count; i++)
-                {
-                    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                    ImageBrush img = new ImageBrush();
-                    Button btn = new Button();
-                    Image image = new Image();
-                    TextBlock tb = new TextBlock();
-                    if (template != null)
-                    {
-                        img = new ImageBrush();
-                        btn = template.Template.FindName("PlayPauseBtn", template) as Button;
-                        image = template.Template.FindName("img", template) as Image;
-                        tb = template.Template.FindName("Id", template) as TextBlock;
-                        if (i != listview.SelectedIndex)
-                        {
-                            img.ImageSource = Play;
-                            btn.Background = img;
-                            image.Visibility = Visibility.Hidden;
-                            tb.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            playButton = GetTemplateChild("PlayPauseGreen") as Button;
-                            ImageBrush ImgBrush = new ImageBrush();
-                            ImgBrush.ImageSource = PauseGreen;
-                            playButton.Background = ImgBrush;
-                            img.ImageSource = Pause;
-                            btn.Background = img;
-                            image.Visibility = Visibility.Visible;
-                            tb.Visibility = Visibility.Hidden;
-                        }
-                    }
-                }
+                //for (int i = 0; i < listview.Items.Count; i++)
+                //{
+                //    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                //    ImageBrush img = new ImageBrush();
+                //    Button btn = new Button();
+                //    Image image = new Image();
+                //    TextBlock tb = new TextBlock();
+                //    if (template != null)
+                //    {
+                //        img = new ImageBrush();
+                //        btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                //        image = template.Template.FindName("img", template) as Image;
+                //        tb = template.Template.FindName("Id", template) as TextBlock;
+                //        if (i != listview.SelectedIndex)
+                //        {
+                //            img.ImageSource = Play;
+                //            btn.Background = img;
+                //            image.Visibility = Visibility.Hidden;
+                //            tb.Visibility = Visibility.Visible;
+                //        }
+                //        else
+                //        {
+                //            playButton = GetTemplateChild("PlayPauseGreen") as Button;
+                //            ImageBrush ImgBrush = new ImageBrush();
+                //            ImgBrush.ImageSource = PauseGreen;
+                //            playButton.Background = ImgBrush;
+                //            img.ImageSource = Pause;
+                //            btn.Background = img;
+                //            image.Visibility = Visibility.Visible;
+                //            tb.Visibility = Visibility.Hidden;
+                //        }
+                //    }
+                //}
             }
             catch { }
         }
