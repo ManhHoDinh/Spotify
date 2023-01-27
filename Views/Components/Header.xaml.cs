@@ -469,7 +469,8 @@ namespace Spotify.Views.Components
                         ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
                         ViewPage.Ins.CurrentIndexView++;
                         if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
-                    }   
+                    }
+                    ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
                     IsDisableBack = false;
                    
                 }
