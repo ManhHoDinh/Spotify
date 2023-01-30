@@ -198,6 +198,7 @@ namespace Spotify
             HeaderOption.Visibility = Visibility.Hidden;
         }
 
+        
         //public static int id = 0;
         //private void window_Loaded(object sender, RoutedEventArgs e)
         //{

@@ -22,9 +22,10 @@
                   Name="PART_Header"
                   Template="{DynamicResource NonScrollableListView}" 
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                  
                   SelectedItem="{Binding SelectedItem,ElementName=listAlbum}" 
                   ItemsSource="{Binding ItemsSource, ElementName=listAlbum}" 
-                 
+                  
                   Background="Transparent" BorderBrush="Transparent">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
