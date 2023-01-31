@@ -4,7 +4,7 @@
 Tận hưởng âm nhạc theo cách riêng của bạn.
 
 <!-- LOGO CINEMA -->
-![Logo Spotify](./ImageApp/CinemaSquadin.jpg)
+![Logo Spotify](./Resource/Images/Spotify.png)
 
 ## Mục lục
 
