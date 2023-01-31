@@ -67,6 +67,7 @@
                         Margin="30 0 0 0"
                         Background="Transparent"
                         Foreground="#b3b3b3" 
+                        
                         SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemContainerStyle>

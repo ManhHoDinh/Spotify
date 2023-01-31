@@ -28,6 +28,18 @@ namespace Spotify
 
 
 
+
+        public bool PrevClick
+        {
+            get { return (bool)GetValue(PrevClickProperty); }
+            set { SetValue(PrevClickProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PrevClick.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PrevClickProperty =
+            DependencyProperty.Register("PrevClick", typeof(bool), typeof(ViewPage), new PropertyMetadata(false));
+
+
         public ObservableCollection<Song> LikeSongSource
         {
             get { return (ObservableCollection<Song>)GetValue(LikeSongSourceProperty); }

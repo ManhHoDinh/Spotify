@@ -477,6 +477,8 @@ namespace Spotify.Views.Components
                 SongSelect.Ins.ImageSong = SongBottom.Ins.ImageSong;
                 SongSelect.Ins.LinkSong = SongBottom.Ins.LinkSong;
                 SongSelect.Ins.Description = SongBottom.Ins.SelectedSong.Descriptions;
+                SongSelect.Ins.ListSelectedItem.Add(SongBottom.Ins.SelectedSong.ID);
+                SongSelect.Ins.CurrentIdSong++;
             }
         }
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)

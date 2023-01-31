@@ -62,12 +62,35 @@ namespace Spotify.ViewModels.Pages
                         DescriptionPlaylist = SelectedPlaylist.Descriptions;
                         ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
                         SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+                        int temp = 0;
+                        for (int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                        {
+                            if (SelectedPlaylist.ID != ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[i]].ID)
+                            {
 
+                                temp++;
+
+                            }
+                        }
+                        //MessageBox.Show(temp.ToString() + ListPlaylist.Ins.ListSelectedItem.Count.ToString());
+                        if (temp == ListPlaylist.Ins.ListSelectedItem.Count)
+                        {
+                            for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
+                            {
+                                if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                                {
+                                    ListPlaylist.Ins.ListSelectedItem.Add(i);
+                                }
+                            }
+                            ListPlaylist.Ins.CurrentIdPlaylist++;
+                            ViewPage.Ins.IsClick = false;
+                        }
+                        else ViewPage.Ins.IsClick = true;
                         if (ViewPage.Ins.IsClick == false)
                         {
                             int currentId = ViewPage.Ins.CurrentIndexView;
                             int count = ViewPage.Ins.ListPage.Count;
-                            // MessageBox.Show(currentId.ToString() + count.ToString());
+                            
                             if (currentId + 1 < count)
                             {
                                 for (int i = currentId + 1; i < count; i++)
@@ -80,9 +103,9 @@ namespace Spotify.ViewModels.Pages
                                 {
                                     if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                                     {
-                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
                                         {
-                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
                                         }
                                     }
 
@@ -90,37 +113,33 @@ namespace Spotify.ViewModels.Pages
                                     {
 
                                         int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
                                         {
 
-                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
                                         }
 
                                     }
                                 }
                             }
                         }
-                        //if(ListPlaylist.Ins.IsCreate == false)
+
+                        //for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
                         //{
-                        for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
-                        {
-                            if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
-                            {
-                                ListPlaylist.Ins.ListSelectedItem.Add(i);
-                            }
-                        }
+                        //    if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                        //    {
+                        //        ListPlaylist.Ins.ListSelectedItem.Add(i);
+                        //    }
+                        //}
                         ListPlaylist.Ins.IsCreate = false;
-
-
-
-
-                        //   }
-
-                       ViewPage.Ins.CurrentView = new CreatePlaylist();
+                       
+                        ViewPage.Ins.CurrentView = new CreatePlaylist();
                         ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                         ViewPage.Ins.CurrentIndexView++;
-                        ListPlaylist.Ins.CurrentIdPlaylist++;
+                        //ListPlaylist.Ins.CurrentIdPlaylist++;
                         ViewPage.Ins.IsDisableBack = false;
+                        ViewPage.Ins.IsClick = false;
+                       // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString() + ListPlaylist.Ins.CurrentIdPlaylist.ToString());
                        
                     }
                 }

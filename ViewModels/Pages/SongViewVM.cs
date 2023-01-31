@@ -23,6 +23,8 @@ namespace Spotify.ViewModels.Pages
         public Uri ImageSong { get => _imageSong; set { _imageSong = value; OnPropertyChanged(); } }
         private string _description;
         public string Description { get => _description; set { _description = value; OnPropertyChanged(); } }
+        private string _linkSong;
+        public string LinkSong { get => _linkSong; set { _linkSong = value; OnPropertyChanged(); } }
         private Song _selectedSong;
         public Song SelectedSong { get => _selectedSong; set {
                 _selectedSong = value;
@@ -47,22 +49,24 @@ namespace Spotify.ViewModels.Pages
             //}
             //else
             //{
+            
             string Name = SongSelect.Ins.SongName;
             string Singer = SongSelect.Ins.SingerName;
             Uri Image = SongSelect.Ins.ImageSong;
             string Description = SongSelect.Ins.Description;
+            Uri Link = SongSelect.Ins.LinkSong;
             Binding SongNameBinding = new Binding("SongName");
-                SongNameBinding.Source = this;
-                SongNameBinding.Mode = BindingMode.OneWayToSource;
-                BindingOperations.SetBinding(SongSelect.Ins, SongSelect.SongNameProperty, SongNameBinding);
-                Binding SingerNameBinding = new Binding("SingerName");
-                SingerNameBinding.Source = this;
-                SingerNameBinding.Mode = BindingMode.OneWayToSource;
-                BindingOperations.SetBinding(SongSelect.Ins, SongSelect.SingerNameProperty, SingerNameBinding);
-                Binding ImageBinding = new Binding("ImageSong");
-                ImageBinding.Source = this;
-                ImageBinding.Mode = BindingMode.OneWayToSource;
-                BindingOperations.SetBinding(SongSelect.Ins, SongSelect.ImageSongProperty, ImageBinding);
+            SongNameBinding.Source = this;
+            SongNameBinding.Mode = BindingMode.OneWayToSource;
+            BindingOperations.SetBinding(SongSelect.Ins, SongSelect.SongNameProperty, SongNameBinding);
+            Binding SingerNameBinding = new Binding("SingerName");
+            SingerNameBinding.Source = this;
+            SingerNameBinding.Mode = BindingMode.OneWayToSource;
+            BindingOperations.SetBinding(SongSelect.Ins, SongSelect.SingerNameProperty, SingerNameBinding);
+            Binding ImageBinding = new Binding("ImageSong");
+            ImageBinding.Source = this;
+            ImageBinding.Mode = BindingMode.OneWayToSource;
+            BindingOperations.SetBinding(SongSelect.Ins, SongSelect.ImageSongProperty, ImageBinding);
             Binding DesctiptionBinding = new Binding("Description");
             DesctiptionBinding.Source = this;
             DesctiptionBinding.Mode = BindingMode.OneWayToSource;
@@ -71,6 +75,7 @@ namespace Spotify.ViewModels.Pages
             SongSelect.Ins.SingerName = Singer;
             SongSelect.Ins.ImageSong = Image;
             SongSelect.Ins.Description = Description;
+            SongSelect.Ins.LinkSong = Link;
             //  }
 
 
