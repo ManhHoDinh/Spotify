@@ -191,55 +191,58 @@ namespace Spotify.Views.Pages
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
             try
-            {   BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
-                    if (SongsView.CurrentType == "likesong")
-                    {
-                        BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
-                    }       else 
-                    {
-
-                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
+            {
+                BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                if (SongsView.CurrentType == "likesong")
                 {
-                    SongBottom.Ins.SongName = SongSelect.Ins.SongName;
-                    SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
-                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
-                    SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
-      
-                    ImageBrush img = new ImageBrush();
-                    img.ImageSource = PauseGreen;
-                    PlayPauseGreen.Background = img;
-                    SongBottom.Ins.IsPlay = true;
-                }
-
-                if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
-                {
-                    SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
-                    SongBottom.Ins.SongName = SongSelect.Ins.SongName;
-                    SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
-                    SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
-                    
-                    SongBottom.Ins.SelectedSong = DataProvider.Ins.DB.Songs.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-   
-                   // SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
-                    ImageBrush img = new ImageBrush();
-                    img.ImageSource = PauseGreen;
-                    PlayPauseGreen.Background = img;
-                    SongBottom.Ins.IsPlay = true;
+                    BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
                 }
                 else
                 {
-                    if (SongBottom.Ins.IsPlay == true)
-                    {
 
-                        SongBottom.Ins.IsPlay = false;
-                    }
-                    else
+                    if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
                     {
+                        SongBottom.Ins.SongName = SongSelect.Ins.SongName;
+                        SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
+                        SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                        SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+
                         ImageBrush img = new ImageBrush();
                         img.ImageSource = PauseGreen;
                         PlayPauseGreen.Background = img;
                         SongBottom.Ins.IsPlay = true;
+                    }
+
+                    if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
+                    {
+                        SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+                        SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                        SongBottom.Ins.SongName = SongSelect.Ins.SongName;
+                        SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
+                        SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+
+                        SongBottom.Ins.SelectedSong = DataProvider.Ins.DB.Songs.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+
+                        // SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                        ImageBrush img = new ImageBrush();
+                        img.ImageSource = PauseGreen;
+                        PlayPauseGreen.Background = img;
+                        SongBottom.Ins.IsPlay = true;
+                    }
+                    else
+                    {
+                        if (SongBottom.Ins.IsPlay == true)
+                        {
+
+                            SongBottom.Ins.IsPlay = false;
+                        }
+                        else
+                        {
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = PauseGreen;
+                            PlayPauseGreen.Background = img;
+                            SongBottom.Ins.IsPlay = true;
+                        }
                     }
                 }
             }
