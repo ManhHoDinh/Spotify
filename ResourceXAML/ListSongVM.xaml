@@ -5,4 +5,5 @@
     <pages:CreatePlaylistVM x:Key="createPlaylistVM"></pages:CreatePlaylistVM>
     <views:LikedSongsVM x:Key="LikedSongsVM"></views:LikedSongsVM>
     <views:HomeVM x:Key="homeVM"></views:HomeVM>
+    <views:SongViewVM x:Key="songviewVM"></views:SongViewVM>
 </ResourceDictionary>

@@ -205,139 +205,293 @@ namespace Spotify.Views.Components
             try
             {
                 //MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[0].ToString() + ListPlaylist.Ins.ListSelectedItem[1].ToString());
-                
+               
                 ViewPage.Ins.IsClick = true;
+       
                 int count = ViewPage.Ins.CurrentIndexView;
                 Button btn = sender as Button;
                 Border bd = BackButton.Template.FindName("border", BackButton) as Border;
                 if (count > 0)
                 {
-                    ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
-                    if (ViewPage.Ins.CurrentView.GetType().Name != "SearchVM")
+                    object page = ViewPage.Ins.ListPage[count - 1];
+
+                    if (page.GetType().Name != "SearchVM")
                         ViewPage.Ins.IsSearchView = false;
                     else
                         ViewPage.Ins.IsSearchView = true;
-                    if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
+                    if (page.GetType().Name == "CreatePlaylist")
                     {
 
                         int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
                         if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
                         {
+
+                         
                             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
                             ListPlaylist.Ins.CurrentIdPlaylist++;
                         }
                         else
                         {
                             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[--CountOfId]];
-
-
                         }
-                        // ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
-                        //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
-                        //{
-                        //    MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[i].ToString());
-                        //}
+                        ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
+                        //ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                        ViewPage.Ins.CurrentIndexView--;
+                        ListPlaylist.Ins.CurrentIdPlaylist -= 1;
+                    }
+                    else if (page.GetType().Name == "AlbumView")
+                    {
+                        ListPlaylist.Ins.SelectedItem = null;
+                        int CountAlbum = ListAlbum.Ins.CurrentIdAlbum;
+                        
+                        if (ViewPage.Ins.ListPage[count].GetType().Name != "AlbumView")
+                        {
+                            int id = ListAlbum.Ins.ListSelectedItem[CountAlbum];
+                            
+                            ListAlbum.Ins.SelectedAlbum = DataProvider.Ins.DB.Albums.Where(a => a.ID == id).FirstOrDefault();
+                            ListAlbum.Ins.CurrentIdAlbum++;
+                            
+                        }
+                        else
+                        {
+                            int temp = ListAlbum.Ins.ListSelectedItem[CountAlbum - 1];
+                            ListAlbum.Ins.SelectedAlbum = DataProvider.Ins.DB.Albums.Where(a => a.ID == temp).FirstOrDefault();
+                        }
                         ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
                         ViewPage.Ins.CurrentIndexView--;
-                        ListPlaylist.Ins.CurrentIdPlaylist -= 2;
+                        ListAlbum.Ins.CurrentIdAlbum -= 1;
+
+                        if (ViewPage.Ins.ListPage[count].GetType().Name == "SongView")
+                        {
+                           
+
+                            if (SongSelect.Ins.CurrentIdSong > 0)
+                            {
+                                
+                                SongSelect.Ins.CurrentIdSong--;
+                            }
+
+                        }
+                    }
+                    else if (page.GetType().Name == "SongView")
+                    {
+                        ListPlaylist.Ins.SelectedItem = null;
+                        int CountSong = SongSelect.Ins.CurrentIdSong;
+                       
+                        if (ViewPage.Ins.ListPage[count].GetType().Name != "SongView")
+                        {
+                            int id = SongSelect.Ins.ListSelectedItem[CountSong];
+                            var song = DataProvider.Ins.DB.Songs.Where(a => a.ID == id).FirstOrDefault();
+                            SongSelect.Ins.SongName = song.SongName;
+                            SongSelect.Ins.SingerName = song.SingerName;
+                            SongSelect.Ins.ImageSong = song.SongImageUri;
+                            SongSelect.Ins.Description = song.Descriptions;
+                            SongSelect.Ins.LinkSong = song.SongLinkUri;
+                            SongSelect.Ins.CurrentIdSong++;
+
+                        }
+                        else
+                        {
+                            int temp = SongSelect.Ins.ListSelectedItem[CountSong - 1];
+                            var song = DataProvider.Ins.DB.Songs.Where(a => a.ID == temp).FirstOrDefault();
+                            SongSelect.Ins.SongName = song.SongName;
+                            SongSelect.Ins.SingerName = song.SingerName;
+                            SongSelect.Ins.ImageSong = song.SongImageUri;
+                            SongSelect.Ins.Description = song.Descriptions;
+                            SongSelect.Ins.LinkSong = song.SongLinkUri;
+
+                        }
+                        ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
+
+                        
+                        ViewPage.Ins.CurrentIndexView--;
+                        SongSelect.Ins.CurrentIdSong -= 1;
+
                     }
                     else
                     {
-
-
-
-
+                        ListPlaylist.Ins.SelectedItem = null;
                         if (ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
                         {
                             if (ListPlaylist.Ins.CurrentIdPlaylist > 0)
                             {
                                 ListPlaylist.Ins.CurrentIdPlaylist--;
-
                             }
 
                         }
+                        if (ViewPage.Ins.ListPage[count].GetType().Name == "AlbumView")
+                        {
+                            if (ListAlbum.Ins.CurrentIdAlbum > 0)
+                            {
+                                ListAlbum.Ins.CurrentIdAlbum--;
+                            }
+
+                        }
+                       
+                        ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count - 1];
+
+
                     }
                     ViewPage.Ins.CurrentIndexView--;
                     ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
                     if (count == 1) IsDisableBack = true;
                     IsDisableNext = false;
                 }
+               
                 else
                 {
                     IsDisableBack = true;
                 }
-            }
-            catch { }
+           }
+            catch 
+            {}
 
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+
                 
                 ViewPage.Ins.IsClick = true;
-                //for(int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
-                //{
-                //    MessageBox.Show(ListPlaylist.Ins.ListSelectedItem[i].ToString());
-                //}
-                //MessageBox.Show(ListPlaylist.Ins.CurrentIdPlaylist.ToString());
                 int count = ViewPage.Ins.CurrentIndexView;
-
                 if (count < ViewPage.Ins.ListPage.Count - 1)
                 {
+                    object page = ViewPage.Ins.ListPage[count + 1];
 
-                    ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
-                    if (ViewPage.Ins.CurrentView.GetType().Name != "SearchVM")
+                   
+                    if (page.GetType().Name != "SearchVM")
                         ViewPage.Ins.IsSearchView = false;
                     else
                         ViewPage.Ins.IsSearchView = true;
-                    if (ViewPage.Ins.CurrentView.GetType().Name == "CreatePlaylist")
+                    if (page.GetType().Name == "CreatePlaylist")
                     {
                         int CountOfId = ListPlaylist.Ins.CurrentIdPlaylist;
-                        //MessageBox.Show(CountOfId.ToString());
-
                         if (ViewPage.Ins.ListPage[count].GetType().Name != "CreatePlaylist")
                         {
+   
+                                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                              
+                               // ListPlaylist.Ins.CurrentIdPlaylist--;
+                        }
+                        else
+                        {
+                            CountOfId++;
+                          
                             ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
+                            ListPlaylist.Ins.CurrentIdPlaylist++;
 
-                            ListPlaylist.Ins.CurrentIdPlaylist--;
+                        }
 
+
+                        //  ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+                        ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
+                        ViewPage.Ins.CurrentIndexView--;
+                        ViewPage.Ins.CurrentIndexView++;
+                        if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
+
+
+                    }
+                    else if (page.GetType().Name == "AlbumView")
+                    {
+                        ListPlaylist.Ins.SelectedItem = null;
+
+                        int CountAlbum = ListAlbum.Ins.CurrentIdAlbum;
+                       
+                        if (ViewPage.Ins.ListPage[count].GetType().Name != "AlbumView")
+                        {
+                            int id = ListAlbum.Ins.ListSelectedItem[CountAlbum];
+                            ListAlbum.Ins.SelectedAlbum = DataProvider.Ins.DB.Albums.Where(a => a.ID == id).FirstOrDefault();
+                            
                         }
                         else
                         {
 
-                            CountOfId++;
-
-                            ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[CountOfId]];
-
-
+                            int temp = ListAlbum.Ins.ListSelectedItem[CountAlbum + 1];
+                            ListAlbum.Ins.SelectedAlbum = DataProvider.Ins.DB.Albums.Where(a => a.ID == temp).FirstOrDefault();
+                            ListAlbum.Ins.CurrentIdAlbum++;
                         }
-                        ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.ListSelectedItem.Count - 1);
+
+
+                      //  ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.ListSelectedItem.Count - 1);
                         ViewPage.Ins.ListPage.RemoveAt(ViewPage.Ins.ListPage.Count - 1);
                         ViewPage.Ins.CurrentIndexView--;
+                        ViewPage.Ins.CurrentIndexView++;
+                       
+                        if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
+                        if (ViewPage.Ins.ListPage[count].GetType().Name == "SongView")
+                        {
+                            SongSelect.Ins.CurrentIdSong++;
+                        }
+                    }
+                    else if (page.GetType().Name == "SongView")
+                    {
+                        ListPlaylist.Ins.SelectedItem = null;
 
+                        int CountSong =SongSelect.Ins.CurrentIdSong;
+                        
+
+
+                        if (ViewPage.Ins.ListPage[count].GetType().Name != "SongView")
+                        {
+                            int id = SongSelect.Ins.ListSelectedItem[CountSong];
+                            var song = DataProvider.Ins.DB.Songs.Where(a => a.ID == id).FirstOrDefault();
+                            SongSelect.Ins.SongName = song.SongName;
+                            SongSelect.Ins.SingerName = song.SingerName;
+                            SongSelect.Ins.ImageSong = song.SongImageUri;
+                            SongSelect.Ins.Description = song.Descriptions;
+                            SongSelect.Ins.LinkSong = song.SongLinkUri;
+                            SongSelect.Ins.CurrentIdSong--;
+                        }
+                        else
+                        {
+
+                            int temp = SongSelect.Ins.ListSelectedItem[CountSong + 1];
+                            var song = DataProvider.Ins.DB.Songs.Where(a => a.ID == temp).FirstOrDefault();
+                            SongSelect.Ins.SongName = song.SongName;
+                            SongSelect.Ins.SingerName = song.SingerName;
+                            SongSelect.Ins.ImageSong = song.SongImageUri;
+                            SongSelect.Ins.Description = song.Descriptions;
+                            SongSelect.Ins.LinkSong = song.SongLinkUri;
+                        }
+
+                        ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
+                        // SongSelect.Ins.ListSelectedItem.RemoveAt(SongSelect.Ins.ListSelectedItem.Count - 1);
+                        SongSelect.Ins.CurrentIdSong++;
+                        ViewPage.Ins.CurrentIndexView++;
+                     
+                        if (count+ 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
 
                     }
                     else
                     {
+                        ListPlaylist.Ins.SelectedItem = null;
+
                         if (ViewPage.Ins.ListPage[count].GetType().Name == "CreatePlaylist")
                         {
                             ListPlaylist.Ins.CurrentIdPlaylist++;
                         }
+                        if (ViewPage.Ins.ListPage[count].GetType().Name == "AlbumView")
+                        {
+                            ListAlbum.Ins.CurrentIdAlbum++;
+                        }
+
+                        ViewPage.Ins.CurrentView = ViewPage.Ins.ListPage[count + 1];
+                        ViewPage.Ins.CurrentIndexView++;
+                        if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
                     }
-
-                    ViewPage.Ins.CurrentIndexView++;
-                    if (count + 1 == ViewPage.Ins.ListPage.Count - 1) IsDisableNext = true;
+                    ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
                     IsDisableBack = false;
-
                 }
-
                 else
                 {
                     IsDisableNext = true;
                 }
             }
-            catch { }
+            catch 
+            {
+                
+            }
         }
         public static string RemoveSign4VietnameseString(string str)
         {

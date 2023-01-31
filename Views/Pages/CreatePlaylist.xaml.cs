@@ -87,13 +87,8 @@ namespace Spotify.Views.Pages
             set
             {
                 SetValue(SelectedItemProperty, value);
-                if (SelectedItem != null)
-                {
-                    Ins.PlaylistName = SelectedItem.PlaylistName;
-                    Ins.PlaylistDescription = SelectedItem.Descriptions;
-                    Ins.ImagePlaylist = SelectedItem.PlaylistImageSource;
-                    CreatePlaylist a = new CreatePlaylist();
-                }
+               
+
             }
         }
         // Using a DependencyProperty as the backing store for SelectedItem.  This enables animation, styling, binding, etc...
@@ -144,37 +139,32 @@ namespace Spotify.Views.Pages
         static ListPlaylist()
         {
             Ins = new ListPlaylist();
-            
+        
            // Ins.List = new ObservableCollection<Playlist>(DataProvider.Ins.DB.Playlists.Where(p=>p.PlaylistType == 2).ToList());
             Ins.SelectedItem = new Playlist();
+            CreatePlaylist a = new CreatePlaylist();
 
         }
-
     }
-  
     public partial class CreatePlaylist : UserControl
     {
         public static Binding bd;
         public CreatePlaylist()
         {
             InitializeComponent();
-            CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            //CreatePlaylistVM playlist = this.DataContext as CreatePlaylistVM;
+            //Binding binding = new Binding("SelectedPlaylist");
+            //binding.Source = playlist;
+            //binding.Mode = BindingMode.TwoWay;
+            //BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
             bd = new Binding("SelectedSong");
             bd.Source = songPlaylist;
             bd.Mode = BindingMode.TwoWay;
             if(AlbumView.type != "album" && AlbumView.type != "likesong")
             {
-            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);
+                BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, bd);  
             }
-            Binding binding = new Binding("SelectedPlaylist");
-            binding.Source = playlist;
-            binding.Mode = BindingMode.TwoWay;
-            BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding);
-            
-            //if(SongBottom.Ins.ListSong != songPlaylist.ItemSource && SongBottom.Ins.ListSong != null)
-            //{
-            //    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
-            //}
+           
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -232,17 +222,118 @@ namespace Spotify.Views.Pages
         // Using a DependencyProperty as the backing store for color.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty colorProperty =
             DependencyProperty.Register("color", typeof(string), typeof(CreatePlaylist), new PropertyMetadata("#545454"));
-
+        public static Song SongSelect;
         private void playlist_Loaded(object sender, RoutedEventArgs e)
         {
+            
+           
+
+            SongSelect = songPlaylist.SelectedSong;
+            //if (songPlaylist.SelectedSong != null)
+            //{
+            //    SongSelect = songPlaylist.SelectedSong;
+            //  }
+
+
+
             SongsView.CurrentType = "playlist";
-            if(songPlaylist.ItemSource.Count > 0)
+
+            if (songPlaylist.ItemSource.Count > 0)
             {
                 Random r = new Random();
                 Color RandomColor = Color.FromRgb((byte)r.Next(1, 255), (byte)r.Next(1, 255), (byte)r.Next(1, 233));
                 string hex = RandomColor.R.ToString("X2") + RandomColor.G.ToString("X2") + RandomColor.B.ToString("X2");
                 color = "#" + hex;
-            }   
+            }
+
+            songPlaylist.ApplyTemplate();
+            if (AlbumView.type == "playlist")
+            {
+                
+                if (SongBottom.Ins.CountId >= 0)
+                {
+                    
+                    if (SongBottom.Ins.IsPlay == false)
+                    {
+                       
+                        songPlaylist.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                        SongBottom.Ins.IsPlay = false;
+                    }
+                    else
+                    {
+                        
+                        
+                        songPlaylist.SelectedSong = SongBottom.Ins.ListSong[SongBottom.Ins.CountId];
+                       
+                      
+                    }
+
+                }
+            }
+
+            var ListSong = songPlaylist.Template.FindName("PART_Header", songPlaylist) as ListView;
+            if (Properties.Settings.Default.CurrentUserID != -1)
+            {
+                var listFavor = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
+                foreach (Song a in listFavor)
+                {
+                    for (int j = 0; j < songPlaylist.ItemSource.Count; j++)
+                    {
+                        if (a.ID == songPlaylist.ItemSource[j].ID)
+                        {
+                            var template = ListSong.ItemContainerGenerator.ContainerFromIndex(j) as ListViewItem;
+                            Button btn = template.Template.FindName("favorBtn", template) as Button;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
+                            btn.Background = img;
+                        }
+                    }
+                }
+            }
+            
+            var playBtn = songPlaylist.Template.FindName("PlayPauseGreen", songPlaylist) as Button;
+
+            int temp = 0;
+            if(SongBottom.Ins.ListSong != null)
+            {
+                if (SongBottom.Ins.ListSong.Count == songPlaylist.ItemSource.Count)
+                {
+                    for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                    {
+                        if (SongBottom.Ins.ListSong[i] == songPlaylist.ItemSource[i])
+                        {
+                            temp++;
+                        }
+                    }
+                }
+                else temp = -1;
+               
+            }
+           
+           
+            if (SongBottom.Ins.IsPlay == true &&  temp == songPlaylist.ItemSource.Count)
+            {
+
+                int index = 0;
+
+                for (int i = 0; i < SongBottom.Ins.ListSong.Count; i++)
+                {
+                    if (SongBottom.Ins.ListSong[i].SongName == SongBottom.Ins.SongName)
+                    {
+
+                        index = i; break;
+                    }
+                }
+
+                
+                ListSong.SelectedIndex = index;
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = (ImageSource)Application.Current.Resources["PauseFill"];
+                playBtn.Background = img;
+            }
+            else ListSong.SelectedIndex = -1;
+
+
         }
 
         
