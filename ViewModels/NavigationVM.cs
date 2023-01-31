@@ -78,33 +78,62 @@ namespace Spotify.ViewModels
 
                 if (currentId + 1 < count)
                 {
+                    
                     for (int i = currentId + 1; i < count; i++)
                     {
                         ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
                     }
-                    
-                   if(ListPlaylist.Ins.CurrentIdPlaylist != -1)
+
+
+                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
                     {
-                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1 )
+                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                         {
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
                             {
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
                             }
                         }
 
-                        else 
+                        else
                         {
+
                             int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
                             {
-                               
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
                             }
-                          
+
                         }
                     }
-                   
+                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                    {
+                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                        {
+
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum - 1; i < ListAlbum.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
+                            {
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum - 1);
+                            }
+
+
+
+                        }
+
+
+                        else
+                        {
+                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < countAlbum - 1; i++)
+                            {
+
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
+                            }
+
+                        }
+                    }
+
 
                 }
                 ViewPage.Ins.CurrentView = obj;

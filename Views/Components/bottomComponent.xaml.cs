@@ -391,55 +391,7 @@ namespace Spotify.Views.Components
             }
             catch { }
         }
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Button HeartBtn = sender as Button;
-        //    //MessageBox.Show(SongBottom.Ins.SelectedSong.ID.ToString());
-        //    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == SongBottom.Ins.SelectedSong.ID).FirstOrDefault();
-        //    MessageBox.Show(song.SongName);
-        //    var playlist = Playlists.LikedSongsPlayplist;
-        //    if (IsFavor)
-        //    {
-        //        //var list = playlist.Songs;
-        //        //foreach (Song s in list)
-        //        //{
-        //        //    if (s.ID == song.ID) { MessageBox.Show("haa"); break; }
-        //        //}
-        //        playlist.Songs.Remove(song);
-        //        playlist.SongsOfPlaylist.Remove(song);
-        //        ImageSource Heart = (ImageSource)Application.Current.Resources["HeartButton"];
-        //        ImageBrush ImgBrush = new ImageBrush();
-        //        ImgBrush.ImageSource = Heart;
-        //        HeartBtn.Background = ImgBrush;
-        //        IsFavor = false;
-        //        isFavor = "false";
-
-        //    }
-        //    else
-        //    {
-        //        var list = playlist.Songs;
-        //        bool IsExistedPlaylist = false;
-        //        foreach (Song s in list)
-        //        {
-        //            if (s.ID == song.ID) { IsExistedPlaylist = true; break; }
-        //        }
-        //        if (!IsExistedPlaylist)
-        //        {
-        //            playlist.Songs.Add(song);
-        //            playlist.SongsOfPlaylist.Add(song);
-        //        }
-        //        ImageSource HeartFill = (ImageSource)Application.Current.Resources["HeartFillButton"];
-        //        ImageBrush ImgBrush = new ImageBrush();
-        //        ImgBrush.ImageSource = HeartFill;
-        //        HeartBtn.Background = ImgBrush;
-        //        IsFavor = true;
-        //        isFavor = "true";
-
-        //    }
-        //    DataProvider.Ins.DB.SaveChanges();
-
-
-        //}
+     
 
         private void mePlayer_MediaEnded(object sender, RoutedEventArgs e)
         {
@@ -515,12 +467,19 @@ namespace Spotify.Views.Components
             SongBottom.Ins.SingerName = SongBottom.Ins.ListSong[index].SingerName;
             SongBottom.Ins.LinkSong = SongBottom.Ins.ListSong[index].SongLinkUri;
             SongBottom.Ins.ImageSong = SongBottom.Ins.ListSong[index].SongImageUri;
-            //  MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
             SongBottom.Ins.CountId = index;
             SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[index];
-            
-            //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
-
+            if (ViewPage.Ins.CurrentView.GetType().Name == "SongView")
+            {
+               
+                SongSelect.Ins.SongName = SongBottom.Ins.SongName;
+                SongSelect.Ins.SingerName = SongBottom.Ins.SingerName;
+                SongSelect.Ins.ImageSong = SongBottom.Ins.ImageSong;
+                SongSelect.Ins.LinkSong = SongBottom.Ins.LinkSong;
+                SongSelect.Ins.Description = SongBottom.Ins.SelectedSong.Descriptions;
+                SongSelect.Ins.ListSelectedItem.Add(SongBottom.Ins.SelectedSong.ID);
+                SongSelect.Ins.CurrentIdSong++;
+            }
         }
         private void ShuffleBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -597,6 +556,7 @@ namespace Spotify.Views.Components
                     }
                     if (id < SongBottom.Ins.ListSong.Count)
                     {
+                        
                         LoadSong(id);
 
                     }

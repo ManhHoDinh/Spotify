@@ -44,6 +44,7 @@ namespace Spotify.ViewModels.Pages
         private ObservableCollection<Song> _songsOfPlaylist = new ObservableCollection<Song>();
         public ObservableCollection<Song> SongsOfPlaylist { get => _songsOfPlaylist; set { _songsOfPlaylist = value; OnPropertyChanged(); } }
         private Playlist _SelectedPlaylist;
+
         public Playlist SelectedPlaylist
         {
             get => _SelectedPlaylist;
@@ -55,16 +56,41 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedPlaylist != null)
                     {
+
+                        ViewPage.Ins.ViewPageSelected = "null";
                         NamePlaylist = SelectedPlaylist.PlaylistName;
                         DescriptionPlaylist = SelectedPlaylist.Descriptions;
                         ImagePlaylist = SelectedPlaylist.PlaylistImageSource;
                         SongsOfPlaylist = SelectedPlaylist.SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
+                        int temp = 0;
+                        for (int i = 0; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                        {
+                            if (SelectedPlaylist.ID != ListPlaylist.Ins.List[ListPlaylist.Ins.ListSelectedItem[i]].ID)
+                            {
 
+                                temp++;
+
+                            }
+                        }
+                        //MessageBox.Show(temp.ToString() + ListPlaylist.Ins.ListSelectedItem.Count.ToString());
+                        if (temp == ListPlaylist.Ins.ListSelectedItem.Count)
+                        {
+                            for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
+                            {
+                                if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                                {
+                                    ListPlaylist.Ins.ListSelectedItem.Add(i);
+                                }
+                            }
+                            ListPlaylist.Ins.CurrentIdPlaylist++;
+                            ViewPage.Ins.IsClick = false;
+                        }
+                        else ViewPage.Ins.IsClick = true;
                         if (ViewPage.Ins.IsClick == false)
                         {
                             int currentId = ViewPage.Ins.CurrentIndexView;
                             int count = ViewPage.Ins.ListPage.Count;
-                            // MessageBox.Show(currentId.ToString() + count.ToString());
+                            
                             if (currentId + 1 < count)
                             {
                                 for (int i = currentId + 1; i < count; i++)
@@ -77,9 +103,9 @@ namespace Spotify.ViewModels.Pages
                                 {
                                     if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                                     {
-                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
                                         {
-                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
                                         }
                                     }
 
@@ -87,35 +113,34 @@ namespace Spotify.ViewModels.Pages
                                     {
 
                                         int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                                        for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
                                         {
 
-                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                            ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
                                         }
 
                                     }
                                 }
                             }
                         }
-                        //if(ListPlaylist.Ins.IsCreate == false)
-                        //{
-                        for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
-                        {
-                            if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
-                            {
-                                ListPlaylist.Ins.ListSelectedItem.Add(i);
-                            }
-                        }
-                        ListPlaylist.Ins.IsCreate = false;
-                        //   }
 
+                        //for (int i = 0; i < ListPlaylist.Ins.List.Count; i++)
+                        //{
+                        //    if (SelectedPlaylist.ID == ListPlaylist.Ins.List[i].ID)
+                        //    {
+                        //        ListPlaylist.Ins.ListSelectedItem.Add(i);
+                        //    }
+                        //}
+                        ListPlaylist.Ins.IsCreate = false;
+                       
                         ViewPage.Ins.CurrentView = new CreatePlaylist();
                         ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                         ViewPage.Ins.CurrentIndexView++;
-                        // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString());
-                        ListPlaylist.Ins.CurrentIdPlaylist++;
+                        //ListPlaylist.Ins.CurrentIdPlaylist++;
                         ViewPage.Ins.IsDisableBack = false;
-
+                        ViewPage.Ins.IsClick = false;
+                       // MessageBox.Show(ListPlaylist.Ins.ListSelectedItem.Count.ToString() + ListPlaylist.Ins.CurrentIdPlaylist.ToString());
+                       
                     }
                 }
 
@@ -133,6 +158,7 @@ namespace Spotify.ViewModels.Pages
                     OnPropertyChanged();
                     if (SelectedSongItem != null)
                     {
+                        
                         //  BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
                         AlbumView.type = "playlist";
                         SongBottom.Ins.SongName = SelectedSongItem.SongName;
@@ -154,15 +180,17 @@ namespace Spotify.ViewModels.Pages
 
         //private BitmapImage _pathImage;
         //public BitmapImage PathImage { get => _pathImage; set { _pathImage = value; OnPropertyChanged(); } }
+        public static Binding binding;
         public CreatePlaylistVM() {
             try
             {
-
+                binding = new Binding("SelectedPlaylist");
+                binding.Source = this;
+                binding.Mode = BindingMode.TwoWay;
+                BindingOperations.SetBinding(ListPlaylist.Ins, ListPlaylist.SelectedItemProperty, binding); 
                 ObservableCollection<Song> songs = new ObservableCollection<Song>(DataProvider.Ins.DB.Songs.ToList());
-                //SongsOfPlaylist = new ObservableCollection<Song>(DataProvider.Ins.DB.Playlists.Where(p => p.ID == SelectedPlaylist.ID).Select(p => p.Songs).FirstOrDefault());
-                //songs.Add(Songs.CamNang);
-                //songs.Add(Songs.BenTrenTangLau);
-                //songs.Add(Songs.DauMua);
+               
+               
 
                 SongItemsCollection = new CollectionViewSource { Source = songs };
                 SongItemsCollection.Filter += MenuItems_Filter;
@@ -226,6 +254,7 @@ namespace Spotify.ViewModels.Pages
                       DataProvider.Ins.DB.SaveChanges();
                       SelectedPlaylist.PlaylistImage = ListPlaylist.Ins.Image;
                       ListPlaylist.Ins.Image = "";
+                     
 
                   });
                 OptionCommand = new RelayCommand<object>(

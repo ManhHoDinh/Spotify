@@ -181,27 +181,6 @@ namespace Spotify.Views.Components
 
         }
 
-        //// Using a DependencyProperty as the backing store for SelectedSong.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedSongProperty =
-        //    DependencyProperty.Register("SelectedSong", typeof(Song), typeof(SongsView), new PropertyMetadata(null));
-
-
-
-        //public Playlist SelectedPlaylist
-        //{
-        //    get { return (Playlist)GetValue(SelectedPlaylistProperty); }
-        //    set { SetValue(SelectedPlaylistProperty, value); }
-        //}
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-        //// Using a DependencyProperty as the backing store for SelectedPlaylist.  This enables animation, styling, binding, etc...
-        //public static readonly DependencyProperty SelectedPlaylistProperty =
-        //    DependencyProperty.Register("SelectedPlaylist", typeof(Playlist), typeof(SongView), new PropertyMetadata(null));
-
-
 
 
 
@@ -375,23 +354,51 @@ namespace Spotify.Views.Components
                         ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
                     }
 
+
                     if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
                     {
                         if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                         {
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
                             {
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
                             }
                         }
 
                         else
                         {
+
                             int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
                             {
 
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                            }
+
+                        }
+                    }
+                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                    {
+                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                        {
+
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum - 1; i < ListAlbum.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
+                            {
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum - 1);
+                            }
+
+
+
+                        }
+
+
+                        else
+                        {
+                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < countAlbum - 1; i++)
+                            {
+
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
                             }
 
                         }
@@ -404,6 +411,7 @@ namespace Spotify.Views.Components
                 ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
                 ViewPage.Ins.CurrentIndexView++;
                 ViewPage.Ins.IsDisableBack = false;
+                ViewPage.Ins.IsDisableNext = true;
             }
         }
         private void NameSong_Click(object sender, RoutedEventArgs e)
@@ -421,6 +429,9 @@ namespace Spotify.Views.Components
                 SongSelect.Ins.ImageSong = songClick.SongImageUri;
                 SongSelect.Ins.Description = songClick.Descriptions;
                 SongSelect.Ins.LinkSong = songClick.SongLinkUri;
+                SongSelect.Ins.ListSelectedItem.Add(songClick.ID);
+                SongSelect.Ins.CurrentIdSong++;
+              
                 ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
                 //MessageBox.Show(tb.Name);
                 //curItem.IsSelected = true;
@@ -442,7 +453,7 @@ namespace Spotify.Views.Components
                 Button btn = sender as Button;
                 ListViewItem template = btn.TemplatedParent as ListViewItem;
 
-                if (SongBottom.Ins.IsPlay == true)
+                if (SongBottom.Ins.IsPlay == true )
                 {
                     if (template.IsSelected == false)
                     {
@@ -472,9 +483,9 @@ namespace Spotify.Views.Components
         private void ListViewSong_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
-            { 
+            {
+
                 
-             
                     var listview = GetTemplateChild("PART_Header") as ListView;
                     if (listview.SelectedIndex != -1)
                     {
@@ -487,53 +498,55 @@ namespace Spotify.Views.Components
                         }
                         else if (CurrentType == "album")
                         {
+                           
                             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
                         }
                         else if (CurrentType == "playlist")
                         {
+                            
                             BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
 
                         }
                     }
                     SongBottom.Ins.ListSong = ItemSource;
-                        SongBottom.Ins.CountId = listview.SelectedIndex;
+                    SongBottom.Ins.CountId = listview.SelectedIndex;
                         
                         
                     }
 
-                for (int i = 0; i < listview.Items.Count; i++)
-                {
-                    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                    ImageBrush img = new ImageBrush();
-                    Button btn = new Button();
-                    Image image = new Image();
-                    TextBlock tb = new TextBlock();
-                    if (template != null)
-                    {
-                        img = new ImageBrush();
-                        btn = template.Template.FindName("PlayPauseBtn", template) as Button;
-                        image = template.Template.FindName("img", template) as Image;
-                        tb = template.Template.FindName("Id", template) as TextBlock;
-                        if (i != listview.SelectedIndex)
-                        {
-                            img.ImageSource = Play;
-                            btn.Background = img;
-                            image.Visibility = Visibility.Hidden;
-                            tb.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            playButton = GetTemplateChild("PlayPauseGreen") as Button;
-                            ImageBrush ImgBrush = new ImageBrush();
-                            ImgBrush.ImageSource = PauseGreen;
-                            playButton.Background = ImgBrush;
-                            img.ImageSource = Pause;
-                            btn.Background = img;
-                            image.Visibility = Visibility.Visible;
-                            tb.Visibility = Visibility.Hidden;
-                        }
-                    }
-                }
+                //for (int i = 0; i < listview.Items.Count; i++)
+                //{
+                //    var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+                //    ImageBrush img = new ImageBrush();
+                //    Button btn = new Button();
+                //    Image image = new Image();
+                //    TextBlock tb = new TextBlock();
+                //    if (template != null)
+                //    {
+                //        img = new ImageBrush();
+                //        btn = template.Template.FindName("PlayPauseBtn", template) as Button;
+                //        image = template.Template.FindName("img", template) as Image;
+                //        tb = template.Template.FindName("Id", template) as TextBlock;
+                //        if (i != listview.SelectedIndex)
+                //        {
+                //            img.ImageSource = Play;
+                //            btn.Background = img;
+                //            image.Visibility = Visibility.Hidden;
+                //            tb.Visibility = Visibility.Visible;
+                //        }
+                //        else
+                //        {
+                //            playButton = GetTemplateChild("PlayPauseGreen") as Button;
+                //            ImageBrush ImgBrush = new ImageBrush();
+                //            ImgBrush.ImageSource = PauseGreen;
+                //            playButton.Background = ImgBrush;
+                //            img.ImageSource = Pause;
+                //            btn.Background = img;
+                //            image.Visibility = Visibility.Visible;
+                //            tb.Visibility = Visibility.Hidden;
+                //        }
+                //    }
+                //}
             }
             catch { }
         }
@@ -544,13 +557,36 @@ namespace Spotify.Views.Components
                 type = "songview";
                 listview = GetTemplateChild("PART_Header") as ListView;
                 ImageBrush ImgBrush = new ImageBrush();
+               
                 if (SongBottom.Ins.SelectedSong == null || listview.SelectedIndex == -1)
                 {
                     
+
+                    if (SongBottom.Ins.ListSong != ItemSource && SongBottom.Ins.ListSong != null)
+                    {
+                        BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                        if (CurrentType == "likesong")
+                        {
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                        }
+                        else if (CurrentType == "album")
+                        {
+
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, AlbumView.binding);
+                        }
+                        else if (CurrentType == "playlist")
+                        {
+
+                            BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, CreatePlaylist.bd);
+
+                        }
+                    }
                     SongBottom.Ins.ListSong = ItemSource;
                     SongBottom.Ins.SelectedSong = SongBottom.Ins.ListSong[0];
                     SongBottom.Ins.IsPlay = true;
                     ImgBrush.ImageSource = PauseGreen;
+                    //MessageBox.Show(SongBottom.Ins.ListSong.Count.ToString());
+
 
                 }
                 else
@@ -589,7 +625,7 @@ namespace Spotify.Views.Components
 
         private void songview_Loaded(object sender, RoutedEventArgs e)
         {
-
+          
 
             SongBottom.Ins.SongSource = ItemSource;
             if(SongBottom.Ins.ListSong != null)
@@ -665,8 +701,6 @@ namespace Spotify.Views.Components
 
 
             }
-
-
         }
         public Button PrevBtn = new Button();
         private void Remove_Click(object sender, RoutedEventArgs e)
@@ -737,80 +771,8 @@ namespace Spotify.Views.Components
             catch { }
         }
 
-        //private void Remove_Click(object sender, RoutedEventArgs e)
-        //{
-        //    listview = GetTemplateChild("PART_Header") as ListView;
-        //    Button btn = sender as Button;
-        //    int id = int.Parse(btn.Tag.ToString());
-        //    var song = DataProvider.Ins.DB.Songs.Where(s => s.ID == id).FirstOrDefault();
-        //    var playlist = DataProvider.Ins.DB.Playlists.Where(pl => pl.ID == ListPlaylist.Ins.SelectedItem.ID).FirstOrDefault();
-        //    playlist.Songs.Remove(song);
-        //    playlist.SongsOfPlaylist.Remove(song);
-        //    ItemSource.Remove(song);
-        //    for (int i = 0; i < listview.Items.Count; i++)
-        //    {
-        //        var template = listview.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-        //        TextBlock tb = new TextBlock();
 
-        //        if (template != null)
-        //        {
-        //            tb = template.Template.FindName("Id", template) as TextBlock;
-        //            tb.Text = (i + 1).ToString();
-        //        }
-        //    }
-        //    DataProvider.Ins.DB.SaveChanges();
-        //}
-        //private void option_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Button btn = sender as Button;
-        //    StackPanel st = btn.Parent as StackPanel;
-        //    Button removeBtn = st.Children[2] as Button;
-        //    if (IsShow)
-        //    {
-        //        removeBtn.Visibility = Visibility.Hidden;
-        //        IsShow = false;
-        //    }
-        //    else
-        //    {
-        //        removeBtn.Visibility = Visibility.Visible;
-        //        IsShow = true;
-        //    }
-        //}
     }
-
-    //private void FavorBtn_Click(object sender, RoutedEventArgs e)
-    //{
-    //    Button btn = sender as Button;
-    //    var background = (ImageBrush)btn.Background;
-    //    ImageBrush img = new ImageBrush();
-    //    Playlist playlist;
-    //    var albums = DataProvider.Ins.DB.Albums.ToList();
-    //    for (int i = 0; i < albums.Count; i++)
-    //    {
-    //        if (albums[i].SongsOfAlbum == ItemSource)
-    //        {
-    //           playlist = new Playlist() { PlaylistName = albums[i].AlbumName, Descriptions = albums[i].Descriptions, PlaylistImage = albums[i].AlbumImage, UserID = 1, PlaylistType = 2 };
-    //           Playlist.InitUri(ref playlist);
-    //            if (background.ImageSource == (ImageSource)Application.Current.Resources["HeartButton"])
-    //            {
-    //                DataProvider.Ins.DB.Playlists.Add(playlist);
-    //                ListPlaylist.Ins.List.Add(playlist);
-    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartFillButton"];
-
-    //            }
-    //            else
-    //            {
-    //                DataProvider.Ins.DB.Playlists.Remove(playlist);
-    //                ListPlaylist.Ins.List.Remove(playlist);
-    //                img.ImageSource = (ImageSource)Application.Current.Resources["HeartButton"];
-
-    //            }
-    //            break;
-    //        }
-    //    }
-    //    btn.Background = img;
-    //    DataProvider.Ins.DB.SaveChanges();
-    //}
 
 
 }

@@ -66,11 +66,14 @@
                         Margin="30 0 0 0"
                         Background="Transparent"
                         Foreground="#b3b3b3" 
-                        SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay}"
-                        ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay}">
+                        
+                        SelectedItem="{Binding Source={x:Static Page:ListPlaylist.Ins},Path=SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ItemsSource="{Binding Source={x:Static Page:ListPlaylist.Ins}, Path=List, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Template">
+                                        
+                                        
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                                 <Border Height="32" Tag="{Binding ElementName= window}">
