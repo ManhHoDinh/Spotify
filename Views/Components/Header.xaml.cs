@@ -343,7 +343,8 @@ namespace Spotify.Views.Components
                     IsDisableBack = true;
                 }
            }
-            catch { }
+            catch 
+            {}
 
         }
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -481,14 +482,16 @@ namespace Spotify.Views.Components
                     }
                     ViewPage.Ins.ViewPageSelected = ViewPage.Ins.CurrentView.GetType().Name;
                     IsDisableBack = false;
-                   
                 }
                 else
                 {
                     IsDisableNext = true;
                 }
             }
-            catch { }
+            catch 
+            {
+                
+            }
         }
         public static string RemoveSign4VietnameseString(string str)
         {
