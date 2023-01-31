@@ -4,8 +4,7 @@
 Tận hưởng âm nhạc theo cách riêng của bạn.
 
 <!-- LOGO CINEMA -->
-![Logo Spotify](./Resource/Images/Spotify.png)
-
+<img src="./Resource/Images/Spotify.png" alt="Logo Spotify" width="250"/>
 ## Mục lục
 
  [I. Mở đầu](#Modau)
