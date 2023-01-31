@@ -191,13 +191,11 @@ namespace Spotify.Views.Pages
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
             try
-            {
-                    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+            {   BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
                     if (SongsView.CurrentType == "likesong")
                     {
                         BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
-                    }
-                    else 
+                    }       else 
                     {
 
                         if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
