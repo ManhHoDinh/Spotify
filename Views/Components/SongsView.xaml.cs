@@ -430,7 +430,6 @@ namespace Spotify.Views.Components
                 SongSelect.Ins.Description = songClick.Descriptions;
                 SongSelect.Ins.LinkSong = songClick.SongLinkUri;
                 SongSelect.Ins.ListSelectedItem.Add(songClick.ID);
-
                 SongSelect.Ins.CurrentIdSong++;
               
                 ///var tb = curItem.Template.FindName("songimg", curItem) as Image;
