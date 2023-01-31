@@ -1,4 +1,5 @@
 ﻿using Spotify.ViewModels.Pages;
+using Spotify.Views.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,28 +40,55 @@ namespace Spotify.Views.Pages
                         ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
                     }
 
+
                     if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
                     {
                         if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
                         {
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < ListPlaylist.Ins.ListSelectedItem.Count; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
                             {
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
                             }
                         }
 
                         else
                         {
+
                             int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist + 1; i < countPlaylist; i++)
+                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
                             {
 
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist + 1);
+                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
                             }
 
                         }
                     }
+                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                    {
+                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                        {
 
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum - 1; i < ListAlbum.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
+                            {
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum - 1);
+                            }
+
+
+
+                        }
+
+
+                        else
+                        {
+                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < countAlbum - 1; i++)
+                            {
+
+                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
+                            }
+
+                        }
+                    }
 
                 }
                 ViewPage.Ins.CurrentView = obj;
@@ -77,6 +105,11 @@ namespace Spotify.Views.Pages
         {
             ViewPage.Ins.IsSearchView = false;
             TranslatePage(new LikedSongsVM());
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+          
         }
     }
 }

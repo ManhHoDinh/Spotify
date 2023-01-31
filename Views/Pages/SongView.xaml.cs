@@ -1,4 +1,5 @@
 ﻿using Spotify.Models;
+using Spotify.ViewModels;
 using Spotify.ViewModels.Pages;
 using Spotify.Views.Components;
 using System;
@@ -31,7 +32,7 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SongNameProperty =
-            DependencyProperty.Register("SongName", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("SongName", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
         public string SingerName
         {
             get { return (string)GetValue(SingerNameProperty); }
@@ -40,21 +41,47 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for SongName.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SingerNameProperty =
-            DependencyProperty.Register("SingerName", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("SingerName", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
         public Uri LinkSong
         {
             get { return (Uri)GetValue(LinkSongProperty); }
             set { SetValue(LinkSongProperty, value); }
         }
         public static readonly DependencyProperty LinkSongProperty =
-          DependencyProperty.Register("LinkSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
+          DependencyProperty.Register("LinkSong", typeof(Uri), typeof(SongSelect), new PropertyMetadata(null));
         public Uri ImageSong
         {
             get { return (Uri)GetValue(ImageSongProperty); }
             set { SetValue(ImageSongProperty, value); }
         }
         public static readonly DependencyProperty ImageSongProperty =
-           DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongView), new PropertyMetadata(null));
+           DependencyProperty.Register("ImageSong", typeof(Uri), typeof(SongSelect), new PropertyMetadata(null));
+
+        public int CurrentIdSong
+        {
+            get { return (int)GetValue(CurrentIdSongProperty); }
+            set { SetValue(CurrentIdSongProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentIdAlbum.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentIdSongProperty =
+            DependencyProperty.Register("CurrentIdSong", typeof(int), typeof(SongSelect), new PropertyMetadata(-1));
+
+
+
+
+
+
+        public List<int> ListSelectedItem
+        {
+            get { return (List<int>)GetValue(ListSelectedItemProperty); }
+            set { SetValue(ListSelectedItemProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ListSelectedItemProperty =
+            DependencyProperty.Register("ListSelectedItem", typeof(List<int>), typeof(SongSelect), new PropertyMetadata(new List<int> { }));
+
 
 
         public string Description
@@ -65,7 +92,7 @@ namespace Spotify.Views.Pages
 
         // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(string), typeof(SongView), new PropertyMetadata(string.Empty));
+            DependencyProperty.Register("Description", typeof(string), typeof(SongSelect), new PropertyMetadata(string.Empty));
 
 
         public static SongSelect Ins { get; private set; }
@@ -163,44 +190,62 @@ namespace Spotify.Views.Pages
             DependencyProperty.Register("isFavor", typeof(bool), typeof(SongView), new PropertyMetadata(true));
         private void PlayPauseGreen_Click(object sender, RoutedEventArgs e)
         {
-            try {
-
-                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
-                {
-                    SongBottom.Ins.SongName = SongSelect.Ins.SongName;
-                    SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
-                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
-                    SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
-                    ImageBrush img = new ImageBrush();
-                    img.ImageSource = PauseGreen;
-                    PlayPauseGreen.Background = img;
-                    SongBottom.Ins.IsPlay = true;
-                }
-
-                if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongSelect.Ins.SongName)
-                {
-                    SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
-                    SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
-                    ImageBrush img = new ImageBrush();
-                    img.ImageSource = PauseGreen;
-                    PlayPauseGreen.Background = img;
-                    SongBottom.Ins.IsPlay = true;
-                }
-                else
-                {
-                    if (SongBottom.Ins.IsPlay == true)
+            try
+            {
+                    BindingOperations.ClearBinding(SongBottom.Ins, SongBottom.SelectedSongProperty);
+                    if (SongsView.CurrentType == "likesong")
+                    {
+                        BindingOperations.SetBinding(SongBottom.Ins, SongBottom.SelectedSongProperty, LikedSongsView.bd);
+                    }
+                    else 
                     {
 
-                        SongBottom.Ins.IsPlay = false;
+                        if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
+                        {
+                            SongBottom.Ins.SongName = SongSelect.Ins.SongName;
+                            SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
+                            SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                            SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = PauseGreen;
+                            PlayPauseGreen.Background = img;
+                            SongBottom.Ins.IsPlay = true;
+                        }
+
+                        else if (SongBottom.Ins.SelectedSong == null || SongBottom.Ins.SelectedSong.SongName != SongNameTb.Text)
+                        {
+                            SongBottom.Ins.SelectedSong = SongBottom.Ins.SongSource.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+                            SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                            SongBottom.Ins.SongName = SongSelect.Ins.SongName;
+                            SongBottom.Ins.SingerName = SongSelect.Ins.SingerName;
+                            SongBottom.Ins.ImageSong = SongSelect.Ins.ImageSong;
+
+                            SongBottom.Ins.SelectedSong = DataProvider.Ins.DB.Songs.Where(s => s.SongName == SongNameTb.Text).FirstOrDefault();
+
+                            // SongBottom.Ins.LinkSong = SongSelect.Ins.LinkSong;
+                            ImageBrush img = new ImageBrush();
+                            img.ImageSource = PauseGreen;
+                            PlayPauseGreen.Background = img;
+                            SongBottom.Ins.IsPlay = true;
+                        }
+                        else
+                        {
+                            if (SongBottom.Ins.IsPlay == true)
+                            {
+
+                                SongBottom.Ins.IsPlay = false;
+                            }
+                            else
+                            {
+                                ImageBrush img = new ImageBrush();
+                                img.ImageSource = PauseGreen;
+                                PlayPauseGreen.Background = img;
+                                SongBottom.Ins.IsPlay = true;
+                            }
+                        }
                     }
-                    else
-                    {
-                        ImageBrush img = new ImageBrush();
-                        img.ImageSource = PauseGreen;
-                        PlayPauseGreen.Background = img;
-                        SongBottom.Ins.IsPlay = true;
-                    }
-                }
+                
             }
             catch { }
 
@@ -224,7 +269,7 @@ namespace Spotify.Views.Pages
                 ImgBrush.ImageSource = HeartFill;
                 HeartBtn.Background = ImgBrush;
                 isFavor = true;
-                
+
 
             }
 
@@ -233,13 +278,25 @@ namespace Spotify.Views.Pages
 
         private void song_Loaded(object sender, RoutedEventArgs e)
         {
-                if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
-                {
-                    ImageBrush img = new ImageBrush();
-                    img.ImageSource = PlayGreen;
-                    PlayPauseGreen.Background = img;
-                }
-                
+            if (SongSelect.Ins.SongName != SongNameTb.Text)
+            {
+                Song songClick = Songs.AllSong.Where(s => s.SongName == SongNameTb.Text).First();
+                SongSelect.Ins.SongName = songClick.SongName;
+                SongSelect.Ins.SingerName = songClick.SingerName;
+                SongSelect.Ins.ImageSong = songClick.SongImageUri;
+                SongSelect.Ins.Description = songClick.Descriptions;
+                SongSelect.Ins.LinkSong = songClick.SongLinkUri;
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = PlayGreen;
+                PlayPauseGreen.Background = img;
+
+            }
+            else if (SongBottom.Ins.SongName != SongSelect.Ins.SongName)
+            {
+                ImageBrush img = new ImageBrush();
+                img.ImageSource = PlayGreen;
+                PlayPauseGreen.Background = img;
+            }
         }
     }
 }
