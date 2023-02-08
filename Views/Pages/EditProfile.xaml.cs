@@ -29,10 +29,10 @@ namespace Spotify.Views.Pages
         public EditProfile()
         {
             InitializeComponent();
-            if (Month.Text.Length < 2)
-                Month.Text = "0" + Month.Text;
-            if (Day.Text.Length < 2)
-                Day.Text = "0" + Day.Text;
+            //if (Month.Text.Length < 2)
+                //Month.Text = "0" + Month.Text;
+            //if (Day.Text.Length < 2)
+                //Day.Text = "0" + Day.Text;
             //if (LoginStatus.Current.User != null)
             //{
             //    Password.Password = LoginStatus.Current.User.Password;
