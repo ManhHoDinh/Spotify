@@ -157,8 +157,6 @@ namespace Spotify.Views.Pages
 
 
                         }
-
-
                         else
                         {
                             int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
@@ -201,17 +199,26 @@ namespace Spotify.Views.Pages
                 if(id != Properties.Settings.Default.CurrentUserID)
                 {
                     var songs = DataProvider.Ins.DB.Playlists.Where(a => a.PlaylistType == 0 && a.UserID == Properties.Settings.Default.CurrentUserID).Select(a => a.Songs).FirstOrDefault();
-                    vm.listSong = new ObservableCollection<Song>(songs);
+                    ListLikeSongs.ItemSource = new ObservableCollection<Song>(songs);
                 }
-                if (ListLikeSongs.ItemSource.Count == 0)
+                if (ListLikeSongs.ItemSource != null)
                 {
-                    HaveSong.Visibility = Visibility.Hidden;
-                    NotHaveSong.Visibility = Visibility.Visible;
+                    if (ListLikeSongs.ItemSource.Count == 0)
+                    {
+                        HaveSong.Visibility = Visibility.Hidden;
+                        NotHaveSong.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        HaveSong.Visibility = Visibility.Visible;
+                        NotHaveSong.Visibility = Visibility.Hidden;
+                    }
+
                 }
                 else
                 {
-                    HaveSong.Visibility = Visibility.Visible;
-                    NotHaveSong.Visibility = Visibility.Hidden;
+                    HaveSong.Visibility = Visibility.Hidden;
+                    NotHaveSong.Visibility = Visibility.Visible;
                 }
                 var list = ListLikeSongs.Template.FindName("PART_Header", ListLikeSongs) as ListView;
                 var playBtn = ListLikeSongs.Template.FindName("PlayPauseGreen", ListLikeSongs) as Button;

@@ -39,212 +39,235 @@ namespace Spotify.ViewModels
             set { _isSearchView = value; OnPropertyChanged(); } }
         public void ChangeViewStyle(string value, object obj)
         {
-            LoginStatus.Current.SearchText = "";
-            StackPanel stack = obj as StackPanel;
-            foreach (object p in stack.Children)
-            {
-                Button btn = p as Button;
-                ControlTemplate ct = btn.Template;
-                Image img = (Image)ct.FindName("image", btn);
-                TextBlock tb = (TextBlock)ct.FindName("name", btn);
-                if (btn.Name == value)
+            try {
+                LoginStatus.Current.SearchText = "";
+                StackPanel stack = obj as StackPanel;
+                foreach (object p in stack.Children)
                 {
-
-                    tb.Foreground = Brushes.White;
-                    if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
+                    Button btn = p as Button;
+                    ControlTemplate ct = btn.Template;
+                    Image img = (Image)ct.FindName("image", btn);
+                    TextBlock tb = (TextBlock)ct.FindName("name", btn);
+                    if (btn.Name == value)
                     {
-                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
+
+                        tb.Foreground = Brushes.White;
+                        if (btn.Name == "Home" || btn.Name == "Search" || btn.Name == "YourLibrary")
+                        {
+                            img.Source = (ImageSource)Application.Current.Resources[btn.Name + "FillIcon"];
+                        }
+                    }
+                    else
+                    {
+                        tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179, 179, 179));
+                        if (btn.Name != "CreatePlaylist" && btn.Name != "LikeSongs")
+                        {
+                            img.Source = (ImageSource)Application.Current.Resources[btn.Name + "Icon"];
+
+                        }
+
                     }
                 }
-                else
-                {
-                    tb.Foreground = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(179, 179, 179));
-                    if (btn.Name != "CreatePlaylist" && btn.Name != "LikeSongs")
-                    {
-                        img.Source = (ImageSource)Application.Current.Resources[btn.Name + "Icon"];
 
-                    }
-
-                }
             }
+            catch { }
         }
         void TranslatePage(object obj)
         {
-            LoginStatus.Current.SearchText = "";
-            if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
-            {
-                int currentId = ViewPage.Ins.CurrentIndexView;
-                int count = ViewPage.Ins.ListPage.Count;
-
-                if (currentId + 1 < count)
+            try {
+                LoginStatus.Current.SearchText = "";
+                if (ViewPage.Ins.CurrentView.GetType().Name != obj.GetType().Name)
                 {
-                    
-                    for (int i = currentId + 1; i < count; i++)
+                    int currentId = ViewPage.Ins.CurrentIndexView;
+                    int count = ViewPage.Ins.ListPage.Count;
+
+                    if (currentId + 1 < count)
                     {
-                        ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+
+                        for (int i = currentId + 1; i < count; i++)
+                        {
+                            ViewPage.Ins.ListPage.RemoveAt(currentId + 1);
+                        }
+
+
+                        if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
+                        {
+                            if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
+                            {
+                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
+                                {
+                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
+                                }
+                            }
+
+                            else
+                            {
+
+                                int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
+                                for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
+                                {
+
+                                    ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
+                                }
+
+                            }
+                        }
+                        if (ListAlbum.Ins.CurrentIdAlbum != -1)
+                        {
+                            if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
+                            {
+
+                                for (int i = ListAlbum.Ins.CurrentIdAlbum - 1; i < ListAlbum.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
+                                {
+                                    ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum - 1);
+                                }
+
+
+
+                            }
+
+
+                            else
+                            {
+                                int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
+                                for (int i = ListAlbum.Ins.CurrentIdAlbum; i < countAlbum - 1; i++)
+                                {
+
+                                    ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
+                                }
+
+                            }
+                        }
+
+
                     }
-
-
-                    if (ListPlaylist.Ins.CurrentIdPlaylist != -1)
-                    {
-                        if (ListPlaylist.Ins.CurrentIdPlaylist == ListPlaylist.Ins.ListSelectedItem.Count - 1)
-                        {
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist - 1; i < ListPlaylist.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
-                            {
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist - 1);
-                            }
-                        }
-
-                        else
-                        {
-
-                            int countPlaylist = ListPlaylist.Ins.ListSelectedItem.Count;
-                            for (int i = ListPlaylist.Ins.CurrentIdPlaylist; i < countPlaylist - 1; i++)
-                            {
-
-                                ListPlaylist.Ins.ListSelectedItem.RemoveAt(ListPlaylist.Ins.CurrentIdPlaylist);
-                            }
-
-                        }
-                    }
-                    if (ListAlbum.Ins.CurrentIdAlbum != -1)
-                    {
-                        if (ListAlbum.Ins.CurrentIdAlbum == ListAlbum.Ins.ListSelectedItem.Count - 1)
-                        {
-
-                            for (int i = ListAlbum.Ins.CurrentIdAlbum - 1; i < ListAlbum.Ins.ListSelectedItem.Count - 1 && i >= 0; i++)
-                            {
-                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum - 1);
-                            }
-
-
-
-                        }
-
-
-                        else
-                        {
-                            int countAlbum = ListAlbum.Ins.ListSelectedItem.Count;
-                            for (int i = ListAlbum.Ins.CurrentIdAlbum; i < countAlbum - 1; i++)
-                            {
-
-                                ListAlbum.Ins.ListSelectedItem.RemoveAt(ListAlbum.Ins.CurrentIdAlbum);
-                            }
-
-                        }
-                    }
+                    ViewPage.Ins.CurrentView = obj;
+                    ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                    ViewPage.Ins.CurrentIndexView++;
+                    ViewPage.Ins.IsDisableBack = false;
+                    ListPlaylist.Ins.SelectedItem = null;
 
 
                 }
-                ViewPage.Ins.CurrentView = obj;
-                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
-                ViewPage.Ins.CurrentIndexView++;
-                ViewPage.Ins.IsDisableBack = false;
-                ListPlaylist.Ins.SelectedItem = null;
-                
-
             }
+            catch { }
         }
         private void Home(object obj)
         {
-            ViewPage.Ins.IsSearchView = false;
-            ChangeViewStyle("Home", obj);
-            TranslatePage(new HomeVM());
-            ViewPage.Ins.IsDisableNext = true;
+            try {
 
-
+                ViewPage.Ins.IsSearchView = false;
+                ChangeViewStyle("Home", obj);
+                TranslatePage(new HomeVM());
+                ViewPage.Ins.IsDisableNext = true;
+            }
+            catch { }
         }
         private void Search(object obj)
         {
-            ViewPage.Ins.IsSearchView = true;
-            ChangeViewStyle("Search", obj);
-            TranslatePage(new SearchVM()); 
+            try {
+                ViewPage.Ins.IsSearchView = true;
+                ChangeViewStyle("Search", obj);
+                TranslatePage(new SearchVM());
+            }
+            catch { }
         }
         private void YourLibrary(object obj)
         {
-            ViewPage.Ins.IsSearchView = false;
-            ChangeViewStyle("YourLibrary", obj);
-            TranslatePage(new YourLibraryVM());
+            try {
+                ViewPage.Ins.IsSearchView = false;
+                ChangeViewStyle("YourLibrary", obj);
+                TranslatePage(new YourLibraryVM());
+            }
+            catch { }
         }
         private void CreatePlaylist(object obj)
         {
-          
+            try {
+
                 ListPlaylist.Ins.IsCreate = true;
                 ViewPage.Ins.IsSearchView = false;
                 ViewPage.Ins.IsClick = false;
 
-            //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
-            //{
-            //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
-            //    ViewPage.Ins.CurrentIndexView++;
-            if (Properties.Settings.Default.CurrentUserID == -1)
-            {
-                PlaylistError form = new PlaylistError();
-                form.ShowDialog();
-            }
-            else
-            {
-                int count = ListPlaylist.Ins.CountPlaylist + 1;
-                Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
-                Playlist.InitUri(ref playlist);
-                DataProvider.Ins.DB.Playlists.Add(playlist);
-                DataProvider.Ins.DB.SaveChanges();
-                ListPlaylist.Ins.List.Add(playlist);
-                // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
-                ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
-                ListPlaylist.Ins.CountPlaylist++;
-                ChangeViewStyle("CreatePlaylist", obj);
-            }
-            
+                //if (ViewPage.Ins.CurrentView.GetType().Name != "CreatePlaylist")
+                //{
+                //    ViewPage.Ins.ListPage.Add(new CreatePlaylist());
+                //    ViewPage.Ins.CurrentIndexView++;
+                if (Properties.Settings.Default.CurrentUserID == -1)
+                {
+                    PlaylistError form = new PlaylistError();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    int count = ListPlaylist.Ins.CountPlaylist + 1;
+                    Playlist playlist = new Playlist() { PlaylistName = "My playlist #" + count.ToString(), Descriptions = "", PlaylistImage = "pack://siteoforigin:,,,/Resource/Images/InitImage.png", UserID = Properties.Settings.Default.CurrentUserID, PlaylistType = 2 };
+                    Playlist.InitUri(ref playlist);
+                    DataProvider.Ins.DB.Playlists.Add(playlist);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListPlaylist.Ins.List.Add(playlist);
+                    // ListPlaylist.Ins.ListSelectedItem.Add(count - 1);
+                    ListPlaylist.Ins.SelectedItem = ListPlaylist.Ins.List[count - 1];
+                    ListPlaylist.Ins.CountPlaylist++;
+                    ChangeViewStyle("CreatePlaylist", obj);
+                }
 
+
+            }
+            catch { }
         }
 
         private void LikedSongs(object obj)
         {
-
-            ViewPage.Ins.IsSearchView = false;
-            //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
-            if (Properties.Settings.Default.CurrentUserID == -1)
-            {
-                LikeSongError form = new LikeSongError();
-                form.ShowDialog();
+            try {
+                ViewPage.Ins.IsSearchView = false;
+                //ListPlaylist.Ins.SelectedItem = DataProvider.Ins.DB.Playlists.Where(p => p.PlaylistType == 0 && p.UserID == 1).FirstOrDefault();
+                if (Properties.Settings.Default.CurrentUserID == -1)
+                {
+                    LikeSongError form = new LikeSongError();
+                    form.ShowDialog();
+                }
+                else
+                {
+                    ChangeViewStyle("LikedSongs", obj);
+                    TranslatePage(new LikedSongsVM());
+                }
             }
-            else
-            {
-                ChangeViewStyle("LikedSongs", obj);
-                TranslatePage(new LikedSongsVM());
-            }
+            catch { }
         }
 
         public NavigationVM()
         {
-            HomeCommand = new RelayCommand(Home);
-            CreatePlaylistCommand = new RelayCommand(CreatePlaylist);
-            LikedSongsCommand = new RelayCommand(LikedSongs);
-            SearchCommand = new RelayCommand(Search);
-            YourLibraryCommand = new RelayCommand(YourLibrary);
-            OpenFormDeleteCommand = new RelayCommand(
+            try {
+                HomeCommand = new RelayCommand(Home);
+                CreatePlaylistCommand = new RelayCommand(CreatePlaylist);
+                LikedSongsCommand = new RelayCommand(LikedSongs);
+                SearchCommand = new RelayCommand(Search);
+                YourLibraryCommand = new RelayCommand(YourLibrary);
+                OpenFormDeleteCommand = new RelayCommand(
 
-       (p) =>
-       {
-           DeleteForm form = new DeleteForm();
-           Application.Current.MainWindow.Opacity = 0.3;
-           form.ShowDialog();
-           Application.Current.MainWindow.Opacity = 1;
-       });
-            LoadCommand = new RelayCommand(
-                 (p) =>
-                 {
-                     PlayListForm form = new PlayListForm();
-                     Application.Current.MainWindow.Opacity = 0.3;
-                     form.ShowDialog();
-                     Application.Current.MainWindow.Opacity = 1;
-                     //  IsVisibleOption = false;
-                 });
+           (p) =>
+           {
+               DeleteForm form = new DeleteForm();
+               Application.Current.MainWindow.Opacity = 0.3;
+               form.ShowDialog();
+               Application.Current.MainWindow.Opacity = 1;
+           });
+                LoadCommand = new RelayCommand(
+                     (p) =>
+                     {
+                         PlayListForm form = new PlayListForm();
+                         Application.Current.MainWindow.Opacity = 0.3;
+                         form.ShowDialog();
+                         Application.Current.MainWindow.Opacity = 1;
+                         //  IsVisibleOption = false;
+                     });
 
-            // Startup Page
-            ViewPage.Ins.CurrentView = new HomeVM();
-            ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+                // Startup Page
+                ViewPage.Ins.CurrentView = new HomeVM();
+                ViewPage.Ins.ListPage.Add(ViewPage.Ins.CurrentView);
+            }
+            catch { }
         }
     }
 }

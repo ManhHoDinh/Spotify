@@ -336,8 +336,11 @@ namespace Spotify.Views.Components
                 DataProvider.Ins.DB.SaveChanges();
             }
             catch {
-                ErrorForm form = new ErrorForm();
-                form.ShowDialog();
+                if(Properties.Settings.Default.CurrentUserID==-1)
+                {
+                    ErrorForm form = new ErrorForm();
+                    form.ShowDialog();
+                }
             }
         }
         void TranslatePage(object obj)
