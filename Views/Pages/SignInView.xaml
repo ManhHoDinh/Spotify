@@ -46,7 +46,7 @@
                     <ColumnDefinition Width="124"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Content="Remember me" VerticalContentAlignment="Center" Margin="0,-9,0,9"/>
-                <Button Click="LoginBtn_Click" Grid.Column="2" Content="Login In" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" Style="{StaticResource RadiusBtn}" Background="#1ED760"/>
+                <Button Click="LoginBtn_Click" Grid.Column="2" Content="Log In" FontFamily="{StaticResource CircularStdBlack}" FontSize="14" Style="{StaticResource RadiusBtn}" Background="#1ED760"/>
             </Grid>
             <Line X1="1000" Stroke="Gray" Margin="0 25"/>
             <TextBlock Style="{StaticResource LoginTextStyle}" Text="Don't have an account?" HorizontalAlignment="Center" FontSize="18"></TextBlock>
